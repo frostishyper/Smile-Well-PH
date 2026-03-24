@@ -1,0 +1,53 @@
+# ==========================================
+# Backend: Java & Spring Boot
+# ==========================================
+# Ignore compiled outputs and build directories
+target/
+build/
+*.class
+*.jar
+*.war
+*.ear
+
+# Ignore Maven/Gradle wrapper binary (keep the scripts)
+.mvn/wrapper/maven-wrapper.jar
+.gradle/
+
+# ==========================================
+# IDEs & Editor Configuration
+# ==========================================
+# VS Code (Ignores personal workspace settings)
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# IntelliJ / Eclipse (Just in case)
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+
+# ==========================================
+# Security & Environment Variables (CRITICAL)
+# ==========================================
+# Never commit database credentials or API keys for the clinic
+.env
+.env.*
+application-secret.properties
+application-secret.yml
+
+# ==========================================
+# Logs & OS Generated Files
+# ==========================================
+*.log
+.DS_Store
+Thumbs.db
+
+# ==========================================
+# Frontend Tools (Optional future-proofing)
+# ==========================================
+# If you ever decide to use npm for CSS libraries later
+node_modules/
