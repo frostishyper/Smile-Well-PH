@@ -58,19 +58,29 @@ this platform handles dynamic schedule optimization, secure patient record manag
 ## 📋 System Requirements
 
 ### **Core Infrastructure**
-- **Java 17+** — Backend runtime environment
-- **Spring Boot 3.x** — REST API application framework
+- **Java 25 LTS** — Backend runtime environment
+- **Spring Boot 4.0.4** — REST API application framework
 - **MySQL 8.0+** — Relational database server
 - **Docker** — Containerization and local deployment environment
+
+### **Dependecies**
+- ** Spring Web ** — For RESTful 
+- ** Spring Data JPA ** — For Data
+- ** MySQL Driver ** — For Interacting With MySQL Database
+- ** Spring Security ** — Access Controls & Security
+- ** Srpingboot Dev Tools ** — LiveReloads & Dev QOL
+- ** Lombok ** — Reduces Boilerplate & QOL
 
 ### **Development Environment**
 - **Git** — Version control and repository management
 - **VS Code** — Standardized IDE (requires *Extension Pack for Java*)
 - **Modern Web Browser** — For testing the client and admin portals (Chrome, Edge, Safari, Firefox)
 
+
+
 ## 🧭 Roadmap
 
-- [ ] Initial commit
+- [✅] Initial commit
 - [ ] Login & Registration
 - [ ] Homepage 
 - [ ] Information Page
