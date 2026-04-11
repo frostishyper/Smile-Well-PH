@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+body, button, input, textarea, select {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+@media (max-width: 1920px) {
+    html {
+    font-size: 14px; /* Shrinks all 'rem' values globally by about 12% */
+    }
+}
+
+/* 3. Scale down for smaller laptops */
+@media (max-width: 1366px) {
+    html {
+    font-size: 12px; 
+    }
+}
+
+/* Portrait Barrier */
+.portrait-warning {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--Logo-Dark);
+    color: var(--White);
+    z-index: 9999;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    text-align: center;
+}
+
+.portrait-warning i {
+    font-size: 4rem;
+}
+
+@media (orientation: portrait) {
+    body {
+        overflow: hidden;
+    }
+    
+    .portrait-warning {
+        display: flex;
+    }
+}
+
+:root {
+    --Logo-Light: #7BB3D2;
+    --Logo-Dark: #2E5C76;
+    --White: #FFFFFF;
+    --Black: #000000;
+    --Control-Gray: #E5E7EB;
+    --Text-Gray: #959595;
+    --Table-Gray: #F0F0F0;
+    --Subtle-Green: #E8F7E0;
+    --Highlight-Green: #67B07D;
+    --Subtle-Red: #F6B9B9;
+    --Highlight-Red: #BE3A3A;
+    --Arc-Blue: #097BAC;
+    --Arc-Green: #19D646;
+    --Arc-Orange: #F5B119;
+    --Arc-Red: #D3030D;
+}
+
+body {
+    display: flex;
+    width: 100%;
+    max-width: 2000px; 
+    min-height: 100vh; 
+    margin: 0 auto; 
+    align-items: stretch;
+    background: #F0F0F0;
+}
+
+.LoginFormContainer {
+    display: flex;
+    padding: 0.625rem 3.125rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9375rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.LoginBannerContainer {
+    display: flex;
+    padding: 3.125rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.Banner {
+    flex: 1 0 0;
+    align-self: stretch;
+    border-radius: 1.25rem;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 49.83%, rgba(0, 0, 0, 0.80) 100%), url(../Media/Clinic.jpg) lightgray 50% / cover no-repeat;
+}
+
+.LoginLogoContainer {
+    display: flex;
+    height: 10rem;        
+    padding: 0 3.125rem;  
+    align-self: stretch;
+}
+
+.SmileWellLogo {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.logo-light {
+    color: var(--Logo-Light);
+}
+
+.logo-dark {
+    color: var(--Logo-Dark);
+}
+
+.LoginFormHeader {
+    display: flex;
+    padding: 3.125rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.HeaderText {
+    color: var(--Black);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.20);
+    font-size: 4rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    max-width: 30rem;
+}
+
+.SubHeaderText {
+    color: #959595;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.20);
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    max-width: 34.5rem;
+}
+
+.LoginForm {
+    display: flex;
+    padding: 0.625rem 3.125rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.LoginInputContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.Input-Label {
+    color: var(--Black);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    font-size: 2.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.required-field {
+    color: var(--Highlight-Red);
+}
+
+input {
+    display: flex;
+    padding: 0.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    border-radius: 0.9375rem;
+    border: 1px solid --Black;
+    color: var(--Black);
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+input::placeholder {
+    color: var(--Text-Gray);
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    opacity: 1; 
+}
+
+.Login-BTN {
+    display: flex;
+    height: 5rem;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    border-radius: 0.9375rem;
+    border: 1px solid --Black;
+    background: var(--Black);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+    color: #FFF;
+    font-size: 2.25rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
