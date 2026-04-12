@@ -123,158 +123,188 @@
                 </div>
             </div>
             <div class="MainActivity">
-                <div class="NewPatientForm">
-                    <div class="CheckBoxHeaderContainer">
-                        <h1 class="PersonalDetails">Personal Details</h1>
-                        <div class="AppointmentControl">
-                            <div class="CancelBtn" id="Cancel-BTN">
-                                <div class ="SideNavButtonContainer">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
-                                        <path d="M3.75 7.5H6.25H26.25" stroke="#BE3A3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M23.75 7.5V25C23.75 25.663 23.4866 26.2989 23.0178 26.7678C22.5489 27.2366 21.913 27.5 21.25 27.5H8.75C8.08696 27.5 7.45107 27.2366 6.98223 26.7678C6.51339 26.2989 6.25 25.663 6.25 25V7.5M10 7.5V5C10 4.33696 10.2634 3.70107 10.7322 3.23223C11.2011 2.76339 11.837 2.5 12.5 2.5H17.5C18.163 2.5 18.7989 2.76339 19.2678 3.23223C19.7366 3.70107 20 4.33696 20 5V7.5" stroke="#BE3A3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M12.5 13.75V21.25" stroke="#BE3A3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M17.5 13.75V21.25" stroke="#BE3A3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="PatientDetailsForm">
 
-                        <!-- Row 1 -->
-                        <div class="PersonalDetailsRow">
-                            <div class="Format1">
-                                <h1 class="Title">First Name</h1>
-                                <div class="InputRow1">
-                                    <h1 class="InputText" ID="inputFirstName">First</h1>
-                                </div>
-                            </div>
-                            <div class="Format1">
-                                <h1 class="Title">Middle Name</h1>
-                                <div class="InputRow1">
-                                    <h1 class="InputText" ID="inputMiddleName">Middle</h1>
-                                </div>
-                            </div>
-                            <div class="Format1">
-                                <h1 class="Title">Last Name</h1>
-                                <div class="InputRow1">
-                                    <h1 class="InputText" ID="inputLastName">Last</h1>
-                                </div>
-                            </div>
-                        </div>
+                <div class="MainActivity">
+    
+    <div class="new-patient-form" id="newPatientForm">
+        <div class="check-box-header-container" id="formHeader">
 
-                        <!-- Row 2 -->
-                        <div class="PersonalDetailsRow">
-                            <div class="Format1">
-                                <h1 class="Title">Contact #</h1>
-                                <div class="InputRow1">
-                                    <h1 class="InputText">Last</h1>
-                                </div>
-                            </div>
-                            <div class="Format1">
-                                <h1 class="Title">Email Address</h1>
-                                <div class="InputRow1">
-                                    <h1 class="InputText">Last</h1>
-                                </div>
-                            </div>
-                            <div class="Format1">
-                                <h1 class="Title">Birthdate <span class="formatBirthdate">(MM/DD/YYYY)</span></h1>
-                                <div class="InputRow1">
-                                    <h1 class="InputText">Last</h1>
-                                </div>
-                            </div>
-                        </div>
+    <h2 class="form-title">Personal Details</h2>
 
-                        <!-- Row 3 -->
-                        <div class="PersonalDetailsRow">
-                            <div class="DropBoxFormat">
-                                <h1 class="Title">Sex</h1>
-                                <div class="DropBox" id="DropBoxSex">
-                                    <div class="DropBoxSubFormat" id="DropBoxSex">
-                                        <h1 class="DropBoxText">Female</h1>
-                                    </div>
-                                    <div class="DropBoxArrow">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                                        <path d="M12.5 18.75L25 31.25L37.5 18.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                            <div class="DropBoxFormat">
-                                <h1 class="Title">Bloodtype</h1>
-                                <div class="DropBox" id="DropBoxBloodType">
-                                    <div class="DropBoxSubFormat">
-                                        <h1 class="DropBoxText">AB</h1>
-                                    </div>
-                                    <div class="DropBoxArrow">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                                        <path d="M12.5 18.75L25 31.25L37.5 18.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                            <div class="Format2">
-                                <h1 class="Title">Valid ID Number</span></h1>
-                                <div class="InputRow2">
-                                    <h1 class="InputText" id="ValidIdNumber">123-456-789</h1>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Row 4 -->
-                        <div class="PersonalDetailsRow">
-                            <div class="Format2">
-                                <h1 class="Title">Home Address</span></h1>
-                                <div class="InputRow2">
-                                    <h1 class="InputText" id="HomeAddress">Nice</h1>
-                                </div>
-                            </div>    
-                        </div>
-                        <div class="PersonalDetailsRow">
-                            <div class="Format2">
-                                <h1 class="Title">Occupation</h1>
-                                <div class="InputRow2">
-                                    <h1 class="InputText" id="Occupation">Web Developer</h1>
-                                </div>
-                            </div>
-                            <div class="Format2">
-                                <h1 class="Title">Religion</h1>
-                                <div class="InputRow2">
-                                    <h1 class="InputText" id="Religion">Christian</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ProcedurePagination">
-                        <div class="Prev" id="PrevBTN">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
-                                <path d="M36.6667 56.6663L20 39.9997L36.6667 23.333" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M60.0002 56.6663L43.3335 39.9997L60.0002 23.333" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
+    <div class="appointment-control" id="appointmentControl">
+    
 
-                        <div class="Pages">
-                            <h1 class="PageCount" id="CurrentPage">1/6</h1>
-                        </div>
+    <div class="CancelBtn" id="CancelBtnControl">
+        <div class ="SideNavButtonContainer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                <path d="M3.75 7.5H6.25H26.25" stroke="#BE3A3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M23.75 7.5V25C23.75 25.663 23.4866 26.2989 23.0178 26.7678C22.5489 27.2366 21.913 27.5 21.25 27.5H8.75C8.08696 27.5 7.45107 27.2366 6.98223 26.7678C6.51339 26.2989 6.25 25.663 6.25 25V7.5M10 7.5V5C10 4.33696 10.2634 3.70107 10.7322 3.23223C11.2011 2.76339 11.837 2.5 12.5 2.5H17.5C18.163 2.5 18.7989 2.76339 19.2678 3.23223C19.7366 3.70107 20 4.33696 20 5V7.5" stroke="#BE3A3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12.5 13.75V21.25" stroke="#BE3A3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M17.5 13.75V21.25" stroke="#BE3A3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+    </div>
 
-                        <div class="Next" id="NextBTN">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
-                                <path d="M43.3333 56.6663L59.9999 39.9997L43.3333 23.333" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M20 56.6663L36.6667 39.9997L20 23.333" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                    </div>
+        </div>
+
+    </div>
+
+    <div class="patient-details-form" id="patientDetailsForm">
+
+        <div class="profile-field-row">
+            <div class="profile-field-col">
+    <label class="field-label">First Name</label>
+    <div class="profile-field">
+        <input type="text" class="field-input" id="firstnamefield" placeholder="Jose">
+    </div>
+</div>
+
+<div class="profile-field-col">
+    <label class="field-label">Middle Name</label>
+    <div class="profile-field">
+        <input type="text" class="field-input" id="middlenamefield" placeholder="Marie">
+    </div>
+</div>
+
+<div class="profile-field-col">
+    <label class="field-label">Last Name</label>
+    <div class="profile-field">
+        <input type="text" class="field-input" id="lastnamefield" placeholder="Dela Cruz">
+    </div>
+</div>
+    </div>
+
+    <div class="profile-field-row">
+        <div class="profile-field-col">
+    <label class="field-label" for="contactNumber">Contact #</label>
+    <div class="profile-field">
+        <input type="text" id="contactNumber" name="contactNumber" class="field-input" placeholder="0912345678">
+    </div>
+</div>
+
+<div class="profile-field-col">
+    <label class="field-label" for="emailAddress">Email Address</label>
+    <div class="profile-field">
+        <input type="email" id="emailAddress" name="emailAddress" class="field-input" placeholder="example@gmail.com">
+    </div>
+</div>
+
+<div class="profile-field-col">
+    <label class="field-label" for="birthDate">Birthdate (MM / DD / YYYY)</label>
+    <div class="profile-field">
+        <input type="text" id="birthDate" name="birthDate" class="field-input" placeholder="04 / 01 / 2008">
+    </div>
+</div>
+        </div>
+
+    <div class="profile-field-row">
+        <div class="profile-field-col">
+    <label class="field-label">Sex</label>
+    <div class="Custom-Dropdown" id="Sex-Dropdown">
+        <div class="Dropdown-Trigger">
+            <div class="Dropdown-Icon">
+                <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
+                    <path d="M12.5 18.75L25 31.25L37.5 18.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="Dropdown-Label">Select Sex</div>
+        </div>
+        <ul class="Dropdown-Menu">
+            <li class="Dropdown-Item" data-value="female">Female</li>
+            <li class="Dropdown-Item" data-value="male">Male</li>
+        </ul>
+    </div>
+</div>
+
+<div class="profile-field-col">
+    <label class="field-label">Blood Type</label>
+    <div class="Custom-Dropdown" id="Bloodtype-Dropdown">
+        <div class="Dropdown-Trigger">
+            <div class="Dropdown-Icon">
+                <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
+                    <path d="M12.5 18.75L25 31.25L37.5 18.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="Dropdown-Label">Select Type</div>
+        </div>
+        <ul class="Dropdown-Menu">
+            <li class="Dropdown-Item" data-value="A+">A+</li>
+            <li class="Dropdown-Item" data-value="A-">A-</li>
+            <li class="Dropdown-Item" data-value="B+">B+</li>
+            <li class="Dropdown-Item" data-value="B-">B-</li>
+            <li class="Dropdown-Item" data-value="AB">AB</li>
+            <li class="Dropdown-Item" data-value="O+">O+</li>
+            <li class="Dropdown-Item" data-value="O-">O-</li>
+        </ul>
+    </div>
+</div>
+
+<div class="profile-field-col" style="flex: 2;"> <label class="field-label" for="validId">Valid ID Number</label>
+    <div class="profile-field">
+        <input type="text" id="validId" class="field-input" placeholder="J45-12-06123">
+    </div>
+</div>
+        </div>
+
+    <div class="profile-field-row">
+        <div class="profile-field-col">
+    <label class="field-label" for="homeAddress">Home Address</label> <div class="profile-field">
+        <input type="text" id="homeAddress" name="homeAddress" class="field-input" placeholder="2132 Taft Ave, Pasay, Metro Manila">
+    </div>
+</div>
+        </div>
+
+    <div class="profile-field-row">
+        <div class="profile-field-col">
+    <label class="field-label" for="occupation">Occupation</label>
+    <div class="profile-field">
+        <input type="text" id="occupation" name="occupation" class="field-input" placeholder="Dentist">
+    </div>
+</div>
+
+<div class="profile-field-col">
+    <label class="field-label" for="religion">Religion</label>
+    <div class="profile-field">
+        <input type="text" id="religion" name="religion" class="field-input" placeholder="Christian">
+    </div>
+</div>
+        </div>
+    
+
+<!-- PAGE STUFF ROW -->
+        <div class="ProcedurePagination">
+            <div class="Prev" id="PrevBTN">
+                <svg class="Prevy" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
+                    <path d="M36.6667 56.6663L20 39.9997L36.6667 23.333" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M60.0002 56.6663L43.3335 39.9997L60.0002 23.333" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <div class="Pages">
+                <div class="PageCell">
+                    <h1 class="PageCount" id="CurrentPage" >1/6</h1>
                 </div>
+            </div>
+
+            <div class="Next" id="NextBTN">
+                <svg class="Nexty" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
+                    <path d="M43.3333 56.6663L59.9999 39.9997L43.3333 23.333" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M20 56.6663L36.6667 39.9997L20 23.333" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+                
             </div>
         </div>
     </body>
-
     <div class="portrait-warning">
     <i class="fa-solid fa-tablet-screen-button"></i>
     <h2>Please rotate your device</h2>
     <p>SmileWell Dental System requires landscape mode.</p>
     </div>
-    
 </html>
