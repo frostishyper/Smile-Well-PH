@@ -4,6 +4,10 @@ body, button, input, textarea, select {
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
+input:focus {
+    outline: none;
+}
+
 * {
     margin: 0;
     padding: 0;

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard</title>
+        <link rel="stylesheet" href="../CSS/dashboard.css"> <!-- Replace Path To Proper CSS -->
+        <script src="../JS/dashboard.js"></script> <!-- Replace Path To Proper JS -->
+    </head>
+
+    <body>
+        <!-- A -->
+        
+        <div class="SideBar">
+            <div class="TopCorner">
+                <div class="LogoContainer">
+                    <h1 class="SmileWellLogo">
+                        <span class="logo-light">Smile</span><span class="logo-dark">Well</span>
+                        <br>
+                        <span class="logo-light">Dental </span><span class="logo-dark">System</span>
+                    </h1>
+                </div>
+            </div>
+            <div class="Side-Nav-Container">
+                <!-- A Side Nav Button -->
+                <div class="Side-Nav-BTN" id="DashboardPage-BTN">
+                    <div class="SNB-Icon-Container">
+                        <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
+                            <path d="M20.8333 6.25H6.25V20.8333H20.8333V6.25Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M43.7498 6.25H29.1665V20.8333H43.7498V6.25Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M43.7498 29.1667H29.1665V43.75H43.7498V29.1667Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M20.8333 29.1667H6.25V43.75H20.8333V29.1667Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="SNB-Label-Container">
+                        <h1 class="SNB-Label">Dash Board</h1>
+                    </div>
+                </div>
+                <!-- A Side Nav Button -->
+                <div class="Side-Nav-BTN" id="RecordsPage-BTN">
+                    <div class="SNB-Icon-Container">
+                        <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
+                            <path d="M43.75 16.6667V43.75H6.25V16.6667" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M47.9168 6.25H2.0835V16.6667H47.9168V6.25Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M20.8335 25H29.1668" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="SNB-Label-Container">
+                        <h1 class="SNB-Label">Records</h1>
+                    </div>
+                </div>
+                <!-- A Side Nav Button -->
+                <div class="Side-Nav-BTN" id="AppointmentsPage-BTN">
+                    <div class="SNB-Icon-Container">
+                        <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
+                            <path d="M39.5833 8.33331H10.4167C8.11548 8.33331 6.25 10.1988 6.25 12.5V41.6666C6.25 43.9678 8.11548 45.8333 10.4167 45.8333H39.5833C41.8845 45.8333 43.75 43.9678 43.75 41.6666V12.5C43.75 10.1988 41.8845 8.33331 39.5833 8.33331Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M33.3335 4.16669V12.5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16.6665 4.16669V12.5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M6.25 20.8333H43.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="SNB-Label-Container">
+                        <h1 class="SNB-Label">Appointments</h1>
+                    </div>
+                </div>
+                <!-- A Side Nav Button -->
+                <div class="Side-Nav-BTN" id="NewPatientPage-BTN">
+                    <div class="SNB-Icon-Container">
+                        <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
+                            <path d="M33.3335 43.75V39.5833C33.3335 37.3732 32.4555 35.2536 30.8927 33.6908C29.3299 32.128 27.2103 31.25 25.0002 31.25H10.4168C8.20669 31.25 6.08708 32.128 4.52427 33.6908C2.96147 35.2536 2.0835 37.3732 2.0835 39.5833V43.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M17.7083 22.9167C22.3107 22.9167 26.0417 19.1857 26.0417 14.5833C26.0417 9.98096 22.3107 6.25 17.7083 6.25C13.106 6.25 9.375 9.98096 9.375 14.5833C9.375 19.1857 13.106 22.9167 17.7083 22.9167Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M41.6665 16.6667V29.1667" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M47.9165 22.9167H35.4165" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="SNB-Label-Container">
+                        <h1 class="SNB-Label">New Patient</h1>
+                    </div>
+                </div>
+                <!-- A Side Nav Button -->
+                <div class="Side-Nav-BTN" id="StaffPage-BTN">
+                    <div class="SNB-Icon-Container">
+                        <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
+                            <path d="M33.3335 8.33331H37.5002C38.6052 8.33331 39.665 8.7723 40.4464 9.5537C41.2278 10.3351 41.6668 11.3949 41.6668 12.5V41.6666C41.6668 42.7717 41.2278 43.8315 40.4464 44.6129C39.665 45.3943 38.6052 45.8333 37.5002 45.8333H12.5002C11.3951 45.8333 10.3353 45.3943 9.55388 44.6129C8.77248 43.8315 8.3335 42.7717 8.3335 41.6666V12.5C8.3335 11.3949 8.77248 10.3351 9.55388 9.5537C10.3353 8.7723 11.3951 8.33331 12.5002 8.33331H16.6668" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M31.2498 4.16669H18.7498C17.5992 4.16669 16.6665 5.09943 16.6665 6.25002V10.4167C16.6665 11.5673 17.5992 12.5 18.7498 12.5H31.2498C32.4004 12.5 33.3332 11.5673 33.3332 10.4167V6.25002C33.3332 5.09943 32.4004 4.16669 31.2498 4.16669Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="SNB-Label-Container">
+                        <h1 class="SNB-Label">Staff</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="Logout-Container">
+                <div class="Logout-BTN" id="Logout-BTN">
+                    <div class="SNB-Icon-Container">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
+                            <path d="M39.5161 5.36706C45.8669 9.83134 50 17.1329 50 25.3968C50 38.9682 38.8306 49.9702 25.0504 49.9999C11.2903 50.0297 0.0201797 38.9881 1.83988e-05 25.4365C-0.0100622 17.1726 4.123 9.85118 10.4637 5.37698C11.6432 4.55357 13.2863 4.90079 13.9919 6.14087L15.5847 8.92856C16.1794 9.97023 15.8972 11.2897 14.9194 12.004C10.7359 15.0595 8.06453 19.9008 8.06453 25.3869C8.05445 34.5436 15.5746 42.0634 25 42.0634C34.2339 42.0634 41.996 34.7023 41.9355 25.2877C41.9052 20.1488 39.4456 15.1885 35.0706 11.994C34.0928 11.2797 33.8206 9.96031 34.4153 8.92856L36.0081 6.14087C36.7137 4.91071 38.3468 4.54365 39.5161 5.36706ZM29.0323 26.1904V2.38095C29.0323 1.06151 27.9536 0 26.6129 0H23.3871C22.0464 0 20.9678 1.06151 20.9678 2.38095V26.1904C20.9678 27.5099 22.0464 28.5714 23.3871 28.5714H26.6129C27.9536 28.5714 29.0323 27.5099 29.0323 26.1904Z" fill="black"/>
+                        </svg>
+                    </div>
+                    <div class="SNB-Label-Container">
+                        <h1 class="Logout-Label">Logout</h1> 
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <div class="MainView">
+            <div class="TopBar">
+                <div class="TopBar-Nav">
+                    <h1 class="TopBar-Nav-Text">
+                        <span>Dashboard</span>
+                    </h1>
+                </div>
+                <div class="UserContainer">
+                    <div class="Username-Container">
+                        <!-- Staff Details -->
+                        <h1 class="Staff-Name" id="Staff-Name">Mezmerizer Miku</h1>
+                        <h2 class="Staff-Role" id="Staff-Role">Dentist</h2>
+                    </div>
+                    <div class="PFP-Container">
+                        <div class="PFP" id="Staff-PFP"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="MainActivity">
+                <div class="Dashboard-Header">
+                    <h1 class="DBH-Label">Overview</h1>
+                </div>
+                <div class="Quick-Metrics-Container">
+                    <div class="QuickMetric-Card">
+                        <div class="QuickMetric-Visuals">
+                            <div class="QMV-IconContainer">
+                                <svg class="QMV-Icon" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <path d="M56.6668 70V63.3333C56.6668 59.7971 55.2621 56.4057 52.7616 53.9052C50.2611 51.4048 46.8697 50 43.3335 50H16.6668C13.1306 50 9.73922 51.4048 7.23874 53.9052C4.73825 56.4057 3.3335 59.7971 3.3335 63.3333V70" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M29.9998 36.6667C37.3636 36.6667 43.3332 30.6971 43.3332 23.3333C43.3332 15.9695 37.3636 10 29.9998 10C22.636 10 16.6665 15.9695 16.6665 23.3333C16.6665 30.6971 22.636 36.6667 29.9998 36.6667Z" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M76.6665 70V63.3333C76.6643 60.3791 75.681 57.5093 73.8711 55.1744C72.0611 52.8395 69.5269 51.1719 66.6665 50.4333" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M53.3335 10.4333C56.2015 11.1677 58.7436 12.8357 60.559 15.1744C62.3743 17.5131 63.3596 20.3894 63.3596 23.35C63.3596 26.3106 62.3743 29.1869 60.559 31.5256C58.7436 33.8643 56.2015 35.5323 53.3335 36.2667" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="QuickMetric-Values">
+                            <h2>Total Patients</h2>
+                            <h1 id="Total-Patients">123</h1>
+                        </div>
+                    </div>
+                    <div class="QuickMetric-Card">
+                        <div class="QuickMetric-Visuals">
+                            <div class="QMV-IconContainer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <path d="M63.3333 13.3334H16.6667C12.9848 13.3334 10 16.3181 10 20V66.6667C10 70.3486 12.9848 73.3334 16.6667 73.3334H63.3333C67.0152 73.3334 70 70.3486 70 66.6667V20C70 16.3181 67.0152 13.3334 63.3333 13.3334Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M53.3335 6.66663V20" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M26.6665 6.66663V20" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M10 33.3334H70" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="QuickMetric-Values">
+                            <h2>Total Appointments</h2>
+                            <h1 id="Total-Appointments">123</h1>
+                        </div>
+                    </div>
+                    <div class="QuickMetric-Card">
+                        <div class="QuickMetric-Visuals">
+                            <div class="QMV-IconContainer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <path d="M53.3333 13.3334H59.9999C61.768 13.3334 63.4637 14.0358 64.714 15.286C65.9642 16.5362 66.6666 18.2319 66.6666 20V66.6667C66.6666 68.4348 65.9642 70.1305 64.714 71.3807C63.4637 72.631 61.768 73.3334 59.9999 73.3334H19.9999C18.2318 73.3334 16.5361 72.631 15.2859 71.3807C14.0356 70.1305 13.3333 68.4348 13.3333 66.6667V20C13.3333 18.2319 14.0356 16.5362 15.2859 15.286C16.5361 14.0358 18.2318 13.3334 19.9999 13.3334H26.6666" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M50.0001 6.66663H30.0001C28.1591 6.66663 26.6667 8.15901 26.6667 9.99996V16.6666C26.6667 18.5076 28.1591 20 30.0001 20H50.0001C51.841 20 53.3334 18.5076 53.3334 16.6666V9.99996C53.3334 8.15901 51.841 6.66663 50.0001 6.66663Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="QuickMetric-Values">
+                            <h2>Total Dentist(s)</h2>
+                            <h1 id="Total-Dentist">123</h1>
+                        </div>
+                    </div>
+                    <div class="QuickMetric-Card">
+                        <div class="QuickMetric-Visuals">
+                            <div class="QMV-IconContainer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <path d="M53.3333 70V63.3333C53.3333 59.7971 51.9285 56.4057 49.428 53.9052C46.9275 51.4048 43.5361 50 39.9999 50H16.6666C13.1304 50 9.73898 51.4048 7.23849 53.9052C4.73801 56.4057 3.33325 59.7971 3.33325 63.3333V70" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M28.3333 36.6667C35.6971 36.6667 41.6667 30.6971 41.6667 23.3333C41.6667 15.9695 35.6971 10 28.3333 10C20.9695 10 15 15.9695 15 23.3333C15 30.6971 20.9695 36.6667 28.3333 36.6667Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M66.6667 26.6666V46.6666" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M76.6667 36.6666H56.6667" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="QuickMetric-Values">
+                            <h2>Upcoming Visit(s)</h2>
+                            <h1 id="Upcoming-Appointments">123</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="Coming-Appointments-Container">
+                    <!-- Drop Down Branch -->
+                    <div class="Coming-Appointments">
+                        <div class="Coming-Apointments-Header">
+                            <h1>Coming Appointments</h1>
+                            <div class="Custom-Dropdown" id="Branch-Dropdown">
+                                <div class="Dropdown-Trigger">
+                                    <div class="Dropdown-Icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                                            <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="Dropdown-Label">Branch</div>
+                                </div>
+                                <ul class="Dropdown-Menu">
+                                    <li class="Dropdown-Item" data-value="all">Manila</li>
+                                    <li class="Dropdown-Item" data-value="main">Buendia</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End OF Dropdown Branch-->
+                        <!--Put the 3 most upcoming apointments-->
+                        <!--1-->
+                        <div class="appointment-entry">
+                            <div class="color-stub-1"></div>
+                            <div class="appointment-details">
+                                <h1 id="appointment-1-Procdure">Procedure 1</h1>
+                                <h2 id="appointment-1-Name">Patient Name</h2>
+                                <h2 id="appointment-1-Time">
+                                    <span>1:00</span><span>PM</span> <span> - </span> <span>2:00</span><span>PM</span>
+                                </h2>
+                            </div>
+                        </div>
+                        <!--2-->
+                        <div class="appointment-entry">
+                            <div class="color-stub-2"></div>
+                            <div class="appointment-details">
+                                <h1 id="appointment-2-Procdure">Procedure 1</h1>
+                                <h2 id="appointment-2-Name">Patient Name</h2>
+                                <h2 id="appointment-2-Time">
+                                    <span>1:00</span><span>PM</span> <span> - </span> <span>2:00</span><span>PM</span>
+                                </h2>
+                            </div>
+                        </div>
+                        <!--3-->
+                        <div class="appointment-entry">
+                            <div class="color-stub-3"></div>
+                            <div class="appointment-details">
+                                <h1 id="appointment-3-Procdure">Procedure 1</h1>
+                                <h2 id="appointment-3-Name">Patient Name</h2>
+                                <h2 id="appointment-3-Time">
+                                    <span>1:00</span><span>PM</span> <span> - </span> <span>2:00</span><span>PM</span>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+
+    <div class="Logout-Modal-Overlay" id="Logout-Modal">
+        <div class="Logout-Card">
+            <div class="LC-Icon-Container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
+                    <path d="M39.5161 5.36706C45.8669 9.83134 50 17.1329 50 25.3968C50 38.9682 38.8306 49.9702 25.0504 49.9999C11.2903 50.0297 0.0201797 38.9881 1.83988e-05 25.4365C-0.0100622 17.1726 4.123 9.85118 10.4637 5.37698C11.6432 4.55357 13.2863 4.90079 13.9919 6.14087L15.5847 8.92856C16.1794 9.97023 15.8972 11.2897 14.9194 12.004C10.7359 15.0595 8.06453 19.9008 8.06453 25.3869C8.05445 34.5436 15.5746 42.0634 25 42.0634C34.2339 42.0634 41.996 34.7023 41.9355 25.2877C41.9052 20.1488 39.4456 15.1885 35.0706 11.994C34.0928 11.2797 33.8206 9.96031 34.4153 8.92856L36.0081 6.14087C36.7137 4.91071 38.3468 4.54365 39.5161 5.36706ZM29.0323 26.1904V2.38095C29.0323 1.06151 27.9536 0 26.6129 0H23.3871C22.0464 0 20.9678 1.06151 20.9678 2.38095V26.1904C20.9678 27.5099 22.0464 28.5714 23.3871 28.5714H26.6129C27.9536 28.5714 29.0323 27.5099 29.0323 26.1904Z" fill="currentColor"/>
+                </svg>
+            </div>
+            <h1 class="LC-Header">Log Out?</h1>
+            <h2 class="LC-SubText">You Are About To Be Logged Out<br>Are You Sure?</h2>
+            <div class="LC-Btn-Container">
+                <button class="LC-Cancel-Btn" id="Cancel-Logout">Cancel</button>
+                <button class="LC-Confirm-Btn" id="Confirm-Logout">Log Out</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="portrait-warning">
+    <i class="fa-solid fa-tablet-screen-button"></i>
+    <h2>Please rotate your device</h2>
+    <p>SmileWell Dental System requires landscape mode.</p>
+    </div>
+</html>
