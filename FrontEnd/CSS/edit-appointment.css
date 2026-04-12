@@ -499,7 +499,7 @@ body {
 }
 
 .Appt-Time {
-    color: var(--Time-Text);    /* #858788 */
+    color: var(--Time-Gray);    /* #858788 */
     font-size: 2rem;
     font-weight: 400;
     line-height: normal;
@@ -571,6 +571,12 @@ body {
     color: var(--Highlight-Green);
 }
 
+.Appt-BTN-Save .Appt-BTN-Icon {
+    width: 1.875rem;
+    height: 1.875rem;
+    display: block;
+    flex-shrink: 0;
+}
 
 /* =====================================================
    PROFILE FIELDS CONTAINER  [node 220:683]
@@ -704,7 +710,7 @@ body {
     height: 100%;
     align-items: center;
     justify-content: center;
-    color: var(--Time-Text);
+    color: var(--Text-Gray);    /* #858788 */
     font-size: 2rem;
     font-weight: 400;
     line-height: normal;
@@ -745,4 +751,75 @@ body {
     width: 3.125rem;            /* 50px */
     height: 3.125rem;
     flex-shrink: 0;
+}
+
+/* Date dropdown uses the same shell as time dropdown */
+.Time-Dropdown-Date {
+    width: 12rem;
+}
+
+.Time-Dropdown-Date {
+    width: 12rem;
+    cursor: pointer;
+}
+
+.Time-Dropdown-Date .Time-Display-Text {
+    width: 100%;
+    justify-content: center;
+}
+
+.Date-Input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    border: none;
+    background: transparent;
+    pointer-events: none;
+}
+
+.Date-Input::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#date-dropdown-wrapper {
+    width: 18rem;
+    min-width: 18rem;
+    padding: 0.625rem 1.25rem;
+    gap: 0.75rem;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+#date-dropdown-wrapper .Time-Display-Text {
+    width: auto;
+    flex: 1 1 auto;
+    min-width: 0;
+    justify-content: flex-start;
+    text-align: left;
+    white-space: nowrap;
+}
+
+#date-dropdown-wrapper .Time-Arrow {
+    flex: 0 0 2rem;
+    width: 2rem;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.Appt-Time {
+    color: var(--Text-Gray);
+}
+
+#date-dropdown-wrapper .Time-Display-Text {
+    color: var(--Text-Gray);
+}
+
+#date-dropdown-wrapper .Time-Arrow {
+    color: var(--Black);
 }

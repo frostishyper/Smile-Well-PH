@@ -42,10 +42,13 @@ const App = {
         patientName:       document.getElementById('patient-name'),
         contactNumber:     document.getElementById('contact-number'),
         appointmentReason: document.getElementById('appointment-reason'),
+        appointmentDate:   document.getElementById('appointment-date'),
         startTime:         document.getElementById('start-time'),
         endTime:           document.getElementById('end-time'),
 
         // Time display spans (show selected value in dropdown)
+        dateDisplay:       document.getElementById('date-display'),
+        dateDropdownWrapper: document.getElementById('date-dropdown-wrapper'),
         startDisplay:      document.getElementById('start-display'),
         endDisplay:        document.getElementById('end-display'),
 
@@ -61,6 +64,9 @@ const App = {
     init() {
         console.log('New Appointment Page Initialized');
         this.updateSummary();
+        if (this.elements.appointmentDate && this.elements.dateDisplay) {
+            this.elements.dateDisplay.textContent = this.formatDateDisplay(this.elements.appointmentDate.value);
+        }
         this.setupEventListeners();
         this.ui.checkOrientation();
     },
@@ -75,8 +81,31 @@ const App = {
         // Live summary sync
         el.patientName?.addEventListener('input',  () => this.updateSummary());
         el.appointmentReason?.addEventListener('input', () => this.updateSummary());
+        el.appointmentDate?.addEventListener('change', () => this.updateSummary());
         el.startTime?.addEventListener('change',   () => this.updateSummary());
         el.endTime?.addEventListener('change',     () => this.updateSummary());
+
+        el.dateDropdownWrapper?.addEventListener('click', () => {
+            if (el.appointmentDate?.showPicker) {
+                el.appointmentDate.showPicker();
+            } else {
+                el.appointmentDate?.focus();
+                el.appointmentDate?.click();
+            }
+        });
+
+        el.dateDropdownWrapper?.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+
+                if (el.appointmentDate?.showPicker) {
+                    el.appointmentDate.showPicker();
+                } else {
+                    el.appointmentDate?.focus();
+                    el.appointmentDate?.click();
+                }
+            }
+        });
 
         // Action buttons
         el.saveBtn?.addEventListener('click',   () => this.handleSave());
@@ -89,6 +118,18 @@ const App = {
         document.getElementById('NewPatientPage-BTN')?.addEventListener('click', () => { window.location.href = '../HTML/NewPatient.html'; });
         document.getElementById('StaffPage-BTN')?.addEventListener('click',      () => { window.location.href = '../HTML/Staff.html'; });
         document.getElementById('Logout-BTN')?.addEventListener('click',         () => { window.location.href = '../HTML/Login.html'; });
+    },
+
+    /**
+     * Formats a date value for display in the UI.
+     *  
+     *  
+     */
+    formatDateDisplay(value) {
+        if (!value) return 'MM/DD/YYYY';
+
+        const [year, month, day] = value.split('-');
+        return `${month}/${day}/${year}`;
     },
 
     /**
@@ -178,6 +219,9 @@ const App = {
         if (el.endDisplay && el.endTime) {
             el.endDisplay.textContent = el.endTime.options[el.endTime.selectedIndex]?.text?.split(' ')[0] || '—';
         }
+        if (el.dateDisplay && el.appointmentDate) {
+        el.dateDisplay.textContent = this.formatDateDisplay(el.appointmentDate.value);
+        }
     },
 
     /* -----------------------------------------------
@@ -190,6 +234,7 @@ const App = {
             patientName:   el.patientName?.value.trim(),
             contactNumber: el.contactNumber?.value.trim(),
             reason:        el.appointmentReason?.value.trim(),
+            appointmentDate: el.appointmentDate?.value,
             startTime:     el.startTime?.options[el.startTime.selectedIndex]?.value,
             endTime:       el.endTime?.options[el.endTime.selectedIndex]?.value,
         };

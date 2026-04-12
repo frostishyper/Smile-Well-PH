@@ -182,16 +182,27 @@
                                     <path d="M10 11v6M14 11v6"/>
                                 </svg>
                             </button>
-
-                            <!-- Save Btn  [node 220:580] -->
-                            <button class="Appt-Action-BTN Appt-BTN-Save" id="save-btn" type="button" title="Save Appointment">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M7 4h8l3 3v13H7z" stroke-linejoin="round"/>
-                                    <path d="M9 4v5h6V4"       stroke-linejoin="round"/>
-                                    <path d="M9 17h6"/>
+                            <!-- Save Btn  [node 220:677]
+                                bg:#e8f7e0  border:#67b07d  save icon -->
+                            <button class="Appt-Action-BTN Appt-BTN-Save" id="save-btn" type="button" title="Save Changes" aria-label="Save Changes">
+                                <svg class="Appt-BTN-Icon" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path d="M23.75 26.25H6.25C5.58696 26.25 4.95107 25.9866 4.48223 25.5178C4.01339 25.0489 3.75 24.413 3.75 23.75V6.25C3.75 5.58696 4.01339 4.95107 4.48223 4.48223C4.95107 4.01339 5.58696 3.75 6.25 3.75H20L26.25 10V23.75C26.25 24.413 25.9866 25.0489 25.5178 25.5178C25.0489 25.9866 24.413 26.25 23.75 26.25Z"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"/>
+                                    <path d="M21.25 26.25V16.25H8.75V26.25"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"/>
+                                    <path d="M8.75 3.75V10H18.75"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"/>
                                 </svg>
                             </button>
-
                         </div><!-- /Appointment-Control -->
                     </div><!-- /Appointment-Entry -->
 
@@ -230,6 +241,33 @@
 
                         <!-- Time Row  [node 220:517] -->
                         <div class="Time-Row">
+
+                            <!-- Date Label  [node 220:515] -->
+                            <div class="Time-Label-Container">
+                                <label class="Time-Label" for="appointment-date">Date</label>
+                            </div>
+
+                            <div class="Time-Dropdown" id="date-dropdown-wrapper" tabindex="0" role="button" aria-label="Choose appointment date">
+                                <span class="Time-Display-Text" id="date-display">04/11/2026</span>
+
+                                <input
+                                    class="Date-Input"
+                                    id="appointment-date"
+                                    name="appointmentDate"
+                                    type="date"
+                                    value="2026-04-11"
+                                >
+
+                                <div class="Time-Arrow">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
+                                        <path d="M12 18L25 31L38 18"
+                                            stroke="currentColor"
+                                            stroke-width="3"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                            </div>
 
                             <!-- Start Label  [node 220:518] -->
                             <div class="Time-Label-Container">

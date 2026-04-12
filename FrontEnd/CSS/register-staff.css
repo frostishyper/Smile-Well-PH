@@ -1,0 +1,715 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+body, button, input, textarea, select {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+@media (max-width: 1920px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 1366px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+:root {
+    --Logo-Light: #7BB3D2;
+    --Logo-Dark: #2E5C76;
+    --White: #FFFFFF;
+    --Black: #000000;
+    --Control-Gray: #E5E7EB;
+    --Text-Gray: #959595;
+    --Table-Gray: #F0F0F0;
+    --Input-Border: #B8B8B8;
+    --Modal-Overlay: rgba(0, 0, 0, 0.16);
+}
+
+.portrait-warning {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--Logo-Dark);
+    color: var(--White);
+    z-index: 9999;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    text-align: center;
+}
+
+@media (orientation: portrait) {
+    body {
+        overflow: hidden;
+    }
+
+    .portrait-warning {
+        display: flex;
+    }
+}
+
+body {
+    display: flex;
+    width: 100%;
+    max-width: 2000px;
+    min-height: 100vh;
+    margin: 0 auto;
+    align-items: stretch;
+    background: #FAFAFA;
+}
+
+.SideBar {
+    display: flex;
+    flex-direction: column;
+    width: 26rem;
+    align-self: stretch;
+    background: var(--White);
+    border-right: 3px solid var(--Control-Gray);
+    flex-shrink: 0;
+}
+
+.MainView {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+    min-height: 0;
+    align-self: stretch;
+    overflow: hidden;
+}
+
+.TopBar {
+    display: flex;
+    height: 10rem;
+    align-items: flex-start;
+    align-self: stretch;
+    border-bottom: 3px solid var(--Control-Gray);
+    background: var(--White);
+}
+
+.MainActivity {
+    position: relative;
+    display: flex;
+    padding: 1.25rem;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    flex: 1 0 0;
+    min-height: 0;
+    align-self: stretch;
+    background: var(--Table-Gray);
+}
+
+.TopCorner {
+    display: flex;
+    width: 100%;
+    height: 10rem;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.LogoContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.SmileWellLogo {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.logo-light {
+    color: var(--Logo-Light);
+}
+
+.logo-dark {
+    color: var(--Logo-Dark);
+}
+
+.TopBar-Nav {
+    display: flex;
+    padding: 0 1.25rem;
+    align-items: center;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.TopBar-Nav-Text {
+    color: var(--Black);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.10);
+    font-size: 2.8125rem;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.UserContainer {
+    display: flex;
+    padding: 0 1.25rem;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.875rem;
+    align-self: stretch;
+}
+
+.Username-Container {
+    display: flex;
+    padding: 0.625rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    align-self: stretch;
+}
+
+.Staff-Name {
+    color: var(--Black);
+    font-size: 1.875rem;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.Staff-Role {
+    color: var(--Text-Gray);
+    font-size: 1.875rem;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.PFP-Container {
+    display: flex;
+    width: 6.875rem;
+    height: 6.875rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.PFP {
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    aspect-ratio: 1 / 1;
+    background: url(../Media/Dentist.jpg) lightgray 50% / cover no-repeat;
+    border-radius: 1rem;
+}
+
+.Side-Nav-Container {
+    display: flex;
+    padding: 5rem 1.875rem 1.25rem 1.875rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.Side-Nav-BTN {
+    display: flex;
+    height: 5.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+.Side-Nav-BTN.active {
+    background: var(--Black);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
+
+.Side-Nav-BTN.active .SNB-Label,
+.Side-Nav-BTN.active .Nav-Icon {
+    color: var(--White);
+}
+
+.SNB-Icon-Container {
+    display: flex;
+    width: 6.25rem;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.Nav-Icon {
+    width: 3.125rem;
+    height: 3.125rem;
+    flex-shrink: 0;
+    aspect-ratio: 1 / 1;
+    color: var(--Black);
+}
+
+.SNB-Label-Container {
+    display: flex;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.SNB-Label {
+    color: var(--Black);
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.Logout-Container {
+    display: flex;
+    width: 100%;
+    padding: 3.125rem 1.875rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.Logout-BTN {
+    display: flex;
+    height: 5.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    flex: 1 0 0;
+    border-radius: 0.9375rem;
+    background: var(--Control-Gray);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+    cursor: pointer;
+}
+
+.Logout-Label {
+    color: var(--Black);
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.register-staff-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: 0;
+    border-radius: 0.9375rem;
+    padding: 1.25rem;
+    background: var(--White);
+    overflow: visible;
+}
+
+.register-staff-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 1.25rem 0.625rem 0.625rem;
+}
+
+.register-staff-heading {
+    color: var(--Black);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.register-staff-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    width: 100%;
+    flex: 0 0 auto;
+}
+
+.register-staff-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    width: 100%;
+    padding: 0.625rem;
+}
+
+.register-staff-row-three .register-staff-col,
+.register-staff-row-two .register-staff-col,
+.register-staff-row-mixed .register-staff-col-fill {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.register-staff-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+
+.register-staff-col-select {
+    width: 10.3125rem;
+    flex: 0 0 10.3125rem;
+}
+
+.register-staff-col-full {
+    width: 100%;
+}
+
+.register-staff-label {
+    color: var(--Text-Gray);
+    font-size: 1.875rem;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.register-staff-label-note {
+    font-weight: 400;
+}
+
+.register-staff-input,
+.register-staff-date-field {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 3.625rem;
+    padding: 0.5rem 0.625rem;
+    border: 1px solid var(--Input-Border);
+    border-radius: 0.9375rem;
+    background: var(--White);
+    color: var(--Black);
+    font-size: 1.875rem;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.03em;
+    outline: none;
+}
+
+.register-staff-input:focus,
+.register-staff-date-field:focus-within {
+    border-color: var(--Logo-Dark);
+}
+
+.register-staff-input::placeholder {
+    color: #c8c8c8;
+}
+
+.register-staff-dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.register-staff-dropdown-toggle {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 4.375rem;
+    padding: 0.625rem;
+    border: 0;
+    border-radius: 0.9375rem;
+    background: var(--Control-Gray);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+    cursor: pointer;
+}
+
+.register-staff-dropdown.open .register-staff-dropdown-toggle {
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.22);
+}
+
+.register-staff-dropdown-value {
+    display: flex;
+    align-items: center;
+    width: 10rem;
+    height: 100%;
+    color: var(--Black);
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+    text-align: left;
+}
+
+.register-staff-dropdown-value.is-placeholder {
+    color: #858788;
+}
+
+.register-staff-dropdown-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.375rem;
+    height: 100%;
+    margin-left: auto;
+    color: var(--Black);
+    transition: transform 0.15s ease;
+}
+
+.register-staff-dropdown.open .register-staff-dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.register-staff-dropdown-arrow svg {
+    width: 3.125rem;
+    height: 3.125rem;
+}
+
+.register-staff-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.5rem;
+    border: 1px solid var(--Input-Border);
+    border-radius: 0.9375rem;
+    background: var(--White);
+    box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.16);
+    z-index: 30;
+}
+
+.register-staff-dropdown-menu[hidden] {
+    display: none;
+}
+
+.register-staff-dropdown-option {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 0;
+    border-radius: 0.75rem;
+    background: transparent;
+    color: var(--Black);
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: normal;
+    cursor: pointer;
+}
+
+.register-staff-dropdown-option:hover,
+.register-staff-dropdown-option:focus-visible,
+.register-staff-dropdown-option.is-selected {
+    background: #F3F4F6;
+    outline: none;
+}
+
+.register-staff-select-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.register-staff-date-field {
+    position: relative;
+    cursor: pointer;
+}
+
+.register-staff-date-display {
+    color: var(--Black);
+    font-size: 1.875rem;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.03em;
+    pointer-events: none;
+}
+
+.register-staff-date-display.is-placeholder {
+    color: #808080;
+}
+
+.register-staff-date-input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.register-staff-date-input::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    cursor: pointer;
+}
+
+.register-staff-submit-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0rem 0.625rem 0.625rem;
+}
+
+.register-staff-submit-btn {
+    min-width: 22rem;
+    height: 5.75rem;
+    padding: 0 2rem;
+    border: 0;
+    border-radius: 0.9375rem;
+    background: var(--Black);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+    color: var(--White);
+    font-size: 2.625rem;
+    font-weight: 400;
+    line-height: normal;
+    cursor: pointer;
+}
+
+.register-staff-submit-btn:hover {
+    opacity: 0.88;
+}
+
+.register-staff-submit-btn:active {
+    transform: scale(0.98);
+}
+
+.register-staff-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: var(--Modal-Overlay);
+    z-index: 50;
+}
+
+.register-staff-modal-backdrop[hidden] {
+    display: none;
+}
+
+.register-staff-modal {
+    display: flex;
+    width: min(100%, 42rem);
+    padding: 2rem 2rem 1.75rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    border: 2px solid var(--Control-Gray);
+    border-radius: 0.9375rem;
+    background: var(--White);
+    box-shadow: 0 18px 30px rgba(0, 0, 0, 0.12);
+}
+
+.register-staff-modal-icon-wrap {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.register-staff-modal-icon-tile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 1.25rem;
+    background: var(--Control-Gray);
+    color: var(--Black);
+}
+
+.register-staff-modal-icon-tile svg {
+    width: 4rem;
+    height: 4rem;
+}
+
+.register-staff-modal-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    text-align: center;
+}
+
+.register-staff-modal-title {
+    color: var(--Black);
+    font-size: 2.875rem;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.register-staff-modal-text {
+    color: var(--Text-Gray);
+    font-size: 1.625rem;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.register-staff-modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.register-staff-modal-confirm,
+.register-staff-modal-cancel {
+    flex: 1 1 0;
+    height: 4.5rem;
+    border-radius: 0.9375rem;
+    border: 1px solid transparent;
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: normal;
+    cursor: pointer;
+}
+
+.register-staff-modal-confirm {
+    background: var(--Black);
+    color: var(--White);
+}
+
+.register-staff-modal-cancel {
+    background: var(--Control-Gray);
+    color: var(--Black);
+}
+
+@media (max-width: 1300px) {
+    .register-staff-row-three,
+    .register-staff-row-mixed,
+    .register-staff-row-two {
+        flex-wrap: wrap;
+    }
+
+    .register-staff-row-three .register-staff-col,
+    .register-staff-row-two .register-staff-col,
+    .register-staff-row-mixed .register-staff-col-fill {
+        flex: 1 1 calc(50% - 0.625rem);
+    }
+}
+
+@media (max-width: 900px) {
+    .register-staff-row {
+        flex-direction: column;
+    }
+
+    .register-staff-row-three .register-staff-col,
+    .register-staff-row-two .register-staff-col,
+    .register-staff-row-mixed .register-staff-col-fill,
+    .register-staff-col-select {
+        width: 100%;
+        flex: 1 1 auto;
+    }
+
+    .register-staff-modal-actions {
+        flex-direction: column;
+    }
+}

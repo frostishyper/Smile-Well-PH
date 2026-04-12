@@ -306,4 +306,51 @@ const App = {
         put(endpoint, data)  { return this.request(endpoint, { method: 'PUT',    body: JSON.stringify(data) }); },
         delete(endpoint)     { return this.request(endpoint, { method: 'DELETE' }); },
     }
+
+
+
 };
+
+// Date dropdown custom display logic (since <input type="date"> is inconsistent across browsers)
+const appointmentDate = document.getElementById('appointment-date');
+const dateDisplay = document.getElementById('date-display');
+const dateDropdownWrapper = document.getElementById('date-dropdown-wrapper');
+
+function formatDateDisplay(value) {
+    if (!value) return 'MM/DD/YYYY';
+
+    const [year, month, day] = value.split('-');
+    return `${month}/${day}/${year}`;
+}
+
+if (appointmentDate && dateDisplay) {
+    dateDisplay.textContent = formatDateDisplay(appointmentDate.value);
+
+    appointmentDate.addEventListener('change', () => {
+        dateDisplay.textContent = formatDateDisplay(appointmentDate.value);
+    });
+}
+
+if (dateDropdownWrapper && appointmentDate) {
+    dateDropdownWrapper.addEventListener('click', () => {
+        if (appointmentDate.showPicker) {
+            appointmentDate.showPicker();
+        } else {
+            appointmentDate.focus();
+            appointmentDate.click();
+        }
+    });
+
+    dateDropdownWrapper.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+
+            if (appointmentDate.showPicker) {
+                appointmentDate.showPicker();
+            } else {
+                appointmentDate.focus();
+                appointmentDate.click();
+            }
+        }
+    });
+}
