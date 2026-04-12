@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en">
     <head>
@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Title Here</title>
         <link rel="stylesheet" href="../CSS/personaldetails.css"> <!-- Replace Path To Proper CSS -->
-        <script src="../JS/template.js"></script> <!-- Replace Path To Proper JS -->
+        <script src="../JS/personaldetails.js"></script> <!-- Replace Path To Proper JS -->
     </head>
 
     <body>
@@ -135,7 +135,7 @@
     
     <div class="edit-btn" id="editVisitBtnControl">
         <div class="side-nav-button-container">
-    <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+    <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
         <path d="M1.25 5V12.5H8.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M28.75 25V17.5H21.25" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M25.6125 11.25C24.9785 9.45845 23.9011 7.85673 22.4807 6.59425C21.0602 5.33176 19.3432 4.44968 17.4896 4.0303C15.6361 3.61091 13.7066 3.6679 11.881 4.19594C10.0555 4.72398 8.39343 5.70586 7.05 7.04997L1.25 12.5M28.75 17.5L22.95 22.95C21.6066 24.2941 19.9445 25.276 18.119 25.804C16.2934 26.332 14.3639 26.389 12.5104 25.9697C10.6568 25.5503 8.93975 24.6682 7.51933 23.4057C6.09892 22.1432 5.02146 20.5415 4.3875 18.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -145,7 +145,7 @@
 
     <div class="save-btn" id="saveEditBtnControl">
         <div class="side-nav-button-container">
-            <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
                 <path d="M23.75 26.25H6.25C5.58696 26.25 4.95107 25.9866 4.48223 25.5178C4.01339 25.0489 3.75 24.413 3.75 23.75V6.25C3.75 5.58696 4.01339 4.95107 4.48223 4.48223C4.95107 4.01339 5.58696 3.75 6.25 3.75H20L26.25 10V23.75C26.25 24.413 25.9866 25.0489 25.5178 25.5178C25.0489 25.9866 24.413 26.25 23.75 26.25Z" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M21.25 26.25V16.25H8.75V26.25" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M8.75 3.75V10H18.75" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -208,29 +208,42 @@
     <div class="profile-field-row">
         <div class="profile-field-col">
     <label class="field-label">Sex</label>
-    <div class="drop-down" id="sexDropDown">
-        <div class="side-nav-button-label-container">
-            <span class="drop-down-text">Female</span>
+    <div class="Custom-Dropdown" id="Sex-Dropdown">
+        <div class="Dropdown-Trigger">
+            <div class="Dropdown-Icon">
+                <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
+                    <path d="M12.5 18.75L25 31.25L37.5 18.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="Dropdown-Label">Select Sex</div>
         </div>
-        <div class="side-nav-button-container">
-            <svg c  xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                <path d="M12.5 18.75L25 31.25L37.5 18.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </div>
+        <ul class="Dropdown-Menu">
+            <li class="Dropdown-Item" data-value="female">Female</li>
+            <li class="Dropdown-Item" data-value="male">Male</li>
+        </ul>
     </div>
 </div>
 
 <div class="profile-field-col">
     <label class="field-label">Bloodtype</label>
-    <div class="drop-down" id="bloodtypeDropDown">
-        <div class="side-nav-button-label-container">
-            <span class="drop-down-text">AB</span>
+    <div class="Custom-Dropdown" id="Bloodtype-Dropdown">
+        <div class="Dropdown-Trigger">
+            <div class="Dropdown-Icon">
+                <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
+                    <path d="M12.5 18.75L25 31.25L37.5 18.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="Dropdown-Label">Select Type</div>
         </div>
-        <div class="side-nav-button-container">
-            <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                <path d="M12.5 18.75L25 31.25L37.5 18.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </div>
+        <ul class="Dropdown-Menu">
+            <li class="Dropdown-Item" data-value="A+">A+</li>
+            <li class="Dropdown-Item" data-value="A-">A-</li>
+            <li class="Dropdown-Item" data-value="B+">B+</li>
+            <li class="Dropdown-Item" data-value="B-">B-</li>
+            <li class="Dropdown-Item" data-value="AB">AB</li>
+            <li class="Dropdown-Item" data-value="O+">O+</li>
+            <li class="Dropdown-Item" data-value="O-">O-</li>
+        </ul>
     </div>
 </div>
 
@@ -242,9 +255,27 @@
         </div>
 
     <div class="profile-field-row">
+        <div class="profile-field-col">
+    <label class="field-label" for="homeAddress">Home Adress</label> <div class="profile-field">
+        <input type="text" id="homeAddress" name="homeAddress" class="field-input" placeholder="69 Vocaloid St, Shibuya Tokyo JP">
+    </div>
+</div>
         </div>
 
     <div class="profile-field-row">
+        <div class="profile-field-col">
+    <label class="field-label" for="occupation">Occupation</label>
+    <div class="profile-field">
+        <input type="text" id="occupation" name="occupation" class="field-input" placeholder="Teto">
+    </div>
+</div>
+
+<div class="profile-field-col">
+    <label class="field-label" for="religion">Religion</label>
+    <div class="profile-field">
+        <input type="text" id="religion" name="religion" class="field-input">
+    </div>
+</div>
         </div>
     
         </div>

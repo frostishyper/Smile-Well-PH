@@ -252,7 +252,14 @@ body {
 }
 
 .Nav-Icon {
-    width: 5rem;
+width: 3.125rem;
+    height: 3.125rem;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+}
+
+.svg-icons{
+width: 5rem;
 height: 5rem;
 flex-shrink: 0;
 aspect-ratio: 1/1;

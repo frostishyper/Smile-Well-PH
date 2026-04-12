@@ -258,6 +258,13 @@ body {
     aspect-ratio: 1/1;
 }
 
+.svg-icons{
+        width: 3.125rem;
+    height: 3.125rem;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+}
+
 .SNB-Label-Container {
     display: flex;
     padding: 0.625rem;

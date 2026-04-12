@@ -252,10 +252,18 @@ body {
 }
 
 .Nav-Icon {
-    width: 1.875rem;
+width: 3.125rem;
+    height: 3.125rem;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+}
+
+.svg-icons{
+width: 1.875rem;
 height: 1.875rem;
 flex-shrink: 0;
 aspect-ratio: 1/1;  
+
 }
 
 .SNB-Label-Container {
@@ -443,45 +451,82 @@ box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
     color: var(--Black);
 }
 
-/* Custom Dropdown Container */
-.drop-down {
-    display: flex;
-    height: 4.375rem; /* Exactly from Figma */
-    align-items: center;
+.Custom-Dropdown {
+    position: relative;
     align-self: stretch;
-    border-radius: 0.9375rem; /* 15px */
-    background: #E5E7EB; /* Gray background from Figma */
-    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.30);
-    cursor: pointer;
-    overflow: hidden;
+    flex: 1;
 }
 
-/* Dropdown Text Side */
-.drop-down .side-nav-button-label-container {
+.Dropdown-Trigger {
     display: flex;
-    width: 10rem; /* Exactly from Figma */
-    justify-content: center;
-    align-items: center;
-    gap: 0.625rem;
-    align-self: stretch;
-}
-
-/* Dropdown Arrow Side */
-.drop-down .side-nav-button-container {
-    display: flex;
-    width: 4.375rem; /* Exactly from Figma */
+    height: 4.375rem; /* Matches your Figma height */
     padding: 0.625rem;
-    justify-content: center;
     align-items: center;
     gap: 0.625rem;
-    align-self: stretch;
     border-radius: 0.9375rem;
+    background: #E5E7EB; /* Control-Gray */
+    color: #858788;
+    cursor: pointer;
+    transition: background 0.2s ease;
 }
 
-.drop-down-text {
-    color: var(--Black);
+.Dropdown-Label {
+    flex: 1;
     font-size: 1.25rem;
     font-weight: 500;
+}
+
+.Dropdown-Menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 0.9375rem;
+    list-style: none;
+    padding: 0.5rem 0;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.Custom-Dropdown.is-open .Dropdown-Menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.Dropdown-Item {
+    padding: 0.75rem 1.25rem;
+    color: #000000;
+    font-size: 1.15rem;
+    cursor: pointer;
+}
+
+.Dropdown-Item:hover {
+    background: #F3F4F6;
+}
+/* No new CSS needed if you already have these from the previous steps: */
+.profile-field-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+    flex: 1 0 0;
+}
+
+.profile-field {
+    display: flex;
+    padding: 0.625rem;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 0.9375rem;
+    border: 1px solid var(--Text-Gray);
+    box-sizing: border-box;
 }
 
 /* This Is Just A Template CSS, Copy Paste The Contents Of This Page To A New CSS File And Go From There */
