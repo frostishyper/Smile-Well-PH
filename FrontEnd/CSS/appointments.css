@@ -1,0 +1,891 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+body, button, input, textarea, select {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+@media (max-width: 1920px) {
+    html {
+    font-size: 14px; /* Shrinks all 'rem' values globally by about 12% */
+    }
+}
+
+/* 3. Scale down for smaller laptops */
+@media (max-width: 1366px) {
+    html {
+    font-size: 12px; 
+    }
+}
+
+/* Portrait Barrier */
+.portrait-warning {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--Logo-Dark);
+    color: var(--White);
+    z-index: 9999;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    text-align: center;
+}
+
+.portrait-warning i {
+    font-size: 4rem;
+}
+
+@media (orientation: portrait) {
+    body {
+        overflow: hidden;
+    }
+    
+    .portrait-warning {
+        display: flex;
+    }
+}
+
+:root {
+    --Logo-Light: #7BB3D2;
+    --Logo-Dark: #2E5C76;
+    --White: #FFFFFF;
+    --Black: #000000;
+    --Control-Gray: #E5E7EB;
+    --Text-Gray: #959595;
+    --Table-Gray: #F0F0F0;
+    --Subtle-Green: #E8F7E0;
+    --Highlight-Green: #67B07D;
+    --Subtle-Red: #F6B9B9;
+    --Highlight-Red: #BE3A3A;
+    --Arc-Blue: #097BAC;
+    --Arc-Green: #19D646;
+    --Arc-Orange: #F5B119;
+    --Arc-Red: #D3030D;
+}
+
+body {
+    display: flex;
+    width: 100%;
+    max-width: 2000px; 
+    min-height: 100vh; 
+    margin: 0 auto; 
+    align-items: stretch;
+    background: #FAFAFA;
+}
+
+.SideBar {
+    display: flex;
+    flex-direction: column;
+    width: 26rem; 
+    align-self: stretch;
+    background: var(--White);
+    border-right: 3px solid var(--Control-Gray);
+    flex-shrink: 0;
+}
+
+.MainView {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.TopBar {
+    display: flex;
+    height: 10rem;
+    align-items: flex-start;
+    align-self: stretch;
+    border-bottom: 3px solid var(--Control-Gray);
+    background: var(--White);
+}
+
+.MainActivity {
+    display: flex;
+    padding: 1.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+    background: var(--Table-Gray);
+}
+
+.TopCorner {
+    display: flex;
+    width: 100%;
+    height: 10rem;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.LogoContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.SmileWellLogo {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.logo-light {
+    color: var(--Logo-Light);
+}
+
+.logo-dark {
+    color: var(--Logo-Dark);
+}
+
+.TopBar-Nav {
+    display: flex;
+    padding: 0 1.25rem;
+    align-items: center;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.TopBar-Nav-Text {
+    color: var(--Black);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.10);
+    font-size: 2.8125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.UserContainer {
+    display: flex;
+    padding: 0 1.25rem;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.875rem;
+    align-self: stretch;
+}
+
+.Username-Container {
+    display: flex;
+    padding: 0.625rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    align-self: stretch;
+}
+
+.Staff-Name {
+    color: var(--Black);
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.Staff-Role {
+    color: var(--Text-Gray);
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.PFP-Container {
+    display: flex;
+    width: 6.875rem;
+    height: 6.875rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.PFP {
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+    background: url(../Media/Dentist.jpg) lightgray 50% / cover no-repeat;
+    border-radius: 1rem;
+}
+
+.Side-Nav-Container {
+    display: flex;
+    padding: 5rem 1.875rem 1.25rem 1.875rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.Side-Nav-BTN {
+    display: flex;
+    height: 5.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    border-radius: 1rem;
+}
+
+.SNB-Icon-Container {
+    display: flex;
+    width: 6.25rem;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.Nav-Icon {
+    width: 3.125rem;
+    height: 3.125rem;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+}
+
+.SNB-Label-Container {
+    display: flex;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.SNB-Label {
+    color: var(--Black);
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.Logout-Container {
+    display: flex;
+    width: 100%;
+    padding: 3.125rem 1.875rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.Logout-BTN {
+    display: flex;
+    height: 5.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    flex: 1 0 0;
+    border-radius: 0.9375rem;
+    background: var(--Control-Gray);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
+
+.Logout-Label {
+    color: var(--Black);
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* This Is Just A Template CSS, Copy Paste The Contents Of This Page To A New CSS File And Go From There */
+/* Start Styling Bellow Here: */
+
+/* ════════════════════════════════════════════
+   MAIN VIEW
+════════════════════════════════════════════ */
+.MainView {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 0;
+    align-self: stretch;
+    overflow: hidden;
+}
+
+/* Top Bar */
+.TopBar {
+    display: flex;
+    height: 10rem;
+    align-items: flex-start;
+    align-self: stretch;
+    border-bottom: 3px solid var(--Control-Gray);
+    background: var(--White);
+    flex-shrink: 0;
+}
+.TopBar-Nav {
+    display: flex;
+    flex: 1 0 0; height: 100%;
+    align-items: center;
+    padding: 0 1.25rem;
+}
+.TopBar-Nav-Text {
+    font-size: 2.8125rem; font-weight: 400;
+    color: var(--Black);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.10);
+    line-height: normal;
+}
+.UserContainer {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1.875rem;
+    padding: 0 1.25rem;
+    flex: 1 0 0;
+}
+.Username-Container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    height: 100%;
+    padding: 0.625rem;
+}
+.Staff-Name { font-size: 1.875rem; font-weight: 700; color: var(--Black); line-height: normal; }
+.Staff-Role { font-size: 1.875rem; font-weight: 400; color: var(--Text-Gray); line-height: normal; }
+.PFP-Container {
+    display: flex;
+    width: 6.875rem; height: 6.875rem;
+    align-items: center; justify-content: center;
+    flex-shrink: 0;
+}
+.PFP {
+    width: 100%; height: 100%;
+    background: url(../Media/Dentist.jpg) lightgray 50% / cover no-repeat;
+    border-radius: 0.9375rem;
+}
+
+/* ════════════════════════════════════════════
+   MAIN ACTIVITY
+════════════════════════════════════════════ */
+.MainActivity {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1.25rem;
+    flex: 1 0 0;
+    align-self: stretch;
+    padding: 1.25rem;
+    background: var(--Table-Gray);
+    overflow: hidden;
+}
+
+/* ════════════════════════════════════════════
+   APPOINTMENTS CONTAINER
+════════════════════════════════════════════ */
+.Appointments-Container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    flex: 1 0 0;
+    align-self: stretch;
+    border-radius: 0.9375rem;
+    min-width: 0;
+}
+
+/* Appointments Today sub-container */
+.Appointments-Today {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    align-self: stretch;
+    flex: 1 0 0;
+}
+
+/* Appointment Header */
+.Appointment-Header {
+    display: flex;
+    padding: 0.625rem 0.625rem 1.25rem 0.625rem;
+    align-items: center;
+    gap: 1.25rem;
+    align-self: stretch;
+}
+
+.Appt-Label-Container {
+    display: flex;
+    flex: 1 0 0;
+    align-items: center;
+    align-self: stretch;
+}
+
+.Appt-Date-Label {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--Black);
+    line-height: normal;
+    white-space: nowrap;
+}
+
+/* New Booking Button */
+.New-Booking-BTN {
+    display: flex;
+    height: 4.375rem;               /* 70px */
+    align-items: center;
+    padding: 0.625rem 1.25rem;
+    gap: 0;
+    border-radius: 0.9375rem;
+    border: none;
+    background: var(--Control-Gray);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+    cursor: pointer;
+    transition: background 0.15s ease;
+    flex-shrink: 0;
+}
+.New-Booking-BTN:hover { background: #d1d5db; }
+
+.New-Booking-Text {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--Time-Gray);
+    line-height: normal;
+    white-space: nowrap;
+    tracking: -0.06em;
+}
+
+.New-Booking-Icon-Container {
+    display: flex;
+    width: 4.375rem; height: 100%;
+    align-items: center; justify-content: center;
+    border-radius: 0.9375rem;
+    flex-shrink: 0;
+}
+.New-Booking-Icon-Container svg {
+    width: 1.75rem; height: 1.75rem;
+    color: var(--Time-Gray);
+}
+
+/* Appointment Today Container (white card) */
+.Appointment-Today-Container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    flex: 1 0 0;
+    align-self: stretch;
+    padding: 1.25rem;
+    border-radius: 0.9375rem;
+    background: #FFF;
+    overflow-y: auto;
+}
+
+/* Empty state */
+.Appt-Empty-State {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    align-self: stretch;
+    color: var(--Text-Gray);
+    font-size: 1.25rem;
+    font-weight: 400;
+    text-align: center;
+}
+
+/* ════════════════════════════════════════════
+   APPOINTMENT ENTRY
+════════════════════════════════════════════ */
+.Appointment-Entry {
+    display: flex;
+    height: 6.25rem;           /* 100px */
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    flex-shrink: 0;
+}
+
+/* Color Stub */
+.Appt-Color-Stub {
+    width: 0.625rem;           /* 10px */
+    align-self: stretch;
+    border-radius: 0.9375rem;
+    flex-shrink: 0;
+}
+
+/* Appointment Details */
+.Appt-Details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+    justify-content: center;
+    padding: 0 0.625rem;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: normal;
+}
+
+.Appt-Procedure {
+    font-size: 1.625rem;       /* 26px */
+    font-weight: 700;
+    color: #000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+.Appt-Patient {
+    font-size: 1.5rem;         /* 24px */
+    font-weight: 400;
+    color: #959595;
+}
+.Appt-Time {
+    font-size: 1.5rem;         /* 24px */
+    font-weight: 400;
+    color: #858788;
+}
+
+/* Appointment Control */
+.Appointment-Control {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1.25rem;
+    align-self: stretch;
+    padding: 0 0.625rem;
+    flex-shrink: 0;
+}
+
+/* Shared control button base */
+.Appt-Control-BTN {
+    display: flex;
+    height: 5rem;              /* 80px */
+    align-items: center;
+    justify-content: center;
+    padding: 0.625rem 1.875rem;  /* 10px 30px */
+    border-radius: 0.9375rem;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+    border: none;
+    background: none;
+    flex-shrink: 0;
+}
+.Appt-Control-BTN:hover  { opacity: 0.80; }
+.Appt-Control-BTN:active { opacity: 0.65; transform: scale(0.97); }
+.Appt-Control-BTN svg   { width: 1.875rem; height: 1.875rem; }
+
+.Appt-BTN-Edit   { border: 1px solid #959595; background: #FFF;    color: var(--Black); }
+.Appt-BTN-Cancel { border: 1px solid #BE3A3A; background: #F6B9B9; color: #BE3A3A; }
+.Appt-BTN-Go     { border: 1px solid #67B07D; background: #E8F7E0; color: #67B07D; }
+
+/* ════════════════════════════════════════════
+   APPOINTMENTS PAGINATION
+════════════════════════════════════════════ */
+.Appt-Pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+    align-self: stretch;
+    padding: 0.625rem 1.25rem;
+    flex-shrink: 0;
+}
+
+.Pag-Arrow-BTN {
+    display: flex;
+    align-items: center; justify-content: center;
+    width: 5rem; height: 5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--Black);
+    border-radius: 0.625rem;
+    transition: background 0.15s ease;
+    flex-shrink: 0;
+}
+.Pag-Arrow-BTN svg    { width: 5rem; height: 5rem; }
+.Pag-Arrow-BTN:hover:not(:disabled) { background: var(--Control-Gray); }
+.Pag-Arrow-BTN:disabled { color: #c8c8c8; cursor: default; }
+
+.Pag-Page-Cell {
+    display: flex;
+    align-items: center; justify-content: center;
+    flex: 1 0 0;
+}
+
+.Pag-Page-Cell > div {
+    display: flex;
+    align-items: center; justify-content: center;
+    padding: 0.9375rem;
+    background: #FFF;
+    border-radius: 1.25rem;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.Pag-Info {
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--Black);
+    white-space: nowrap;
+}
+
+/* ════════════════════════════════════════════
+   CALENDAR CONTAINER
+════════════════════════════════════════════ */
+.Calendar-Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    align-self: stretch;
+    padding: 1.875rem;
+    border-radius: 0.9375rem;
+    background: #FFF;
+    width: 38.75rem;           /* ~620px — matches Figma */
+    flex-shrink: 0;
+}
+
+/* ── Branch Header ── */
+.Cal-Branch-Header {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    align-self: stretch;
+    padding: 0.625rem 0.625rem 1.25rem 0.625rem;
+    border-bottom: 1px solid #959595;
+    flex-shrink: 0;
+}
+
+.Cal-Branch-Label-Container {
+    display: flex;
+    flex: 1 0 0;
+    align-items: center;
+    align-self: stretch;
+}
+
+.Cal-Branch-Label {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--Black);
+    line-height: normal;
+    white-space: nowrap;
+}
+
+/* Shared dropdown look */
+.Cal-Dropdown-Static,
+.Cal-Dropdown-Select-Wrapper {
+    display: flex;
+    height: 4.375rem;          /* 70px */
+    align-items: center;
+    padding: 0.625rem;
+    border-radius: 0.9375rem;
+    background: var(--Control-Gray);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+    flex-shrink: 0;
+    position: relative;
+}
+
+.Cal-Dropdown-Static { pointer-events: none; user-select: none; }
+
+.Cal-Dropdown-Text-Container {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.25rem;
+    width: 10rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.Cal-Dropdown-Text {
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--Time-Gray);
+    white-space: nowrap;
+    letter-spacing: -0.06em;
+}
+
+/* Native select — invisible, positioned over text container */
+.Cal-Select {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+    color: var(--Time-Gray);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 2rem;
+    font-weight: 400;
+    outline: none;
+    cursor: pointer;
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.Cal-Dropdown-Icon-Container {
+    display: flex;
+    width: 4.375rem; height: 100%;
+    align-items: center; justify-content: center;
+    border-radius: 0.9375rem;
+    flex-shrink: 0;
+}
+.Cal-Dropdown-Icon-Container svg {
+    width: 3.125rem; height: 3.125rem;
+    color: var(--Black);
+}
+
+/* Timeline row (Month + Year) */
+.Cal-Timeline-Container {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    align-self: stretch;
+    padding: 0.625rem;
+    flex-shrink: 0;
+}
+
+.Cal-Timeline-Container .Cal-Dropdown-Select-Wrapper {
+    flex: 1 0 0;
+}
+
+.Cal-Timeline-Container .Cal-Dropdown-Text-Container {
+    flex: 1 0 0;
+    width: auto;
+}
+
+/* ── Calendar Grid Wrapper ── */
+.Cal-Grid-Wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    width: 100%;
+    background: var(--Control-Gray);
+    border-radius: 1.25rem;
+    padding: 0.625rem;
+    flex-shrink: 0;
+}
+
+/* Day label row & date rows share this row structure */
+.Cal-Row {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    width: 100%;
+    flex: 1 0 0;
+    min-height: 3.5rem;
+}
+
+.Cal-Dates {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    width: 100%;
+    flex: 1 0 0;
+}
+
+/* Individual day cell */
+.Cal-Day-Cell {
+    display: flex;
+    flex: 1 0 0;
+    align-items: center;
+    justify-content: center;
+    min-height: 3.5rem;
+}
+
+.Cal-Day-Label {
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--Black);
+    text-align: center;
+    line-height: normal;
+    letter-spacing: -0.06em;
+    white-space: nowrap;
+}
+
+.Cal-Day-Cell.sunday .Cal-Day-Label       { color: var(--Highlight-Red); }
+.Cal-Day-Cell.other-month .Cal-Day-Label  { color: #c8c8c8; pointer-events: none; }
+.Cal-Day-Cell.empty                        { pointer-events: none; }
+
+/* Clickable day numbers */
+.Cal-Day-Cell:not(.empty):not(.other-month) { cursor: pointer; }
+.Cal-Day-Cell:not(.empty):not(.other-month):hover .Cal-Day-Label { opacity: 0.6; }
+
+/* Selected day pill */
+.Cal-Day-Cell .Cal-Day-Selection {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    background: var(--Black);
+    border-radius: 50%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.Cal-Day-Cell .Cal-Day-Selection .Cal-Day-Label {
+    color: #FFF;
+    font-size: 2rem;
+    line-height: 1;
+    margin: 0;
+    width: auto;
+    text-align: center;
+}
+/* ── Calendar Pagination (day navigator) ── */
+.Cal-Pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.625rem;
+    align-self: stretch;
+    padding: 0.625rem 1.25rem;
+    height: 6.25rem;
+    flex-shrink: 0;
+}
+
+.Cal-Pag-Arrow {
+    display: flex;
+    align-items: center; justify-content: center;
+    width: 5rem; height: 5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--Black);
+    border-radius: 0.625rem;
+    transition: background 0.15s ease;
+    flex-shrink: 0;
+}
+.Cal-Pag-Arrow svg   { width: 5rem; height: 5rem; }
+.Cal-Pag-Arrow:hover { background: rgba(0,0,0,0.08); }
+
+.Cal-Pag-Center {
+    display: flex;
+    flex: 1 0 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.Cal-Day-Pill {
+    display: flex;
+    align-items: center; justify-content: center;
+    background: var(--Black);
+    border-radius: 999px;
+    padding: 0.625rem 1.25rem;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #FFF;
+    line-height: normal;
+    white-space: nowrap;
+    min-width: 3.5rem;
+    text-align: center;
+}
