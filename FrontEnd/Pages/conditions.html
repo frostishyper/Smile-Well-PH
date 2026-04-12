@@ -5,8 +5,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Title Here</title>
-        <link rel="stylesheet" href="../CSS/personaldetails.css"> <!-- Replace Path To Proper CSS -->
-        <script src="../JS/personaldetails.js"></script> <!-- Replace Path To Proper JS -->
+        <link rel="stylesheet" href="../CSS/conditions.css"> <!-- Replace Path To Proper CSS -->
+        <script src="../JS/template.js"></script> <!-- Replace Path To Proper JS -->
     </head>
 
     <body>
@@ -123,171 +123,114 @@
                 </div>
             </div>
             <div class="MainActivity">
-
-                <div class="MainActivity">
-    
-    <div class="new-patient-form" id="newPatientForm">
-        <div class="check-box-header-container" id="formHeader">
-
-    <h2 class="form-title">Personal Details</h2>
-
-    <div class="appointment-control" id="appointmentControl">
-    
-    <div class="edit-btn" id="editVisitBtnControl">
-        <div class="side-nav-button-container">
-    <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
-        <path d="M1.25 5V12.5H8.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M28.75 25V17.5H21.25" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M25.6125 11.25C24.9785 9.45845 23.9011 7.85673 22.4807 6.59425C21.0602 5.33176 19.3432 4.44968 17.4896 4.0303C15.6361 3.61091 13.7066 3.6679 11.881 4.19594C10.0555 4.72398 8.39343 5.70586 7.05 7.04997L1.25 12.5M28.75 17.5L22.95 22.95C21.6066 24.2941 19.9445 25.276 18.119 25.804C16.2934 26.332 14.3639 26.389 12.5104 25.9697C10.6568 25.5503 8.93975 24.6682 7.51933 23.4057C6.09892 22.1432 5.02146 20.5415 4.3875 18.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-</div>
-        </div>
-
-    <div class="save-btn" id="saveEditBtnControl">
-        <div class="side-nav-button-container">
-            <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
-                <path d="M23.75 26.25H6.25C5.58696 26.25 4.95107 25.9866 4.48223 25.5178C4.01339 25.0489 3.75 24.413 3.75 23.75V6.25C3.75 5.58696 4.01339 4.95107 4.48223 4.48223C4.95107 4.01339 5.58696 3.75 6.25 3.75H20L26.25 10V23.75C26.25 24.413 25.9866 25.0489 25.5178 25.5178C25.0489 25.9866 24.413 26.25 23.75 26.25Z" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M21.25 26.25V16.25H8.75V26.25" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M8.75 3.75V10H18.75" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </div>
-    </div>
-
-        </div>
-
-    </div>
-
-    <div class="patient-details-form" id="patientDetailsForm">
-
-        <div class="profile-field-row">
-            <div class="profile-field-col">
-    <label class="field-label">First Name</label>
-    <div class="profile-field">
-        <input type="text" class="field-input" id="firstnamefield" placeholder="Teto">
-    </div>
-</div>
-
-<div class="profile-field-col">
-    <label class="field-label">Middle Name</label>
-    <div class="profile-field">
-        <input type="text" class="field-input" id="middlenamefield" placeholder="Utau">
-    </div>
-</div>
-
-<div class="profile-field-col">
-    <label class="field-label">Last Name</label>
-    <div class="profile-field">
-        <input type="text" class="field-input" id="lastnamefield" placeholder="Kasane">
-    </div>
-</div>
-    </div>
-
-    <div class="profile-field-row">
-        <div class="profile-field-col">
-    <label class="field-label" for="contactNumber">Contact #</label>
-    <div class="profile-field">
-        <input type="text" id="contactNumber" name="contactNumber" class="field-input" placeholder="0912345678">
-    </div>
-</div>
-
-<div class="profile-field-col">
-    <label class="field-label" for="emailAddress">Email Address</label>
-    <div class="profile-field">
-        <input type="email" id="emailAddress" name="emailAddress" class="field-input" placeholder="example@gmail.com">
-    </div>
-</div>
-
-<div class="profile-field-col">
-    <label class="field-label" for="birthDate">Birthdate (MM / DD / YYYY)</label>
-    <div class="profile-field">
-        <input type="text" id="birthDate" name="birthDate" class="field-input" placeholder="04 / 01 / 2008">
-    </div>
-</div>
-        </div>
-
-    <div class="profile-field-row">
-        <div class="profile-field-col">
-    <label class="field-label">Sex</label>
-    <div class="Custom-Dropdown" id="Sex-Dropdown">
-        <div class="Dropdown-Trigger">
-            <div class="Dropdown-Icon">
-                <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                    <path d="M12.5 18.75L25 31.25L37.5 18.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+                <div class="new-patient-form" id="allergensForm">
+    <div class="check-box-header-container">
+        <h2 class="form-title">Conditions</h2>
+        <div class="appointment-control">
+            <div class="edit-btn" id="editConditionsBtn">
+                <div class="side-nav-button-container">
+                    <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                        <path d="M11.25 12.5L5 18.75L11.25 25" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M25 5V13.75C25 15.0761 24.4732 16.3479 23.5355 17.2855C22.5979 18.2232 21.3261 18.75 20 18.75H5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
             </div>
-            <div class="Dropdown-Label">Select Sex</div>
-        </div>
-        <ul class="Dropdown-Menu">
-            <li class="Dropdown-Item" data-value="female">Female</li>
-            <li class="Dropdown-Item" data-value="male">Male</li>
-        </ul>
-    </div>
-</div>
-
-<div class="profile-field-col">
-    <label class="field-label">Blood Type</label>
-    <div class="Custom-Dropdown" id="Bloodtype-Dropdown">
-        <div class="Dropdown-Trigger">
-            <div class="Dropdown-Icon">
-                <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                    <path d="M12.5 18.75L25 31.25L37.5 18.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+            <div class="save-btn" id="saveAllergensBtn">
+                <div class="side-nav-button-container">
+                    <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                        <path d="M23.75 26.25H6.25C5.58696 26.25 4.95107 25.9866 4.48223 25.5178C4.01339 25.0489 3.75 24.413 3.75 23.75V6.25C3.75 5.58696 4.01339 4.95107 4.48223 4.48223C4.95107 4.01339 5.58696 3.75 6.25 3.75H20L26.25 10V23.75C26.25 24.413 25.9866 25.0489 25.5178 25.5178C25.0489 25.9866 24.413 26.25 23.75 26.25Z" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M21.25 26.25V16.25H8.75V26.25" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8.75 3.75V10H18.75" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
             </div>
-            <div class="Dropdown-Label">Select Type</div>
         </div>
-        <ul class="Dropdown-Menu">
-            <li class="Dropdown-Item" data-value="A+">A+</li>
-            <li class="Dropdown-Item" data-value="A-">A-</li>
-            <li class="Dropdown-Item" data-value="B+">B+</li>
-            <li class="Dropdown-Item" data-value="B-">B-</li>
-            <li class="Dropdown-Item" data-value="AB">AB</li>
-            <li class="Dropdown-Item" data-value="O+">O+</li>
-            <li class="Dropdown-Item" data-value="O-">O-</li>
-        </ul>
+    </div>
+
+        <div class="patient-details-form">
+        <div class="conditions-list-container">
+            <div class="condition-item-row">
+                <label class="check-box-wrapper">
+                    <input type="checkbox" class="condition-toggle">
+                    <div class="custom-sq-box"></div>
+                </label>
+                <span class="condition-text-label">Heart Conditions (EX. Pacemakers, Etc)</span>
+                <div class="profile-field cond-input-field">
+                    <input type="text" placeholder="Arrhythmia">
+                </div>
+            </div>
+            
+            <div class="condition-item-row">
+                <label class="check-box-wrapper">
+                    <input type="checkbox" class="condition-toggle">
+                    <div class="custom-sq-box"></div>
+                </label>
+                <span class="condition-text-label">Diabetes (Type)</span>
+                <div class="profile-field cond-input-field">
+                    <input type="text">
+                </div>
+            </div>
+
+            <div class="condition-item-row">
+                <label class="check-box-wrapper">
+                    <input type="checkbox" class="condition-toggle">
+                    <div class="custom-sq-box"></div>
+                </label>
+                <span class="condition-text-label">Blood Conditions (Bleeding Conditions, Blood Pressure)</span>
+                <div class="profile-field cond-input-field">
+                    <input type="text">
+                </div>
+            </div>
+
+            <div class="condition-item-row">
+                <label class="check-box-wrapper">
+                    <input type="checkbox" class="condition-toggle">
+                    <div class="custom-sq-box"></div>
+                </label>
+                <span class="condition-text-label">Respiratory Conditions (Asthma, Emphysema)</span>
+                <div class="profile-field cond-input-field">
+                    <input type="text">
+                </div>
+            </div>
+
+            <div class="condition-item-row">
+                <label class="check-box-wrapper">
+                    <input type="checkbox" class="condition-toggle">
+                    <div class="custom-sq-box"></div>
+                </label>
+                <span class="condition-text-label">Kidney Or Liver Conditions</span>
+                <div class="profile-field cond-input-field">
+                    <input type="text">
+                </div>
+            </div>
+
+            <div class="condition-item-row">
+                <label class="check-box-wrapper">
+                    <input type="checkbox" class="condition-toggle">
+                    <div class="custom-sq-box"></div>
+                </label>
+                <span class="condition-text-label">Epilepsy or Seizures</span>
+                <div class="profile-field cond-input-field">
+                    <input type="text">
+                </div>
+            </div>
+
+            <div class="condition-item-row">
+                <label class="check-box-wrapper">
+                    <input type="checkbox" class="condition-toggle">
+                    <div class="custom-sq-box"></div>
+                </label>
+                <span class="condition-text-label">Others</span>
+                <div class="profile-field cond-input-field">
+                    <input type="text">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
-<div class="profile-field-col" style="flex: 2;"> <label class="field-label" for="validId">Valid ID Number</label>
-    <div class="profile-field">
-        <input type="text" id="validId" class="field-input" placeholder="696-420">
-    </div>
-</div>
-        </div>
-
-    <div class="profile-field-row">
-        <div class="profile-field-col">
-    <label class="field-label" for="homeAddress">Home Address</label> <div class="profile-field">
-        <input type="text" id="homeAddress" name="homeAddress" class="field-input" placeholder="69 Vocaloid St, Shibuya Tokyo JP">
-    </div>
-</div>
-        </div>
-
-    <div class="profile-field-row">
-        <div class="profile-field-col">
-    <label class="field-label" for="occupation">Occupation</label>
-    <div class="profile-field">
-        <input type="text" id="occupation" name="occupation" class="field-input" placeholder="Teto">
-    </div>
-</div>
-
-<div class="profile-field-col">
-    <label class="field-label" for="religion">Religion</label>
-    <div class="profile-field">
-        <input type="text" id="religion" name="religion" class="field-input">
-    </div>
-</div>
-        </div>
-    
-        </div>
-
-</div>
-                
+                </div>
+                    </div>
             </div>
         </div>
     </body>
-    <div class="portrait-warning">
-    <i class="fa-solid fa-tablet-screen-button"></i>
-    <h2>Please rotate your device</h2>
-    <p>SmileWell Dental System requires landscape mode.</p>
-    </div>
 </html>
