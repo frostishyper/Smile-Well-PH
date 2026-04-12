@@ -1,13 +1,7 @@
-// This Is Only  Boilerplate Script, Copy & Paste This To A New JS File And Go From There.
-
 document.addEventListener('DOMContentLoaded', () => {
     App.init();
 });
 
-/**
- * 1. BACKEND CONFIGURATION
- * Set your Spring Boot API base URL and default headers here.
- */
 const API_CONFIG = {
     BASE_URL: 'http://localhost:8080/api/v1',
     HEADERS: {
@@ -17,39 +11,84 @@ const API_CONFIG = {
 };
 
 const App = {
-    /**
-     * 2. ELEMENT CACHE
-     * Store your querySelectors here so you don't hunt the DOM twice.
-     */
-    elements: {
-        body: document.querySelector('body'),
-        // Example: submitBtn: document.querySelector('#submit-btn')
-    },
+    elements: {},
 
-    /**
-     * 3. INITIALIZATION
-     * This runs immediately when the page loads.
-     */
     init() {
-        console.log('Page Logic Initialized');
+        this.cacheElements();
         this.setupEventListeners();
         this.ui.checkOrientation();
     },
 
-    /**
-     * 4. EVENT LISTENERS
-     * Define all clicks, submits, and input changes for this specific page here.
-     */
-    setupEventListeners() {
-        // Example: this.elements.submitBtn.addEventListener('click', () => this.handleAction());
+    cacheElements() {
+        this.elements.body = document.querySelector('body');
+        
+        this.elements.dropdown = document.querySelector('#Branch-Dropdown');
+        
+        if (this.elements.dropdown) {
+            this.elements.dropdownTrigger = this.elements.dropdown.querySelector('.Dropdown-Trigger');
+            this.elements.dropdownLabel = this.elements.dropdown.querySelector('.Dropdown-Label');
+            this.elements.dropdownItems = this.elements.dropdown.querySelectorAll('.Dropdown-Item');
+        }
+
+        this.elements.logoutTrigger = document.querySelector('#Logout-BTN');
+        this.elements.logoutModal = document.querySelector('#Logout-Modal');
+        this.elements.cancelLogoutBtn = document.querySelector('#Cancel-Logout');
+        this.elements.confirmLogoutBtn = document.querySelector('#Confirm-Logout');
     },
 
-    /**
-     * 5. UI HELPERS
-     * Reusable functions for interface states (loading spinners, orientation, etc.)
-     */
+    setupEventListeners() {
+        if (this.elements.dropdown) {
+            this.elements.dropdownTrigger.addEventListener('click', (e) => {
+                e.stopPropagation(); 
+                this.elements.dropdown.classList.toggle('is-open');
+            });
+
+            this.elements.dropdownItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    this.handleDropdownSelect(item);
+                });
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!this.elements.dropdown.contains(e.target)) {
+                    this.elements.dropdown.classList.remove('is-open');
+                }
+            });
+        }
+
+        if (this.elements.logoutTrigger && this.elements.logoutModal) {
+            this.elements.logoutTrigger.addEventListener('click', () => {
+                this.elements.logoutModal.classList.add('is-open');
+            });
+        }
+
+        if (this.elements.cancelLogoutBtn && this.elements.logoutModal) {
+            this.elements.cancelLogoutBtn.addEventListener('click', () => {
+                this.elements.logoutModal.classList.remove('is-open');
+            });
+        }
+
+        if (this.elements.confirmLogoutBtn) {
+            this.elements.confirmLogoutBtn.addEventListener('click', () => {
+                
+            });
+        }
+    },
+
+    handleDropdownSelect(selectedItem) {
+        this.elements.dropdownLabel.textContent = selectedItem.textContent;
+        this.elements.dropdownLabel.style.color = 'var(--Black)'; 
+        
+        this.elements.dropdown.classList.remove('is-open');
+        
+        const branchId = selectedItem.getAttribute('data-value');
+        
+        this.api.get(`/appointments?branch=${branchId}`)
+            .then(data => console.log(data))
+            .catch(err => console.error(err));
+    },
+
     ui: {
-        // Use this to disable buttons during API calls
         setLoading(element, isLoading) {
             if (isLoading) {
                 element.classList.add('is-loading');
@@ -60,7 +99,6 @@ const App = {
             }
         },
 
-        // Keeps tablet users in Landscape mode
         checkOrientation() {
             if (window.innerHeight > window.innerWidth) {
                 console.warn('System optimized for Landscape view.');
@@ -68,10 +106,6 @@ const App = {
         }
     },
 
-    /**
-     * 6. API LAYER (REST)
-     * Centralized methods for communicating with the Spring Boot controllers.
-     */
     api: {
         async request(endpoint, options = {}) {
             const url = `${API_CONFIG.BASE_URL}${endpoint}`;
@@ -83,7 +117,6 @@ const App = {
             try {
                 const response = await fetch(url, settings);
                 
-                // Handle Spring Boot error responses (4xx, 5xx)
                 if (!response.ok) {
                     const errorData = await response.json().catch(() => ({}));
                     throw new Error(errorData.message || `Status: ${response.status}`);
@@ -96,12 +129,10 @@ const App = {
             }
         },
 
-        // Usage: App.api.get('/patients/123')
         get(endpoint) {
             return this.request(endpoint, { method: 'GET' });
         },
 
-        // Usage: App.api.post('/auth/login', { user, pass })
         post(endpoint, data) {
             return this.request(endpoint, {
                 method: 'POST',
@@ -109,7 +140,6 @@ const App = {
             });
         },
 
-        // Usage: App.api.put('/billing/update', updatedData)
         put(endpoint, data) {
             return this.request(endpoint, {
                 method: 'PUT',
@@ -117,7 +147,6 @@ const App = {
             });
         },
 
-        // Usage: App.api.delete('/records/99')
         delete(endpoint) {
             return this.request(endpoint, { method: 'DELETE' });
         }

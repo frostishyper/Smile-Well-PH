@@ -191,6 +191,7 @@
                     </div>
                 </div>
                 <div class="Coming-Appointments-Container">
+                    <!-- Drop Down Branch -->
                     <div class="Coming-Appointments">
                         <div class="Coming-Apointments-Header">
                             <h1>Coming Appointments</h1>
@@ -209,13 +210,64 @@
                                 </ul>
                             </div>
                         </div>
-
+                        <!-- End OF Dropdown Branch-->
+                        <!--Put the 3 most upcoming apointments-->
+                        <!--1-->
+                        <div class="appointment-entry">
+                            <div class="color-stub-1"></div>
+                            <div class="appointment-details">
+                                <h1 id="appointment-1-Procdure">Procedure 1</h1>
+                                <h2 id="appointment-1-Name">Patient Name</h2>
+                                <h2 id="appointment-1-Time">
+                                    <span>1:00</span><span>PM</span> <span> - </span> <span>2:00</span><span>PM</span>
+                                </h2>
+                            </div>
+                        </div>
+                        <!--2-->
+                        <div class="appointment-entry">
+                            <div class="color-stub-2"></div>
+                            <div class="appointment-details">
+                                <h1 id="appointment-2-Procdure">Procedure 1</h1>
+                                <h2 id="appointment-2-Name">Patient Name</h2>
+                                <h2 id="appointment-2-Time">
+                                    <span>1:00</span><span>PM</span> <span> - </span> <span>2:00</span><span>PM</span>
+                                </h2>
+                            </div>
+                        </div>
+                        <!--3-->
+                        <div class="appointment-entry">
+                            <div class="color-stub-3"></div>
+                            <div class="appointment-details">
+                                <h1 id="appointment-3-Procdure">Procedure 1</h1>
+                                <h2 id="appointment-3-Name">Patient Name</h2>
+                                <h2 id="appointment-3-Time">
+                                    <span>1:00</span><span>PM</span> <span> - </span> <span>2:00</span><span>PM</span>
+                                </h2>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </body>
 
+
+    <div class="Logout-Modal-Overlay" id="Logout-Modal">
+        <div class="Logout-Card">
+            <div class="LC-Icon-Container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
+                    <path d="M39.5161 5.36706C45.8669 9.83134 50 17.1329 50 25.3968C50 38.9682 38.8306 49.9702 25.0504 49.9999C11.2903 50.0297 0.0201797 38.9881 1.83988e-05 25.4365C-0.0100622 17.1726 4.123 9.85118 10.4637 5.37698C11.6432 4.55357 13.2863 4.90079 13.9919 6.14087L15.5847 8.92856C16.1794 9.97023 15.8972 11.2897 14.9194 12.004C10.7359 15.0595 8.06453 19.9008 8.06453 25.3869C8.05445 34.5436 15.5746 42.0634 25 42.0634C34.2339 42.0634 41.996 34.7023 41.9355 25.2877C41.9052 20.1488 39.4456 15.1885 35.0706 11.994C34.0928 11.2797 33.8206 9.96031 34.4153 8.92856L36.0081 6.14087C36.7137 4.91071 38.3468 4.54365 39.5161 5.36706ZM29.0323 26.1904V2.38095C29.0323 1.06151 27.9536 0 26.6129 0H23.3871C22.0464 0 20.9678 1.06151 20.9678 2.38095V26.1904C20.9678 27.5099 22.0464 28.5714 23.3871 28.5714H26.6129C27.9536 28.5714 29.0323 27.5099 29.0323 26.1904Z" fill="currentColor"/>
+                </svg>
+            </div>
+            <h1 class="LC-Header">Log Out?</h1>
+            <h2 class="LC-SubText">You Are About To Be Logged Out<br>Are You Sure?</h2>
+            <div class="LC-Btn-Container">
+                <button class="LC-Cancel-Btn" id="Cancel-Logout">Cancel</button>
+                <button class="LC-Confirm-Btn" id="Confirm-Logout">Log Out</button>
+            </div>
+        </div>
+    </div>
+    
     <div class="portrait-warning">
     <i class="fa-solid fa-tablet-screen-button"></i>
     <h2>Please rotate your device</h2>
