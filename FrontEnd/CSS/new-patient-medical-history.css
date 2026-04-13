@@ -521,7 +521,7 @@ align-self: stretch;
 }
 
 /* 3. Specific colors for Yes (Green) */
-.hidden-input[value="yes"]:checked + .box-visual {
+.hidden-input:checked + .box-visual {
     background-color: #d1fae5; /* Light Green */
     border-color: #065f46;     /* Dark Green */
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23065f46"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>');
@@ -531,6 +531,7 @@ align-self: stretch;
 }
 
 /* 4. Specific colors for No (Red) */
+/* UNUSED HERE */
 .hidden-input[value="no"]:checked + .box-visual {
     background-color: #fee2e2; /* Light Red */
     border-color: #991b1b;     /* Dark Red */

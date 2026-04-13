@@ -490,7 +490,6 @@ body {
 
 /* CHECKBOXES FORMAT */
 /* 1. Hide the ugly default checkbox but keep it functional */
-
 .hidden-input {
     display: none;
 }
@@ -541,8 +540,6 @@ body {
     gap: 0.5rem;
     cursor: pointer;
 }
-
-
 
 /* PAGE NAVIGATION */
 .ProcedurePagination{
