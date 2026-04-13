@@ -1,5 +1,3 @@
-// This Is Only  Boilerplate Script, Copy & Paste This To A New JS File And Go From There.
-
 document.addEventListener('DOMContentLoaded', () => {
     App.init();
 });
@@ -16,9 +14,6 @@ const API_CONFIG = {
     }
 };
 
-/* =====================================================
-2. APP
-===================================================== */
 const App = {
     /**
      * 2. ELEMENT CACHE
@@ -99,12 +94,12 @@ const App = {
             }
         },
 
-        // Usage: App.api.get('/patients/123')
+        // Get Request(s)
         get(endpoint) {
             return this.request(endpoint, { method: 'GET' });
         },
 
-        // Usage: App.api.post('/auth/login', { user, pass })
+        // Post Request(s)
         post(endpoint, data) {
             return this.request(endpoint, {
                 method: 'POST',
@@ -112,7 +107,7 @@ const App = {
             });
         },
 
-        // Usage: App.api.put('/billing/update', updatedData)
+        // Put Request(s)
         put(endpoint, data) {
             return this.request(endpoint, {
                 method: 'PUT',
@@ -120,7 +115,7 @@ const App = {
             });
         },
 
-        // Usage: App.api.delete('/records/99')
+        // Delete Request(s)
         delete(endpoint) {
             return this.request(endpoint, { method: 'DELETE' });
         }
