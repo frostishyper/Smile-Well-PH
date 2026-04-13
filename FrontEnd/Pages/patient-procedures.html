@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Patient Procedures - SmileWell Dental System</title>
+        <link rel="stylesheet" href="../CSS/patient-procedures.css">
+    </head>
+    <body>
+        <div class="portrait-warning">
+            <h2>Please rotate your device</h2>
+            <p>SmileWell Dental System requires landscape mode.</p>
+        </div>
+
+        <!-- ===== SIDEBAR ===== -->
+        <div class="SideBar">
+            <div class="TopCorner">
+                <div class="LogoContainer">
+                    <h1 class="SmileWellLogo">
+                        <span class="logo-light">Smile</span><span class="logo-dark">Well</span>
+                        <br>
+                        <span class="logo-light">Dental </span><span class="logo-dark">System</span>
+                    </h1>
+                </div>
+            </div>
+
+            <div class="Side-Nav-Container">
+                <div class="Side-Nav-BTN" id="dashboardpage-btn">
+                    <div class="SNB-Icon-Container">
+                        <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
+                            <path d="M20.8333 6.25H6.25V20.8333H20.8333V6.25Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M43.75 6.25H29.1667V20.8333H43.75V6.25Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M43.75 29.1667H29.1667V43.75H43.75V29.1667Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M20.8333 29.1667H6.25V43.75H20.8333V29.1667Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="SNB-Label-Container">
+                        <h1 class="SNB-Label">Dashboard</h1>
+                    </div>
+                </div>
+
+                <!-- Records — ACTIVE -->
+                <div class="Side-Nav-BTN active" id="recordspage-btn">
+                    <div class="SNB-Icon-Container">
+                        <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
+                            <path d="M43.75 16.6667V43.75H6.25V16.6667" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M47.9167 6.25H2.08333V16.6667H47.9167V6.25Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M20.8333 25H29.1667" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="SNB-Label-Container">
+                        <h1 class="SNB-Label">Records</h1>
+                    </div>
+                </div>
+
+                <div class="Side-Nav-BTN" id="appointmentspage-btn">
+                    <div class="SNB-Icon-Container">
+                        <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
+                            <path d="M39.5833 8.33333H10.4167C8.11548 8.33333 6.25 10.1988 6.25 12.5V41.6667C6.25 43.9679 8.11548 45.8333 10.4167 45.8333H39.5833C41.8845 45.8333 43.75 43.9679 43.75 41.6667V12.5C43.75 10.1988 41.8845 8.33333 39.5833 8.33333Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M33.3333 4.16667V12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16.6667 4.16667V12.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M6.25 20.8333H43.75" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="SNB-Label-Container">
+                        <h1 class="SNB-Label">Appointments</h1>
+                    </div>
+                </div>
+
+                <div class="Side-Nav-BTN" id="newpatientpage-btn">
+                    <div class="SNB-Icon-Container">
+                        <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
+                            <path d="M33.3333 43.75V39.5833C33.3333 37.3732 32.4554 35.2536 30.8926 33.6908C29.3298 32.128 27.2101 31.25 25 31.25H10.4167C8.20653 31.25 6.08691 32.128 4.52411 33.6908C2.96131 35.2536 2.08333 37.3732 2.08333 39.5833V43.75" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M17.7083 22.9167C22.3107 22.9167 26.0417 19.1857 26.0417 14.5833C26.0417 9.98096 22.3107 6.25 17.7083 6.25C13.106 6.25 9.375 9.98096 9.375 14.5833C9.375 19.1857 13.106 22.9167 17.7083 22.9167Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M41.6667 16.6667V29.1667" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M47.9167 22.9167H35.4167" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="SNB-Label-Container">
+                        <h1 class="SNB-Label">New Patient</h1>
+                    </div>
+                </div>
+
+                <div class="Side-Nav-BTN" id="staffpage-btn">
+                    <div class="SNB-Icon-Container">
+                        <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
+                            <path d="M33.3333 8.33333H37.5C38.6051 8.33333 39.6649 8.77232 40.4463 9.55372C41.2277 10.3351 41.6667 11.3949 41.6667 12.5V41.6667C41.6667 42.7717 41.2277 43.8315 40.4463 44.6129C39.6649 45.3943 38.6051 45.8333 37.5 45.8333H12.5C11.3949 45.8333 10.3351 45.3943 9.55372 44.6129C8.77232 43.8315 8.33333 42.7717 8.33333 41.6667V12.5C8.33333 11.3949 8.77232 10.3351 9.55372 9.55372C10.3351 8.77232 11.3949 8.33333 12.5 8.33333H16.6667" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M31.25 4.16667H18.75C17.5994 4.16667 16.6667 5.09941 16.6667 6.25V10.4167C16.6667 11.5673 17.5994 12.5 18.75 12.5H31.25C32.4006 12.5 33.3333 11.5673 33.3333 10.4167V6.25C33.3333 5.09941 32.4006 4.16667 31.25 4.16667Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="SNB-Label-Container">
+                        <h1 class="SNB-Label">Staff</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="Logout-Container">
+                <div class="Logout-BTN" id="logout-btn">
+                    <div class="SNB-Icon-Container">
+                        <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
+                            <path d="M39.5161 5.36706C45.8669 9.83134 50 17.1329 50 25.3968C50 38.9682 38.8306 49.9702 25.0504 49.9999C11.2903 50.0297 0.0201797 38.9881 1.83988e-05 25.4365C-0.0100622 17.1726 4.123 9.85118 10.4637 5.37698C11.6432 4.55357 13.2863 4.90079 13.9919 6.14087L15.5847 8.92856C16.1794 9.97023 15.8972 11.2897 14.9194 12.004C10.7359 15.0595 8.06453 19.9008 8.06453 25.3869C8.05445 34.5436 15.5746 42.0634 25 42.0634C34.2339 42.0634 41.996 34.7023 41.9355 25.2877C41.9052 20.1488 39.4456 15.1885 35.0706 11.994C34.0927 11.2797 33.8206 9.96031 34.4153 8.92856L36.0081 6.14087C36.7137 4.91071 38.3468 4.54365 39.5161 5.36706ZM29.0323 26.1904V2.38095C29.0323 1.06151 27.9536 0 26.6129 0H23.3871C22.0464 0 20.9678 1.06151 20.9678 2.38095V26.1904C20.9678 27.5099 22.0464 28.5714 23.3871 28.5714H26.6129C27.9536 28.5714 29.0323 27.5099 29.0323 26.1904Z" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <div class="SNB-Label-Container">
+                        <h1 class="Logout-Label">Logout</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== MAIN VIEW ===== -->
+        <div class="MainView">
+            <div class="TopBar">
+                <div class="TopBar-Nav">
+                    <h1 class="TopBar-Nav-Text">Records &gt; <span id="patient-breadcrumb">Kasane Teto</span> &gt; <strong>Procedures</strong></h1>
+                </div>
+                <div class="UserContainer">
+                    <div class="Username-Container">
+                        <h1 class="Staff-Name" id="staff-name">Frostishyper</h1>
+                        <h2 class="Staff-Role" id="staff-role">Dentist</h2>
+                    </div>
+                    <div class="PFP-Container">
+                        <div class="PFP" id="staff-pfp"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Activity  [node 128:558]  bg:#f0f0f0  p:20px  gap:20px  flex-row -->
+            <main class="MainActivity">
+                <section class="patient-procedures-layout" aria-labelledby="patient-procedures-heading">
+                    <h2 class="sr-only" id="patient-procedures-heading">Patient procedures</h2>
+
+                    <!-- ══════════════════════════════
+                         LEFT — Visits Container  [node 128:578]
+                    ══════════════════════════════ -->
+                    <div class="patient-procedures-visits">
+
+                        <!-- Procedure Pagination  [node 161:352]  h:100px  flex-row  px:20px py:10px -->
+                        <div class="procedure-pagination" aria-label="Visit pagination">
+
+                            <!-- Prev arrow  [node 161:597]  plain icon button -->
+                            <button class="procedure-pagination-btn" id="visit-prev-btn" type="button" aria-label="Previous visit">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+                                    <path d="M36.6667 56.6667L20 40L36.6667 23.3333" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M60 56.6667L43.3333 40L60 23.3333" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+
+                            <!-- Page pill  [node 161:572 / 161:575]  auto-width  p:15px  white  rounded  shadow -->
+                            <div class="procedure-pages-area">
+                                <div class="procedure-page-indicator" id="visit-page-indicator">2 / 2</div>
+                            </div>
+
+                            <!-- Next arrow  [node 161:592]  plain icon button -->
+                            <button class="procedure-pagination-btn" id="visit-next-btn" type="button" aria-label="Next visit">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none">
+                                    <path d="M43.3333 56.6667L60 40L43.3333 23.3333" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M20 56.6667L36.6667 40L20 23.3333" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+
+                        </div><!-- /procedure-pagination -->
+
+                        <!-- Visit Container  [node 142:45]  flex-col  gap:10px -->
+                        <div class="patient-procedures-visit-stack">
+
+                            <!-- Visit Header Card  [node 142:46]
+                                 flex-col  gap:10px  pt:30px pb:15px px:30px -->
+                            <article class="procedure-card visit-header-card" aria-labelledby="visit-title">
+
+                                <!-- Visit Title Row  [node 142:47]  flex-row  gap:30px  items-center -->
+                                <div class="visit-title-row">
+                                    <div class="visit-title-container">
+                                        <h3 class="visit-title" id="visit-title">Visit 2</h3>
+                                    </div>
+                                    <!-- Visit D&T  [node 142:249]  gap:10px  text:24px bold #959595 -->
+                                    <div class="visit-meta-container" id="visit-summary-meta">
+                                        <span class="visit-meta-text" id="visit-branch">Manila</span>
+                                        <span class="visit-meta-divider" aria-hidden="true"></span>
+                                        <span class="visit-meta-text" id="visit-date">3/28/2026</span>
+                                        <span class="visit-meta-divider" aria-hidden="true"></span>
+                                        <span class="visit-meta-text" id="visit-time-range">11:00 AM - 12:00 AM</span>
+                                    </div>
+                                </div>
+
+                                <!-- Edit Visit Btn  [node 161:169]
+                                     h:80px  border:1px #959595  rounded:15px  shadow  px:30px py:10px
+                                     BELOW the title row, aligned left -->
+                                <button class="visit-edit-btn" id="visit-edit-btn" type="button" aria-label="Edit selected visit">
+                                    <!-- [Figma node 161:171 — "edit"]  Feather: edit-2 -->
+                                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path d="M13.75 5H5C4.33696 5 3.70107 5.26339 3.23223 5.73223C2.76339 6.20107 2.5 6.83696 2.5 7.5V25C2.5 25.663 2.76339 26.2989 3.23223 26.7678C3.70107 27.2366 4.33696 27.5 5 27.5H22.5C23.163 27.5 23.7989 27.2366 24.2678 26.7678C24.7366 26.2989 25 25.663 25 25V16.25" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M23.125 3.12479C23.6223 2.62751 24.2967 2.34814 25 2.34814C25.7033 2.34814 26.3777 2.62751 26.875 3.12479C27.3723 3.62208 27.6517 4.29653 27.6517 4.99979C27.6517 5.70306 27.3723 6.37751 26.875 6.87479L15 18.7498L10 19.9998L11.25 14.9998L23.125 3.12479Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+
+                            </article><!-- /visit-header-card -->
+
+                            <!-- Operations Card  [node 142:54]  flex-col -->
+                            <article class="procedure-card operations-card" aria-labelledby="operations-label">
+
+                                <!-- Header row  [node 142:55]  h:77px  border-bottom:#959595 -->
+                                <div class="operations-header">
+                                    <span class="operations-col-label" id="operations-label">Operation(s)</span>
+                                    <span class="operations-col-label operations-col-right">Bill</span>
+                                </div>
+
+                                <!-- Rows injected by JS -->
+                                <div class="operations-body" id="procedures-table-body"></div>
+
+                            </article><!-- /operations-card -->
+
+                            <!-- Dentist Notes Card  [node 241:4494]  flex-col  gap:20px  p:20px -->
+                            <article class="procedure-card dentist-notes-card" aria-labelledby="dentist-notes-title">
+                                <h3 class="dentist-notes-title" id="dentist-notes-title">Dentist Note(s)</h3>
+                                <p class="dentist-notes-copy" id="dentist-notes-copy"></p>
+                            </article>
+
+                        </div><!-- /patient-procedures-visit-stack -->
+
+                    </div><!-- /patient-procedures-visits -->
+
+
+                    <!-- ══════════════════════════════
+                         RIGHT — Overview Container  [node 128:579]
+                         w:490px  flex-col  gap:20px
+                    ══════════════════════════════ -->
+                    <aside class="patient-procedures-overview">
+
+                        <!-- Patient Card  [node 133:12]  px:30px py:20px -->
+                        <article class="overview-card patient-card">
+                            <div class="overview-profile">
+                                <img class="overview-avatar" id="patient-avatar" src="../Media/Patient.jpg" alt="Patient avatar">
+                                <div class="overview-profile-copy">
+                                    <h3 class="overview-name" id="patient-name">Kasane Teto</h3>
+                                    <p class="overview-role" id="patient-role">Patient</p>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Attending Dentist Card  [node 128:583] -->
+                        <article class="overview-card dentist-card">
+                            <p class="overview-card-heading">Attending Dentist</p>
+                            <div class="overview-profile">
+                                <img class="overview-avatar" id="dentist-avatar" src="../Media/Dentist.jpg" alt="Attending dentist avatar">
+                                <div class="overview-profile-copy">
+                                    <h3 class="overview-name" id="dentist-name">Makoto</h3>
+                                    <p class="overview-role" id="dentist-role">Dentist</p>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Branch Card  [node 437:341]  h:116px  px:30px py:10px -->
+                        <article class="overview-card branch-card">
+                            <div class="overview-profile-copy">
+                                <h3 class="overview-name" id="branch-name">Manila</h3>
+                                <p class="overview-role">Branch</p>
+                            </div>
+                        </article>
+
+                        <!-- S.O.A Button  [node 142:293]  h:150px  border:#959595  icon w:150px -->
+                        <button class="action-card-button" id="soa-btn" type="button">
+                            <span class="action-card-icon" aria-hidden="true">
+                                <!-- [Figma node 142:295 — "dollar-sign"] -->
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M40 3.3335V76.6668" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M56.6667 16.6665H31.6667C28.5725 16.6665 25.605 17.8957 23.4171 20.0836C21.2292 22.2715 20 25.239 20 28.3332C20 31.4274 21.2292 34.3948 23.4171 36.5827C25.605 38.7707 28.5725 39.9998 31.6667 39.9998H48.3333C51.4275 39.9998 54.395 41.229 56.5829 43.4169C58.7708 45.6049 60 48.5723 60 51.6665C60 54.7607 58.7708 57.7282 56.5829 59.9161C54.395 62.104 51.4275 63.3332 48.3333 63.3332H20" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            <span class="action-card-label">S.O.A</span>
+                        </button>
+
+                        <!-- New Procedure Button  [node 142:301]  h:150px  border:#959595  icon w:150px -->
+                        <button class="action-card-button" id="new-procedure-btn" type="button">
+                            <span class="action-card-icon" aria-hidden="true">
+                                <!-- [Figma node 142:303 — "activity"] -->
+                                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M73.3334 40H60L50 70L30 10L20 40H6.66669" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            <span class="action-card-label">New Procedure</span>
+                        </button>
+
+                    </aside><!-- /patient-procedures-overview -->
+
+                </section>
+            </main>
+        </div><!-- /MainView -->
+
+        <script src="../JS/patient-procedures.js"></script>
+    </body>
+</html>
