@@ -207,57 +207,65 @@
                     <!-- Branch Header -->
                     <div class="Cal-Branch-Header">
                         <div class="Cal-Branch-Label-Container">
-                            <span class="Cal-Branch-Label">Branch</span>
+                            <span class="Cal-Branch-Label" id="cal-branch-label">Branch</span>
                         </div>
-                        <!-- Static non-interactive branch display -->
-                        <div class="Cal-Dropdown-Static">
-                            <div class="Cal-Dropdown-Text-Container">
-                                <span class="Cal-Dropdown-Text">Manila</span>
-                            </div>
-                            <div class="Cal-Dropdown-Icon-Container">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="10 20 25 35 40 20"/>
-                                </svg>
-                            </div>
+                        <div class="Cal-Dropdown-Static Cal-Dropdown" id="cal-branch-dropdown" data-dropdown="branch">
+                            <button class="Cal-Dropdown-Toggle" id="cal-branch-toggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="cal-branch-label cal-branch-display">
+                                <span class="Cal-Dropdown-Value" id="cal-branch-display">Manila</span>
+                                <div class="Cal-Dropdown-Arrow" aria-hidden="true">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
+                                        <path d="M12 18L25 31L38 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </button>
+                            <div class="Cal-Dropdown-Menu" id="cal-branch-menu" role="listbox" aria-label="Branch options" hidden></div>
+                            <select class="Cal-Select" id="cal-branch-select" tabindex="-1" aria-hidden="true">
+                                <option selected>Manila</option>
+                                <option>Buendia</option>
+                            </select>
                         </div>
                     </div>
 
                     <!-- Month / Year selects -->
                     <div class="Cal-Timeline-Container">
-                        <div class="Cal-Dropdown-Select-Wrapper">
-                            <div class="Cal-Dropdown-Text-Container">
-                                <select class="Cal-Select" id="cal-month-select">
-                                    <option value="0">January</option>
-                                    <option value="1">February</option>
-                                    <option value="2">March</option>
-                                    <option value="3" selected>April</option>
-                                    <option value="4">May</option>
-                                    <option value="5">June</option>
-                                    <option value="6">July</option>
-                                    <option value="7">August</option>
-                                    <option value="8">September</option>
-                                    <option value="9">October</option>
-                                    <option value="10">November</option>
-                                    <option value="11">December</option>
-                                </select>
-                            </div>
-                            <div class="Cal-Dropdown-Icon-Container">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="10 20 25 35 40 20"/>
-                                </svg>
-                            </div>
+                        <div class="Cal-Dropdown-Select-Wrapper Cal-Dropdown" id="cal-month-dropdown" data-dropdown="month">
+                            <button class="Cal-Dropdown-Toggle" id="cal-month-toggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Select month">
+                                <span class="Cal-Dropdown-Value" id="cal-month-display">April</span>
+                                <div class="Cal-Dropdown-Arrow" aria-hidden="true">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
+                                        <path d="M12 18L25 31L38 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </button>
+                            <div class="Cal-Dropdown-Menu" id="cal-month-menu" role="listbox" aria-label="Month options" hidden></div>
+                            <select class="Cal-Select" id="cal-month-select" tabindex="-1" aria-hidden="true">
+                                <option value="0">January</option>
+                                <option value="1">February</option>
+                                <option value="2">March</option>
+                                <option value="3" selected>April</option>
+                                <option value="4">May</option>
+                                <option value="5">June</option>
+                                <option value="6">July</option>
+                                <option value="7">August</option>
+                                <option value="8">September</option>
+                                <option value="9">October</option>
+                                <option value="10">November</option>
+                                <option value="11">December</option>
+                            </select>
                         </div>
-                        <div class="Cal-Dropdown-Select-Wrapper">
-                            <div class="Cal-Dropdown-Text-Container">
-                                <select class="Cal-Select" id="cal-year-select">
-                                    <!-- Populated by JS -->
-                                </select>
-                            </div>
-                            <div class="Cal-Dropdown-Icon-Container">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="10 20 25 35 40 20"/>
-                                </svg>
-                            </div>
+                        <div class="Cal-Dropdown-Select-Wrapper Cal-Dropdown" id="cal-year-dropdown" data-dropdown="year">
+                            <button class="Cal-Dropdown-Toggle" id="cal-year-toggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Select year">
+                                <span class="Cal-Dropdown-Value" id="cal-year-display">2026</span>
+                                <div class="Cal-Dropdown-Arrow" aria-hidden="true">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
+                                        <path d="M12 18L25 31L38 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </button>
+                            <div class="Cal-Dropdown-Menu" id="cal-year-menu" role="listbox" aria-label="Year options" hidden></div>
+                            <select class="Cal-Select" id="cal-year-select" tabindex="-1" aria-hidden="true">
+                                <!-- Populated by JS -->
+                            </select>
                         </div>
                     </div>
 

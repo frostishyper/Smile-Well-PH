@@ -228,7 +228,7 @@ body {
     align-items: center;
     gap: 0.625rem;
     align-self: stretch;
-    border-radius: 1rem;
+    border-radius: 0.9375rem;
     cursor: pointer;
 }
 

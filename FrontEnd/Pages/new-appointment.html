@@ -271,56 +271,80 @@
 
                             <!-- Start Label  [node 220:518] -->
                             <div class="Time-Label-Container">
-                                <label class="Time-Label" for="start-time">Start</label>
+                                <label class="Time-Label" id="start-time-label" for="start-time">Start</label>
                             </div>
 
                             <!-- Start Dropdown  [node 220:520] -->
-                            <div class="Time-Dropdown" id="start-dropdown-wrapper">
-                                <span class="Time-Display-Text" id="start-display">1:00</span>
-                                <select class="Time-Select" id="start-time" name="startTime">
-                                    <option>8:00 AM</option>  <option>8:30 AM</option>
-                                    <option>9:00 AM</option>  <option>9:30 AM</option>
-                                    <option>10:00 AM</option> <option>10:30 AM</option>
-                                    <option>11:00 AM</option> <option>11:30 AM</option>
-                                    <option>12:00 PM</option> <option>12:30 PM</option>
+                            <div class="appointment-dropdown" id="start-dropdown-wrapper" data-dropdown="startTime">
+                                <button class="appointment-dropdown-toggle" id="start-time-toggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="start-time-label start-time-display">
+                                    <span class="appointment-dropdown-value" id="start-time-display">1:00 PM</span>
+                                    <div class="appointment-dropdown-arrow" aria-hidden="true">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
+                                            <path d="M12 18L25 31L38 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="appointment-dropdown-menu" id="start-time-menu" role="listbox" aria-label="Start time options" hidden></div>
+                                <select class="appointment-select-input" id="start-time" name="startTime" tabindex="-1" aria-hidden="true">
+                                    <option>8:00 AM</option>
+                                    <option>8:30 AM</option>
+                                    <option>9:00 AM</option>
+                                    <option>9:30 AM</option>
+                                    <option>10:00 AM</option>
+                                    <option>10:30 AM</option>
+                                    <option>11:00 AM</option>
+                                    <option>11:30 AM</option>
+                                    <option>12:00 PM</option>
+                                    <option>12:30 PM</option>
                                     <option selected>1:00 PM</option>
-                                    <option>1:30 PM</option>  <option>2:00 PM</option>
-                                    <option>2:30 PM</option>  <option>3:00 PM</option>
-                                    <option>3:30 PM</option>  <option>4:00 PM</option>
-                                    <option>4:30 PM</option>  <option>5:00 PM</option>
+                                    <option>1:30 PM</option>
+                                    <option>2:00 PM</option>
+                                    <option>2:30 PM</option>
+                                    <option>3:00 PM</option>
+                                    <option>3:30 PM</option>
+                                    <option>4:00 PM</option>
+                                    <option>4:30 PM</option>
+                                    <option>5:00 PM</option>
                                 </select>
-                                <div class="Time-Arrow">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
-                                        <path d="M12 18L25 31L38 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
                             </div>
 
                             <!-- End Label  [node 220:534] -->
                             <div class="Time-Label-Container">
-                                <label class="Time-Label" for="end-time">End</label>
+                                <label class="Time-Label" id="end-time-label" for="end-time">End</label>
                             </div>
 
                             <!-- End Dropdown  [node 220:527] -->
-                            <div class="Time-Dropdown" id="end-dropdown-wrapper">
-                                <span class="Time-Display-Text" id="end-display">1:30</span>
-                                <select class="Time-Select" id="end-time" name="endTime">
-                                    <option>8:30 AM</option>  <option>9:00 AM</option>
-                                    <option>9:30 AM</option>  <option>10:00 AM</option>
-                                    <option>10:30 AM</option> <option>11:00 AM</option>
-                                    <option>11:30 AM</option> <option>12:00 PM</option>
-                                    <option>12:30 PM</option> <option>1:00 PM</option>
+                            <div class="appointment-dropdown" id="end-dropdown-wrapper" data-dropdown="endTime">
+                                <button class="appointment-dropdown-toggle" id="end-time-toggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="end-time-label end-time-display">
+                                    <span class="appointment-dropdown-value" id="end-time-display">1:30 PM</span>
+                                    <div class="appointment-dropdown-arrow" aria-hidden="true">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
+                                            <path d="M12 18L25 31L38 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="appointment-dropdown-menu" id="end-time-menu" role="listbox" aria-label="End time options" hidden></div>
+                                <select class="appointment-select-input" id="end-time" name="endTime" tabindex="-1" aria-hidden="true">
+                                    <option>8:30 AM</option>
+                                    <option>9:00 AM</option>
+                                    <option>9:30 AM</option>
+                                    <option>10:00 AM</option>
+                                    <option>10:30 AM</option>
+                                    <option>11:00 AM</option>
+                                    <option>11:30 AM</option>
+                                    <option>12:00 PM</option>
+                                    <option>12:30 PM</option>
+                                    <option>1:00 PM</option>
                                     <option selected>1:30 PM</option>
-                                    <option>2:00 PM</option>  <option>2:30 PM</option>
-                                    <option>3:00 PM</option>  <option>3:30 PM</option>
-                                    <option>4:00 PM</option>  <option>4:30 PM</option>
-                                    <option>5:00 PM</option>  <option>5:30 PM</option>
+                                    <option>2:00 PM</option>
+                                    <option>2:30 PM</option>
+                                    <option>3:00 PM</option>
+                                    <option>3:30 PM</option>
+                                    <option>4:00 PM</option>
+                                    <option>4:30 PM</option>
+                                    <option>5:00 PM</option>
+                                    <option>5:30 PM</option>
                                 </select>
-                                <div class="Time-Arrow">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
-                                        <path d="M12 18L25 31L38 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
                             </div>
 
                         </div><!-- /Time-Row -->
