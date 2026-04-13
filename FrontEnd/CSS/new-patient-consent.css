@@ -444,12 +444,11 @@ box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
 }
 
 .QuestionLabelTextFormat{
-    color: #959595;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.20);
+    color: #000;
     font-family: "Plus Jakarta Sans";
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     line-height: normal;
 }
 
@@ -462,6 +461,28 @@ box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
     align-self: stretch;
 }
 
+.LegalContainer{
+    display: flex;
+    padding: 1.625rem;
+    align-items: flex-start;
+    gap: 0.625rem;
+    flex: 1 0 0;
+    align-self: stretch;
+
+    border-radius: 0.9375rem;
+    border: 1px solid #000000;
+}
+
+.LegalText{
+    color: #000;
+    font-family: "Plus Jakarta Sans";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    flex: 1 0 0;
+}
 .MedicalCondition{
     display: flex;
     padding: 0.6rem;
@@ -470,11 +491,11 @@ box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
     flex: 1 0 0;
 }
 .Question{
-display: flex;
-padding: 0.625rem;
-align-items: center;
-gap: 0.625rem;
-align-self: stretch;
+    display: flex;
+    padding: 0.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
 }
 
 .QuestionText{
@@ -497,6 +518,45 @@ align-self: stretch;
     gap: 0.625rem;
     align-self: stretch;
     aspect-ratio: 1/1;
+}
+
+.RegisterRow{
+    display: flex;
+    padding: 2.875rem 1.875rem;
+    justify-content: center;
+    align-items: center;
+    gap: 1.875rem;
+    align-self: stretch;
+}
+
+.RegisterContainer{
+    display: flex;
+    width: 25rem;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.ConfirmRegistration{
+    display: flex;
+    width: 25rem;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.btn-label-register{
+    color: #FFF;
+    font-family: "Plus Jakarta Sans";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.06rem;
 }
 
 /* CHECKBOXES FORMAT */
@@ -929,6 +989,20 @@ align-self: stretch;
     gap: 1.875rem;
     flex: 1 0 0;
     align-self: stretch;
+}
+
+.btn-register{
+    display: flex;
+    width: 25rem;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+
+    border-radius: 0.9375rem;
+    background: #000;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
 }
 
 .btn-secondary{

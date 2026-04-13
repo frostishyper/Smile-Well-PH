@@ -145,22 +145,45 @@
                     <div class="MainColumn">
                         <!-- ROW 1 -->
                         <div class="PatientFormRowContainer">
+                            <div class="LegalContainer">
+                                <h1 class="LegalText">
+                                    "I hereby authorize the attending dentists and clinical staff to perform a comprehensive dental examination, 
+                                    including the taking of necessary radiographs (X-rays), photographs, and diagnostic models. 
+                                    I understand that following this evaluation, a detailed 
+                                    treatment plan will be presented to me. I acknowledge that dentistry is not an exact science 
+                                    and that no specific guarantees have been made regarding the outcome of any procedures, treatments, 
+                                    or surgeries. I consent to the administration of local anesthetics and other necessary medications 
+                                    as deemed appropriate by the attending clinician."
+                                </h1>
+                            </div>
+                        </div>
+
+                        <!-- ROW 2 -->
+                        <div class="PatientFormRowContainer">
                             <div class="MedicalCondition">
                                 <div class="ChoiceContainer">
                                     <label class="choice-label">
-                                        <input type="radio" name="allergyQ1" value="yes" class="hidden-input">
+                                        <input type="checkbox" name="consent" value="yes" class="hidden-input">
                                         <div class="box-visual"></div>
-                                        </label>
+                                    </label>
                                 </div>
                                 <div class="Question">
-                                    <h1 class="QuestionText">Heart Conditions (Ex. Pacemakers, etc.)</h1>
+                                    <h1 class="QuestionText">I Agree & Consent To The Terms</h1>
                                 </div>
                             </div>
-                            <div class="profile-field">
-                                <input type="text" id="otherAllergies" name="medicalCondition" class="field-input" placeholder="DISEASES">
+                        </div>
+
+                        <!-- ROW 3 -->
+                        <div class="RegisterRow">
+                            <div class="RegisterContainer">
+                                <button id="cancelAction" class="btn-register">
+                                    <span class="btn-label-register">Register</span>
+                                </button>
                             </div>
                         </div>
+
                     </div>
+                </div>
 
                     <!-- PAGE STUFF ROW -->
                     <div class="ProcedurePagination">
