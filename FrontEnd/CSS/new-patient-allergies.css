@@ -240,7 +240,6 @@ body {
     gap: 0.625rem;
     align-self: stretch;
     border-radius: 1rem;
-    color:black;
 }
 
 .SNB-Icon-Container {
@@ -254,10 +253,18 @@ body {
 }
 
 .Nav-Icon {
-    width: 3.125rem;
+width: 3.125rem;
     height: 3.125rem;
     flex-shrink: 0;
     aspect-ratio: 1/1;
+}
+
+.svg-icons{
+width: 1.875rem;
+height: 1.875rem;
+flex-shrink: 0;
+aspect-ratio: 1/1;  
+
 }
 
 .SNB-Label-Container {
@@ -305,31 +312,10 @@ body {
     line-height: normal;
 }
 
-/* This Is Just A Template CSS, Copy Paste The Contents Of This Page To A New CSS File And Go From There */
-/* Start Styling Bellow Here: */
-
-/* Actvie Side Nav Stuff */
-
-.SNB-Label-Active {
-    color: #FFF;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.20);
-    font-family: "Plus Jakarta Sans";
-    font-size: 2rem;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
-}
-
-.Side-Nav-Active{
-    border-radius: 0.9375rem;
-    background: #1C1C1C;
-    color: #FFFFFF;
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
-}
-
-.newPatientForm{
+/* New Patient Form Container */
+.new-patient-form {
     display: flex;
-    padding: 0.625rem;
+    padding: 1.25rem;
     flex-direction: column;
     align-items: flex-start;
     flex: 1 0 0;
@@ -340,33 +326,10 @@ body {
 
 .check-box-header-container {
     display: flex;
-    padding: 1.25rem; /* 20px */
-    align-items: center;
-    gap: 0.625rem; /* 10px */
-    align-self: stretch;
-    box-sizing: border-box;
-}
-
-.CancelBtn{
-    display: flex;
-    height: 5rem;
-    align-items: center;
-
-    border-radius: 0.9375rem;
-    border: 1px solid #BE3A3A;
-    background: #F6B9B9;
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
-}
-
-.SideNavButtonContainer{
-    display: flex;
-    width: 5.625rem;
-    padding: 0.625rem 1.875rem;
-    justify-content: center;
+    padding: 1.25rem;
     align-items: center;
     gap: 0.625rem;
     align-self: stretch;
-    border-radius: 0.9375rem;
 }
 
 .form-title {
@@ -380,19 +343,62 @@ body {
 
 .appointment-control {
     display: flex;
-    padding: 0 0.625rem; /* Exactly as shown in Figma */
-    justify-content: flex-end; /* Pins buttons to the right */
+    padding: 0 0.625rem;
+    justify-content: flex-end;
     align-items: center;
-    gap: 1.25rem; /* 20px gap between buttons */
-    flex: 1 0 0; /* Grows to fill the space in the header */
+    gap: 1.25rem;
+    flex: 1 0 0;
     align-self: stretch;
 }
 
-/* Main Activity */
-
-.MainContainer{
+/* Base style for the small square buttons in this header */
+.edit-btn {
     display: flex;
+    height: 5rem;
     align-items: center;
+    border-radius: 0.9375rem;
+    border: 1px solid #959595;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
+
+.save-btn{
+    display: flex;
+height: 5rem;
+align-items: center;
+border-radius: 0.9375rem;
+border: 1px solid #67B07D;
+background: #E8F7E0;
+box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
+
+#saveEditBtnControl {
+    border: 1px solid var(--Highlight-Green);
+    background: var(--Subtle-Green);
+}
+
+.side-nav-button-container {
+    display: flex;
+    width: 5.25rem; /* Exactly from Figma */
+    padding: 0.625rem 1.875rem; /* 10px top/bottom, 30px left/right */
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    border-radius: 0.9375rem; /* 15px */
+    box-sizing: border-box;
+}
+
+/* Ensure the SVG inside scales correctly */
+.side-nav-button-container svg {
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+}
+
+.patient-details-form {
+    display: flex;
+    padding: 0.625rem;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 0.625rem;
     flex: 1 0 0;
     align-self: stretch;
@@ -400,14 +406,14 @@ body {
 
 .MainColumn{
     display: flex;
+    padding: 0.625rem;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.625rem;
-    flex: 1 0 0;
     align-self: stretch;
 
     border-radius: 0.9375rem;
-    background: #FFF;
+    background: #ffffff;
 }
 
 .QuestionLabel{
@@ -426,16 +432,6 @@ body {
     align-self: stretch;
 }
 
-.QuestionLabelTextFormat{
-    color: #959595;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.20);
-    font-family: "Plus Jakarta Sans";
-    font-size: 2rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;    
-}
-
 .YNCol{
     display: flex;
     padding: 0.625rem;
@@ -444,6 +440,16 @@ body {
     gap: 0.625rem;
     flex: 1 0 0;
     align-self: stretch;
+}
+
+.QuestionLabelTextFormat{
+    color: #959595;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.20);
+    font-family: "Plus Jakarta Sans";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .PatientFormRowContainer{
@@ -460,14 +466,11 @@ body {
     padding: 0.625rem;
     align-items: center;
     gap: 0.625rem;
-    flex: 2;
+    flex: 3 0 0;
     align-self: stretch;
 }
 
 .QuestionText{
-    flex: 1 0 0;
-    align-self: stretch;
-    
     color: #000;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.20);
     font-family: "Plus Jakarta Sans";
@@ -475,10 +478,11 @@ body {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    letter-spacing: 0.1875rem;
 }
 
 .ChoiceContainer{
-    flex: 1.75; /* each takes 1.5/5, so together = 3/5 */
+    flex: 2.8; /* each takes 1.5/5, so together = 3/5 */
     display: flex;
     padding: 1.25rem;
     justify-content: center;
@@ -486,7 +490,6 @@ body {
     gap:0.625rem;
     align-self: stretch;
 }
-
 
 /* CHECKBOXES FORMAT */
 /* 1. Hide the ugly default checkbox but keep it functional */
@@ -541,10 +544,208 @@ body {
     gap: 0.5rem;
     cursor: pointer;
 }
+/* END OF CHECKBOX */
 
+.profile-field-row {
+    display: flex;
+    padding: 0.625rem;
+    align-items: flex-start;
+    gap: 1.25rem;
+    align-self: stretch;
+}
 
+/* Vertical container for Label + Input */
+.profile-field-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+    flex: 1 0 0;
+}
 
-/* PAGE NAVIGATION */
+/* Label Styling */
+.field-label {
+    color: #000000;
+    font-family: "Plus Jakarta Sans";
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.sub-field-label{
+    color: #000;
+    font-family: "Plus Jakarta Sans";
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* The Input Wrapper */
+.profile-field {
+    display: flex;
+    padding: 0.625rem;
+    align-items: center;
+    align-self: stretch;
+    
+    border-radius: 0.9375rem;
+    border: 1px solid #959595;
+    background: var(--White);
+    box-sizing: border-box;
+}
+
+/* The actual text input inside */
+.field-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1.25rem;
+    color: var(--Black);
+
+    color: #000;
+    font-family: "Plus Jakarta Sans";
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.Custom-Dropdown {
+    position: relative;
+    align-self: stretch;
+    flex: 1;
+}
+
+.Dropdown-Trigger {
+    display: flex;
+    height: 4.375rem; /* Matches your Figma height */
+    padding: 0.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 0.9375rem;
+    background: #E5E7EB; /* Control-Gray */
+    color: #858788;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.Dropdown-Label {
+    flex: 1;
+    color: #858788;
+    font-family: "Plus Jakarta Sans";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.06rem;
+}
+
+.Dropdown-Menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 0.9375rem;
+    list-style: none;
+    padding: 0.5rem 0;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.Custom-Dropdown.is-open .Dropdown-Menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.Dropdown-Item {
+    padding: 0.75rem 1.25rem;
+    
+    color: #858788;
+    font-family: "Plus Jakarta Sans";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.06rem;
+
+    cursor: pointer;
+}
+
+.Dropdown-Item:hover {
+    background: #F3F4F6;
+}
+/* No new CSS needed if you already have these from the previous steps: */
+.profile-field-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+    flex: 1 0 0;
+}
+
+.profile-field {
+    display: flex;
+    padding: 0.625rem;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 0.9375rem;
+    border: 1px solid var(--Text-Gray);
+    box-sizing: border-box;
+}
+
+/* This Is Just A Template CSS, Copy Paste The Contents Of This Page To A New CSS File And Go From There */
+/* Start Styling Bellow Here: */
+
+/*Active Side Nav Stuff */
+
+.SNB-Label-Active {
+    color: #FFF;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.20);
+    font-family: "Plus Jakarta Sans";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.Side-Nav-Active{
+    border-radius: 0.9375rem;
+    background: #1C1C1C;
+    color: #FFFFFF;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
+
+.CancelBtn{
+    display: flex;
+    height: 5rem;
+    align-items: center;
+
+    border-radius: 0.9375rem;
+    border: 1px solid #BE3A3A;
+    background: #F6B9B9;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
+
+.SideNavButtonContainer{
+    display: flex;
+    width: 5.625rem;
+    padding: 0.625rem 1.875rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    border-radius: 0.9375rem;
+}
+
 .ProcedurePagination{
     display: flex;
     height: 6.25rem;
@@ -646,7 +847,6 @@ body {
     #cancelAction:active {
         transform: scale(0.9);
     }
-
 /* This styles the box itself */
 .custom-popup {
 /* REMOVE display: flex; from here */
