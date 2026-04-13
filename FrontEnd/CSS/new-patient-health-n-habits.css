@@ -163,10 +163,11 @@ body {
 
 .TopBar-Nav-Text {
     color: #000;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.10);
     font-family: "Plus Jakarta Sans";
-    font-size: 2rem;
+    font-size: 2.8125rem;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 400;
     line-height: normal;
 }
 
@@ -239,6 +240,7 @@ body {
     gap: 0.625rem;
     align-self: stretch;
     border-radius: 1rem;
+    color:black;
 }
 
 .SNB-Icon-Container {
@@ -305,6 +307,25 @@ body {
 
 /* This Is Just A Template CSS, Copy Paste The Contents Of This Page To A New CSS File And Go From There */
 /* Start Styling Bellow Here: */
+
+/* Actvie Side Nav Stuff */
+
+.SNB-Label-Active {
+    color: #FFF;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.20);
+    font-family: "Plus Jakarta Sans";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.Side-Nav-Active{
+    border-radius: 0.9375rem;
+    background: #1C1C1C;
+    color: #FFFFFF;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
 
 .newPatientForm{
     display: flex;
@@ -588,7 +609,6 @@ body {
 }
 
 /* DELETE POPUP STUFF */
-
 #CancelBtnControl {
     cursor: pointer;
 }
@@ -603,10 +623,12 @@ body {
 
 /* This styles the box itself */
 .custom-popup {
-    display: flex;
+/* REMOVE display: flex; from here */
     width: 62.5rem;
     height: 37.5rem;
     padding: 3.125rem 0.625rem 0.625rem 0.625rem;
+    
+    /* Use this instead to center the content inside the dialog */
     flex-direction: column;
     align-items: center;
     gap: 1.5625rem;
@@ -615,6 +637,13 @@ body {
     border: 2px solid #E5E7EB;
     background: #FFF;
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+    
+    /* This ensures it centers on screen when showModal() is called */
+    margin: auto;
+}
+
+.custom-popup[open] {
+    display: flex;
 }
 
 /* This styles the dim/blur effect behind the popup */
@@ -623,39 +652,7 @@ body {
     backdrop-filter: blur(3px); /* Optional: blurs the background */
 }
 
-/* Your custom button styles */
-.btn-danger { 
-    background: #ff4757; 
-    color: white; 
-    border: none; 
-    padding: 10px 20px; 
-    border-radius: 5px; 
-    cursor: pointer; }
-
-.btn-secondary { 
-    background: #f1f2f6; 
-    border: none; 
-    padding: 10px 20px; 
-    border-radius: 5px; 
-    cursor: pointer;
-}
-
-/* This targets the popup box itself */
-#deleteModal {
-    margin: auto; /* This combined with showModal() centers it perfectly */
-    border: none;
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-}
-
-/* This targets the dimmed background */
-#deleteModal::backdrop {
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(4px); /* Optional: makes it look fancy */
-}
-
-.TrashContainer{
+.PopupContainer{
     display: flex;
     width: 6.25rem;
     height: 6.25rem;
@@ -669,6 +666,27 @@ body {
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
 }
 
+.DeleteText{
+    color: #000;
+    font-family: "Plus Jakarta Sans";
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.09rem;
+}
+
+.CancellingText{
+    color: #000;
+    text-align: center;
+    font-family: "Plus Jakarta Sans";
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.0375rem;
+}
+
 .button-group{
     display: flex;
     padding: 2.875rem 1.875rem;
@@ -677,4 +695,55 @@ body {
     gap: 1.875rem;
     flex: 1 0 0;
     align-self: stretch;
+}
+
+.btn-secondary{
+    display: flex;
+    width: 25rem;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    flex-shrink: 0;
+    align-self: stretch;
+
+    border-radius: 0.9375rem;
+    background: #000;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
+
+.btn-danger{
+    display: flex;
+    width: 25rem;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    flex-shrink: 0;
+    align-self: stretch;
+    border: none; 
+
+    border-radius: 0.9375rem;
+    background: #E5E7EB;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
+
+.btn-label-back{
+    color: #FFF;
+    font-family: "Plus Jakarta Sans";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.06rem;
+}
+
+.btn-label-delete{
+    color: #080c0e;
+    font-family: "Plus Jakarta Sans";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.06rem;
 }

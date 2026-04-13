@@ -162,11 +162,12 @@ body {
 }
 
 .TopBar-Nav-Text {
-    color: var(--Black);
+    color: #000;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.10);
+    font-family: "Plus Jakarta Sans";
     font-size: 2.8125rem;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     line-height: normal;
 }
 
@@ -314,39 +315,39 @@ aspect-ratio: 1/1;
 /* New Patient Form Container */
 .new-patient-form {
     display: flex;
-    padding: 1.25rem; /* Exactly 20px */
+    padding: 1.25rem;
     flex-direction: column;
     align-items: flex-start;
     flex: 1 0 0;
     align-self: stretch;
-    background: var(--White); /* #FFF from Figma */
-    border-radius: 1.07rem; /* Matching your general UI radius */
-    box-sizing: border-box;
+
+    background: #FFF;
 }
 
 .check-box-header-container {
     display: flex;
-    padding: 1.25rem; /* 20px */
+    padding: 1.25rem;
     align-items: center;
-    gap: 0.625rem; /* 10px */
+    gap: 0.625rem;
     align-self: stretch;
-    box-sizing: border-box;
 }
 
 .form-title {
-    color: var(--Black);
-    font-size: 1.5rem; /* Adjust based on your Staff-Name/Role scaling */
+    color: #000;
+    font-family: "Plus Jakarta Sans";
+    font-size: 2rem;
+    font-style: normal;
     font-weight: 700;
-    margin: 0;
+    line-height: normal;
 }
 
 .appointment-control {
     display: flex;
-    padding: 0 0.625rem; /* Exactly as shown in Figma */
-    justify-content: flex-end; /* Pins buttons to the right */
+    padding: 0 0.625rem;
+    justify-content: flex-end;
     align-items: center;
-    gap: 1.25rem; /* 20px gap between buttons */
-    flex: 1 0 0; /* Grows to fill the space in the header */
+    gap: 1.25rem;
+    flex: 1 0 0;
     align-self: stretch;
 }
 
@@ -395,22 +396,20 @@ box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
 
 .patient-details-form {
     display: flex;
-    padding: 0.625rem; /* Exactly 10px */
+    padding: 0.625rem;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.625rem; /* 10px spacing between rows/inputs */
+    gap: 0.625rem;
     flex: 1 0 0;
     align-self: stretch;
-    box-sizing: border-box;
 }
 
 .profile-field-row {
     display: flex;
-    padding: 0.625rem; /* 10px */
+    padding: 0.625rem;
     align-items: flex-start;
-    gap: 1.25rem; /* 20px gap between input groups */
+    gap: 1.25rem;
     align-self: stretch;
-    box-sizing: border-box;
 }
 
 /* Vertical container for Label + Input */
@@ -418,25 +417,29 @@ box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.625rem; /* 10px from Figma */
-    flex: 1 0 0; /* Ensures the three names share the row width equally */
+    gap: 0.625rem;
+    flex: 1 0 0;
 }
 
 /* Label Styling */
 .field-label {
-    color: var(--Text-Gray);
-    font-size: 1.125rem; /* Adjusted for readability */
-    font-weight: 500;
+    color: #959595;
+    font-family: "Plus Jakarta Sans";
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
 }
 
 /* The Input Wrapper */
 .profile-field {
     display: flex;
-    padding: 0.625rem; /* 10px */
+    padding: 0.625rem;
     align-items: center;
     align-self: stretch;
-    border-radius: 0.9375rem; /* 15px */
-    border: 1px solid var(--Text-Gray); /* #959595 */
+    
+    border-radius: 0.9375rem;
+    border: 1px solid #959595;
     background: var(--White);
     box-sizing: border-box;
 }
@@ -449,6 +452,13 @@ box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
     background: transparent;
     font-size: 1.25rem;
     color: var(--Black);
+
+    color: #000;
+    font-family: "Plus Jakarta Sans";
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .Custom-Dropdown {
@@ -472,8 +482,13 @@ box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
 
 .Dropdown-Label {
     flex: 1;
-    font-size: 1.25rem;
-    font-weight: 500;
+    color: #858788;
+    font-family: "Plus Jakarta Sans";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.06rem;
 }
 
 .Dropdown-Menu {
@@ -502,8 +517,15 @@ box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
 
 .Dropdown-Item {
     padding: 0.75rem 1.25rem;
-    color: #000000;
-    font-size: 1.15rem;
+    
+    color: #858788;
+    font-family: "Plus Jakarta Sans";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.06rem;
+
     cursor: pointer;
 }
 
@@ -531,6 +553,25 @@ box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
 
 /* This Is Just A Template CSS, Copy Paste The Contents Of This Page To A New CSS File And Go From There */
 /* Start Styling Bellow Here: */
+
+/*Active Side Nav Stuff */
+
+.SNB-Label-Active {
+    color: #FFF;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.20);
+    font-family: "Plus Jakarta Sans";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.Side-Nav-Active{
+    border-radius: 0.9375rem;
+    background: #1C1C1C;
+    color: #FFFFFF;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
 
 .CancelBtn{
     display: flex;
@@ -627,4 +668,144 @@ box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
     width: 5rem;
     height: 5rem;
     aspect-ratio: 1/1;
+}
+
+/* DELETE POPUP STUFF */
+#CancelBtnControl {
+    cursor: pointer;
+}
+
+#CancelBtnControl:hover {
+    opacity: 0.8; /* Subtle visual feedback */
+}
+
+#CancelBtnControl:active {
+    transform: scale(0.9);
+}
+
+/* This styles the box itself */
+.custom-popup {
+/* REMOVE display: flex; from here */
+    width: 62.5rem;
+    height: 37.5rem;
+    padding: 3.125rem 0.625rem 0.625rem 0.625rem;
+    
+    /* Use this instead to center the content inside the dialog */
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5625rem;
+
+    border-radius: 0.9375rem;
+    border: 2px solid #E5E7EB;
+    background: #FFF;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+    
+    /* This ensures it centers on screen when showModal() is called */
+    margin: auto;
+}
+
+.custom-popup[open] {
+    display: flex;
+}
+
+/* This styles the dim/blur effect behind the popup */
+.custom-popup::backdrop {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px); /* Optional: blurs the background */
+}
+
+.PopupContainer{
+    display: flex;
+    width: 6.25rem;
+    height: 6.25rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    flex-shrink: 0;
+
+    border-radius: 0.9375rem;
+    background: #E5E7EB;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
+
+.DeleteText{
+    color: #000;
+    font-family: "Plus Jakarta Sans";
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.09rem;
+}
+
+.CancellingText{
+    color: #000;
+    text-align: center;
+    font-family: "Plus Jakarta Sans";
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.0375rem;
+}
+
+.button-group{
+    display: flex;
+    padding: 2.875rem 1.875rem;
+    justify-content: center;
+    align-items: center;
+    gap: 1.875rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.btn-secondary{
+    display: flex;
+    width: 25rem;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    flex-shrink: 0;
+    align-self: stretch;
+
+    border-radius: 0.9375rem;
+    background: #000;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
+
+.btn-danger{
+    display: flex;
+    width: 25rem;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    flex-shrink: 0;
+    align-self: stretch;
+    border: none; 
+
+    border-radius: 0.9375rem;
+    background: #E5E7EB;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
+
+.btn-label-back{
+    color: #FFF;
+    font-family: "Plus Jakarta Sans";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.06rem;
+}
+
+.btn-label-delete{
+    color: #080c0e;
+    font-family: "Plus Jakarta Sans";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.06rem;
 }
