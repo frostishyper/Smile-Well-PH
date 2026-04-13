@@ -194,6 +194,7 @@ body {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    
 }
 
 .Staff-Role {
@@ -202,6 +203,7 @@ body {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    align-items: flex-start;
 }
 
 .PFP-Container {
@@ -252,10 +254,17 @@ body {
 }
 
 .Nav-Icon {
-    width: 3.125rem;
+width: 3.125rem;
     height: 3.125rem;
     flex-shrink: 0;
     aspect-ratio: 1/1;
+}
+
+.svg-icons{
+width: 5rem;
+height: 5rem;
+flex-shrink: 0;
+aspect-ratio: 1/1;
 }
 
 .SNB-Label-Container {
@@ -303,13 +312,183 @@ body {
     line-height: normal;
 }
 
-.svg-icons{
-width: 1.875rem;
-height: 1.875rem;
-flex-shrink: 0;
-aspect-ratio: 1/1;  
+.full-profile-info-display {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    flex: 1 0 0;
+    align-self: stretch;
+    border-radius: 15px;
+    background: #FFF;
+    box-sizing: border-box; 
 }
 
+.profile-header {
+    display: flex;
+    height: 170px;
+    padding-bottom: 20px;
+    align-items: center;
+    gap: 20px;
+    align-self: stretch;
+    border-bottom: 1px solid #959595;
+    box-sizing: border-box;
+}
+
+.profile-edit-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.edit-visit-btn {
+    display: flex;
+    height: 5.714rem;
+    align-items: center;
+    border-radius: 1.07rem;
+    border: 1px solid var(--Text-Gray);
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.30);
+    box-sizing: border-box;
+}
+
+.side-nav-button-container {
+    display: flex;
+    padding: 0.714rem 2.14rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.714rem;
+    align-self: stretch;
+    border-radius: 1.07rem;
+    box-sizing: border-box;
+}
+
+#editIcon {
+    width: 2.14rem;
+    height: 2.14rem;
+    aspect-ratio: 1/1;
+}
+
+/* Profile Navs Main Container */
+.profile-navs {
+    display: flex;
+    align-items: center;
+    gap: 1.42rem; /* 20px */
+    flex: 1 0 0;
+    align-self: stretch;
+    box-sizing: border-box;
+}
+
+/* Column Base (Ready for next step) */
+.profile-nav-col {
+    display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 30px;
+flex: 1 0 0;
+align-self: stretch;
+}
+
+.profile-nav-row {
+    display: flex;
+    padding: 0.714rem; /* 10px */
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.714rem; /* 10px */
+    flex: 1 0 0;
+    align-self: stretch;
+    box-sizing: border-box;
+}
+
+/* Main Button Card */
+.profile-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.714rem; /* 10px */
+    flex: 1 0 0;
+    align-self: stretch;
+    border-radius: 1.07rem; /* 15px */
+    border: 1px solid var(--Text-Gray);
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.30);
+    background: var(--White);
+    cursor: pointer;
+    overflow: hidden;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.profile-nav-btn:hover {
+    background: #F5F5F5;
+}
+
+#patientTextFix {
+    align-items: flex-start;
+}
+
+/* Icon Container (Left Side) */
+.side-nav-button-container {
+    display: flex;
+    width: 10.71rem; /* 150px */
+    padding: 0.714rem; /* 10px */
+    justify-content: center;
+    align-items: center;
+    gap: 0.714rem;
+    align-self: stretch;
+    border-radius: 1.07rem 0 0 1.07rem;
+    box-sizing: border-box;
+}
+
+/* Label Container (Right Side) */
+.side-nav-button-label-container {
+    display: flex;
+    padding: 0.714rem; /* 10px */
+    justify-content: center;
+    align-items: center;
+    gap: 0.714rem;
+    flex: 1 0 0;
+    align-self: stretch;
+    box-sizing: border-box;
+}
+
+.card-label {
+    color: var(--Black);
+    font-size: 1.5rem; /* Adjust based on your visual preference */
+    font-weight: 500;
+}
+.Side-Nav-BTN {
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+/* Active (current page) + Hover share the same black style */
+.Side-Nav-BTN:hover,
+.Side-Nav-BTN.active {
+    background: var(--Black);
+}
+
+/* Label turns white */
+.Side-Nav-BTN:hover .SNB-Label,
+.Side-Nav-BTN.active .SNB-Label {
+    color: var(--White);
+}
+
+/* SVG strokes turn white */
+.Side-Nav-BTN:hover svg path,
+.Side-Nav-BTN:hover svg circle,
+.Side-Nav-BTN:hover svg rect,
+.Side-Nav-BTN.active svg path,
+.Side-Nav-BTN.active svg circle,
+.Side-Nav-BTN.active svg rect {
+    stroke: var(--White);
+}
+
+/* Special case: Logout icon uses fill not stroke */
+.Logout-BTN:hover svg path,
+.Logout-BTN.active svg path {
+    fill: var(--White);
+    stroke: none;
+}
 /* This Is Just A Template CSS, Copy Paste The Contents Of This Page To A New CSS File And Go From There */
 /* Start Styling Bellow Here: */
 

@@ -258,6 +258,13 @@ body {
     aspect-ratio: 1/1;
 }
 
+.svg-icons{
+        width: 3.125rem;
+    height: 3.125rem;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+}
+
 .SNB-Label-Container {
     display: flex;
     padding: 0.625rem;
@@ -303,12 +310,197 @@ body {
     line-height: normal;
 }
 
-.svg-icons{
-width: 1.875rem;
-height: 1.875rem;
-flex-shrink: 0;
-aspect-ratio: 1/1;  
+.full-profile-info-display {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    flex: 1 0 0;
+    align-self: stretch;
+    border-radius: 15px;
+    background: #FFF;
+    box-sizing: border-box; 
 }
+
+.profile-header {
+    display: flex;
+    height: 170px;
+    padding-bottom: 20px;
+    align-items: center;
+    gap: 20px;
+    align-self: stretch;
+    border-bottom: 1px solid #959595;
+    box-sizing: border-box;
+}
+
+.consent-forms {
+    display: flex;
+    padding: 0.625rem; 
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem; 
+    flex: 1 0 0;
+    align-self: stretch;
+    box-sizing: border-box;
+    background: transparent;
+}
+
+.medical-condition {
+    display: flex;
+    height: 7.14rem; 
+    padding: 0.714rem; 
+    align-items: flex-start;
+    gap: 0.714rem; 
+    align-self: stretch;
+    border-radius: 1.07rem; 
+    border: 1px solid var(--Black);
+    box-sizing: border-box;
+}
+
+.radio-container {
+    display: flex;
+    width: 5.714rem;
+    padding: 0.714rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.714rem;
+    align-self: stretch;
+    aspect-ratio: 1/1;
+    box-sizing: border-box;
+}
+
+#medicalConditionIcon1 {
+    width: 100%;
+    height: 100%;
+    color: var(--Black);
+}
+
+.medical-condition-label {
+    display: flex;
+    padding: 0.714rem;
+    align-items: center;
+    gap: 0.714rem;
+    flex: 1 0 0;
+    align-self: stretch;
+    box-sizing: border-box;
+}
+
+.record-filename {
+    color: var(--Black);
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+.ProcedurePagination{
+    display: flex;
+    height: 6.25rem;
+    padding: 0.625rem 1.25rem;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.Prev{
+    display: flex;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.Prevy{
+    width: 5rem;
+    height: 5rem;
+    aspect-ratio: 1/1;
+}
+
+.Pages{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    flex: 1 0 0;
+    align-self: stretch;
+
+}
+
+.PageCell{
+    border-radius: 1.25rem;
+    background: #ffffff;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+    
+    display: flex;
+    width: 5.0625rem;
+    padding: 0.9375rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.PageCount{
+    color: #000;
+    font-family: "Plus Jakarta Sans";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    flex: 1 0 0;
+    align-self: center;
+}
+
+.Next{
+    display: flex;
+    padding: 0.625rem;
+    justify-content: right;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.Nexty{
+    width: 5rem;
+    height: 5rem;
+    aspect-ratio: 1/1;
+}
+
+.Side-Nav-BTN {
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+/* Active (current page) + Hover share the same black style */
+.Side-Nav-BTN:hover,
+.Side-Nav-BTN.active {
+    background: var(--Black);
+}
+
+/* Label turns white */
+.Side-Nav-BTN:hover .SNB-Label,
+.Side-Nav-BTN.active .SNB-Label {
+    color: var(--White);
+}
+
+/* SVG strokes turn white */
+.Side-Nav-BTN:hover svg path,
+.Side-Nav-BTN:hover svg circle,
+.Side-Nav-BTN:hover svg rect,
+.Side-Nav-BTN.active svg path,
+.Side-Nav-BTN.active svg circle,
+.Side-Nav-BTN.active svg rect {
+    stroke: var(--White);
+}
+
+/* Special case: Logout icon uses fill not stroke */
+.Logout-BTN:hover svg path,
+.Logout-BTN.active svg path {
+    fill: var(--White);
+    stroke: none;
+}
+
 
 /* This Is Just A Template CSS, Copy Paste The Contents Of This Page To A New CSS File And Go From There */
 /* Start Styling Bellow Here: */

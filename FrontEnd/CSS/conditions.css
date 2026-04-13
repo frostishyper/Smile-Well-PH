@@ -303,13 +303,244 @@ body {
     line-height: normal;
 }
 
-.svg-icons{
-width: 1.875rem;
-height: 1.875rem;
-flex-shrink: 0;
-aspect-ratio: 1/1;  
+.new-patient-form {
+    display: flex;
+    padding: 1.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+    background: var(--White);
+    border-radius: 1.07rem;
+    box-sizing: border-box;
 }
 
+.check-box-header-container {
+    display: flex;
+    padding: 1.25rem;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.form-title {
+    color: var(--Black);
+    font-size: 2.2rem;
+    font-weight: 700;
+    flex: 1;
+}
+
+.appointment-control {
+    display: flex;
+    gap: 1.25rem;
+}
+
+.edit-btn, .save-btn {
+    display: flex;
+    height: 5rem;
+    align-items: center;
+    border-radius: 0.9375rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.30);
+    cursor: pointer;
+}
+
+.edit-btn { border: 1px solid var(--Text-Gray); }
+.save-btn { border: 1px solid var(--Highlight-Green); background: var(--Subtle-Green); }
+
+.side-nav-button-container {
+    display: flex;
+    width: 5.25rem;
+    padding: 0.625rem 1.875rem;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+}
+
+.patient-details-form {
+    display: flex;
+    padding: 0.625rem;
+    flex-direction: column;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.medical-conditions-container {
+    display: flex;
+    padding: 0.625rem; /* Exactly from Figma padding property */
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem; /* Exactly from Figma gap property */
+    flex: 1 0 0;
+    align-self: stretch;
+    box-sizing: border-box;
+}
+
+.medical-condition-row {
+    display: flex;
+    padding: 0.625rem; /* Exactly from Figma padding property */
+    align-items: center;
+    gap: 0.625rem; /* Exactly from Figma gap property */
+    flex: 1 0 0;
+    align-self: stretch;
+    box-sizing: border-box;
+}
+
+.medical-condition-info {
+    display: flex;
+    padding: 0.625rem; /* Exactly from Frame 75 properties */
+    align-items: center;
+    gap: 0.625rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.radio-container {
+    display: flex;
+    width: 5rem; /* Exactly from Figma property panel */
+    padding: 1.25rem; /* Exactly from Figma padding property */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    cursor: pointer;
+    aspect-ratio: 1/1;
+}
+
+.condition-checkbox {
+    display: none; /* Hide standard check */
+}
+
+.custom-sq-box {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--Black);
+    background: var(--White);
+    transition: all 0.2s ease;
+}
+
+/* Green Glow/Fill when clicked */
+.condition-checkbox:checked + .custom-sq-box {
+    background-color: var(--Highlight-Green);
+    border-color: var(--Highlight-Green);
+    box-shadow: 0 0 8px rgba(103, 176, 125, 0.4);
+}
+
+.medical-condition-label {
+    display: flex;
+    width: 27.6rem; /* Exactly from Figma dimensions */
+    padding: 0.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    color: var(--Black);
+    font-size: 1.15rem;
+}
+
+/* Specific styling for the text input box in this row */
+.medical-condition-row .profile-field {
+    flex: 1 0 0;
+    /* Keeps existing profile-field padding/border from previous step */
+}
+
+/* Start Styling Bellow Here: */
+
+.conditions-list-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem 0;
+    gap: 0.625rem; /* Precise Figma spacing */
+}
+
+.condition-item-row {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    gap: 2rem; /* Space between checkbox/label and the input */
+    padding: 0.5rem 0;
+}
+
+.check-box-wrapper {
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.condition-toggle {
+    display: none;
+}
+
+.custom-sq-box {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 2px solid var(--Black);
+    background: var(--White);
+    transition: all 0.2s ease;
+}
+
+.condition-toggle:checked + .custom-sq-box {
+    background-color: var(--Highlight-Green);
+    border-color: var(--Highlight-Green);
+}
+
+.condition-text-label {
+    flex: 1; /* Pushes the input field to the right */
+    color: var(--Black);
+    font-size: 1.15rem;
+    font-weight: 500;
+}
+
+.cond-input-field {
+    width: 100%;
+    max-width: 450px; /* Limits width to match the Figma visual */
+    display: flex;
+    padding: 0.625rem;
+    align-items: center;
+    border-radius: 0.9375rem;
+    border: 1px solid var(--Control-Gray);
+}
+
+.cond-input-field input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1.25rem;
+}
+
+.Side-Nav-BTN {
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+/* Active (current page) + Hover share the same black style */
+.Side-Nav-BTN:hover,
+.Side-Nav-BTN.active {
+    background: var(--Black);
+}
+
+/* Label turns white */
+.Side-Nav-BTN:hover .SNB-Label,
+.Side-Nav-BTN.active .SNB-Label {
+    color: var(--White);
+}
+
+/* SVG strokes turn white */
+.Side-Nav-BTN:hover svg path,
+.Side-Nav-BTN:hover svg circle,
+.Side-Nav-BTN:hover svg rect,
+.Side-Nav-BTN.active svg path,
+.Side-Nav-BTN.active svg circle,
+.Side-Nav-BTN.active svg rect {
+    stroke: var(--White);
+}
+
+/* Special case: Logout icon uses fill not stroke */
+.Logout-BTN:hover svg path,
+.Logout-BTN.active svg path {
+    fill: var(--White);
+    stroke: none;
+}
 /* This Is Just A Template CSS, Copy Paste The Contents Of This Page To A New CSS File And Go From There */
 /* Start Styling Bellow Here: */
 

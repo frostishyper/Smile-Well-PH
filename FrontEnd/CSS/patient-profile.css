@@ -1,0 +1,638 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+body, button, input, textarea, select {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+@media (max-width: 1920px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 1366px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+/* Portrait Barrier */
+.portrait-warning {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--Logo-Dark);
+    color: var(--White);
+    z-index: 9999;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    text-align: center;
+}
+
+.portrait-warning i {
+    font-size: 4rem;
+}
+
+@media (orientation: portrait) {
+    body {
+        overflow: hidden;
+    }
+    .portrait-warning {
+        display: flex;
+    }
+}
+
+:root {
+    --Logo-Light: #7BB3D2;
+    --Logo-Dark: #2E5C76;
+    --White: #FFFFFF;
+    --Black: #000000;
+    --Control-Gray: #E5E7EB;
+    --Text-Gray: #959595;
+    --Table-Gray: #F0F0F0;
+    --Subtle-Green: #E8F7E0;
+    --Highlight-Green: #67B07D;
+    --Subtle-Red: #F6B9B9;
+    --Highlight-Red: #BE3A3A;
+    --Arc-Blue: #097BAC;
+    --Arc-Green: #19D646;
+    --Arc-Orange: #F5B119;
+    --Arc-Red: #D3030D;
+}
+
+/* ══ Base Layout ══ */
+
+body {
+    display: flex;
+    width: 100%;
+    max-width: 2000px;
+    min-height: 100vh;
+    margin: 0 auto;
+    align-items: stretch;
+    background: #FAFAFA;
+}
+
+/* ══ Sidebar ══ */
+
+.SideBar {
+    display: flex;
+    flex-direction: column;
+    width: 28.125rem;
+    align-self: stretch;
+    background: var(--White);
+    border-right: 3px solid var(--Control-Gray);
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.TopCorner {
+    display: flex;
+    width: 100%;
+    height: 10rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.625rem;
+    flex-shrink: 0;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.LogoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.SmileWellLogo {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.09rem;
+    text-align: center;
+}
+
+.logo-light {
+    color: var(--Logo-Light);
+}
+
+.logo-dark {
+    color: var(--Logo-Dark);
+}
+
+.Side-Nav-Container {
+    display: flex;
+    padding: 5rem 1.875rem 1.25rem 1.875rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.Side-Nav-BTN {
+    display: flex;
+    height: 5.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    border-radius: 0.9375rem;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Active + Hover */
+.Side-Nav-BTN:hover,
+.Side-Nav-BTN.active {
+    background: var(--Black);
+}
+
+.Side-Nav-BTN:hover .SNB-Label,
+.Side-Nav-BTN.active .SNB-Label {
+    color: var(--White);
+}
+
+/* SVG icons */
+.Side-Nav-BTN:hover svg path,
+.Side-Nav-BTN:hover svg circle,
+.Side-Nav-BTN:hover svg rect,
+.Side-Nav-BTN.active svg path,
+.Side-Nav-BTN.active svg circle,
+.Side-Nav-BTN.active svg rect {
+    stroke: var(--White);
+}
+
+/* Image icons */
+.Side-Nav-BTN:hover .Nav-Icon-Img,
+.Side-Nav-BTN.active .Nav-Icon-Img {
+    filter: invert(1);
+}
+
+.SNB-Icon-Container {
+    display: flex;
+    width: 6.25rem;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    flex-shrink: 0;
+}
+
+.Nav-Icon {
+    width: 3.125rem;
+    height: 3.125rem;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+}
+
+.Nav-Icon-Img {
+    width: 3.125rem;
+    height: 3.125rem;
+    flex-shrink: 0;
+    object-fit: contain;
+    transition: filter 0.15s;
+}
+
+.SNB-Label-Container {
+    display: flex;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.SNB-Label {
+    color: var(--Black);
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.06rem;
+    white-space: nowrap;
+}
+
+.Logout-Container {
+    display: flex;
+    width: 100%;
+    padding: 0.625rem 1.875rem;
+    justify-content: center;
+    align-items: center;
+    flex: 1 0 0;
+}
+
+.Logout-BTN {
+    display: flex;
+    height: 5.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    flex: 1 0 0;
+    border-radius: 0.9375rem;
+    background: var(--Control-Gray);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.Logout-BTN:hover {
+    background: var(--Black);
+}
+
+.Logout-BTN:hover .Logout-Label {
+    color: var(--White);
+}
+
+.Logout-BTN:hover svg path {
+    fill: var(--White);
+    stroke: none;
+}
+
+.Logout-BTN:hover .Nav-Icon-Img {
+    filter: invert(1);
+}
+
+.Logout-Label {
+    color: var(--Black);
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.06rem;
+    white-space: nowrap;
+}
+
+/* ══ Main View ══ */
+
+.MainView {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+    overflow: hidden;
+}
+
+/* ══ Top Bar ══ */
+
+.TopBar {
+    display: flex;
+    height: 10rem;
+    align-items: flex-start;
+    align-self: stretch;
+    border-bottom: 3px solid var(--Control-Gray);
+    background: var(--White);
+    flex-shrink: 0;
+}
+
+.TopBar-Nav {
+    display: flex;
+    padding: 0 1.25rem;
+    align-items: center;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.TopBar-Nav-Text {
+    color: var(--Black);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.10);
+    font-size: 2.8125rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.084375rem;
+    white-space: pre;
+}
+
+.TopBar-Nav-Text strong {
+    font-weight: 700;
+}
+
+.UserContainer {
+    display: flex;
+    padding: 0 1.25rem;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.875rem;
+    align-self: stretch;
+    flex: 1 0 0;
+}
+
+.Username-Container {
+    display: flex;
+    padding: 0.625rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    align-self: stretch;
+    flex: 1 0 0;
+    white-space: nowrap;
+}
+
+.Staff-Name {
+    color: var(--Black);
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.Staff-Role {
+    color: var(--Text-Gray);
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.PFP-Container {
+    display: flex;
+    width: 6.875rem;
+    height: 6.875rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 0.9375rem;
+    overflow: hidden;
+}
+
+.PFP {
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+    background: url(../Media/Dentist.jpg) lightgray 50% / cover no-repeat;
+    border-radius: 0.9375rem;
+}
+
+/* ══ Main Activity ══ */
+
+.MainActivity {
+    display: flex;
+    padding: 1.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    flex: 1 0 0;
+    align-self: stretch;
+    background: var(--Table-Gray);
+    overflow-y: auto;
+}
+
+/* ══ Profile Card ══ */
+
+.PO-Card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-self: stretch;
+    background: var(--White);
+    border-radius: 0.9375rem;
+    padding: 1rem 0;
+    height: 23rem;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+/* Left: photo, name, phone, address — with right divider */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    padding: 0 1.875rem;
+    width: 28rem;
+    flex-shrink: 0;
+    align-self: stretch;
+    border-right: 1px solid var(--Text-Gray);
+    overflow: hidden;
+}
+
+.PO-Patient-Identity {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    width: 100%;
+}
+
+.PO-Detail-Identity {
+    display: flex;
+    width: 37.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    gap: 0.625rem;
+    padding: 0 1.875rem;
+}
+
+.PO-Patient-Photo {
+    width: 7rem;
+    height: 7rem;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 0.9375rem;
+}
+
+.PO-Patient-Name {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--Black);
+    line-height: normal;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.PO-Contact-Row {
+    display: flex;
+    align-items: center;
+    gap: 0.9375rem;
+    padding: 0 0.25rem;
+    flex: 1 0 0;
+    align-self: stretch;
+    width: 100%;
+}
+
+.PO-Address-Row {
+    display: flex;
+    align-items: center;
+    gap: 0.9375rem;
+    padding: 0.25rem;
+    flex: 1 0 0;
+    align-self: stretch;
+    width: 100%;
+}
+
+.PO-Contact-Icon {
+    width: 2rem;
+    height: 2rem;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.PO-Contact-Text {
+    font-size: 1.75rem;
+    color: var(--Black);
+    line-height: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Right: general info columns */
+.PO-Patient-Details {
+    display: flex;
+    flex: 1 0 0;
+    align-items: center;
+    gap: 0;
+    padding: 0 1.875rem;
+    align-self: stretch;
+    overflow: hidden;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.PO-Details-Col {
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: auto;
+    padding: 0;
+    justify-content: space-between;
+    align-items: flex-start;
+    overflow: hidden;
+}
+
+.PO-Field {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.625rem;
+    gap: 0.625rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.PO-Field-Label {
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--Text-Gray);
+    line-height: normal;
+}
+
+.PO-Field-Value {
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--Black);
+    line-height: normal;
+}
+
+/* ══ Navigation Cards ══ */
+
+.PO-Nav-Cards {
+    display: flex;
+    align-items: stretch;
+    align-self: stretch;
+    background: var(--White);
+    border-radius: 0.9375rem;
+    padding: 0.625rem;
+    gap: 1.25rem;
+    flex: 1 0 0;
+    min-height: 16rem;
+}
+
+.PO-Nav-Col {
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: column;
+    gap: 1.875rem;
+    align-self: stretch;
+}
+
+/* Padding wrapper around each button */
+.PO-Nav-Row {
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.625rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Individual nav button */
+.PO-Nav-BTN {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    gap: 0.625rem;
+    flex: 1 0 0;
+    border-radius: 0.9375rem;
+    border: 1px solid var(--Text-Gray);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--White);
+    transition: background 0.18s;
+    width: 100%;
+}
+
+.PO-Nav-BTN:hover {
+    background: var(--Black);
+}
+
+.PO-Nav-BTN:hover .PO-Nav-BTN-Label {
+    color: var(--White);
+}
+
+.PO-Nav-BTN:hover .PO-Nav-BTN-Icon-Img {
+    filter: invert(1);
+}
+
+/* Icon container inside nav button */
+.PO-Nav-BTN-Icon-Container {
+    display: flex;
+    width: 9.375rem;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 0.625rem;
+    flex-shrink: 0;
+}
+
+.PO-Nav-BTN-Icon-Img {
+    width: 5rem;
+    height: 5rem;
+    object-fit: contain;
+    flex-shrink: 0;
+    transition: filter 0.18s;
+}
+
+.PO-Nav-BTN-Label {
+    flex: 1 0 0;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--Black);
+    line-height: normal;
+    transition: color 0.18s;
+    white-space: nowrap;
+}

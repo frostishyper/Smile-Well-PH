@@ -303,13 +303,177 @@ body {
     line-height: normal;
 }
 
-.svg-icons{
-width: 1.875rem;
-height: 1.875rem;
-flex-shrink: 0;
-aspect-ratio: 1/1;  
+.new-patient-form {
+    display: flex;
+    padding: 1.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+    background: var(--White);
+    border-radius: 1.07rem;
+    box-sizing: border-box;
 }
 
+.check-box-header-container {
+    display: flex;
+    padding: 1.25rem;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.form-title {
+    color: var(--Black);
+    font-size: 2.2rem;
+    font-weight: 700;
+    flex: 1;
+}
+
+.appointment-control {
+    display: flex;
+    gap: 1.25rem;
+}
+
+.edit-btn, .save-btn {
+    display: flex;
+    height: 5rem;
+    align-items: center;
+    border-radius: 0.9375rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.30);
+    cursor: pointer;
+}
+
+.edit-btn { border: 1px solid var(--Text-Gray); }
+.save-btn { border: 1px solid var(--Highlight-Green); background: var(--Subtle-Green); }
+
+.side-nav-button-container {
+    display: flex;
+    width: 5.25rem;
+    padding: 0.625rem 1.875rem;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+}
+
+.patient-details-form {
+    display: flex;
+    padding: 0.625rem;
+    flex-direction: column;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.question-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 900px; /* Constrains single column for better readability */
+    padding: 0.625rem;
+}
+
+.questionnaire-labels {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    border-bottom: 1px solid var(--Control-Gray);
+}
+
+.label-col-question { flex: 3; color: var(--Text-Gray); font-weight: 500; font-size: 1.25rem; padding: 0.625rem; }
+.label-col-yes, .label-col-no { flex: 1; text-align: center; color: var(--Text-Gray); font-weight: 500; font-size: 1.25rem; }
+
+.patient-form-container { display: flex; flex-direction: column; align-self: stretch; }
+.patient-form-row { display: flex; align-items: center; height: 6.5rem; gap: 0.625rem; align-self: stretch; }
+.question-label { flex: 3; color: var(--Black); font-size: 1.15rem; padding-left: 0.625rem; }
+.yes-box, .no-box { flex: 1; display: flex; justify-content: center; align-items: center; }
+
+.toggle-radio { display: none; }
+.square-toggle { cursor: pointer; }
+.box-visual {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 2px solid var(--Black);
+    background: var(--White);
+    transition: all 0.2s ease;
+}
+
+.others-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem; /* Exactly from Figma property panel */
+    flex: 1 0 0;
+    align-self: stretch;
+    margin-top: 1rem; /* Separation from the checkbox rows */
+}
+
+.field-label-text {
+    color: var(--Black);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.profile-field {
+    display: flex;
+    padding: 0.625rem; /* Exactly from Figma padding property */
+    align-items: center;
+    align-self: stretch;
+    border-radius: 0.9375rem; /* 15px */
+    border: 1px solid #959595; /* Exact border color from Figma */
+    background: var(--White);
+    box-sizing: border-box;
+}
+
+/* Internal input styling to ensure it fills the container */
+.profile-field input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1.25rem;
+    color: var(--Black);
+}
+
+.profile-field input::placeholder {
+    color: var(--Text-Gray);
+}
+.yes-toggle .toggle-radio:checked + .box-visual { background-color: var(--Highlight-Green); border-color: var(--Highlight-Green); }
+.no-toggle .toggle-radio:checked + .box-visual { background-color: var(--Highlight-Red); border-color: var(--Highlight-Red); }
+
+.Side-Nav-BTN {
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+/* Active (current page) + Hover share the same black style */
+.Side-Nav-BTN:hover,
+.Side-Nav-BTN.active {
+    background: var(--Black);
+}
+
+/* Label turns white */
+.Side-Nav-BTN:hover .SNB-Label,
+.Side-Nav-BTN.active .SNB-Label {
+    color: var(--White);
+}
+
+/* SVG strokes turn white */
+.Side-Nav-BTN:hover svg path,
+.Side-Nav-BTN:hover svg circle,
+.Side-Nav-BTN:hover svg rect,
+.Side-Nav-BTN.active svg path,
+.Side-Nav-BTN.active svg circle,
+.Side-Nav-BTN.active svg rect {
+    stroke: var(--White);
+}
+
+/* Special case: Logout icon uses fill not stroke */
+.Logout-BTN:hover svg path,
+.Logout-BTN.active svg path {
+    fill: var(--White);
+    stroke: none;
+}
 /* This Is Just A Template CSS, Copy Paste The Contents Of This Page To A New CSS File And Go From There */
 /* Start Styling Bellow Here: */
 
