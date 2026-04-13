@@ -116,7 +116,7 @@ body {
 
 .MainActivity {
     display: flex;
-    padding: .650rem;
+    padding: 1.25rem;
     flex-direction: column;
     align-items: flex-start;
     flex: 1 0 0;
@@ -194,6 +194,7 @@ body {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    
 }
 
 .Staff-Role {
@@ -202,6 +203,7 @@ body {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    align-items: flex-start;
 }
 
 .PFP-Container {
@@ -259,11 +261,10 @@ width: 3.125rem;
 }
 
 .svg-icons{
-width: 1.875rem;
-height: 1.875rem;
+width: 5rem;
+height: 5rem;
 flex-shrink: 0;
-aspect-ratio: 1/1;  
-
+aspect-ratio: 1/1;
 }
 
 .SNB-Label-Container {
@@ -311,238 +312,150 @@ aspect-ratio: 1/1;
     line-height: normal;
 }
 
-/* New Patient Form Container */
-.new-patient-form {
+.full-profile-info-display {
     display: flex;
-    padding: 1.25rem; /* Exactly 20px */
+    padding: 20px;
     flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    flex: 1 0 0;
+    align-self: stretch;
+    border-radius: 15px;
+    background: #FFF;
+    box-sizing: border-box; 
+}
+
+.profile-header {
+    display: flex;
+    height: 170px;
+    padding-bottom: 20px;
+    align-items: center;
+    gap: 20px;
+    align-self: stretch;
+    border-bottom: 1px solid #959595;
+    box-sizing: border-box;
+}
+
+.profile-edit-container {
+    display: flex;
+    justify-content: flex-end;
     align-items: flex-start;
     flex: 1 0 0;
     align-self: stretch;
-    background: var(--White); /* #FFF from Figma */
-    border-radius: 1.07rem; /* Matching your general UI radius */
+}
+
+.edit-visit-btn {
+    display: flex;
+    height: 5.714rem;
+    align-items: center;
+    border-radius: 1.07rem;
+    border: 1px solid var(--Text-Gray);
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.30);
     box-sizing: border-box;
-}
-
-.check-box-header-container {
-    display: flex;
-    padding: 1.25rem; /* 20px */
-    align-items: center;
-    gap: 0.625rem; /* 10px */
-    align-self: stretch;
-    box-sizing: border-box;
-}
-
-.form-title {
-    color: var(--Black);
-    font-size: 1.5rem; /* Adjust based on your Staff-Name/Role scaling */
-    font-weight: 700;
-    margin: 0;
-}
-
-.appointment-control {
-    display: flex;
-    padding: 0 0.625rem; /* Exactly as shown in Figma */
-    justify-content: flex-end; /* Pins buttons to the right */
-    align-items: center;
-    gap: 1.25rem; /* 20px gap between buttons */
-    flex: 1 0 0; /* Grows to fill the space in the header */
-    align-self: stretch;
-}
-
-/* Base style for the small square buttons in this header */
-.edit-btn {
-    display: flex;
-    height: 5rem;
-    align-items: center;
-    border-radius: 0.9375rem;
-    border: 1px solid #959595;
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
-}
-
-.save-btn{
-    display: flex;
-height: 5rem;
-align-items: center;
-border-radius: 0.9375rem;
-border: 1px solid #67B07D;
-background: #E8F7E0;
-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
-}
-
-#saveEditBtnControl {
-    border: 1px solid var(--Highlight-Green);
-    background: var(--Subtle-Green);
 }
 
 .side-nav-button-container {
     display: flex;
-    width: 5.25rem; /* Exactly from Figma */
-    padding: 0.625rem 1.875rem; /* 10px top/bottom, 30px left/right */
+    padding: 0.714rem 2.14rem;
     justify-content: center;
     align-items: center;
-    gap: 0.625rem;
+    gap: 0.714rem;
     align-self: stretch;
-    border-radius: 0.9375rem; /* 15px */
+    border-radius: 1.07rem;
     box-sizing: border-box;
 }
 
-/* Ensure the SVG inside scales correctly */
-.side-nav-button-container svg {
-    flex-shrink: 0;
+#editIcon {
+    width: 2.14rem;
+    height: 2.14rem;
     aspect-ratio: 1/1;
 }
 
-.patient-details-form {
+/* Profile Navs Main Container */
+.profile-navs {
     display: flex;
-    padding: 0.625rem; /* Exactly 10px */
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.625rem; /* 10px spacing between rows/inputs */
+    align-items: center;
+    gap: 1.42rem; /* 20px */
     flex: 1 0 0;
     align-self: stretch;
     box-sizing: border-box;
 }
 
-.profile-field-row {
+/* Column Base (Ready for next step) */
+.profile-nav-col {
     display: flex;
-    padding: 0.625rem; /* 10px */
-    align-items: flex-start;
-    gap: 1.25rem; /* 20px gap between input groups */
-    align-self: stretch;
-    box-sizing: border-box;
+flex-direction: column;
+align-items: flex-start;
+gap: 30px;
+flex: 1 0 0;
+align-self: stretch;
 }
 
-/* Vertical container for Label + Input */
-.profile-field-col {
+.profile-nav-row {
     display: flex;
+    padding: 0.714rem; /* 10px */
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.625rem; /* 10px from Figma */
-    flex: 1 0 0; /* Ensures the three names share the row width equally */
-}
-
-/* Label Styling */
-.field-label {
-    color: var(--Text-Gray);
-    font-size: 1.125rem; /* Adjusted for readability */
-    font-weight: 500;
-}
-
-/* The Input Wrapper */
-.profile-field {
-    display: flex;
-    padding: 0.625rem; /* 10px */
-    align-items: center;
-    align-self: stretch;
-    border-radius: 0.9375rem; /* 15px */
-    border: 1px solid var(--Text-Gray); /* #959595 */
-    background: var(--White);
-    box-sizing: border-box;
-}
-
-/* The actual text input inside */
-.field-input {
-    width: 100%;
-    border: none;
-    outline: none;
-    background: transparent;
-    font-size: 1.25rem;
-    color: var(--Black);
-}
-
-.Custom-Dropdown {
-    position: relative;
-    align-self: stretch;
-    flex: 1;
-}
-
-.Dropdown-Trigger {
-    display: flex;
-    height: 4.375rem; /* Matches your Figma height */
-    padding: 0.625rem;
-    align-items: center;
-    gap: 0.625rem;
-    border-radius: 0.9375rem;
-    background: #E5E7EB; /* Control-Gray */
-    color: #858788;
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
-
-.Dropdown-Label {
-    flex: 1;
-    font-size: 1.25rem;
-    font-weight: 500;
-}
-
-.Dropdown-Menu {
-    position: absolute;
-    top: calc(100% + 0.5rem);
-    left: 0;
-    width: 100%;
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
-    border-radius: 0.9375rem;
-    list-style: none;
-    padding: 0.5rem 0;
-    z-index: 100;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.2s ease;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.Custom-Dropdown.is-open .Dropdown-Menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.Dropdown-Item {
-    padding: 0.75rem 1.25rem;
-    color: #000000;
-    font-size: 1.15rem;
-    cursor: pointer;
-}
-
-.Dropdown-Item:hover {
-    background: #F3F4F6;
-}
-/* No new CSS needed if you already have these from the previous steps: */
-.profile-field-col {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.625rem;
+    gap: 0.714rem; /* 10px */
     flex: 1 0 0;
+    align-self: stretch;
+    box-sizing: border-box;
 }
 
-.profile-field {
+/* Main Button Card */
+.profile-nav-btn {
     display: flex;
-    padding: 0.625rem;
     align-items: center;
+    gap: 0.714rem; /* 10px */
+    flex: 1 0 0;
     align-self: stretch;
-    border-radius: 0.9375rem;
+    border-radius: 1.07rem; /* 15px */
     border: 1px solid var(--Text-Gray);
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.30);
+    background: var(--White);
+    cursor: pointer;
+    overflow: hidden;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.profile-nav-btn:hover {
+    background: #F5F5F5;
+}
+
+#patientTextFix {
+    align-items: flex-start;
+}
+
+/* Icon Container (Left Side) */
+.side-nav-button-container {
+    display: flex;
+    width: 10.71rem; /* 150px */
+    padding: 0.714rem; /* 10px */
+    justify-content: center;
+    align-items: center;
+    gap: 0.714rem;
+    align-self: stretch;
+    border-radius: 1.07rem 0 0 1.07rem;
     box-sizing: border-box;
 }
 
-.date-input {
+/* Label Container (Right Side) */
+.side-nav-button-label-container {
+    display: flex;
+    padding: 0.714rem; /* 10px */
+    justify-content: center;
+    align-items: center;
+    gap: 0.714rem;
+    flex: 1 0 0;
+    align-self: stretch;
+    box-sizing: border-box;
+}
+
+.card-label {
     color: var(--Black);
-    cursor: pointer;
+    font-size: 1.5rem; /* Adjust based on your visual preference */
+    font-weight: 500;
 }
-
-.date-input::-webkit-calendar-picker-indicator {
-    cursor: pointer;
-    opacity: 0.5;
-}
-
-.date-input::-webkit-calendar-picker-indicator:hover {
-    opacity: 1;
-}
-
 .Side-Nav-BTN {
     cursor: pointer;
     transition: background 0.15s, color 0.15s;

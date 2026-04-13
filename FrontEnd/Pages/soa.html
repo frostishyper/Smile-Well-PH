@@ -5,11 +5,13 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Title Here</title>
-        <link rel="stylesheet" href="../CSS/relatedinfo.css">
-        <script src="../JS/relatedinfo.js"></script>
+        <link rel="stylesheet" href="../CSS/soa.css"> <!-- Replace Path To Proper CSS -->
+        <script src="../JS/soa.js" defer></script> <!-- Replace Path To Proper JS -->
     </head>
 
     <body>
+        <!-- A -->
+        <!-- This Is Just A Template Page, Copy Paste The Contents Of This Page To A New HTML File And Go From There -->
         <div class="SideBar">
             <div class="TopCorner">
                 <div class="LogoContainer">
@@ -21,6 +23,7 @@
                 </div>
             </div>
             <div class="Side-Nav-Container">
+                <!-- A Side Nav Button -->
                 <div class="Side-Nav-BTN" id="DashboardPage-BTN">
                     <div class="SNB-Icon-Container">
                         <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
@@ -34,6 +37,7 @@
                         <h1 class="SNB-Label">Dash Board</h1>
                     </div>
                 </div>
+                <!-- A Side Nav Button -->
                 <div class="Side-Nav-BTN active" id="RecordsPage-BTN">
                     <div class="SNB-Icon-Container">
                         <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
@@ -46,6 +50,7 @@
                         <h1 class="SNB-Label">Records</h1>
                     </div>
                 </div>
+                <!-- A Side Nav Button -->
                 <div class="Side-Nav-BTN" id="AppointmentsPage-BTN">
                     <div class="SNB-Icon-Container">
                         <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
@@ -59,6 +64,7 @@
                         <h1 class="SNB-Label">Appointments</h1>
                     </div>
                 </div>
+                <!-- A Side Nav Button -->
                 <div class="Side-Nav-BTN" id="NewPatientPage-BTN">
                     <div class="SNB-Icon-Container">
                         <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
@@ -72,6 +78,7 @@
                         <h1 class="SNB-Label">New Patient</h1>
                     </div>
                 </div>
+                <!-- A Side Nav Button -->
                 <div class="Side-Nav-BTN" id="StaffPage-BTN">
                     <div class="SNB-Icon-Container">
                         <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
@@ -101,11 +108,12 @@
             <div class="TopBar">
                 <div class="TopBar-Nav">
                     <h1 class="TopBar-Nav-Text">
-                        <span>Records > Kasane Teto > Full Profile > Related Info</span>
+                        <span>Records  > Kasane Teto > <b>SOA</b> </span>
                     </h1>
                 </div>
                 <div class="UserContainer">
                     <div class="Username-Container">
+                        <!-- Staff Details -->
                         <h1 class="Staff-Name" id="Staff-Name">Mezmerizer Miku</h1>
                         <h2 class="Staff-Role" id="Staff-Role">Dentist</h2>
                     </div>
@@ -115,136 +123,87 @@
                 </div>
             </div>
             <div class="MainActivity">
-                <div class="new-patient-form" id="relatedInfoForm">
-                    <div class="check-box-header-container" id="formHeader">
-                        <h2 class="form-title">Related Info</h2>
-                        <div class="appointment-control" id="appointmentControl">
-                            <div class="edit-btn" id="editRelatedBtn">
-                                <div class="side-nav-button-container">
-                                    <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
-                                        <path d="M1.25 5V12.5H8.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M28.75 25V17.5H21.25" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M25.6125 11.25C24.9785 9.45845 23.9011 7.85673 22.4807 6.59425C21.0602 5.33176 19.3432 4.44968 17.4896 4.0303C15.6361 3.61091 13.7066 3.6679 11.881 4.19594C10.0555 4.72398 8.39343 5.70586 7.05 7.04997L1.25 12.5M28.75 17.5L22.95 22.95C21.6066 24.2941 19.9445 25.276 18.119 25.804C16.2934 26.332 14.3639 26.389 12.5104 25.9697C10.6568 25.5503 8.93975 24.6682 7.51933 23.4057C6.09892 22.1432 5.02146 20.5415 4.3875 18.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="save-btn" id="saveRelatedBtn">
-                                <div class="side-nav-button-container">
-                                    <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
-                                        <path d="M23.75 26.25H6.25C5.58696 26.25 4.95107 25.9866 4.48223 25.5178C4.01339 25.0489 3.75 24.413 3.75 23.75V6.25C3.75 5.58696 4.01339 4.95107 4.48223 4.48223C4.95107 4.01339 5.58696 3.75 6.25 3.75H20L26.25 10V23.75C26.25 24.413 25.9866 25.0489 25.5178 25.5178C25.0489 25.9866 24.413 26.25 23.75 26.25Z" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M21.25 26.25V16.25H8.75V26.25" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M8.75 3.75V10H18.75" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                            </div>
+
+                <div class="transaction-details-container">
+
+                    <div class="transaction-details-container">
+                        <div class="col-label-container">
+                            <div class="record-col trans-id">Trans ID</div>
+                            <div class="record-col item-name">Item Name</div>
+                            <div class="record-col amount">Amount</div>
+                            <div class="record-col date">Date</div>
+                        </div>
+
+                        <div class="col-label-container record-row">
+                            <div class="record-col trans-id">1</div>
+                            <div class="record-col item-name">Dental Cleaning</div>
+                            <div class="record-col amount">₱ 800.00</div>
+                            <div class="record-col date">3/28/2026</div>
+                        </div>
+
+                        <div class="col-label-container summary-row border-top">
+                            <div class="summary-col-item label">Outstanding Balance</div>
+                            <div class="summary-col-item value highlight">₱ 1400.00</div>
                         </div>
                     </div>
 
-                    <div class="patient-details-form">
-
-                        <div class="profile-field-row">
-                            <div class="profile-field-col">
-                                <label class="field-label">Next Of Kin / Guardian First Name</label>
-                                <div class="profile-field">
-                                    <input type="text" class="field-input" id="kinFirstname" placeholder="Miku">
-                                </div>
-                            </div>
-                            <div class="profile-field-col">
-                                <label class="field-label">Next Of Kin / Guardian Middle Name</label>
-                                <div class="profile-field">
-                                    <input type="text" class="field-input" id="kinMiddlename">
-                                </div>
-                            </div>
-                            <div class="profile-field-col">
-                                <label class="field-label">Next Of Kin / Guardian Last Name</label>
-                                <div class="profile-field">
-                                    <input type="text" class="field-input" id="kinLastname">
-                                </div>
-                            </div>
                         </div>
 
-                        <div class="profile-field-row">
-                            <div class="profile-field-col">
-                                <label class="field-label" for="kinContact">Contact #</label>
-                                <div class="profile-field">
-                                    <input type="text" id="kinContact" class="field-input" placeholder="0912345678">
-                                </div>
-                            </div>
-                            <div class="profile-field-col">
-                                <label class="field-label" for="kinEmail">Email Address</label>
-                                <div class="profile-field">
-                                    <input type="email" id="kinEmail" class="field-input">
-                                </div>
-                            </div>
-
-                            <!-- ✅ ONLY CHANGE: type="date" instead of type="text", removed placeholder -->
-                            <div class="profile-field-col">
-                                <label class="field-label" for="kinBirthdate">Birthdate</label>
-                                <div class="profile-field">
-                                    <input type="date" id="kinBirthdate" class="field-input date-input">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="profile-field-row">
-                            <div class="profile-field-col">
-                                <label class="field-label">Sex</label>
-                                <div class="Custom-Dropdown" id="Kin-Sex-Dropdown">
-                                    <div class="Dropdown-Trigger">
-                                        <div class="Dropdown-Icon">
-                                            <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                                                <path d="M12.5 18.75L25 31.25L37.5 18.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </div>
-                                        <div class="Dropdown-Label">Female</div>
+                        <div class="action-sidebar-container">
+                            <div class="sidebar-card patient-card">
+                                <div class="User-Profile">
+                            <img src="../Media/Patient.jpg" class="PFP" alt="Patient">
                                     </div>
-                                    <ul class="Dropdown-Menu">
-                                        <li class="Dropdown-Item" data-value="female">Female</li>
-                                        <li class="Dropdown-Item" data-value="male">Male</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="profile-field-col" style="flex: 2;">
-                                <label class="field-label">Relation</label>
-                                <div class="profile-field">
-                                    <input type="text" id="kinRelation" class="field-input" placeholder="Sister">
-                                </div>
+                            <div class="card-info">
+                            <div class="patient-name">Kasane Teto</div>
+                            <div class="patient-label">Patient</div>
                             </div>
                         </div>
 
-                        <div class="profile-field-row">
-                            <div class="profile-field-col">
-                                <label class="field-label">Home Address</label>
-                                <div class="profile-field">
-                                    <input type="text" id="kinAddress" class="field-input" placeholder="69 Vocaloid St, Shibuya Tokyo JP">
-                                </div>
+                        <div class="sidebar-card action-button">
+                            <div class="sidebar-icon box-icon">
+                                <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <path d="M70 26.6665V69.9998H10V26.6665" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M76.6667 10H3.33337V26.6667H76.6667V10Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M33.3334 40H46.6667" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
                             </div>
+                            <div class="action-text">Transaction History</div>
                         </div>
 
-                        <div class="profile-field-row">
-                            <div class="profile-field-col">
-                                <label class="field-label">Reference</label>
-                                <div class="profile-field">
-                                    <input type="text" id="patientReference" class="field-input" placeholder="Teto">
-                                </div>
+                        <div class="sidebar-card action-button" id="makePaymentBtn">
+                            <div class="sidebar-icon dollar-icon">
+                                <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                    <path d="M40 3.3335V76.6668" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M56.6667 16.6665H31.6667C28.5725 16.6665 25.605 17.8957 23.4171 20.0836C21.2292 22.2715 20 25.239 20 28.3332C20 31.4274 21.2292 34.3948 23.4171 36.5827C25.605 38.7707 28.5725 39.9998 31.6667 39.9998H48.3333C51.4275 39.9998 54.395 41.229 56.5829 43.4169C58.7708 45.6049 60 48.5723 60 51.6665C60 54.7607 58.7708 57.7282 56.5829 59.9161C54.395 62.104 51.4275 63.3332 48.3333 63.3332H20" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
                             </div>
-                            <div class="profile-field-col">
-                                <label class="field-label">Insurance Provider</label>
-                                <div class="profile-field">
-                                    <input type="text" id="insuranceProvider" class="field-input">
-                                </div>
-                            </div>
+                            <div class="action-text">Make Payment</div>
                         </div>
-
+                            </div>
                     </div>
-                </div>
+                
             </div>
         </div>
 
-        <div class="portrait-warning">
-            <i class="fa-solid fa-tablet-screen-button"></i>
-            <h2>Please rotate your device</h2>
-            <p>SmileWell Dental System requires landscape mode.</p>
+        <!-- Payment Modal -->
+<div class="modal-overlay" id="paymentModal">
+    <div class="modal">
+        <div class="modal-title">Patient Payment</div>
+        <div>
+            <div class="modal-label" id>Payment Amount</div>
+            <input class="modal-input" type="number" id="paymentAmount">
         </div>
+        <div>
+            <div class="modal-label">Description</div>
+            <input class="modal-input" type="text" id="paymentDesc">
+        </div>
+        <div class="modal-actions">
+            <button class="btn-cancel" id="cancelBtn">Cancel</button>
+            <button class="btn-pay" id="payBtn">Pay</button>
+        </div>
+    </div>
+</div>
+
     </body>
 </html>

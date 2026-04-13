@@ -114,14 +114,22 @@ body {
     background: var(--White);
 }
 
+.svg-icons{
+width: 1.875rem;
+height: 1.875rem;
+flex-shrink: 0;
+aspect-ratio: 1/1;  
+}
+
 .MainActivity {
-    display: flex;
-    padding: 1.25rem;
-    flex-direction: column;
-    align-items: flex-start;
-    flex: 1 0 0;
-    align-self: stretch;
-    background: var(--Table-Gray);
+  display: flex;
+  flex-direction: row; /* Changed from column to row */
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  flex: 1 0 0;
+  align-self: stretch;
+  background: var(--Table-Gray);
 }
 
 .TopCorner {
@@ -239,7 +247,36 @@ body {
     gap: 0.625rem;
     align-self: stretch;
     border-radius: 1rem;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
 }
+
+.Side-Nav-BTN:hover,
+.Side-Nav-BTN.active {
+    background: var(--Black);
+}
+
+.Side-Nav-BTN:hover .SNB-Label,
+.Side-Nav-BTN.active .SNB-Label {
+    color: var(--White);
+}
+
+.Side-Nav-BTN:hover svg path,
+.Side-Nav-BTN:hover svg circle,
+.Side-Nav-BTN.active svg path,
+.Side-Nav-BTN.active svg circle {
+    stroke: var(--White);
+}
+
+.action-button {
+    transition: background 0.15s;
+}
+
+.action-button:hover {
+    background: #F5F5F5;
+    cursor: pointer;
+}
+
 
 .SNB-Icon-Container {
     display: flex;
@@ -252,17 +289,10 @@ body {
 }
 
 .Nav-Icon {
-width: 3.125rem;
+    width: 3.125rem;
     height: 3.125rem;
     flex-shrink: 0;
     aspect-ratio: 1/1;
-}
-
-.svg-icons{
-width: 5rem;
-height: 5rem;
-flex-shrink: 0;
-aspect-ratio: 1/1;
 }
 
 .SNB-Label-Container {
@@ -310,142 +340,286 @@ aspect-ratio: 1/1;
     line-height: normal;
 }
 
-.full-profile-info-display {
+/* Update this class to handle the horizontal split */
+.MainActivity {
+  display: flex;
+  flex-direction: row; /* Changed from column to row */
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  flex: 1 0 0;
+  align-self: stretch;
+  background: var(--Table-Gray);
+}
+
+/* Ensure the details container stays flexible */
+.transaction-details-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  flex: 1; /* Takes up remaining space */
+  align-self: stretch;
+  border-radius: 0.9375rem;
+  background: #FFFFFF;
+}
+
+/* Give the sidebar a fixed width so it doesn't wrap */
+.action-sidebar-container {
+  /* existing properties... */
+  background: #FFFFFF;
+  border-radius: 0.9375rem;
+  padding: 1.25rem;
+  align-self: stretch;  /* makes it match the height of the details container */
+}
+
+.User-Profile{
     display: flex;
-    padding: 20px;
+    width: 6.875rem;
+    height: 6.875rem;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    flex: 1 0 0;
-    align-self: stretch;
-    border-radius: 15px;
-    background: #FFF;
-    box-sizing: border-box; 
-}
-
-.profile-header {
-    display: flex;
-    height: 170px;
-    padding-bottom: 20px;
-    align-items: center;
-    gap: 20px;
-    align-self: stretch;
-    border-bottom: 1px solid #959595;
-    box-sizing: border-box;
-}
-
-.profile-edit-container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-    flex: 1 0 0;
-    align-self: stretch;
-}
-
-.edit-visit-btn {
-    display: flex;
-    height: 5.714rem;
-    align-items: center;
-    border-radius: 1.07rem;
-    border: 1px solid var(--Text-Gray);
-    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.30);
-    box-sizing: border-box;
-}
-
-.side-nav-button-container {
-    display: flex;
-    padding: 0.714rem 2.14rem;
     justify-content: center;
     align-items: center;
-    gap: 0.714rem;
-    align-self: stretch;
-    border-radius: 1.07rem;
-    box-sizing: border-box;
+    gap: 0.625rem;
 }
 
-#editIcon {
-    width: 2.14rem;
-    height: 2.14rem;
+.col-label-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-self: stretch;
+}
+
+.header {
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.record-row {
+  padding: 1.25rem 0.625rem;
+}
+
+.record-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.625rem 1.25rem;
+  border-right: 1px solid #E0E0E0;
+}
+
+.header .record-col {
+  height: 3rem;
+  font-weight: 700;
+  color: #000;
+}
+
+.record-row .record-col {
+  font-weight: 400;
+  color: #000;
+  border-right: none;
+}
+
+.trans-id {
+  width: 15%;
+}
+
+.item-name {
+  flex: 1;
+  justify-content: center;
+}
+
+.amount {
+  width: 20%;
+}
+
+.record-row .amount {
+  color: #BE3A3A;
+}
+
+.date {
+  width: 20%;
+  border-right: none;
+}
+
+.action-sidebar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.625rem;
+  width: 25rem; /* Fixed width to match sidebar aesthetic */
+  flex-shrink: 0; /* Prevents it from getting squashed */
+}
+
+.summary-col-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.625rem 1.25rem;
+  flex: 1 0 0;
+  align-self: stretch;
+  gap: 0.625rem;
+  font-weight: 400;
+}
+
+.summary-col-item.label {
+  color: #000000;
+}
+
+.summary-col-item.value {
+  color: #000000;
+}
+
+.summary-col-item.highlight {
+  color: #BE3A3A;
+}
+
+.summary-row {
+  padding: 0.625rem;
+}
+
+.border-top {
+  border-top: 1px solid #959595;
+}
+
+.action-sidebar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.625rem;
+  padding: 1.25rem;
+}
+
+.sidebar-card {
+  display: flex;
+  width: 100%;
+  padding: 0.625rem 1.25rem;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 0.5rem;
+  background: #FFF;
+  border: 1px solid #D9D9D9;
+}
+
+.patient-card {
+  border: none;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.patient-name {
+  color: #000;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.patient-label {
+  color: #959595;
+  font-size: 0.85rem;
+}
+
+.action-button {
+  cursor: pointer;
+  min-height: 4.5rem;
+}
+
+.action-text {
+  color: #000;
+  font-weight: 400;
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+.sidebar-icon {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ProcedurePagination{
+    display: flex;
+    height: 6.25rem;
+    padding: 0.625rem 1.25rem;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.Prev{
+    display: flex;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.Prevy{
+    width: 5rem;
+    height: 5rem;
     aspect-ratio: 1/1;
 }
 
-/* Profile Navs Main Container */
-.profile-navs {
+.Pages{
     display: flex;
-    align-items: center;
-    gap: 1.42rem; /* 20px */
-    flex: 1 0 0;
-    align-self: stretch;
-    box-sizing: border-box;
-}
-
-/* Column Base (Ready for next step) */
-.profile-nav-col {
-    display: flex;
-flex-direction: column;
-align-items: flex-start;
-gap: 30px;
-flex: 1 0 0;
-align-self: stretch;
-}
-
-.profile-nav-row {
-    display: flex;
-    padding: 0.714rem; /* 10px */
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.714rem; /* 10px */
-    flex: 1 0 0;
-    align-self: stretch;
-    box-sizing: border-box;
-}
-
-/* Main Button Card */
-.profile-nav-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.714rem; /* 10px */
-    flex: 1 0 0;
-    align-self: stretch;
-    border-radius: 1.07rem; /* 15px */
-    border: 1px solid var(--Text-Gray);
-    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.30);
-    background: var(--White);
-    cursor: pointer;
-    overflow: hidden;
-}
-
-/* Icon Container (Left Side) */
-.side-nav-button-container {
-    display: flex;
-    width: 10.71rem; /* 150px */
-    padding: 0.714rem; /* 10px */
     justify-content: center;
     align-items: center;
-    gap: 0.714rem;
-    align-self: stretch;
-    border-radius: 1.07rem 0 0 1.07rem;
-    box-sizing: border-box;
-}
-
-/* Label Container (Right Side) */
-.side-nav-button-label-container {
-    display: flex;
-    padding: 0.714rem; /* 10px */
-    justify-content: center;
-    align-items: center;
-    gap: 0.714rem;
+    gap: 1.25rem;
     flex: 1 0 0;
     align-self: stretch;
-    box-sizing: border-box;
+
 }
 
-.card-label {
-    color: var(--Black);
-    font-size: 1.5rem; /* Adjust based on your visual preference */
-    font-weight: 500;
+.PageCell{
+    border-radius: 1.25rem;
+    background: #ffffff;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+    
+    display: flex;
+    width: 5.0625rem;
+    padding: 0.9375rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
 }
 
+.PageCount{
+    color: #000;
+    font-family: "Plus Jakarta Sans";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    flex: 1 0 0;
+    align-self: center;
+}
+
+.Next{
+    display: flex;
+    padding: 0.625rem;
+    justify-content: right;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.Nexty{
+    width: 5rem;
+    height: 5rem;
+    aspect-ratio: 1/1;
+}
 /* This Is Just A Template CSS, Copy Paste The Contents Of This Page To A New CSS File And Go From There */
 /* Start Styling Bellow Here: */
 

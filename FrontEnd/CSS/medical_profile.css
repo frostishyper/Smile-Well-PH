@@ -392,52 +392,113 @@ body {
     font-size: 1.4rem;
     font-weight: 400;
 }
-
-.procedure-pagination {
+.ProcedurePagination{
     display: flex;
-    height: 7.14rem;
-    padding: 0.714rem 1.428rem;
+    height: 6.25rem;
+    padding: 0.625rem 1.25rem;
     justify-content: flex-end;
     align-items: center;
-    gap: 0.714rem;
-    align-self: stretch;
-    box-sizing: border-box;
-    margin-top: auto;
-}
-
-.pagination-arrow-container {
-    display: flex;
-    padding: 0.714rem;
-    justify-content: center;
-    align-items: center;
-    gap: 0.714rem;
+    gap: 0.625rem;
     align-self: stretch;
 }
 
-.nav-arrow {
-    color: var(--Black);
-    font-size: 2rem;
-    cursor: pointer;
-    user-select: none;
+.Prev{
+    display: flex;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
 }
 
-.pagination-pages-container {
+.Prevy{
+    width: 5rem;
+    height: 5rem;
+    aspect-ratio: 1/1;
+}
+
+.Pages{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1.428rem;
+    gap: 1.25rem;
     flex: 1 0 0;
     align-self: stretch;
+
 }
 
-.page-text {
-    color: var(--Black);
-    font-size: 1.5rem;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    background: var(--White);
-    border-radius: 0.5rem;
-    border: 1px solid var(--Control-Gray);
+.PageCell{
+    border-radius: 1.25rem;
+    background: #ffffff;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+    
+    display: flex;
+    width: 5.0625rem;
+    padding: 0.9375rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.PageCount{
+    color: #000;
+    font-family: "Plus Jakarta Sans";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    flex: 1 0 0;
+    align-self: center;
+}
+
+.Next{
+    display: flex;
+    padding: 0.625rem;
+    justify-content: right;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.Nexty{
+    width: 5rem;
+    height: 5rem;
+    aspect-ratio: 1/1;
+}
+
+.Side-Nav-BTN {
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+/* Active (current page) + Hover share the same black style */
+.Side-Nav-BTN:hover,
+.Side-Nav-BTN.active {
+    background: var(--Black);
+}
+
+/* Label turns white */
+.Side-Nav-BTN:hover .SNB-Label,
+.Side-Nav-BTN.active .SNB-Label {
+    color: var(--White);
+}
+
+/* SVG strokes turn white */
+.Side-Nav-BTN:hover svg path,
+.Side-Nav-BTN:hover svg circle,
+.Side-Nav-BTN:hover svg rect,
+.Side-Nav-BTN.active svg path,
+.Side-Nav-BTN.active svg circle,
+.Side-Nav-BTN.active svg rect {
+    stroke: var(--White);
+}
+
+/* Special case: Logout icon uses fill not stroke */
+.Logout-BTN:hover svg path,
+.Logout-BTN.active svg path {
+    fill: var(--White);
+    stroke: none;
 }
 
 
