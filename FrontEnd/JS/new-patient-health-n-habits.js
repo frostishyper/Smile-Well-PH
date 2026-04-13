@@ -35,9 +35,11 @@ const App = {
     init() {
         console.log('Page Logic Initialized');
 
+        //DELETE POPUP TINGS
         this.elements = {
             body: document.querySelector('body'),
             cancelBtn: document.querySelector('#CancelBtnControl'), // Your SVG div
+            backBtn: document.querySelector('#cancelAction'),
             deleteModal: document.querySelector('#deleteModal')    // Your <dialog>
         };
 
@@ -51,12 +53,21 @@ const App = {
      */
     setupEventListeners() {
         // Example: this.elements.submitBtn.addEventListener('click', () => this.handleAction());
+
+        //OPEN DELETE POPUP
         if (this.elements.cancelBtn && this.elements.deleteModal) {
             this.elements.cancelBtn.addEventListener('click', () => {
                 this.elements.deleteModal.showModal();
             });
         }
-    
+
+        // CLOSE DELETE POPUP
+        const backBtn = document.querySelector('#cancelAction');
+        if (backBtn && this.elements.deleteModal) {
+            backBtn.addEventListener('click', () => {
+                this.elements.deleteModal.close();
+            });
+        }
     },
 
     /**

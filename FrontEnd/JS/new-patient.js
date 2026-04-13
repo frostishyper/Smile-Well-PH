@@ -1,12 +1,9 @@
-// This Is Only  Boilerplate Script, Copy & Paste This To A New JS File And Go From There.
-
 document.addEventListener('DOMContentLoaded', () => {
     App.init();
 });
 
 /**
  * 1. BACKEND CONFIGURATION
- * Set your Spring Boot API base URL and default headers here.
  */
 const API_CONFIG = {
     BASE_URL: 'http://localhost:8080/api/v1',
@@ -19,52 +16,120 @@ const API_CONFIG = {
 const App = {
     /**
      * 2. ELEMENT CACHE
-     * Store your querySelectors here so you don't hunt the DOM twice.
      */
     elements: {
         body: document.querySelector('body'),
-        cancelBtn: document.querySelector('#CancelBtnControl'),
-        deleteModal: document.querySelector('#deleteModal')
-        // Example: submitBtn: document.querySelector('#submit-btn')
+        // Cache all custom dropdowns
+        customDropdowns: document.querySelectorAll('.Custom-Dropdown'),
+        
+        //DELETE POPUP BUTTONS
+            cancelBtn: document.querySelector('#CancelBtnControl'),
+            deleteModal: document.querySelector('#deleteModal')
+        // Example: saveBtn: document.querySelector('#saveEditBtnControl')
     },
 
     /**
      * 3. INITIALIZATION
-     * This runs immediately when the page loads.
      */
     init() {
-        console.log('Page Logic Initialized');
+        console.log('SmileWell Page Logic Initialized');
 
-        this.elements = {
-            body: document.querySelector('body'),
-            cancelBtn: document.querySelector('#CancelBtnControl'), // Your SVG div
-            deleteModal: document.querySelector('#deleteModal')    // Your <dialog>
-        };
-
+            this.elements = {
+                body: document.querySelector('body'),
+                cancelBtn: document.querySelector('#CancelBtnControl'), // Your SVG div
+                backBtn: document.querySelector('#cancelAction'),
+                deleteModal: document.querySelector('#deleteModal')    // Your <dialog>
+            };
+        this.initDropdowns();
         this.setupEventListeners();
         this.ui.checkOrientation();
     },
 
     /**
+     * CUSTOM DROPDOWN LOGIC
+     * Updated to scan the DOM dynamically
+     */
+    initDropdowns() {
+        // Scan for dropdowns at the moment the function runs
+        const dropdowns = document.querySelectorAll('.Custom-Dropdown');
+        
+        console.log(`Dropdown Scan: Found ${dropdowns.length} elements`);
+
+        if (dropdowns.length === 0) {
+            console.warn("No dropdowns found! Are they rendered yet?");
+            return;
+        }
+
+        dropdowns.forEach(dropdown => {
+            const trigger = dropdown.querySelector('.Dropdown-Trigger');
+            const label = dropdown.querySelector('.Dropdown-Label');
+            const items = dropdown.querySelectorAll('.Dropdown-Item');
+
+            if (!trigger) return; // Safety check
+
+            trigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                
+                // Close others
+                dropdowns.forEach(d => {
+                    if (d !== dropdown) d.classList.remove('is-open');
+                });
+
+                dropdown.classList.toggle('is-open');
+                console.log('Dropdown toggled:', dropdown.id, dropdown.classList.contains('is-open'));
+            });
+
+            items.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent trigger from firing
+                    const selectedText = item.textContent;
+                    const selectedValue = item.getAttribute('data-value');
+                    
+                    label.textContent = selectedText;
+                    label.style.color = '#000000'; 
+                    dropdown.classList.remove('is-open');
+                    dropdown.dataset.selectedValue = selectedValue;
+                    
+                    console.log(`Selected: ${selectedValue}`);
+                });
+            });
+        });
+
+        document.addEventListener('click', () => {
+            dropdowns.forEach(d => d.classList.remove('is-open'));
+        });
+    },
+
+    /**
      * 4. EVENT LISTENERS
-     * Define all clicks, submits, and input changes for this specific page here.
      */
     setupEventListeners() {
-        // Example: this.elements.submitBtn.addEventListener('click', () => this.handleAction());
+        // Example: Click handler for a save button
+        // if(this.elements.saveBtn) {
+        //    this.elements.saveBtn.addEventListener('click', () => this.handleSave());
+        // }
+        
+        //OPEN DELETE POPUP
         if (this.elements.cancelBtn && this.elements.deleteModal) {
             this.elements.cancelBtn.addEventListener('click', () => {
                 this.elements.deleteModal.showModal();
             });
         }
-    
+
+        // CLOSE DELETE POPUP
+        const backBtn = document.querySelector('#cancelAction');
+        if (backBtn && this.elements.deleteModal) {
+            backBtn.addEventListener('click', () => {
+                this.elements.deleteModal.close();
+            });
+        }
+
     },
 
     /**
      * 5. UI HELPERS
-     * Reusable functions for interface states (loading spinners, orientation, etc.)
      */
     ui: {
-        // Use this to disable buttons during API calls
         setLoading(element, isLoading) {
             if (isLoading) {
                 element.classList.add('is-loading');
@@ -75,7 +140,6 @@ const App = {
             }
         },
 
-        // Keeps tablet users in Landscape mode
         checkOrientation() {
             if (window.innerHeight > window.innerWidth) {
                 console.warn('System optimized for Landscape view.');
@@ -85,7 +149,6 @@ const App = {
 
     /**
      * 6. API LAYER (REST)
-     * Centralized methods for communicating with the Spring Boot controllers.
      */
     api: {
         async request(endpoint, options = {}) {
@@ -97,13 +160,10 @@ const App = {
 
             try {
                 const response = await fetch(url, settings);
-                
-                // Handle Spring Boot error responses (4xx, 5xx)
                 if (!response.ok) {
                     const errorData = await response.json().catch(() => ({}));
                     throw new Error(errorData.message || `Status: ${response.status}`);
                 }
-
                 return response.status === 204 ? null : response.json();
             } catch (error) {
                 console.error('Fetch Error:', error.message);
@@ -111,30 +171,19 @@ const App = {
             }
         },
 
-        // Usage: App.api.get('/patients/123')
-        get(endpoint) {
-            return this.request(endpoint, { method: 'GET' });
-        },
-
-        // Usage: App.api.post('/auth/login', { user, pass })
+        get(endpoint) { return this.request(endpoint, { method: 'GET' }); },
         post(endpoint, data) {
             return this.request(endpoint, {
                 method: 'POST',
                 body: JSON.stringify(data)
             });
         },
-
-        // Usage: App.api.put('/billing/update', updatedData)
         put(endpoint, data) {
             return this.request(endpoint, {
                 method: 'PUT',
                 body: JSON.stringify(data)
             });
         },
-
-        // Usage: App.api.delete('/records/99')
-        delete(endpoint) {
-            return this.request(endpoint, { method: 'DELETE' });
-        }
+        delete(endpoint) { return this.request(endpoint, { method: 'DELETE' }); }
     }
 };

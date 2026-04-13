@@ -609,17 +609,31 @@ body {
 }
 
 /* DELETE POPUP STUFF */
-#CancelBtnControl {
+
+    /* BUTTONS BEING INTERACTIVE */
+    #CancelBtnControl {
+        cursor: pointer;
+    }
+
+    #CancelBtnControl:hover {
+        opacity: 0.8; /* Subtle visual feedback */
+    }
+
+    #CancelBtnControl:active {
+        transform: scale(0.9);
+    }
+
+    #cancelAction {
     cursor: pointer;
-}
+    }
 
-#CancelBtnControl:hover {
-    opacity: 0.8; /* Subtle visual feedback */
-}
+    #cancelAction:hover {
+        opacity: 0.8; /* Subtle visual feedback */
+    }
 
-#CancelBtnControl:active {
-    transform: scale(0.9);
-}
+    #cancelAction:active {
+        transform: scale(0.9);
+    }
 
 /* This styles the box itself */
 .custom-popup {
