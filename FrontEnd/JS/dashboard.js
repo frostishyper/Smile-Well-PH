@@ -29,11 +29,6 @@ const App = {
             this.elements.dropdownLabel = this.elements.dropdown.querySelector('.Dropdown-Label');
             this.elements.dropdownItems = this.elements.dropdown.querySelectorAll('.Dropdown-Item');
         }
-
-        this.elements.logoutTrigger = document.querySelector('#Logout-BTN');
-        this.elements.logoutModal = document.querySelector('#Logout-Modal');
-        this.elements.cancelLogoutBtn = document.querySelector('#Cancel-Logout');
-        this.elements.confirmLogoutBtn = document.querySelector('#Confirm-Logout');
     },
 
     setupEventListeners() {
@@ -53,24 +48,6 @@ const App = {
                 if (!this.elements.dropdown.contains(e.target)) {
                     this.elements.dropdown.classList.remove('is-open');
                 }
-            });
-        }
-
-        if (this.elements.logoutTrigger && this.elements.logoutModal) {
-            this.elements.logoutTrigger.addEventListener('click', () => {
-                this.elements.logoutModal.classList.add('is-open');
-            });
-        }
-
-        if (this.elements.cancelLogoutBtn && this.elements.logoutModal) {
-            this.elements.cancelLogoutBtn.addEventListener('click', () => {
-                this.elements.logoutModal.classList.remove('is-open');
-            });
-        }
-
-        if (this.elements.confirmLogoutBtn) {
-            this.elements.confirmLogoutBtn.addEventListener('click', () => {
-                
             });
         }
     },

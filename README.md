@@ -76,6 +76,10 @@ this platform handles dynamic schedule optimization, secure patient record manag
 - **VS Code** — Standardized IDE (requires *Extension Pack for Java*)
 - **Modern Web Browser** — For testing the client and admin portals (Chrome, Edge, Safari, Firefox)
 
+```
+.\mvnw spring-boot:run
+```
+
 
 
 ## 🧭 Roadmap
