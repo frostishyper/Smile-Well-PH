@@ -1,0 +1,727 @@
+/* =====================================================
+   patient-procedures.css — SmileWell Dental System
+   Figma ref: node 128:558
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+/* ===== RESET ===== */
+body, button, input, textarea, select {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { font-size: 16px; }
+@media (max-width: 1920px) { html { font-size: 14px; } }
+@media (max-width: 1366px) { html { font-size: 12px; } }
+
+/* ===== CSS VARIABLES ===== */
+:root {
+    --Logo-Light:      #7BB3D2;
+    --Logo-Dark:       #2E5C76;
+    --White:           #FFFFFF;
+    --Black:           #000000;
+    --Control-Gray:    #E5E7EB;
+    --Text-Gray:       #959595;
+    --Table-Gray:      #F0F0F0;
+    --card-border:     #D9D9D9;
+    --card-shadow:     0 1px 4px 0 rgba(0, 0, 0, 0.25);
+    --card-shadow-strong: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+    --soft-divider:    #959595;
+}
+
+/* ===== PORTRAIT BARRIER ===== */
+.portrait-warning {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: var(--Logo-Dark);
+    color: var(--White);
+    z-index: 9999;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    text-align: center;
+}
+@media (orientation: portrait) {
+    body { overflow: hidden; }
+    .portrait-warning { display: flex; }
+}
+
+/* ===== BODY ===== */
+body {
+    display: flex;
+    width: 100%;
+    max-width: 2000px;
+    min-height: 100vh;
+    margin: 0 auto;
+    align-items: stretch;
+    background: #FAFAFA;
+}
+
+/* =====================================================
+   SIDEBAR — matches template
+   ===================================================== */
+.SideBar {
+    display: flex;
+    flex-direction: column;
+    width: 26rem;
+    align-self: stretch;
+    background: var(--White);
+    border-right: 3px solid var(--Control-Gray);
+    flex-shrink: 0;
+}
+
+.TopCorner {
+    display: flex;
+    width: 100%;
+    height: 10rem;
+    align-items: center;
+    padding: 0 2rem;
+    flex-shrink: 0;
+}
+
+.LogoContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.SmileWellLogo { font-size: 3rem; font-weight: 700; line-height: 1.2; }
+.logo-light    { color: var(--Logo-Light); }
+.logo-dark     { color: var(--Logo-Dark); }
+
+.Side-Nav-Container {
+    display: flex;
+    padding: 5rem 1.875rem 1.25rem;
+    flex-direction: column;
+    gap: 1.25rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.Side-Nav-BTN {
+    display: flex;
+    height: 5.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    color: var(--Black);
+}
+.Side-Nav-BTN:hover:not(.active) { background: rgba(0,0,0,0.04); }
+.Side-Nav-BTN.active { background: var(--Black); color: var(--White); cursor: default; }
+.Side-Nav-BTN.active .SNB-Label { color: var(--White); }
+
+.SNB-Icon-Container {
+    display: flex;
+    width: 6.25rem;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    flex-shrink: 0;
+}
+
+.Nav-Icon { width: 3.125rem; height: 3.125rem; flex-shrink: 0; }
+
+.SNB-Label-Container {
+    display: flex;
+    padding: 0.625rem;
+    align-items: center;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.SNB-Label { color: inherit; font-size: 2rem; font-weight: 400; line-height: normal; }
+
+.Logout-Container {
+    display: flex;
+    width: 100%;
+    padding: 3.125rem 1.875rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.Logout-BTN {
+    display: flex;
+    height: 5.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    flex: 1 0 0;
+    border-radius: 0.9375rem;
+    background: var(--Control-Gray);
+    box-shadow: var(--card-shadow-strong);
+    cursor: pointer;
+    color: var(--Black);
+}
+.Logout-Label { color: var(--Black); font-size: 2rem; font-weight: 400; line-height: normal; }
+
+/* =====================================================
+   MAIN VIEW — matches template
+   ===================================================== */
+.MainView {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+    /* No overflow:hidden — we let MainActivity manage it */
+    min-width: 0;
+}
+
+.TopBar {
+    display: flex;
+    height: 10rem;
+    align-items: flex-start;
+    align-self: stretch;
+    border-bottom: 3px solid var(--Control-Gray);
+    background: var(--White);
+    flex-shrink: 0;
+}
+
+.TopBar-Nav {
+    display: flex;
+    padding: 0 1.25rem;
+    align-items: center;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.TopBar-Nav-Text {
+    color: var(--Black);
+    font-size: 2.8125rem;
+    font-weight: 400;
+    line-height: normal;
+}
+.TopBar-Nav-Text strong { font-weight: 700; }
+
+.UserContainer {
+    display: flex;
+    padding: 0 1.25rem;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.875rem;
+    align-self: stretch;
+}
+
+.Username-Container {
+    display: flex;
+    padding: 0.625rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    align-self: stretch;
+}
+
+.Staff-Name { color: var(--Black); font-size: 1.875rem; font-weight: 700; line-height: normal; }
+.Staff-Role { color: var(--Text-Gray); font-size: 1.875rem; font-weight: 400; line-height: normal; }
+
+.PFP-Container {
+    display: flex;
+    width: 6.875rem;
+    height: 6.875rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.PFP {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1/1;
+    background: url(../Media/Dentist.jpg) lightgray 50% / cover no-repeat;
+    border-radius: 1rem;
+}
+
+/* =====================================================
+   MAIN ACTIVITY  [node 128:558]
+   bg:#f0f0f0  p:20px  gap:20px  flex-row
+   KEY: flex:1 with overflow:hidden prevents scrolling
+   ===================================================== */
+.MainActivity {
+    display: flex;
+    padding: 1.25rem;           /* 20px */
+    flex: 1 0 0;
+    align-self: stretch;
+    background: var(--Table-Gray);
+    overflow: hidden;           /* no outer scroll — content fits */
+    min-height: 0;
+}
+
+/* =====================================================
+   PAGE LAYOUT  [node 128:578 / 128:579]
+   gap:20px  h:full  flex-row
+   ===================================================== */
+.patient-procedures-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;               /* 20px */
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+}
+
+/* Left column — flex:1 */
+.patient-procedures-visits {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    gap: 1.25rem;               /* 20px */
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+}
+
+/* Right column  [node 128:579]  w:490px */
+.patient-procedures-overview {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 30.625rem;        /* 490px */
+    width: 30.625rem;
+    gap: 1.25rem;               /* 20px */
+    height: 100%;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+/* =====================================================
+   PROCEDURE PAGINATION  [node 161:352]
+   h:100px  flex-row  px:20px py:10px
+   Arrows: plain icon buttons — NO card border
+   Page pill: auto-width white pill centered
+   ===================================================== */
+.procedure-pagination {
+    display: flex;
+    height: 6.25rem;            /* 100px */
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0;
+    padding: 0.625rem 1.25rem;  /* py:10px px:20px */
+    flex-shrink: 0;
+}
+
+/* Plain arrow button  [node 161:597 / 161:592]  no card border */
+.procedure-pagination-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 6.25rem;             /* contains the 80px icon with 10px padding */
+    height: 100%;
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    color: var(--Black);
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+    border-radius: 0.625rem;
+}
+.procedure-pagination-btn:hover:not(:disabled) { opacity: 0.7; }
+.procedure-pagination-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+
+.procedure-pagination-btn svg {
+    width: 5rem;                /* 80px */
+    height: 5rem;
+}
+
+/* Center area — flex:1 to push pill center */
+.procedure-pages-area {
+    display: flex;
+    flex: 1 0 0;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+/* Page pill  [node 161:575]
+   Auto-width  p:15px  white bg  rounded:20px  shadow
+   User request: shrink to text + padding */
+.procedure-page-indicator {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.625rem 1.25rem;  /* ~15px adapted to rem */
+    background: var(--White);
+    border-radius: 1.25rem;     /* 20px */
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+    color: var(--Black);
+    font-size: 2rem;            /* 32px */
+    font-weight: 400;
+    line-height: normal;
+    white-space: nowrap;
+    flex-shrink: 0;             /* do NOT stretch — auto-width */
+}
+
+/* =====================================================
+   VISIT STACK — cards container  [node 142:45]
+   flex-col  gap:10px  flex:1 with overflow so cards don't force scroll
+   ===================================================== */
+.patient-procedures-visit-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;              /* 10px */
+    flex: 1 1 0;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+/* =====================================================
+   SHARED CARD BASE
+   ===================================================== */
+.procedure-card {
+    background: var(--White);
+    border-radius: 0.9375rem;   /* 15px */
+    width: 100%;
+    flex-shrink: 0;
+}
+
+/* =====================================================
+   VISIT HEADER CARD  [node 142:46]
+   flex-col  gap:10px  pt:30px pb:15px px:30px
+   ===================================================== */
+.visit-header-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;              /* 10px */
+    padding: 1.875rem 1.875rem 0.9375rem; /* pt:30px px:30px pb:15px */
+}
+
+/* Visit Title Row  [node 142:47]  flex-row  gap:30px  items-center */
+.visit-title-row {
+    display: flex;
+    align-items: center;
+    gap: 1.875rem;              /* 30px */
+    width: 100%;
+}
+
+.visit-title-container {
+    display: flex;
+    align-items: center;
+    flex: 1 0 0;
+    min-width: 0;
+    padding: 0.625rem;
+}
+
+/* Visit title  font-size:32px  bold  black */
+.visit-title {
+    color: var(--Black);
+    font-size: 2rem;            /* 32px */
+    font-weight: 700;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+/* Meta container  [node 142:249]  gap:10px  items-center */
+.visit-meta-container {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;              /* 10px */
+    flex-shrink: 0;
+}
+
+/* Meta text  font-size:24px  bold  #959595 */
+.visit-meta-text {
+    color: var(--Text-Gray);
+    font-size: 1.5rem;          /* 24px */
+    font-weight: 700;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+/* Divider  [node 142:251]  1px right border full height */
+.visit-meta-divider {
+    display: inline-block;
+    width: 1px;
+    height: 1.5rem;
+    background: var(--Text-Gray);
+    flex-shrink: 0;
+}
+
+/* Edit Visit Btn  [node 161:169]
+   h:80px  border:1px #959595  rounded:15px  shadow  px:30px py:10px
+   Sits BELOW the title row, aligned left (align-self: flex-start) */
+.visit-edit-btn {
+    display: inline-flex;
+    align-self: flex-start;
+    height: 5rem;               /* 80px */
+    align-items: center;
+    justify-content: center;
+    padding: 0.625rem 1.875rem; /* py:10px px:30px */
+    border: 1px solid var(--Text-Gray);
+    border-radius: 0.9375rem;
+    background: var(--White);
+    box-shadow: var(--card-shadow-strong);
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+    color: var(--Black);
+}
+.visit-edit-btn:hover { opacity: 0.75; }
+
+/* =====================================================
+   OPERATIONS CARD  [node 142:54]
+   flex-col
+   ===================================================== */
+.operations-card {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header row  [node 142:55]  h:77px  border-bottom:#959595  two equal columns centered */
+.operations-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 4.8125rem;          /* 77px */
+    border-bottom: 1px solid var(--soft-divider);
+    flex-shrink: 0;
+}
+
+.operations-col-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.875rem;        /* px:30px */
+    color: var(--Text-Gray);
+    font-size: 1.5rem;          /* 24px */
+    font-weight: 700;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.operations-col-right {
+    justify-content: center;
+}
+
+/* Body — injected rows */
+.operations-body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Operation row  [node 142:74 / 142:82]  py:20px  two equal columns */
+.operation-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 1.25rem 0;         /* py:20px */
+    border-bottom: 1px solid var(--soft-divider);
+}
+.operation-row:last-child { border-bottom: none; }
+
+.operation-row-name,
+.operation-row-bill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.875rem;
+    color: var(--Text-Gray);
+    font-size: 1.5rem;          /* 24px */
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* Empty state */
+.operations-empty {
+    padding: 1.25rem 1.875rem;
+    color: var(--Text-Gray);
+    font-size: 1.5rem;
+    font-weight: 400;
+    text-align: center;
+}
+
+/* =====================================================
+   DENTIST NOTES CARD  [node 241:4494]
+   flex-col  gap:20px  p:20px
+   ===================================================== */
+.dentist-notes-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;               /* 20px */
+    padding: 1.25rem;           /* 20px */
+}
+
+/* Notes title  [node 241:4497]  font-size:32px  bold  black */
+.dentist-notes-title {
+    display: flex;
+    align-items: center;
+    padding: 0.625rem;
+    color: var(--Black);
+    font-size: 2rem;            /* 32px */
+    font-weight: 700;
+    line-height: normal;
+}
+
+/* Notes copy  [node 241:4513]  font-size:24px  regular  black */
+.dentist-notes-copy {
+    color: var(--Black);
+    font-size: 1.5rem;          /* 24px */
+    font-weight: 400;
+    line-height: 1.45;
+}
+
+/* =====================================================
+   OVERVIEW CARDS
+   ===================================================== */
+.overview-card {
+    background: var(--White);
+    border-radius: 0.9375rem;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+/* Patient card  [node 133:12]  px:30px py:20px */
+.patient-card {
+    padding: 1.25rem 1.875rem;  /* py:20px px:30px */
+}
+
+/* Dentist card  [node 128:583]  flex-col */
+.dentist-card {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Attending header  [node 128:585]  p:30px  font:36px bold */
+.overview-card-heading {
+    padding: 1.875rem;          /* 30px */
+    color: var(--Black);
+    font-size: 2.25rem;         /* 36px */
+    font-weight: 700;
+    line-height: normal;
+}
+
+/* Dentist profile row  px:30px py:20px */
+.dentist-card .overview-profile {
+    padding: 1.25rem 1.875rem 1.25rem;
+}
+
+/* Branch card  [node 437:341]  h:116px  px:30px py:10px */
+.branch-card {
+    display: flex;
+    align-items: center;
+    height: 7.25rem;            /* 116px */
+    padding: 0.625rem 1.875rem; /* py:10px px:30px */
+}
+
+/* Profile row — shared by patient/dentist cards */
+.overview-profile {
+    display: flex;
+    align-items: center;
+    gap: 1.875rem;              /* 30px */
+    width: 100%;
+}
+
+/* Avatar  [node 133:16]  110×110px  rounded:15px */
+.overview-avatar {
+    width: 6.875rem;            /* 110px */
+    height: 6.875rem;
+    flex-shrink: 0;
+    border-radius: 0.9375rem;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Name + role copy  font-size:30px */
+.overview-profile-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    min-width: 0;
+    padding: 0.625rem;
+}
+
+.overview-name {
+    color: var(--Black);
+    font-size: 1.875rem;        /* 30px */
+    font-weight: 700;
+    line-height: normal;
+}
+
+.overview-role {
+    color: var(--Text-Gray);
+    font-size: 1.875rem;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* =====================================================
+   ACTION CARD BUTTONS  [node 142:293 / 142:301]
+   h:150px  border:1px #959595  rounded:15px  shadow
+   icon col: w:150px  icon: 80×80px
+   label: flex:1  font:32px
+   ===================================================== */
+.action-card-button {
+    display: flex;
+    height: 9.375rem;           /* 150px */
+    align-items: center;
+    width: 100%;
+    flex-shrink: 0;
+    border: 1px solid var(--Text-Gray);
+    border-radius: 0.9375rem;
+    background: var(--White);
+    box-shadow: var(--card-shadow-strong);
+    cursor: pointer;
+    overflow: hidden;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    color: var(--Black);
+}
+.action-card-button:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
+
+/* Icon column  [node 142:294 / 142:302]  w:150px  border-right */
+.action-card-icon {
+    display: flex;
+    width: 9.375rem;            /* 150px */
+    min-width: 9.375rem;
+    align-self: stretch;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid var(--card-border);
+}
+
+/* Label  [node 142:298 / 142:305]  font:32px  flex:1  centered */
+.action-card-label {
+    display: flex;
+    flex: 1 1 0;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.625rem;
+    color: var(--Black);
+    font-size: 2rem;            /* 32px */
+    font-weight: 400;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+/* =====================================================
+   UTILITY
+   ===================================================== */
+.sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+
+/* Responsive — stack at narrow widths */
+@media (max-width: 1180px) {
+    .patient-procedures-layout {
+        flex-direction: column;
+        overflow-y: auto;
+        height: auto;
+    }
+    .patient-procedures-visits,
+    .patient-procedures-overview {
+        height: auto;
+        overflow: visible;
+    }
+    .patient-procedures-overview {
+        width: 100%;
+        flex-basis: auto;
+    }
+}
