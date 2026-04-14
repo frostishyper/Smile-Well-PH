@@ -72,26 +72,7 @@ this platform handles daily schedule management, comprehensive digital patient r
 - **VS Code** — Standardized IDE (requires *Extension Pack for Java*)
 - **Modern Web Browser** — For testing the client and admin portals (Chrome, Edge, Safari, Firefox)
 
-## 🛠️ How To Run The Wep App
-
-### 1. Database & Environment Setup
-Before starting the server, you must configure your local environment variables. 
-1. Create a file named exactly `.env` inside the `BackEnd` directory (at the same level as the `pom.xml` file).
-2. Add the following credentials, updating `DB_HOST` to the correct ZeroTier IP if you are connecting remotely:
-```env
-DB_HOST=(Your Host)
-DB_PORT=(Your Port)
-DB_NAME=(Your DB Name)
-DB_USER=(Your User)
-DB_PASS=(Your Pass)
 ```
-   
-### 2. Starting the Server
-Spring Boot uses the Maven Wrapper to automatically download required dependencies and boot the embedded Tomcat server.
-Open your terminal and run:
-
-```bash
-cd BackEnd
 .\mvnw spring-boot:run
 ```
 

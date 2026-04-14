@@ -70,3 +70,5 @@ target/
 .settings
 .springBeans
 .sts4-cache
+FrontEnd/docs/agent-rules.md
+FrontEnd/docs/AGENTS.md
