@@ -1,3 +1,9 @@
+/**
+ * Edit Staff Page Logic
+ * Handles form population, custom dropdowns, and date displays.
+ * Convention: Pascal-Kebab for IDs, camelCase for variables.
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
     App.init();
 });
@@ -27,55 +33,58 @@ const state = {
     originalStaff: null
 };
 
-function formatDateDisplay(value) {
-    if (!value) {
-        return 'MM / DD / YYYY';
-    }
+// --- Helpers ---
 
+function formatDateDisplay(value) {
+    if (!value) return 'MM / DD / YYYY';
     const [year, month, day] = value.split('-');
     return `${month} / ${day} / ${year}`;
 }
 
 function toTitleCase(value) {
-    if (!value) {
-        return '';
-    }
-
+    if (!value) return '';
     return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
 }
+
+// --- Core Application ---
 
 const App = {
     elements: {
         body: document.querySelector('body'),
-        form: document.getElementById('edit-staff-form'),
-        firstName: document.getElementById('first-name'),
-        middleName: document.getElementById('middle-name'),
-        lastName: document.getElementById('last-name'),
-        phoneNumber: document.getElementById('phone-number'),
-        emailAddress: document.getElementById('email-address'),
-        birthdate: document.getElementById('birthdate'),
-        birthdateField: document.getElementById('birthdate-field'),
-        birthdateDisplay: document.getElementById('birthdate-display'),
+        form: document.getElementById('EditStaff-Form'),
+        
+        // Input Fields (Pascal-Kebab matching HTML)
+        firstName: document.getElementById('FirstName-Input'),
+        middleName: document.getElementById('MiddleName-Input'),
+        lastName: document.getElementById('LastName-Input'),
+        phoneNumber: document.getElementById('PhoneNumber-Input'),
+        emailAddress: document.getElementById('EmailAddress-Input'),
+        displayName: document.getElementById('DisplayName-Input'),
+        homeAddress: document.getElementById('HomeAddress-Input'),
+
+        // Birthdate Components
+        birthdate: document.getElementById('Birthdate-Input'),
+        birthdateField: document.getElementById('Birthdate-Field'),
+        birthdateDisplay: document.getElementById('Birthdate-Display'),
+
+        // Custom Dropdown UI Components
         dropdowns: document.querySelectorAll('.edit-staff-dropdown'),
         dropdownOptions: document.querySelectorAll('.edit-staff-dropdown-option'),
-        sex: document.getElementById('sex'),
+        
+        sex: document.getElementById('Sex-Input'),
         sexDropdown: document.querySelector('[data-dropdown="sex"]'),
-        sexToggle: document.getElementById('sex-toggle'),
-        sexDisplay: document.getElementById('sex-display'),
-        role: document.getElementById('role'),
+        sexToggle: document.getElementById('Sex-Toggle'),
+        sexDisplay: document.getElementById('Sex-Display'),
+        
+        role: document.getElementById('Role-Input'),
         roleDropdown: document.querySelector('[data-dropdown="role"]'),
-        roleToggle: document.getElementById('role-toggle'),
-        roleDisplay: document.getElementById('role-display'),
-        displayName: document.getElementById('display-name'),
-        homeAddress: document.getElementById('home-address'),
-        resetBtn: document.getElementById('edit-staff-reset-btn'),
-        deleteBtn: document.getElementById('edit-staff-delete-btn'),
-        saveBtn: document.getElementById('edit-staff-save-btn'),
-        dashboardBtn: document.getElementById('dashboardpage-btn'),
-        recordsBtn: document.getElementById('recordspage-btn'),
-        appointmentsBtn: document.getElementById('appointmentspage-btn'),
-        newPatientBtn: document.getElementById('newpatientpage-btn'),
-        logoutBtn: document.getElementById('logout-btn')
+        roleToggle: document.getElementById('Role-Toggle'),
+        roleDisplay: document.getElementById('Role-Display'),
+
+        // Action Buttons
+        resetBtn: document.getElementById('EditStaff-Reset-BTN'),
+        deleteBtn: document.getElementById('EditStaff-Delete-BTN'),
+        saveBtn: document.getElementById('EditStaff-Save-BTN'),
     },
 
     init() {
@@ -95,30 +104,16 @@ const App = {
             this.handleSave();
         });
 
-        el.resetBtn?.addEventListener('click', () => {
-            this.handleReset();
-        });
+        el.resetBtn?.addEventListener('click', () => this.handleReset());
+        el.deleteBtn?.addEventListener('click', () => this.handleDelete());
 
-        el.deleteBtn?.addEventListener('click', () => {
-            this.handleDelete();
-        });
+        // Sync hidden select changes to custom UI
+        el.sex?.addEventListener('change', () => this.syncSelectDisplay(el.sex, el.sexDisplay, el.sexDropdown));
+        el.role?.addEventListener('change', () => this.syncSelectDisplay(el.role, el.roleDisplay, el.roleDropdown));
 
-        el.sex?.addEventListener('change', () => {
-            this.syncSelectDisplay(el.sex, el.sexDisplay, el.sexDropdown);
-        });
-
-        el.role?.addEventListener('change', () => {
-            this.syncSelectDisplay(el.role, el.roleDisplay, el.roleDropdown);
-        });
-
-        el.birthdate?.addEventListener('change', () => {
-            this.syncBirthdateDisplay();
-        });
-
-        el.birthdateField?.addEventListener('click', () => {
-            this.openBirthdatePicker();
-        });
-
+        // Birthdate Logic
+        el.birthdate?.addEventListener('change', () => this.syncBirthdateDisplay());
+        el.birthdateField?.addEventListener('click', () => this.openBirthdatePicker());
         el.birthdateField?.addEventListener('keydown', (event) => {
             if (event.key === 'Enter' || event.key === ' ') {
                 event.preventDefault();
@@ -126,47 +121,36 @@ const App = {
             }
         });
 
+        // Numerical Phone Restriction
         el.phoneNumber?.addEventListener('input', (event) => {
             event.target.value = event.target.value.replace(/\D/g, '').slice(0, 11);
         });
 
-        el.sexToggle?.addEventListener('click', () => {
-            this.toggleDropdown(el.sexDropdown);
-        });
+        // Dropdown Toggle Clicks
+        el.sexToggle?.addEventListener('click', () => this.toggleDropdown(el.sexDropdown));
+        el.roleToggle?.addEventListener('click', () => this.toggleDropdown(el.roleDropdown));
 
-        el.roleToggle?.addEventListener('click', () => {
-            this.toggleDropdown(el.roleDropdown);
-        });
-
+        // Custom Menu Option Clicks
         el.dropdownOptions.forEach((option) => {
             option.addEventListener('click', () => {
                 this.selectDropdownOption(option.dataset.target, option.dataset.value, option.textContent.trim());
             });
         });
 
+        // Close dropdowns on outside click
         document.addEventListener('click', (event) => {
-            const clickedInsideDropdown = Array.from(el.dropdowns).some((dropdown) => dropdown.contains(event.target));
-
-            if (!clickedInsideDropdown) {
-                this.closeAllDropdowns();
-            }
+            const isInside = Array.from(el.dropdowns).some((d) => d.contains(event.target));
+            if (!isInside) this.closeAllDropdowns();
         });
 
         document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape') {
-                this.closeAllDropdowns();
-            }
+            if (event.key === 'Escape') this.closeAllDropdowns();
         });
-
-        
     },
 
     populateForm(staffMember) {
         const el = this.elements;
-
-        if (!staffMember) {
-            return;
-        }
+        if (!staffMember) return;
 
         el.firstName.value = staffMember.firstName;
         el.middleName.value = staffMember.middleName;
@@ -185,12 +169,13 @@ const App = {
     },
 
     syncSelectDisplay(selectElement, displayElement, dropdownElement) {
-        if (!selectElement || !displayElement || !dropdownElement) {
-            return;
-        }
+        if (!selectElement || !displayElement || !dropdownElement) return;
 
+        const hasValue = selectElement.value !== "";
         const selectedText = selectElement.options[selectElement.selectedIndex]?.text || 'Select';
-        displayElement.textContent = toTitleCase(selectedText);
+        
+        displayElement.textContent = hasValue ? toTitleCase(selectedText) : 'Select';
+        displayElement.classList.toggle('is-placeholder', !hasValue);
 
         dropdownElement.querySelectorAll('.edit-staff-dropdown-option').forEach((option) => {
             option.classList.toggle('is-selected', option.dataset.value === selectElement.value);
@@ -198,25 +183,16 @@ const App = {
     },
 
     toggleDropdown(dropdownElement) {
-        if (!dropdownElement) {
-            return;
-        }
-
+        if (!dropdownElement) return;
         const isOpen = dropdownElement.classList.contains('open');
         this.closeAllDropdowns();
-
-        if (!isOpen) {
-            this.openDropdown(dropdownElement);
-        }
+        if (!isOpen) this.openDropdown(dropdownElement);
     },
 
     openDropdown(dropdownElement) {
         const toggle = dropdownElement.querySelector('.edit-staff-dropdown-toggle');
         const menu = dropdownElement.querySelector('.edit-staff-dropdown-menu');
-
-        if (!toggle || !menu) {
-            return;
-        }
+        if (!toggle || !menu) return;
 
         dropdownElement.classList.add('open');
         toggle.setAttribute('aria-expanded', 'true');
@@ -226,10 +202,7 @@ const App = {
     closeDropdown(dropdownElement) {
         const toggle = dropdownElement?.querySelector('.edit-staff-dropdown-toggle');
         const menu = dropdownElement?.querySelector('.edit-staff-dropdown-menu');
-
-        if (!dropdownElement || !toggle || !menu) {
-            return;
-        }
+        if (!dropdownElement || !toggle || !menu) return;
 
         dropdownElement.classList.remove('open');
         toggle.setAttribute('aria-expanded', 'false');
@@ -237,42 +210,33 @@ const App = {
     },
 
     closeAllDropdowns() {
-        this.elements.dropdowns.forEach((dropdown) => {
-            this.closeDropdown(dropdown);
-        });
+        this.elements.dropdowns.forEach((dropdown) => this.closeDropdown(dropdown));
     },
 
     selectDropdownOption(target, value, label) {
-        const selectElement = this.elements[target];
+        const selectElement = this.elements[target]; 
         const displayElement = this.elements[`${target}Display`];
         const dropdownElement = this.elements[`${target}Dropdown`];
 
-        if (!selectElement || !displayElement || !dropdownElement || !value) {
-            return;
-        }
+        if (!selectElement || !value) return;
 
         selectElement.value = value;
-        displayElement.textContent = label;
         this.syncSelectDisplay(selectElement, displayElement, dropdownElement);
         this.closeDropdown(dropdownElement);
     },
 
     syncBirthdateDisplay() {
         const el = this.elements;
-        if (!el.birthdateDisplay || !el.birthdate) {
-            return;
-        }
+        if (!el.birthdateDisplay || !el.birthdate) return;
 
-        const hasValue = Boolean(el.birthdate.value);
-        el.birthdateDisplay.textContent = formatDateDisplay(el.birthdate.value);
-        el.birthdateDisplay.classList.toggle('is-placeholder', !hasValue);
+        const val = el.birthdate.value;
+        el.birthdateDisplay.textContent = formatDateDisplay(val);
+        el.birthdateDisplay.classList.toggle('is-placeholder', !val);
     },
 
     openBirthdatePicker() {
         const birthdateInput = this.elements.birthdate;
-        if (!birthdateInput) {
-            return;
-        }
+        if (!birthdateInput) return;
 
         if (birthdateInput.showPicker) {
             birthdateInput.showPicker();
@@ -284,7 +248,6 @@ const App = {
 
     getFormPayload() {
         const el = this.elements;
-
         return {
             firstName: el.firstName.value.trim(),
             middleName: el.middleName.value.trim(),
@@ -305,94 +268,23 @@ const App = {
     },
 
     handleSave() {
-        const el = this.elements;
-
-        if (!el.form?.reportValidity()) {
-            return;
-        }
-
+        if (!this.elements.form?.reportValidity()) return;
         const payload = this.getFormPayload();
-        console.log('Mock save staff payload:', payload);
-
-        // TODO: Replace this mock save with backend update integration.
-        window.alert('Staff details validated. Backend save integration goes here next.');
+        console.log('Payload for API:', payload);
+        window.alert('Details validated. Ready for backend integration.');
     },
 
     handleDelete() {
-        const confirmed = window.confirm('Delete this staff record? This is a mock action only.');
-
-        if (!confirmed) {
-            return;
+        if (window.confirm('Delete this staff record?')) {
+            console.log('Action: Delete', state.originalStaff);
         }
-
-        console.log('Mock delete staff record:', state.originalStaff);
-
-        // TODO: Replace this mock delete with backend delete integration.
     },
 
     ui: {
-        setLoading(element, isLoading) {
-            if (!element) return;
-
-            if (isLoading) {
-                element.classList.add('is-loading');
-                element.disabled = true;
-            } else {
-                element.classList.remove('is-loading');
-                element.disabled = false;
-            }
-        },
-
         checkOrientation() {
             if (window.innerHeight > window.innerWidth) {
                 console.warn('System optimized for Landscape view.');
             }
-        }
-    },
-
-    api: {
-        async request(endpoint, options = {}) {
-            const url = `${API_CONFIG.BASE_URL}${endpoint}`;
-            const settings = {
-                ...options,
-                headers: { ...API_CONFIG.HEADERS, ...options.headers }
-            };
-
-            try {
-                const response = await fetch(url, settings);
-
-                if (!response.ok) {
-                    const errorData = await response.json().catch(() => ({}));
-                    throw new Error(errorData.message || `Status: ${response.status}`);
-                }
-
-                return response.status === 204 ? null : response.json();
-            } catch (error) {
-                console.error('Fetch Error:', error.message);
-                throw error;
-            }
-        },
-
-        get(endpoint) {
-            return this.request(endpoint, { method: 'GET' });
-        },
-
-        post(endpoint, data) {
-            return this.request(endpoint, {
-                method: 'POST',
-                body: JSON.stringify(data)
-            });
-        },
-
-        put(endpoint, data) {
-            return this.request(endpoint, {
-                method: 'PUT',
-                body: JSON.stringify(data)
-            });
-        },
-
-        delete(endpoint) {
-            return this.request(endpoint, { method: 'DELETE' });
         }
     }
 };
