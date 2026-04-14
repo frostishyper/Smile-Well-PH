@@ -88,24 +88,7 @@ const App = {
         el.saveBtn?.addEventListener('click', () => this.handleSave());
         el.cancelBtn?.addEventListener('click', () => this.handleCancel());
 
-        document.getElementById('DashboardPage-BTN')?.addEventListener('click', () => {
-            window.location.href = '../HTML/Dashboard.html';
-        });
-        document.getElementById('RecordsPage-BTN')?.addEventListener('click', () => {
-            window.location.href = '../HTML/Records.html';
-        });
-        document.getElementById('AppointmentsPage-BTN')?.addEventListener('click', () => {
-            window.location.href = '../HTML/Appointments.html';
-        });
-        document.getElementById('NewPatientPage-BTN')?.addEventListener('click', () => {
-            window.location.href = '../HTML/NewPatient.html';
-        });
-        document.getElementById('StaffPage-BTN')?.addEventListener('click', () => {
-            window.location.href = '../HTML/Staff.html';
-        });
-        document.getElementById('Logout-BTN')?.addEventListener('click', () => {
-            window.location.href = '../HTML/Login.html';
-        });
+        
     },
 
     setupCustomDropdowns() {

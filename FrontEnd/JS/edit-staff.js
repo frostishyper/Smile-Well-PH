@@ -158,25 +158,7 @@ const App = {
             }
         });
 
-        el.dashboardBtn?.addEventListener('click', () => {
-            window.location.href = '../HTML/Dashboard.html';
-        });
-
-        el.recordsBtn?.addEventListener('click', () => {
-            window.location.href = '../HTML/Records.html';
-        });
-
-        el.appointmentsBtn?.addEventListener('click', () => {
-            window.location.href = '../HTML/appointments.html';
-        });
-
-        el.newPatientBtn?.addEventListener('click', () => {
-            window.location.href = '../HTML/NewPatient.html';
-        });
-
-        el.logoutBtn?.addEventListener('click', () => {
-            window.location.href = '../HTML/Login.html';
-        });
+        
     },
 
     populateForm(staffMember) {

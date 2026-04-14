@@ -3,6 +3,8 @@ package com.smilewell.backend.Controller;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class FrontendController {
@@ -95,4 +97,15 @@ public class FrontendController {
 
     @GetMapping("/transactionhistory")
     public String serveTransactionHistory() { return "forward:/Pages/transactionhistory.html"; }
+
+    // Frontend Ai Slop Compensator
+    @GetMapping("/{page}.html")
+    public String interceptBadHtmlRequests(@PathVariable String page) {
+        
+        if (page.equals("patient-list")) {
+            return "redirect:/records";
+        }
+        
+        return "redirect:/" + page;
+    }
 }

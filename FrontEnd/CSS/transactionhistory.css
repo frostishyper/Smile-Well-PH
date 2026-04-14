@@ -620,6 +620,23 @@ aspect-ratio: 1/1;
     height: 5rem;
     aspect-ratio: 1/1;
 }
-/* This Is Just A Template CSS, Copy Paste The Contents Of This Page To A New CSS File And Go From There */
-/* Start Styling Bellow Here: */
+
+.Side-Nav-BTN {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.Side-Nav-BTN:hover {
+    border-radius: 0.9375rem;
+    background: var(--Black);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
+
+.Side-Nav-BTN:hover .SNB-Label {
+    color: var(--White);
+}
+
+.Side-Nav-BTN:hover svg path {
+    stroke: var(--White);
+}
 

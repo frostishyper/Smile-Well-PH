@@ -26,19 +26,7 @@ html {
     }
 }
 
-:root {
-    --logo-light: #7bb3d2;
-    --logo-dark: #2e5c76;
-    --white: #ffffff;
-    --black: #000000;
-    --control-gray: #e5e7eb;
-    --text-gray: #959595;
-    --table-gray: #f0f0f0;
-    --staff-list-border: #d9d9d9;
-    --staff-list-row: #f7f7f7;
-    --staff-list-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
-}
-
+/* Portrait Barrier */
 .portrait-warning {
     display: none;
     position: fixed;
@@ -46,8 +34,8 @@ html {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: var(--logo-dark);
-    color: var(--white);
+    background-color: var(--Logo-Dark);
+    color: var(--White);
     z-index: 9999;
     flex-direction: column;
     justify-content: center;
@@ -56,33 +44,55 @@ html {
     text-align: center;
 }
 
+.portrait-warning i {
+    font-size: 4rem;
+}
+
 @media (orientation: portrait) {
     body {
         overflow: hidden;
     }
-
+    
     .portrait-warning {
         display: flex;
     }
 }
 
+:root {
+    --Logo-Light: #7BB3D2;
+    --Logo-Dark: #2E5C76;
+    --White: #FFFFFF;
+    --Black: #000000;
+    --Control-Gray: #E5E7EB;
+    --Text-Gray: #959595;
+    --Table-Gray: #F0F0F0;
+    --Subtle-Green: #E8F7E0;
+    --Highlight-Green: #67B07D;
+    --Subtle-Red: #F6B9B9;
+    --Highlight-Red: #BE3A3A;
+    --Arc-Blue: #097BAC;
+    --Arc-Green: #19D646;
+    --Arc-Orange: #F5B119;
+    --Arc-Red: #D3030D;
+}
+
 body {
     display: flex;
     width: 100%;
-    max-width: 2000px;
-    min-height: 100vh;
-    margin: 0 auto;
+    max-width: 2000px; 
+    min-height: 100vh; 
+    margin: 0 auto; 
     align-items: stretch;
-    background: #fafafa;
+    background: #FAFAFA;
 }
 
 .SideBar {
     display: flex;
     flex-direction: column;
-    width: 26rem;
+    width: 26rem; 
     align-self: stretch;
-    background: var(--white);
-    border-right: 3px solid var(--control-gray);
+    background: var(--White);
+    border-right: 3px solid var(--Control-Gray);
     flex-shrink: 0;
 }
 
@@ -92,7 +102,6 @@ body {
     align-items: flex-start;
     flex: 1 0 0;
     align-self: stretch;
-    overflow: hidden;
 }
 
 .TopBar {
@@ -100,20 +109,18 @@ body {
     height: 10rem;
     align-items: flex-start;
     align-self: stretch;
-    border-bottom: 3px solid var(--control-gray);
-    background: var(--white);
+    border-bottom: 3px solid var(--Control-Gray);
+    background: var(--White);
 }
 
 .MainActivity {
     display: flex;
     padding: 1.25rem;
     flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
+    align-items: flex-start;
     flex: 1 0 0;
     align-self: stretch;
-    background: var(--table-gray);
-    overflow: auto;
+    background: var(--Table-Gray);
 }
 
 .TopCorner {
@@ -138,11 +145,11 @@ body {
 }
 
 .logo-light {
-    color: var(--logo-light);
+    color: var(--Logo-Light);
 }
 
 .logo-dark {
-    color: var(--logo-dark);
+    color: var(--Logo-Dark);
 }
 
 .TopBar-Nav {
@@ -154,10 +161,11 @@ body {
 }
 
 .TopBar-Nav-Text {
-    color: var(--black);
+    color: var(--Black);
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.10);
     font-size: 2.8125rem;
-    font-weight: 400;
+    font-style: normal;
+    font-weight: 500;
     line-height: normal;
 }
 
@@ -180,15 +188,17 @@ body {
 }
 
 .Staff-Name {
-    color: var(--black);
+    color: var(--Black);
     font-size: 1.875rem;
+    font-style: normal;
     font-weight: 700;
     line-height: normal;
 }
 
 .Staff-Role {
-    color: var(--text-gray);
+    color: var(--Text-Gray);
     font-size: 1.875rem;
+    font-style: normal;
     font-weight: 400;
     line-height: normal;
 }
@@ -206,7 +216,7 @@ body {
     width: 100%;
     height: 100%;
     flex-shrink: 0;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1/1;
     background: url(../Media/Dentist.jpg) lightgray 50% / cover no-repeat;
     border-radius: 1rem;
 }
@@ -228,17 +238,29 @@ body {
     gap: 0.625rem;
     align-self: stretch;
     border-radius: 1rem;
+    transition: all 0.2s ease;
     cursor: pointer;
 }
 
+.Side-Nav-BTN:hover, 
 .Side-Nav-BTN.active {
-    background: var(--black);
+    background: var(--Black);
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
 }
 
-.Side-Nav-BTN.active .SNB-Label,
+.Side-Nav-BTN:hover .SNB-Label,
+.Side-Nav-BTN.active .SNB-Label {
+    color: var(--White);
+}
+
+.Side-Nav-BTN:hover .Nav-Icon,
 .Side-Nav-BTN.active .Nav-Icon {
-    color: var(--white);
+    color: var(--White);
+}
+
+.Side-Nav-BTN:hover svg path,
+.Side-Nav-BTN.active svg path {
+    stroke: var(--White);
 }
 
 .SNB-Icon-Container {
@@ -255,8 +277,7 @@ body {
     width: 3.125rem;
     height: 3.125rem;
     flex-shrink: 0;
-    aspect-ratio: 1 / 1;
-    color: var(--black);
+    aspect-ratio: 1/1;
 }
 
 .SNB-Label-Container {
@@ -270,8 +291,9 @@ body {
 }
 
 .SNB-Label {
-    color: var(--black);
+    color: var(--Black);
     font-size: 2rem;
+    font-style: normal;
     font-weight: 400;
     line-height: normal;
 }
@@ -291,300 +313,122 @@ body {
     gap: 0.625rem;
     flex: 1 0 0;
     border-radius: 0.9375rem;
-    background: var(--control-gray);
+    background: var(--Control-Gray);
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
     cursor: pointer;
 }
 
 .Logout-Label {
-    color: var(--black);
+    color: var(--Black);
     font-size: 2rem;
+    font-style: normal;
     font-weight: 400;
     line-height: normal;
 }
 
-.staff-list-shell {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    width: 100%;
-    min-height: 100%;
+.svg-icons {
+    width: 1.875rem;
+    height: 1.875rem;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;  
 }
 
-.staff-list-toolbar {
+/* This Is Just A Template CSS, Copy Paste The Contents Of This Page To A New CSS File And Go From There */
+/* Start Styling Bellow Here: */
+
+.Staff-Toolbar {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.Search-Box {
     display: flex;
     align-items: center;
     gap: 1rem;
-    width: 100%;
-}
-
-.staff-list-search {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    min-width: 0;
-    width: 26rem;
-    height: 4rem;
-    padding: 0 1.125rem;
-    border: 1px solid var(--staff-list-border);
+    flex: 1;
+    height: 4.5rem;
+    padding: 0 1.5rem;
+    border: 2px solid var(--Control-Gray);
     border-radius: 1rem;
-    background: var(--white);
+    background: var(--White);
 }
 
-.staff-list-search-label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-gray);
-}
-
-.staff-list-search-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-}
-
-.staff-list-search-input {
-    width: 100%;
-    border: 0;
-    background: transparent;
-    color: var(--black);
-    font-size: 1.375rem;
-    font-weight: 400;
-    line-height: normal;
+.Search-Box input {
+    flex: 1;
+    border: none;
     outline: none;
-}
-
-.staff-list-search-input::placeholder {
-    color: var(--text-gray);
-}
-
-.staff-list-new-btn,
-.staff-list-sort-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    height: 4rem;
-    border: 1px solid var(--staff-list-border);
-    border-radius: 1rem;
-    background: var(--white);
-    color: var(--black);
-    box-shadow: var(--staff-list-shadow);
-    cursor: pointer;
-}
-
-.staff-list-new-btn {
-    min-width: 8rem;
-    padding: 0 1.125rem;
-}
-
-.staff-list-new-text,
-.staff-list-sort-text {
-    font-size: 1.375rem;
-    font-weight: 500;
-    line-height: normal;
-}
-
-.staff-list-new-icon,
-.staff-list-sort-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-    flex-shrink: 0;
-}
-
-.staff-list-sort {
-    position: relative;
-    margin-left: auto;
-}
-
-.staff-list-sort-toggle {
-    min-width: 18rem;
-    padding: 0 1.125rem;
-    justify-content: space-between;
-}
-
-.staff-list-sort.open .staff-list-sort-icon {
-    transform: rotate(180deg);
-}
-
-.staff-list-sort-menu {
-    position: absolute;
-    top: calc(100% + 0.5rem);
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    width: 18rem;
-    padding: 0.5rem;
-    border: 1px solid var(--staff-list-border);
-    border-radius: 1rem;
-    background: var(--white);
-    box-shadow: var(--staff-list-shadow);
-    z-index: 20;
-}
-
-.staff-list-sort-menu[hidden] {
-    display: none !important;
-}
-
-.staff-list-sort-option {
-    width: 100%;
-    padding: 0.875rem 1rem;
-    border: 0;
-    border-radius: 0.75rem;
+    font-size: 1.5rem;
     background: transparent;
-    color: var(--black);
-    text-align: left;
-    font-size: 1.125rem;
-    font-weight: 400;
-    line-height: normal;
-    cursor: pointer;
+    color: var(--Black);
 }
 
-.staff-list-sort-option:hover,
-.staff-list-sort-option:focus-visible {
-    background: var(--table-gray);
-    outline: none;
-}
-
-.staff-list-card {
+.New-Staff-BTN {
     display: flex;
-    flex-direction: column;
-    gap: 1.125rem;
-    width: 100%;
-    min-height: 0;
-    padding: 1.25rem;
-    border: 1px solid var(--staff-list-border);
-    border-radius: 1.5rem;
-    background: var(--white);
-}
-
-.staff-list-table-wrap {
-    width: 100%;
-    overflow: auto;
-}
-
-.staff-list-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-}
-
-.staff-list-table thead th {
-    padding: 0.625rem 1.5rem 1rem;
-    border-bottom: 1px solid var(--staff-list-border);
-    color: var(--black);
-    text-align: left;
-    font-size: 1.25rem;
+    padding: 0 2.5rem;
+    height: 4.5rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    background: var(--Black);
+    color: var(--White);
+    font-size: 1.5rem;
     font-weight: 600;
-    line-height: normal;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
 }
 
-.staff-list-table thead th:last-child,
-.staff-list-table tbody td:last-child {
-    text-align: center;
+.Staff-Table-Card {
+    display: flex;
+    padding: 1.5rem;
+    flex-direction: column;
+    align-items: stretch;
+    align-self: stretch;
+    border: 1px solid var(--Control-Gray);
+    border-radius: 1.5rem;
+    background: var(--White);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-.staff-list-table tbody td {
-    padding: 1.125rem 1.5rem;
-    border-bottom: 1px solid #ececec;
-    color: var(--black);
-    font-size: 1.25rem;
+.Staff-Table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.Staff-Table thead th {
+    padding: 1.25rem 1rem;
+    border-bottom: 3px solid var(--Table-Gray);
+    color: var(--Text-Gray);
+    text-align: left;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.Staff-Table tbody td {
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid var(--Control-Gray);
+    font-size: 1.5rem;
     font-weight: 400;
-    line-height: normal;
+    color: var(--Black);
 }
 
-.staff-list-table tbody tr:last-child td {
-    border-bottom: 0;
-}
-
-.staff-list-table tbody tr:hover {
-    background: #fcfcfc;
-}
-
-.staff-list-edit-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 3rem;
-    height: 3rem;
-    border: 1px solid var(--staff-list-border);
-    border-radius: 0.875rem;
-    background: var(--white);
-    color: var(--black);
+.edit-action-btn {
+    padding: 0.6rem 1.5rem;
+    border-radius: 0.8rem;
+    background: var(--Control-Gray);
+    border: none;
+    font-size: 1.3rem;
+    font-weight: 700;
     cursor: pointer;
+    transition: background 0.2s;
 }
 
-.staff-list-edit-btn svg {
-    width: 1.5rem;
-    height: 1.5rem;
-}
-
-.staff-list-pagination {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    padding-top: 0.25rem;
-}
-
-.staff-list-page-buttons {
-    display: flex;
-    align-items: center;
-    gap: 0.625rem;
-}
-
-.staff-list-page-nav,
-.staff-list-page-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 3rem;
-    height: 3rem;
-    padding: 0 0.875rem;
-    border: 1px solid var(--staff-list-border);
-    border-radius: 999px;
-    background: var(--white);
-    color: var(--black);
-    font-size: 1.125rem;
-    font-weight: 500;
-    line-height: normal;
-    cursor: pointer;
-}
-
-.staff-list-page-nav svg {
-    width: 1.75rem;
-    height: 1.75rem;
-}
-
-.staff-list-page-btn.is-active {
-    background: var(--black);
-    border-color: var(--black);
-    color: var(--white);
-}
-
-.staff-list-page-nav:disabled,
-.staff-list-page-btn:disabled {
-    opacity: 0.45;
-    cursor: not-allowed;
-}
-
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-}
-
-@media (max-width: 1100px) {
-    .staff-list-toolbar {
-        flex-wrap: wrap;
-    }
-
-    .staff-list-sort {
-        margin-left: 0;
-    }
+.edit-action-btn:hover {
+    background: var(--Text-Gray);
+    color: var(--White);
 }

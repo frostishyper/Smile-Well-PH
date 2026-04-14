@@ -30,20 +30,7 @@ const App = {
     setupEventListeners() {
         const { makePaymentBtn, paymentModal, cancelBtn, payBtn } = this.elements;
 
-        // Open modal
-        makePaymentBtn.addEventListener('click', () => {
-            this.modal.open();
-        });
-
-        // Close on Cancel button
-        cancelBtn.addEventListener('click', () => {
-            this.modal.close();
-        });
-
-        // Close on backdrop click
-        paymentModal.addEventListener('click', (e) => {
-            if (e.target === paymentModal) this.modal.close();
-        });
+        
 
         // Submit payment
         payBtn.addEventListener('click', () => {

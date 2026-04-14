@@ -222,13 +222,7 @@ const App = {
             // TODO: window.location.href = `../HTML/new-procedure.html?patient=${MOCK_PATIENT.id}`;
         });
 
-        // Sidebar navigation
-        document.getElementById('dashboardpage-btn')?.addEventListener('click',   () => { window.location.href = '../HTML/Dashboard.html'; });
-        document.getElementById('recordspage-btn')?.addEventListener('click',     () => { window.location.href = '../HTML/Records.html'; });
-        document.getElementById('appointmentspage-btn')?.addEventListener('click',() => { window.location.href = '../HTML/Appointments.html'; });
-        document.getElementById('newpatientpage-btn')?.addEventListener('click',  () => { window.location.href = '../HTML/NewPatient.html'; });
-        document.getElementById('staffpage-btn')?.addEventListener('click',       () => { window.location.href = '../HTML/Staff.html'; });
-        document.getElementById('logout-btn')?.addEventListener('click',          () => { window.location.href = '../HTML/Login.html'; });
+        
     },
 
     /* -----------------------------------------------

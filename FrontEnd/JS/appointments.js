@@ -425,25 +425,7 @@ const App = {
     bindEvents() {
         const el = this.el;
 
-        document.getElementById('DashboardPage-BTN')?.addEventListener('click', () => {
-            window.location.href = '../HTML/Dashboard.html';
-        });
-        document.getElementById('RecordsPage-BTN')?.addEventListener('click', () => {
-            window.location.href = '../HTML/Records.html';
-        });
-        document.getElementById('NewPatientPage-BTN')?.addEventListener('click', () => {
-            window.location.href = '../HTML/NewPatient.html';
-        });
-        document.getElementById('StaffPage-BTN')?.addEventListener('click', () => {
-            window.location.href = '../HTML/Staff.html';
-        });
-        document.getElementById('Logout-BTN')?.addEventListener('click', () => {
-            window.location.href = '../HTML/Login.html';
-        });
-
-        el.newBookingBtn?.addEventListener('click', () => {
-            window.location.href = '../HTML/NewAppointment.html';
-        });
+        
 
         el.pagPrev?.addEventListener('click', () => {
             if (state.currentPage > 1) {

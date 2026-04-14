@@ -394,3 +394,22 @@ body {
         padding: 0.625rem 1.25rem;
     }
 }
+
+.Side-Nav-BTN {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.Side-Nav-BTN:hover {
+    border-radius: 0.9375rem;
+    background: var(--Black);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
+
+.Side-Nav-BTN:hover .SNB-Label {
+    color: var(--White);
+}
+
+.Side-Nav-BTN:hover svg path {
+    stroke: var(--White);
+}

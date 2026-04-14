@@ -31,26 +31,6 @@ const App = {
     setupEventListeners() {
         const el = this.elements;
 
-        el.dashboardBtn?.addEventListener('click', () => {
-            window.location.href = '../HTML/Dashboard.html';
-        });
-
-        el.recordsBtn?.addEventListener('click', () => {
-            window.location.href = '../HTML/Records.html';
-        });
-
-        el.appointmentsBtn?.addEventListener('click', () => {
-            window.location.href = '../HTML/appointments.html';
-        });
-
-        el.newPatientBtn?.addEventListener('click', () => {
-            window.location.href = '../HTML/NewPatient.html';
-        });
-
-        el.logoutBtn?.addEventListener('click', () => {
-            window.location.href = '../HTML/Login.html';
-        });
-
         el.staffAuthForm?.addEventListener('submit', (event) => {
             event.preventDefault();
 
