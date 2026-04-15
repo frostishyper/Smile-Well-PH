@@ -113,9 +113,26 @@ body {
     transition: background 0.15s ease;
     color: var(--Black);
 }
-.Side-Nav-BTN:hover:not(.active) { background: rgba(0,0,0,0.04); }
+.Side-Nav-BTN:hover:not(.active) { background: #1C1C1C; }
 .Side-Nav-BTN.active { background: var(--Black); color: var(--White); cursor: default; }
 .Side-Nav-BTN.active .SNB-Label { color: var(--White); }
+
+.SNB-Label-Active {
+    color: #FFF;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.20);
+    font-family: "Plus Jakarta Sans";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.Side-Nav-Active{
+    border-radius: 0.9375rem;
+    background: #1C1C1C;
+    color: #FFFFFF;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
 
 .SNB-Icon-Container {
     display: flex;
@@ -744,3 +761,4 @@ body {
 .Side-Nav-BTN:hover svg path {
     stroke: var(--White);
 }
+
