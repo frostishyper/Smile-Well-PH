@@ -122,210 +122,209 @@
                 </div>
             </div>
             <!-- Main Activity  [node 220:656] -->
-<!-- Main Activity  [node 220:656] -->
-<div class="MainActivity">
+            <div class="MainActivity">
 
-    <!-- Edit Appointment Card — white card  [node 220:657] -->
-    <div class="EditAppointment-Card">
+                <!-- Edit Appointment Card — white card  [node 220:657] -->
+                <div class="EditAppointment-Card">
 
-        <!-- Appointment Entry — summary header  [node 220:658] -->
-        <div class="Appointment-Entry">
+                    <!-- Appointment Entry — summary header  [node 220:658] -->
+                    <div class="Appointment-Entry">
 
-            <!-- Color Stub  [node 220:659] -->
-            <div class="Appt-Color-Stub" id="appointment-color-stub"></div>
+                        <!-- Color Stub  [node 220:659] -->
+                        <div class="Appt-Color-Stub" id="appointment-color-stub"></div>
 
-            <!-- Appointment Details  [node 220:660] -->
-            <div class="Appt-Details">
-                <span class="Appt-Procedure" id="summary-procedure">—</span>
-                <span class="Appt-Patient" id="summary-patient">—</span>
-                <span class="Appt-Time" id="summary-time">—</span>
-            </div>
-
-            <!-- Appointment Control  [node 220:664] — 3 buttons -->
-            <div class="Appointment-Control">
-
-                <!-- Back/Return Btn  [node 220:665] -->
-                <button class="Appt-Action-BTN Appt-BTN-Back" id="back-btn" type="button" title="Back to Appointments">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="9 10 4 15 9 20"/>
-                        <path d="M20 4v7a4 4 0 0 1-4 4H4"/>
-                    </svg>
-                </button>
-
-                <!-- Delete Btn  [node 220:670] -->
-                <button class="Appt-Action-BTN Appt-BTN-Delete" id="delete-btn" type="button" title="Delete Appointment">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 6h18"/>
-                        <path d="M8 6V4h8v2"/>
-                        <path d="M19 6l-1 14H6L5 6"/>
-                        <path d="M10 11v6M14 11v6"/>
-                    </svg>
-                </button>
-
-                <!-- Save Btn  [node 220:677] -->
-                <button class="Appt-Action-BTN Appt-BTN-Save" id="save-btn" type="button" title="Save Changes" aria-label="Save Changes">
-                    <svg class="Appt-BTN-Icon" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path d="M23.75 26.25H6.25C5.58696 26.25 4.95107 25.9866 4.48223 25.5178C4.01339 25.0489 3.75 24.413 3.75 23.75V6.25C3.75 5.58696 4.01339 4.95107 4.48223 4.48223C4.95107 4.01339 5.58696 3.75 6.25 3.75H20L26.25 10V23.75C26.25 24.413 25.9866 25.0489 25.5178 25.5178C25.0489 25.9866 24.413 26.25 23.75 26.25Z"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"/>
-                        <path d="M21.25 26.25V16.25H8.75V26.25"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"/>
-                        <path d="M8.75 3.75V10H18.75"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"/>
-                    </svg>
-                </button>
-            </div>
-        </div>
-
-        <!-- Profile Fields Container  [node 220:683] -->
-        <div class="Profile-Fields-Container">
-
-            <!-- Patient Name  [node 220:684] -->
-            <div class="Profile-Field-Row">
-                <div class="Profile-Field-Col">
-                    <label class="Form-Label" for="patient-name">Patient Name</label>
-                    <div class="Profile-Field">
-                        <input class="Form-Input" id="patient-name" name="patientName" type="text">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contact #  [node 220:690] -->
-            <div class="Profile-Field-Row">
-                <div class="Profile-Field-Col">
-                    <label class="Form-Label" for="contact-number">Contact #</label>
-                    <div class="Profile-Field">
-                        <input class="Form-Input" id="contact-number" name="contactNumber" type="text">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Procedure  [node 220:696] -->
-            <div class="Profile-Field-Row">
-                <div class="Profile-Field-Col">
-                    <label class="Form-Label" for="appointment-procedure">Procedure</label>
-                    <div class="Profile-Field">
-                        <input class="Form-Input" id="appointment-procedure" name="procedure" type="text">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Time Row  [node 220:702] -->
-            <div class="Time-Row">
-
-                <div class="Time-Label-Container">
-                    <label class="Time-Label" for="appointment-date">Date</label>
-                </div>
-
-                <div class="Time-Dropdown" id="appointment-date-picker-trigger" tabindex="0" role="button" aria-label="Choose appointment date">
-                    <span class="Time-Display-Text" id="appointment-date-display">MM/DD/YYYY</span>
-
-                    <input
-                        class="Date-Input"
-                        id="appointment-date"
-                        name="appointmentDate"
-                        type="date"
-                        value=""
-                    >
-
-                    <div class="Time-Arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
-                            <path d="M12 18L25 31L38 18"
-                                stroke="currentColor"
-                                stroke-width="3"
-                                stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                </div>
-
-                <div class="Time-Label-Container">
-                    <label class="Time-Label" id="start-time-label" for="start-time">Start</label>
-                </div>
-
-                <div class="appointment-dropdown" id="start-time-dropdown" data-dropdown="startTime">
-                    <button class="appointment-dropdown-toggle" id="start-time-toggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="start-time-label start-time-value">
-                        <span class="appointment-dropdown-value" id="start-time-value">Select</span>
-                        <div class="appointment-dropdown-arrow" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
-                                <path d="M12 18L25 31L38 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                        <!-- Appointment Details  [node 220:660] -->
+                        <div class="Appt-Details">
+                            <span class="Appt-Procedure" id="summary-procedure">—</span>
+                            <span class="Appt-Patient" id="summary-patient">—</span>
+                            <span class="Appt-Time" id="summary-time">—</span>
                         </div>
-                    </button>
-                    <div class="appointment-dropdown-menu" id="start-time-menu" role="listbox" aria-label="Start time options" hidden></div>
-                    <select class="appointment-select-input" id="start-time" name="startTime" tabindex="-1" aria-hidden="true">
-                        <option value="" selected disabled>Select</option>
-                        <option>9:00 AM</option>
-                        <option>9:30 AM</option>
-                        <option>10:00 AM</option>
-                        <option>10:30 AM</option>
-                        <option>11:00 AM</option>
-                        <option>11:30 AM</option>
-                        <option>12:00 PM</option>
-                        <option>12:30 PM</option>
-                        <option>1:00 PM</option>
-                        <option>1:30 PM</option>
-                        <option>2:00 PM</option>
-                        <option>2:30 PM</option>
-                        <option>3:00 PM</option>
-                        <option>3:30 PM</option>
-                        <option>4:00 PM</option>
-                        <option>4:30 PM</option>
-                        <option>5:00 PM</option>
-                        <option>5:30 PM</option>
-                    </select>
-                </div>
 
-                <div class="Time-Label-Container">
-                    <label class="Time-Label" id="end-time-label" for="end-time">End</label>
-                </div>
+                        <!-- Appointment Control  [node 220:664] — 3 buttons -->
+                        <div class="Appointment-Control">
 
-                <div class="appointment-dropdown" id="end-time-dropdown" data-dropdown="endTime">
-                    <button class="appointment-dropdown-toggle" id="end-time-toggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="end-time-label end-time-value">
-                        <span class="appointment-dropdown-value" id="end-time-value">Select</span>
-                        <div class="appointment-dropdown-arrow" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
-                                <path d="M12 18L25 31L38 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <!-- Back/Return Btn  [node 220:665] -->
+                            <button class="Appt-Action-BTN Appt-BTN-Back" id="back-btn" type="button" title="Back to Appointments">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="9 10 4 15 9 20"/>
+                                    <path d="M20 4v7a4 4 0 0 1-4 4H4"/>
+                                </svg>
+                            </button>
+
+                            <!-- Delete Btn  [node 220:670] -->
+                            <button class="Appt-Action-BTN Appt-BTN-Delete" id="delete-btn" type="button" title="Delete Appointment">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 6h18"/>
+                                    <path d="M8 6V4h8v2"/>
+                                    <path d="M19 6l-1 14H6L5 6"/>
+                                    <path d="M10 11v6M14 11v6"/>
+                                </svg>
+                            </button>
+
+                            <!-- Save Btn  [node 220:677] -->
+                            <button class="Appt-Action-BTN Appt-BTN-Save" id="save-btn" type="button" title="Save Changes" aria-label="Save Changes">
+                                <svg class="Appt-BTN-Icon" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path d="M23.75 26.25H6.25C5.58696 26.25 4.95107 25.9866 4.48223 25.5178C4.01339 25.0489 3.75 24.413 3.75 23.75V6.25C3.75 5.58696 4.01339 4.95107 4.48223 4.48223C4.95107 4.01339 5.58696 3.75 6.25 3.75H20L26.25 10V23.75C26.25 24.413 25.9866 25.0489 25.5178 25.5178C25.0489 25.9866 24.413 26.25 23.75 26.25Z"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"/>
+                                    <path d="M21.25 26.25V16.25H8.75V26.25"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"/>
+                                    <path d="M8.75 3.75V10H18.75"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"/>
+                                </svg>
+                            </button>
                         </div>
-                    </button>
-                    <div class="appointment-dropdown-menu" id="end-time-menu" role="listbox" aria-label="End time options" hidden></div>
-                    <select class="appointment-select-input" id="end-time" name="endTime" tabindex="-1" aria-hidden="true">
-                        <option value="" selected disabled>Select</option>
-                        <option>9:30 AM</option>
-                        <option>10:00 AM</option>
-                        <option>10:30 AM</option>
-                        <option>11:00 AM</option>
-                        <option>11:30 AM</option>
-                        <option>12:00 PM</option>
-                        <option>12:30 PM</option>
-                        <option>1:00 PM</option>
-                        <option>1:30 PM</option>
-                        <option>2:00 PM</option>
-                        <option>2:30 PM</option>
-                        <option>3:00 PM</option>
-                        <option>3:30 PM</option>
-                        <option>4:00 PM</option>
-                        <option>4:30 PM</option>
-                        <option>5:00 PM</option>
-                        <option>5:30 PM</option>
-                        <option>6:00 PM</option>
-                    </select>
+                    </div>
+
+                    <!-- Profile Fields Container  [node 220:683] -->
+                    <div class="Profile-Fields-Container">
+
+                        <!-- Patient Name  [node 220:684] -->
+                        <div class="Profile-Field-Row">
+                            <div class="Profile-Field-Col">
+                                <label class="Form-Label" for="patient-name">Patient Name</label>
+                                <div class="Profile-Field">
+                                    <input class="Form-Input" id="patient-name" name="patientName" type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact #  [node 220:690] -->
+                        <div class="Profile-Field-Row">
+                            <div class="Profile-Field-Col">
+                                <label class="Form-Label" for="contact-number">Contact #</label>
+                                <div class="Profile-Field">
+                                    <input class="Form-Input" id="contact-number" name="contactNumber" type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Procedure  [node 220:696] -->
+                        <div class="Profile-Field-Row">
+                            <div class="Profile-Field-Col">
+                                <label class="Form-Label" for="appointment-procedure">Procedure</label>
+                                <div class="Profile-Field">
+                                    <input class="Form-Input" id="appointment-procedure" name="procedure" type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Time Row  [node 220:702] -->
+                        <div class="Time-Row">
+
+                            <div class="Time-Label-Container">
+                                <label class="Time-Label" for="appointment-date">Date</label>
+                            </div>
+
+                            <div class="Time-Dropdown" id="appointment-date-picker-trigger" tabindex="0" role="button" aria-label="Choose appointment date">
+                                <span class="Time-Display-Text" id="appointment-date-display">MM/DD/YYYY</span>
+
+                                <input
+                                    class="Date-Input"
+                                    id="appointment-date"
+                                    name="appointmentDate"
+                                    type="date"
+                                    value=""
+                                >
+
+                                <div class="Time-Arrow">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
+                                        <path d="M12 18L25 31L38 18"
+                                            stroke="currentColor"
+                                            stroke-width="3"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="Time-Label-Container">
+                                <label class="Time-Label" id="start-time-label" for="start-time">Start</label>
+                            </div>
+
+                            <div class="appointment-dropdown" id="start-time-dropdown" data-dropdown="startTime">
+                                <button class="appointment-dropdown-toggle" id="start-time-toggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="start-time-label start-time-value">
+                                    <span class="appointment-dropdown-value" id="start-time-value">Select</span>
+                                    <div class="appointment-dropdown-arrow" aria-hidden="true">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
+                                            <path d="M12 18L25 31L38 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="appointment-dropdown-menu" id="start-time-menu" role="listbox" aria-label="Start time options" hidden></div>
+                                <select class="appointment-select-input" id="start-time" name="startTime" tabindex="-1" aria-hidden="true">
+                                    <option value="" selected disabled>Select</option>
+                                    <option>9:00 AM</option>
+                                    <option>9:30 AM</option>
+                                    <option>10:00 AM</option>
+                                    <option>10:30 AM</option>
+                                    <option>11:00 AM</option>
+                                    <option>11:30 AM</option>
+                                    <option>12:00 PM</option>
+                                    <option>12:30 PM</option>
+                                    <option>1:00 PM</option>
+                                    <option>1:30 PM</option>
+                                    <option>2:00 PM</option>
+                                    <option>2:30 PM</option>
+                                    <option>3:00 PM</option>
+                                    <option>3:30 PM</option>
+                                    <option>4:00 PM</option>
+                                    <option>4:30 PM</option>
+                                    <option>5:00 PM</option>
+                                    <option>5:30 PM</option>
+                                </select>
+                            </div>
+
+                            <div class="Time-Label-Container">
+                                <label class="Time-Label" id="end-time-label" for="end-time">End</label>
+                            </div>
+
+                            <div class="appointment-dropdown" id="end-time-dropdown" data-dropdown="endTime">
+                                <button class="appointment-dropdown-toggle" id="end-time-toggle" type="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="end-time-label end-time-value">
+                                    <span class="appointment-dropdown-value" id="end-time-value">Select</span>
+                                    <div class="appointment-dropdown-arrow" aria-hidden="true">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
+                                            <path d="M12 18L25 31L38 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="appointment-dropdown-menu" id="end-time-menu" role="listbox" aria-label="End time options" hidden></div>
+                                <select class="appointment-select-input" id="end-time" name="endTime" tabindex="-1" aria-hidden="true">
+                                    <option value="" selected disabled>Select</option>
+                                    <option>9:30 AM</option>
+                                    <option>10:00 AM</option>
+                                    <option>10:30 AM</option>
+                                    <option>11:00 AM</option>
+                                    <option>11:30 AM</option>
+                                    <option>12:00 PM</option>
+                                    <option>12:30 PM</option>
+                                    <option>1:00 PM</option>
+                                    <option>1:30 PM</option>
+                                    <option>2:00 PM</option>
+                                    <option>2:30 PM</option>
+                                    <option>3:00 PM</option>
+                                    <option>3:30 PM</option>
+                                    <option>4:00 PM</option>
+                                    <option>4:30 PM</option>
+                                    <option>5:00 PM</option>
+                                    <option>5:30 PM</option>
+                                    <option>6:00 PM</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
-
             </div>
-
-        </div>
-    </div>
-</div>
         </div><!-- /MainView -->
 
     <script src="../JS/edit-appointment.js"></script>
