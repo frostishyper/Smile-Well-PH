@@ -1,3 +1,4 @@
+
 // This Is Only  Boilerplate Script, Copy & Paste This To A New JS File And Go From There.
 
 document.addEventListener('DOMContentLoaded', () => {
