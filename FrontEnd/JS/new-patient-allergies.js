@@ -1,189 +1,85 @@
-document.addEventListener('DOMContentLoaded', () => {
-    App.init();
-});
-
-/**
- * 1. BACKEND CONFIGURATION
- */
-const API_CONFIG = {
-    BASE_URL: 'http://localhost:8080/api/v1',
-    HEADERS: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    }
-};
+document.addEventListener('DOMContentLoaded', () => App.init());
 
 const App = {
-    /**
-     * 2. ELEMENT CACHE
-     */
-    elements: {
-        body: document.querySelector('body'),
-        // Cache all custom dropdowns
-        customDropdowns: document.querySelectorAll('.Custom-Dropdown'),
-        
-        //DELETE POPUP BUTTONS
-            cancelBtn: document.querySelector('#CancelBtnControl'),
-            deleteModal: document.querySelector('#deleteModal')
-        // Example: saveBtn: document.querySelector('#saveEditBtnControl')
-    },
-
-    /**
-     * 3. INITIALIZATION
-     */
     init() {
-        console.log('SmileWell Page Logic Initialized');
+        const pageLabel = document.getElementById('CurrentPage');
+        if (pageLabel) pageLabel.textContent = "4/6"; // Force correct numbering
 
-            this.elements = {
-                body: document.querySelector('body'),
-                cancelBtn: document.querySelector('#CancelBtnControl'), // Your SVG div
-                backBtn: document.querySelector('#cancelAction'),
-                deleteModal: document.querySelector('#deleteModal')    // Your <dialog>
-            };
-        this.initDropdowns();
-        this.setupEventListeners();
+        this.setupNavigation();
+        this.setupCancel();
+        this.loadState();
         this.ui.checkOrientation();
     },
 
-    /**
-     * CUSTOM DROPDOWN LOGIC
-     * Updated to scan the DOM dynamically
-     */
-    initDropdowns() {
-        // Scan for dropdowns at the moment the function runs
-        const dropdowns = document.querySelectorAll('.Custom-Dropdown');
-        
-        console.log(`Dropdown Scan: Found ${dropdowns.length} elements`);
+    getRadioValue(name) {
+        const checked = document.querySelector(`input[name="${name}"]:checked`);
+        return checked ? checked.value : null;
+    },
 
-        if (dropdowns.length === 0) {
-            console.warn("No dropdowns found! Are they rendered yet?");
-            return;
+    validate() {
+        const groups = ['allergyQ1', 'allergyQ2', 'allergyQ3', 'allergyQ4', 'allergyQ5'];
+        for (let g of groups) {
+            if (!this.getRadioValue(g)) {
+                alert("Please answer all allergy selections.");
+                return false;
+            }
         }
+        return true;
+    },
 
-        dropdowns.forEach(dropdown => {
-            const trigger = dropdown.querySelector('.Dropdown-Trigger');
-            const label = dropdown.querySelector('.Dropdown-Label');
-            const items = dropdown.querySelectorAll('.Dropdown-Item');
+    saveState() {
+        const data = JSON.parse(sessionStorage.getItem('newPatientData') || '{}');
+        data.allergies = {
+            penicillin: this.getRadioValue('allergyQ1'),
+            anesthetics: this.getRadioValue('allergyQ2'),
+            aspirin: this.getRadioValue('allergyQ3'),
+            latex: this.getRadioValue('allergyQ4'),
+            sulfa: this.getRadioValue('allergyQ5'),
+            others: document.getElementById('otherAllergies')?.value || ''
+        };
+        sessionStorage.setItem('newPatientData', JSON.stringify(data));
+    },
 
-            if (!trigger) return; // Safety check
-
-            trigger.addEventListener('click', (e) => {
-                e.stopPropagation();
-                
-                // Close others
-                dropdowns.forEach(d => {
-                    if (d !== dropdown) d.classList.remove('is-open');
-                });
-
-                dropdown.classList.toggle('is-open');
-                console.log('Dropdown toggled:', dropdown.id, dropdown.classList.contains('is-open'));
-            });
-
-            items.forEach(item => {
-                item.addEventListener('click', (e) => {
-                    e.stopPropagation(); // Prevent trigger from firing
-                    const selectedText = item.textContent;
-                    const selectedValue = item.getAttribute('data-value');
-                    
-                    label.textContent = selectedText;
-                    label.style.color = '#000000'; 
-                    dropdown.classList.remove('is-open');
-                    dropdown.dataset.selectedValue = selectedValue;
-                    
-                    console.log(`Selected: ${selectedValue}`);
-                });
-            });
+    loadState() {
+        const data = JSON.parse(sessionStorage.getItem('newPatientData') || '{}');
+        if (!data.allergies) return;
+        const a = data.allergies;
+        const radioMap = { penicillin: 'allergyQ1', anesthetics: 'allergyQ2', aspirin: 'allergyQ3', latex: 'allergyQ4', sulfa: 'allergyQ5' };
+        Object.entries(radioMap).forEach(([key, name]) => {
+            if (a[key]) {
+                const input = document.querySelector(`input[name="${name}"][value="${a[key]}"]`);
+                if (input) input.checked = true;
+            }
         });
+        if (document.getElementById('otherAllergies')) document.getElementById('otherAllergies').value = a.others || '';
+    },
 
-        document.addEventListener('click', () => {
-            dropdowns.forEach(d => d.classList.remove('is-open'));
+    setupNavigation() {
+        document.getElementById('NextBTN')?.addEventListener('click', () => {
+            if (this.validate()) {
+                this.saveState();
+                window.location.href = '/new-patient-medical-history';
+            }
+        });
+        document.getElementById('PrevBTN')?.addEventListener('click', () => {
+            this.saveState();
+            window.location.href = '/new-patient-health-n-habits';
         });
     },
 
-    /**
-     * 4. EVENT LISTENERS
-     */
-    setupEventListeners() {
-        // Example: Click handler for a save button
-        // if(this.elements.saveBtn) {
-        //    this.elements.saveBtn.addEventListener('click', () => this.handleSave());
-        // }
-        
-        //OPEN DELETE POPUP
-        if (this.elements.cancelBtn && this.elements.deleteModal) {
-            this.elements.cancelBtn.addEventListener('click', () => {
-                this.elements.deleteModal.showModal();
-            });
-        }
-
-        // CLOSE DELETE POPUP
-        const backBtn = document.querySelector('#cancelAction');
-        if (backBtn && this.elements.deleteModal) {
-            backBtn.addEventListener('click', () => {
-                this.elements.deleteModal.close();
-            });
-        }
-
+    setupCancel() {
+        const modal = document.getElementById('deleteModal');
+        document.getElementById('CancelBtnControl')?.addEventListener('click', () => modal?.showModal());
+        document.getElementById('cancelAction')?.addEventListener('click', () => modal?.close());
+        document.getElementById('confirmDelete')?.addEventListener('click', () => {
+            sessionStorage.removeItem('newPatientData');
+            window.location.href = '/records';
+        });
     },
 
-    /**
-     * 5. UI HELPERS
-     */
     ui: {
-        setLoading(element, isLoading) {
-            if (isLoading) {
-                element.classList.add('is-loading');
-                element.disabled = true;
-            } else {
-                element.classList.remove('is-loading');
-                element.disabled = false;
-            }
-        },
-
         checkOrientation() {
-            if (window.innerHeight > window.innerWidth) {
-                console.warn('System optimized for Landscape view.');
-            }
+            if (window.innerHeight > window.innerWidth) console.warn('Landscape orientation recommended');
         }
-    },
-
-    /**
-     * 6. API LAYER (REST)
-     */
-    api: {
-        async request(endpoint, options = {}) {
-            const url = `${API_CONFIG.BASE_URL}${endpoint}`;
-            const settings = {
-                ...options,
-                headers: { ...API_CONFIG.HEADERS, ...options.headers }
-            };
-
-            try {
-                const response = await fetch(url, settings);
-                if (!response.ok) {
-                    const errorData = await response.json().catch(() => ({}));
-                    throw new Error(errorData.message || `Status: ${response.status}`);
-                }
-                return response.status === 204 ? null : response.json();
-            } catch (error) {
-                console.error('Fetch Error:', error.message);
-                throw error;
-            }
-        },
-
-        get(endpoint) { return this.request(endpoint, { method: 'GET' }); },
-        post(endpoint, data) {
-            return this.request(endpoint, {
-                method: 'POST',
-                body: JSON.stringify(data)
-            });
-        },
-        put(endpoint, data) {
-            return this.request(endpoint, {
-                method: 'PUT',
-                body: JSON.stringify(data)
-            });
-        },
-        delete(endpoint) { return this.request(endpoint, { method: 'DELETE' }); }
     }
 };

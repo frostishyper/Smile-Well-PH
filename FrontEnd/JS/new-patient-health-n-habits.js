@@ -1,151 +1,83 @@
-// This Is Only  Boilerplate Script, Copy & Paste This To A New JS File And Go From There.
-
-document.addEventListener('DOMContentLoaded', () => {
-    App.init();
-});
-
-/**
- * 1. BACKEND CONFIGURATION
- * Set your Spring Boot API base URL and default headers here.
- */
-const API_CONFIG = {
-    BASE_URL: 'http://localhost:8080/api/v1',
-    HEADERS: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    }
-};
+document.addEventListener('DOMContentLoaded', () => App.init());
 
 const App = {
-    /**
-     * 2. ELEMENT CACHE
-     * Store your querySelectors here so you don't hunt the DOM twice.
-     */
-    elements: {
-        body: document.querySelector('body'),
-        cancelBtn: document.querySelector('#CancelBtnControl'),
-        deleteModal: document.querySelector('#deleteModal')
-        // Example: submitBtn: document.querySelector('#submit-btn')
-    },
-
-    /**
-     * 3. INITIALIZATION
-     * This runs immediately when the page loads.
-     */
     init() {
-        console.log('Page Logic Initialized');
-
-        //DELETE POPUP TINGS
-        this.elements = {
-            body: document.querySelector('body'),
-            cancelBtn: document.querySelector('#CancelBtnControl'), // Your SVG div
-            backBtn: document.querySelector('#cancelAction'),
-            deleteModal: document.querySelector('#deleteModal')    // Your <dialog>
-        };
-
-        this.setupEventListeners();
+        this.setupNavigation();
+        this.setupCancel();
+        this.loadState();
         this.ui.checkOrientation();
     },
 
-    /**
-     * 4. EVENT LISTENERS
-     * Define all clicks, submits, and input changes for this specific page here.
-     */
-    setupEventListeners() {
-        // Example: this.elements.submitBtn.addEventListener('click', () => this.handleAction());
-
-        //OPEN DELETE POPUP
-        if (this.elements.cancelBtn && this.elements.deleteModal) {
-            this.elements.cancelBtn.addEventListener('click', () => {
-                this.elements.deleteModal.showModal();
-            });
-        }
-
-        // CLOSE DELETE POPUP
-        const backBtn = document.querySelector('#cancelAction');
-        if (backBtn && this.elements.deleteModal) {
-            backBtn.addEventListener('click', () => {
-                this.elements.deleteModal.close();
-            });
-        }
+    getRadioValue(name) {
+        const checked = document.querySelector(`input[name="${name}"]:checked`);
+        return checked ? checked.value : null;
     },
 
-    /**
-     * 5. UI HELPERS
-     * Reusable functions for interface states (loading spinners, orientation, etc.)
-     */
-    ui: {
-        // Use this to disable buttons during API calls
-        setLoading(element, isLoading) {
-            if (isLoading) {
-                element.classList.add('is-loading');
-                element.disabled = true;
-            } else {
-                element.classList.remove('is-loading');
-                element.disabled = false;
-            }
-        },
-
-        // Keeps tablet users in Landscape mode
-        checkOrientation() {
-            if (window.innerHeight > window.innerWidth) {
-                console.warn('System optimized for Landscape view.');
+    // Check if all radio groups are answered
+    validate() {
+        const groups = ['healthQ1', 'healthQ2', 'healthQ3', 'healthQ4', 'healthQ5', 'healthQ6', 'healthQ7'];
+        for (let g of groups) {
+            if (!this.getRadioValue(g)) {
+                alert("Please answer all questions before proceeding.");
+                return false;
             }
         }
+        return true;
     },
 
-    /**
-     * 6. API LAYER (REST)
-     * Centralized methods for communicating with the Spring Boot controllers.
-     */
-    api: {
-        async request(endpoint, options = {}) {
-            const url = `${API_CONFIG.BASE_URL}${endpoint}`;
-            const settings = {
-                ...options,
-                headers: { ...API_CONFIG.HEADERS, ...options.headers }
+    saveState() {
+        const data = JSON.parse(sessionStorage.getItem('newPatientData') || '{}');
+        data.habits = {
+            goodHealth: this.getRadioValue('healthQ1'),
+            smoker: this.getRadioValue('healthQ2'),
+            alcohol: this.getRadioValue('healthQ3'),
+            drugs: this.getRadioValue('healthQ4'),
+            pregnant: this.getRadioValue('healthQ5'),
+            birthControl: this.getRadioValue('healthQ6'),
+            nursing: this.getRadioValue('healthQ7')
+        };
+        sessionStorage.setItem('newPatientData', JSON.stringify(data));
+    },
+
+    loadState() {
+        const data = JSON.parse(sessionStorage.getItem('newPatientData') || '{}');
+        if (!data.habits) return;
+        Object.entries(data.habits).forEach(([key, val]) => {
+            const radioMap = {
+                goodHealth: 'healthQ1', smoker: 'healthQ2', alcohol: 'healthQ3',
+                drugs: 'healthQ4', pregnant: 'healthQ5', birthControl: 'healthQ6', nursing: 'healthQ7'
             };
+            const input = document.querySelector(`input[name="${radioMap[key]}"][value="${val}"]`);
+            if (input) input.checked = true;
+        });
+    },
 
-            try {
-                const response = await fetch(url, settings);
-                
-                // Handle Spring Boot error responses (4xx, 5xx)
-                if (!response.ok) {
-                    const errorData = await response.json().catch(() => ({}));
-                    throw new Error(errorData.message || `Status: ${response.status}`);
-                }
-
-                return response.status === 204 ? null : response.json();
-            } catch (error) {
-                console.error('Fetch Error:', error.message);
-                throw error;
+    setupNavigation() {
+        document.getElementById('NextBTN')?.addEventListener('click', () => {
+            if (this.validate()) {
+                this.saveState();
+                window.location.href = '/new-patient-allergies';
             }
-        },
+        });
+        document.getElementById('PrevBTN')?.addEventListener('click', () => {
+            this.saveState();
+            window.location.href = '/new-patient-related-info';
+        });
+    },
 
-        // Usage: App.api.get('/patients/123')
-        get(endpoint) {
-            return this.request(endpoint, { method: 'GET' });
-        },
+    setupCancel() {
+        const modal = document.getElementById('deleteModal');
+        document.getElementById('CancelBtnControl')?.addEventListener('click', () => modal?.showModal());
+        document.getElementById('cancelAction')?.addEventListener('click', () => modal?.close());
+        document.getElementById('confirmDelete')?.addEventListener('click', () => {
+            sessionStorage.removeItem('newPatientData');
+            window.location.href = '/records';
+        });
+    },
 
-        // Usage: App.api.post('/auth/login', { user, pass })
-        post(endpoint, data) {
-            return this.request(endpoint, {
-                method: 'POST',
-                body: JSON.stringify(data)
-            });
-        },
-
-        // Usage: App.api.put('/billing/update', updatedData)
-        put(endpoint, data) {
-            return this.request(endpoint, {
-                method: 'PUT',
-                body: JSON.stringify(data)
-            });
-        },
-
-        // Usage: App.api.delete('/records/99')
-        delete(endpoint) {
-            return this.request(endpoint, { method: 'DELETE' });
+    ui: {
+        checkOrientation() {
+            if (window.innerHeight > window.innerWidth) console.warn('Landscape orientation recommended');
         }
     }
 };
