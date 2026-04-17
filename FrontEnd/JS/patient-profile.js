@@ -6,10 +6,10 @@ const API_CONFIG = {
 };
 
 const App = {
-    elements: {}, // Leave empty initially so it doesn't fire before the DOM loads
+    elements: {}, 
 
     init() {
-        this.cacheElements(); // Grab elements ONLY after the DOM is fully loaded
+        this.cacheElements(); 
         this.setupEventListeners();
         this.ui.checkOrientation();
         this.loadPatientData();
@@ -51,7 +51,8 @@ const App = {
             return;
         }
         try {
-            const patient = await this.api.get(`/patients/${patientId}`);
+            // FIXED: Point to the new, collision-free endpoint
+            const patient = await this.api.get(`/patients/profile/${patientId}`);
             this.populatePatient(patient);
         } catch (error) {
             console.error('Failed to load profile:', error.message);
@@ -85,7 +86,6 @@ const App = {
         const patientId = new URLSearchParams(window.location.search).get('patientId');
         if (!patientId) return;
 
-        // Routing through FrontendController
         const route = `/${destination}?patientId=${patientId}`;
         window.location.href = route;
     },
