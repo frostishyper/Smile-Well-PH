@@ -24,11 +24,11 @@ public class PatientApiController {
     @GetMapping("/list")
     public List<Map<String, Object>> getAllPatients() {
         String sql = "SELECT p.patient_id, p.first_name, p.last_name, " +
-                     "DATE_FORMAT(MAX(v.created_at), '%m/%d/%Y') as last_visit " +
-                     "FROM patients p " +
-                     "LEFT JOIN visits v ON p.patient_id = v.patient_id " +
-                     "GROUP BY p.patient_id, p.first_name, p.last_name " +
-                     "ORDER BY p.last_name ASC";
+                    "DATE_FORMAT(MAX(v.created_at), '%m/%d/%Y') as last_visit " +
+                    "FROM patients p " +
+                    "LEFT JOIN visits v ON p.patient_id = v.patient_id " +
+                    "GROUP BY p.patient_id, p.first_name, p.last_name " +
+                    "ORDER BY p.last_name ASC";
         return jdbcTemplate.queryForList(sql);
     }
 
