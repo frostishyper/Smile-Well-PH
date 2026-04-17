@@ -451,10 +451,11 @@ aspect-ratio: 1/1;
   display: flex;
   flex-direction: column;
   padding: 1.25rem;
-  flex: 1; /* Takes up remaining space */
+  flex: 1; 
   align-self: stretch;
   border-radius: 0.9375rem;
   background: #FFFFFF;
+  overflow: hidden; /* Keeps rows from spilling out */
 }
 
 /* Give the sidebar a fixed width so it doesn't wrap */
@@ -479,8 +480,23 @@ aspect-ratio: 1/1;
 .col-label-container {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: stretch; /* Stretch ensures borders match height */
   align-self: stretch;
+  width: 100%;
+}
+
+.col-label-container.header {
+  border-bottom: 2px solid var(--Control-Gray);
+  background-color: var(--White);
+}
+
+.col-label-container.record-row {
+  border-bottom: 1px solid var(--Table-Gray);
+  transition: background 0.2s;
+}
+
+.col-label-container.record-row:hover {
+  background-color: #FAFAFA;
 }
 
 .header {

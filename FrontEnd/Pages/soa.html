@@ -126,8 +126,6 @@
             <div class="MainActivity">
 
                 <div class="transaction-details-container">
-
-                    <div class="transaction-details-container">
                         <div class="col-label-container">
                             <div class="record-col trans-id">Trans ID</div>
                             <div class="record-col item-name">Item Name</div>
@@ -135,19 +133,13 @@
                             <div class="record-col date">Date</div>
                         </div>
 
-                        <div class="col-label-container record-row">
-                            <div class="record-col trans-id">1</div>
-                            <div class="record-col item-name">Dental Cleaning</div>
-                            <div class="record-col amount">₱ 800.00</div>
-                            <div class="record-col date">3/28/2026</div>
-                        </div>
+                        <!-- Dynamic rows injected here by renderTable() -->
+                        <div class="transaction-list-container"></div>
 
                         <div class="col-label-container summary-row border-top">
                             <div class="summary-col-item label">Outstanding Balance</div>
-                            <div class="summary-col-item value highlight">₱ 1400.00</div>
+                            <div class="summary-col-item value highlight">₱ 0.00</div>
                         </div>
-                    </div>
-
                         </div>
 
                         <div class="action-sidebar-container">
@@ -161,16 +153,16 @@
                             </div>
                         </div>
 
-                        <div class="sidebar-card action-button">
-                            <div class="sidebar-icon box-icon">
-                                <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
-                                    <path d="M70 26.6665V69.9998H10V26.6665" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M76.6667 10H3.33337V26.6667H76.6667V10Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M33.3334 40H46.6667" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <div class="action-text">Transaction History</div>
+                        <div class="sidebar-card action-button" id="historyBtn">
+                        <div class="sidebar-icon box-icon">
+                            <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                <path d="M70 26.6665V69.9998H10V26.6665" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M76.6667 10H3.33337V26.6667H76.6667V10Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M33.3334 40H46.6667" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
                         </div>
+                        <div class="action-text">Transaction History</div>
+                    </div>
 
                         <div class="sidebar-card action-button" id="makePaymentBtn">
                             <div class="sidebar-icon dollar-icon">
@@ -194,7 +186,7 @@
         <div>
             <div class="modal-label" id>Payment Amount</div>
             <input class="modal-input" type="number" id="paymentAmount">
-        </div>
+        </div> 
         <div>
             <div class="modal-label">Description</div>
             <input class="modal-input" type="text" id="paymentDesc">

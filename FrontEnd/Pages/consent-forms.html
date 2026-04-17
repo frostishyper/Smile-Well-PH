@@ -5,11 +5,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Title Here</title>
-        <link rel="stylesheet" href="../CSS/transactionhistory.css"> <!-- Replace Path To Proper CSS -->
-        <script src="../JS/template.js" defer></script> <!-- Replace Path To Proper JS -->
+        <link rel="stylesheet" href="../CSS/consent-forms.css"> <!-- Replace Path To Proper CSS -->
+        <script src="../JS/consent-forms.js"></script> <!-- Replace Path To Proper JS -->
         <script src="../JS/logout.js"></script>
     </head>
-    
+
     <body>
         <!-- A -->
         <!-- This Is Just A Template Page, Copy Paste The Contents Of This Page To A New HTML File And Go From There -->
@@ -109,7 +109,7 @@
             <div class="TopBar">
                 <div class="TopBar-Nav">
                     <h1 class="TopBar-Nav-Text">
-                        <span>Records  > Kasane Teto > <b>SOA</b> </span>
+                        <span>Records  > Kasane Teto > Full Profile</span>
                     </h1>
                 </div>
                 <div class="UserContainer">
@@ -125,22 +125,36 @@
             </div>
             <div class="MainActivity">
 
-    <div class="transaction-details-container">
-        <div class="col-label-container header">
-            <div class="record-col trans-id">Trans ID</div>
-            <div class="record-col item-name">Item Name</div>
-            <div class="record-col amount">Amount</div>
-            <div class="record-col date">Date</div>
+                <div class="profile-header" id="profileHeader">
+        <div class="PFP-Container" id="profileAvatarContainer">
+            <img src="../Media/Patient.jpg" alt="Patient Avatar" class="PFP" id="patientAvatar">
         </div>
 
-        <div class="col-label-container record-row">
-            <div class="record-col trans-id">1</div>
-            <div class="record-col item-name">Dental Cleaning</div>
-            <div class="record-col amount">₱ 800.00</div>
-            <div class="record-col date">3/28/2026</div>
+        <div class="Username-Container" style="align-items: flex-start;">
+            <h1 class="Staff-Name" id="patientName">Kasane Teto, Vocaloid</h1>
+            <h2 class="Staff-Role" id="patientLabel">Patient</h2>
+        </div>
+    </div>
+    <div class="consent-forms" id="consentFormsContainer">
+
+        <div class="medical-condition" id="medicalConditionRow1">
+            <div class="radio-container" id="radioContainer1">
+                <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none" id="medicalConditionIcon1">
+                    <path d="M37.5 43.75H12.5C11.3954 43.75 10.4167 42.7713 10.4167 41.6667V8.33333C10.4167 7.22876 11.3954 6.25 12.5 6.25H29.1667L39.5833 16.6667V41.6667C39.5833 42.7713 38.6046 43.75 37.5 43.75Z" stroke="var(--Black)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M29.1667 6.25V16.6667H39.5833" stroke="var(--Black)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16.6667 25H33.3333" stroke="var(--Black)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16.6667 33.3333H33.3333" stroke="var(--Black)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16.6667 16.6667H20.8333" stroke="var(--Black)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <div class="medical-condition-label" id="medicalConditionLabel1">
+                <span class="record-filename" id="recordFilename1">Kasane-Teto-Vocaloid-Consent-(3/28/2026)</span>
+            </div>
+        </div>
         </div>
 
-                        <!-- PAGE STUFF ROW -->
+     <!-- PAGE STUFF ROW -->
                         <div class="ProcedurePagination">
                             <div class="Prev" id="PrevBTN">
                                 <svg class="Prevy" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
@@ -160,34 +174,13 @@
                                 </svg>
                             </div>
                         </div>
-    </div>
-
-    <div class="action-sidebar-container">
-        <div class="sidebar-card patient-card">
-            <div class="User-Profile">
-                <img src="../Media/Patient.jpg" class="PFP" alt="Patient">
-            </div>
-            <div class="card-info">
-                <div class="patient-name">Kasane Teto</div>
-                <div class="patient-label">Patient</div>
-            </div>
-        </div>
-
-        <div class="sidebar-card action-button" id="soaBtn">
-            <div class="sidebar-icon">
-                <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
-                    <path d="M40 3.3335V76.6668" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M56.6667 16.6665H31.6667C28.5725 16.6665 25.605 17.8957 23.4171 20.0836C21.2292 22.2715 20 25.239 20 28.3332C20 31.4274 21.2292 34.3948 23.4171 36.5827C25.605 38.7707 28.5725 39.9998 31.6667 39.9998H48.3333C51.4275 39.9998 54.395 41.229 56.5829 43.4169C58.7708 45.6049 60 48.5723 60 51.6665C60 54.7607 58.7708 57.7282 56.5829 59.9161C54.395 62.104 51.4275 63.3332 48.3333 63.3332H20" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-            <div class="action-text">S.O.A</div>
-        </div>
-    </div>
-
-</div>
                 
             </div>
         </div>
-
     </body>
+    <div class="portrait-warning">
+    <i class="fa-solid fa-tablet-screen-button"></i>
+    <h2>Please rotate your device</h2>
+    <p>SmileWell Dental System requires landscape mode.</p>
+    </div>
 </html>
