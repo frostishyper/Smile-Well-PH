@@ -50,12 +50,14 @@ const App = {
         this.elements.payBtn?.addEventListener('click',          () => this.handlePayment());
         this.elements.saveBtn?.addEventListener('click',         () => this.handleSave());
         this.elements.resetBtn?.addEventListener('click',        () => this.loadStatement());
+        
         this.elements.historyBtn?.addEventListener('click', () => {
-        const patientId = this.getPatientId();
-        if (patientId) {
-            window.location.href = `/transactionhistory?patientId=${patientId}`;
-        }
-    });
+            const patientId = this.getPatientId();
+            if (patientId) {
+                window.location.href = `/transactionhistory?patientId=${patientId}`;
+            }
+        });
+
         window.addEventListener('resize', () => this.ui.checkOrientation());
     },
 
@@ -76,7 +78,7 @@ const App = {
 
             this.populateStatement(statement);
             
-            // NEW: Fetch all procedures linked to this statement
+            // Fetches only UNPAID procedures for the SOA view
             const items = await this.api.get(`/statements/${patientId}/items`);
             this.renderTable(items);
 
@@ -85,24 +87,23 @@ const App = {
         }
     },
 
-    // NEW: Helper function to render the procedure list
     renderTable(items) {
-    const container = this.elements.transactionList;
-    if (!container) return;
+        const container = this.elements.transactionList;
+        if (!container) return;
 
-    if (this.elements.emptyState) {
-        this.elements.emptyState.style.display = items.length === 0 ? 'block' : 'none';
-    }
+        if (this.elements.emptyState) {
+            this.elements.emptyState.style.display = items.length === 0 ? 'block' : 'none';
+        }
 
-    container.innerHTML = items.map(item => `
-        <div class="col-label-container record-row" data-item-id="${item.item_id}">
-            <div class="record-col trans-id">${item.item_id}</div>
-            <div class="record-col item-name">${item.description}</div>
-            <div class="record-col amount">${this.ui.formatCurrency(item.amount)}</div>
-            <div class="record-col date">${item.created_at}</div>
-        </div>
-    `).join('');
-},
+        container.innerHTML = items.map(item => `
+            <div class="col-label-container record-row" data-item-id="${item.item_id}">
+                <div class="record-col trans-id">${item.item_id}</div>
+                <div class="record-col item-name">${item.description}</div>
+                <div class="record-col amount">${this.ui.formatCurrency(item.amount)}</div>
+                <div class="record-col date">${item.created_at}</div>
+            </div>
+        `).join('');
+    },
 
     async getOrCreateStatement(patientId) {
         try {
@@ -130,16 +131,6 @@ const App = {
         if (this.elements.lastUpdated)   this.elements.lastUpdated.textContent   = statement.updated_at ?? '-';
     },
 
-    // Kept for backward compatibility if needed
-    renderStatementRow(statement) {
-        this.renderTable([{
-            item_id: statement.statement_id,
-            description: "Outstanding Balance",
-            amount: statement.current_balance,
-            created_at: statement.updated_at || statement.created_at
-        }]);
-    },
-
     openPaymentModal() {
         if (!this.elements.paymentModal) return;
         this.elements.paymentModal.style.display = 'flex';
@@ -153,30 +144,30 @@ const App = {
     },
 
     async handlePayment() {
-    const patientId = this.getPatientId();
-    if (!patientId) return;
+        const patientId = this.getPatientId();
+        if (!patientId) return;
 
-    const paymentAmount = Number(this.elements.paymentAmount?.value || 0);
-    const paymentNote = this.elements.paymentDesc?.value || "Patient Payment"; // Capture note
+        const paymentAmount = Number(this.elements.paymentAmount?.value || 0);
+        const paymentNote = this.elements.paymentDesc?.value || "Patient Payment";
 
-    if (paymentAmount <= 0) return alert('Enter a valid amount');
+        if (paymentAmount <= 0) return alert('Enter a valid amount');
 
-    this.ui.setLoading(this.elements.payBtn, true);
+        this.ui.setLoading(this.elements.payBtn, true);
 
-    try {
-        await this.api.put(`/statements/${patientId}`, {
-            currentBalance: paymentAmount,
-            description: paymentNote // Send note to backend
-        });
+        try {
+            await this.api.put(`/statements/${patientId}`, {
+                currentBalance: paymentAmount,
+                description: paymentNote 
+            });
 
-        this.closePaymentModal();
-        await this.loadStatement(); 
-    } catch (error) {
-        alert("Error processing payment: " + error.message);
-    } finally {
-        this.ui.setLoading(this.elements.payBtn, false);
-    }
-},
+            this.closePaymentModal();
+            await this.loadStatement(); 
+        } catch (error) {
+            alert("Error processing payment: " + error.message);
+        } finally {
+            this.ui.setLoading(this.elements.payBtn, false);
+        }
+    },
 
     async handleSave() {
         const patientId = this.getPatientId();
