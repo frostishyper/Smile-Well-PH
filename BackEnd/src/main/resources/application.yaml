@@ -25,4 +25,4 @@ spring:
       static-locations: file:../FrontEnd/
 
 server:
-    port: 3030
+    port: 3000
