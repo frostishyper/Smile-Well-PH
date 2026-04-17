@@ -674,7 +674,7 @@ body {
    TIME ROW  [node 220:517]
    gap:20px  pb:20px  pt:10px  px:10px
    ===================================================== */
-.Time-Row {
+.Time-Row, .Branch-Field-Row {
     display: flex;
     align-items: center;
     gap: 1.25rem;               /* 20px */
@@ -685,7 +685,7 @@ body {
 }
 
 /* Time Label Container  [node 220:518] */
-.Time-Label-Container {
+.Time-Label-Container, .Branch-Label-Container {
     display: flex;
     align-items: center;
     height: 4.375rem;           /* 70px — matches dropdown height */
@@ -693,7 +693,7 @@ body {
 }
 
 /* Time Label  font-size:32px  bold  black */
-.Time-Label {
+.Time-Label, .Branch-Label {
     color: var(--Black);
     font-size: 2rem;            /* 32px */
     font-weight: 700;
@@ -719,12 +719,12 @@ body {
    w:160px  font-size:32px  color:#858788 */
 .Time-Display-Text {
     display: flex;
-    width: 10rem;               /* 160px */
+    width: 14rem;
     height: 100%;
     align-items: center;
     justify-content: center;
-    color: var(--Text-Gray);    /* #858788 */
-    font-size: 2rem;            /* 32px */
+    color: var(--Text-Gray);
+    font-size: 2rem;
     font-weight: 400;
     line-height: normal;
     white-space: nowrap;
