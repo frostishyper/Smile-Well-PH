@@ -826,3 +826,108 @@ body {
 .Side-Nav-BTN:hover svg path {
     stroke: var(--White);
 }
+
+.Custom-Dropdown {
+    position: relative;
+    flex: 1;
+}
+
+.Dropdown-Trigger {
+    display: flex;
+    padding: 0.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 0.9375rem;
+    background: var(--Control-Gray);
+    color: #858788;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s ease;
+}
+
+.Dropdown-Trigger:hover {
+    background: #D1D5DB;
+}
+
+.Dropdown-Icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+}
+
+.Dropdown-Icon svg {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.Dropdown-Label {
+    flex: 1 0 0;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: -0.06rem;
+    line-height: normal;
+}
+
+.Dropdown-Menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    width: 100%;
+    background: var(--White);
+    border: 1px solid var(--Control-Gray);
+    border-radius: 0.9375rem;
+    list-style: none;
+    padding: 0.5rem 0;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    
+    /* --- ADDED FOR SCROLLING --- */
+    max-height: 16rem; 
+    overflow-y: auto; 
+}
+
+/* --- ADDED FOR CLEAN SCROLLBAR VISUALS --- */
+.Dropdown-Menu::-webkit-scrollbar {
+    width: 8px;
+}
+.Dropdown-Menu::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 0.5rem 0; 
+}
+.Dropdown-Menu::-webkit-scrollbar-thumb {
+    background-color: var(--Control-Gray);
+    border-radius: 10px;
+}
+.Dropdown-Menu::-webkit-scrollbar-thumb:hover {
+    background-color: #858788; 
+}
+
+.Custom-Dropdown.is-open .Dropdown-Menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.Custom-Dropdown.is-open .Dropdown-Icon svg {
+    transform: rotate(180deg);
+}
+
+.Dropdown-Item {
+    padding: 0.75rem 1.25rem;
+    color: var(--Black);
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: -0.06rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.Dropdown-Item:hover {
+    background: var(--Table-Gray);
+}

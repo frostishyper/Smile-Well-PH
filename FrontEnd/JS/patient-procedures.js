@@ -1,266 +1,158 @@
-/**
- * patient-procedures.js — SmileWell Dental System
- * Patient procedures page logic.
- * Mock data layer; swap App.api calls for Spring Boot endpoints later.
- */
+document.addEventListener('DOMContentLoaded', () => App.init());
 
-document.addEventListener('DOMContentLoaded', () => {
-    App.init();
-});
-
-/* =====================================================
-   1. BACKEND CONFIGURATION
-   ===================================================== */
 const API_CONFIG = {
-    BASE_URL: 'http://localhost:8080/api/v1',
-    HEADERS: {
-        'Content-Type': 'application/json',
-        'Accept':       'application/json'
-    }
+    BASE_URL: '/api/v1',
+    HEADERS: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
 };
 
-/* =====================================================
-   2. MOCK DATA
-   ===================================================== */
-const MOCK_PATIENT = {
-    id:      1,
-    name:    'Kasane Teto',
-    role:    'Patient',
-    avatar:  '../Media/Patient.jpg',
-};
-
-const MOCK_DENTIST = {
-    id:   10,
-    name: 'Makoto',
-    role: 'Dentist',
-    avatar: '../Media/Dentist.jpg',
-};
-
-const MOCK_BRANCH = 'Manila';
-
-const MOCK_VISITS = [
-    {
-        id:         1,
-        number:     1,
-        branch:     'Manila',
-        date:       '1/15/2026',
-        timeRange:  '9:00 AM - 10:00 AM',
-        operations: [
-            { name: 'Checkup',   bill: '₱ 500.00' },
-        ],
-        notes: 'Patient is in good health. Routine checkup completed.',
-    },
-    {
-        id:         2,
-        number:     2,
-        branch:     'Manila',
-        date:       '3/28/2026',
-        timeRange:  '11:00 AM - 12:00 AM',
-        operations: [
-            { name: 'Dental Cleaning',  bill: '₱ 800.00' },
-            { name: 'Dental Pasta (2x)', bill: '₱ 600.00' },
-        ],
-        notes: 'Come Back Every Three Months For Check-Up & Cleaning',
-    },
-];
-
-/* =====================================================
-   3. STATE
-   ===================================================== */
-const state = {
-    visitIndex: MOCK_VISITS.length - 1,   // start on last visit
-};
-
-/* =====================================================
-   4. APP
-   ===================================================== */
 const App = {
-
-    elements: {
-        // Breadcrumb
-        patientBreadcrumb:  document.getElementById('patient-breadcrumb'),
-
-        // Visit header
-        visitTitle:         document.getElementById('visit-title'),
-        visitBranch:        document.getElementById('visit-branch'),
-        visitDate:          document.getElementById('visit-date'),
-        visitTimeRange:     document.getElementById('visit-time-range'),
-        visitEditBtn:       document.getElementById('visit-edit-btn'),
-
-        // Operations
-        operationsBody:     document.getElementById('procedures-table-body'),
-
-        // Dentist notes
-        dentistNotesCopy:   document.getElementById('dentist-notes-copy'),
-
-        // Pagination
-        visitPrevBtn:       document.getElementById('visit-prev-btn'),
-        visitNextBtn:       document.getElementById('visit-next-btn'),
-        visitPageIndicator: document.getElementById('visit-page-indicator'),
-
-        // Overview
-        patientName:        document.getElementById('patient-name'),
-        patientRole:        document.getElementById('patient-role'),
-        patientAvatar:      document.getElementById('patient-avatar'),
-        dentistName:        document.getElementById('dentist-name'),
-        dentistRole:        document.getElementById('dentist-role'),
-        dentistAvatar:      document.getElementById('dentist-avatar'),
-        branchName:         document.getElementById('branch-name'),
-
-        // Action buttons
-        soaBtn:             document.getElementById('soa-btn'),
-        newProcedureBtn:    document.getElementById('new-procedure-btn'),
+    elements: {},
+    state: {
+        patientId: null,
+        patientData: null,
+        visits: [],
+        currentIndex: 0
     },
 
     init() {
-        console.log('Patient Procedures Page Initialized');
-        this.renderOverview();
-        this.renderVisit();
+        this.cacheElements();
+        this.state.patientId = new URLSearchParams(window.location.search).get('patientId');
+        if (!this.state.patientId) return window.location.href = '/records';
+        
         this.setupEventListeners();
-        this.ui.checkOrientation();
+        this.loadPatientAndVisits();
     },
 
-    /* -----------------------------------------------
-       RENDER: Overview panel (patient, dentist, branch)
-    ----------------------------------------------- */
-    renderOverview() {
-        const el = this.elements;
+    cacheElements() {
+        this.elements = {
+            soaBtn: document.querySelector('#Soa-BTN'),
+            newProcedureBtn: document.querySelector('#NewProcedure-BTN'),
+            editVisitBtn: document.querySelector('#Edit-Visit-BTN'),
+            prevBtn: document.querySelector('#PrevBTN'),
+            nextBtn: document.querySelector('#NextBTN'),
+            
+            topBarPatientName: document.querySelector('#TopBar-Patient-Name'),
+            sidebarPatientName: document.querySelector('#Sidebar-Patient-Name'),
+            sidebarDentistName: document.querySelector('#Sidebar-Dentist-Name'),
+            sidebarBranchName: document.querySelector('#Sidebar-Branch-Name'),
 
-        if (el.patientBreadcrumb)  el.patientBreadcrumb.textContent  = MOCK_PATIENT.name;
-        if (el.patientName)        el.patientName.textContent        = MOCK_PATIENT.name;
-        if (el.patientRole)        el.patientRole.textContent        = MOCK_PATIENT.role;
-        if (el.patientAvatar)      el.patientAvatar.src              = MOCK_PATIENT.avatar;
-
-        if (el.dentistName)        el.dentistName.textContent        = MOCK_DENTIST.name;
-        if (el.dentistRole)        el.dentistRole.textContent        = MOCK_DENTIST.role;
-        if (el.dentistAvatar)      el.dentistAvatar.src              = MOCK_DENTIST.avatar;
-
-        if (el.branchName)         el.branchName.textContent         = MOCK_BRANCH;
+            currentPage: document.querySelector('#CurrentPage'),
+            totalVisit: document.querySelector('#TotalVisit'),
+            visitNumber: document.querySelector('#VisitNumber'),
+            visitCity: document.querySelector('#VisitInfoCity'),
+            visitDate: document.querySelector('#VisitInfoDate'),
+            operationsContainer: document.querySelector('#VisitOperations-Container'),
+            visitNotes: document.querySelector('#VisitNotesText')
+        };
     },
 
-    /* -----------------------------------------------
-       RENDER: Current visit
-    ----------------------------------------------- */
-    renderVisit() {
-        const el    = this.elements;
-        const visit = MOCK_VISITS[state.visitIndex];
-        const total = MOCK_VISITS.length;
-
-        // Pagination
-        if (el.visitPageIndicator) el.visitPageIndicator.textContent = `${state.visitIndex + 1} / ${total}`;
-        if (el.visitPrevBtn)       el.visitPrevBtn.disabled          = state.visitIndex <= 0;
-        if (el.visitNextBtn)       el.visitNextBtn.disabled          = state.visitIndex >= total - 1;
-
-        // Visit header
-        if (el.visitTitle)     el.visitTitle.textContent     = `Visit ${visit.number}`;
-        if (el.visitBranch)    el.visitBranch.textContent    = visit.branch;
-        if (el.visitDate)      el.visitDate.textContent      = visit.date;
-        if (el.visitTimeRange) el.visitTimeRange.textContent = visit.timeRange;
-
-        // Operations
-        if (el.operationsBody) {
-            el.operationsBody.innerHTML = '';
-            if (visit.operations.length === 0) {
-                el.operationsBody.innerHTML = `<p class="operations-empty">No operations recorded.</p>`;
-            } else {
-                visit.operations.forEach(op => {
-                    const row = document.createElement('div');
-                    row.className = 'operation-row';
-                    row.innerHTML = `
-                        <span class="operation-row-name">${op.name}</span>
-                        <span class="operation-row-bill">${op.bill}</span>
-                    `;
-                    el.operationsBody.appendChild(row);
-                });
-            }
-        }
-
-        // Notes
-        if (el.dentistNotesCopy) {
-            el.dentistNotesCopy.textContent = visit.notes || 'No notes recorded.';
-        }
-
-        // TODO: App.api.get(`/patients/${patientId}/visits/${visit.id}`)
-    },
-
-    /* -----------------------------------------------
-       EVENT LISTENERS
-    ----------------------------------------------- */
     setupEventListeners() {
         const el = this.elements;
-
-        // Pagination
-        el.visitPrevBtn?.addEventListener('click', () => {
-            if (state.visitIndex > 0) {
-                state.visitIndex--;
-                this.renderVisit();
-            }
-        });
-
-        el.visitNextBtn?.addEventListener('click', () => {
-            if (state.visitIndex < MOCK_VISITS.length - 1) {
-                state.visitIndex++;
-                this.renderVisit();
-            }
-        });
-
-        // Edit visit
-        el.visitEditBtn?.addEventListener('click', () => {
-            const visit = MOCK_VISITS[state.visitIndex];
-            console.log('Edit visit:', visit.id);
-            // TODO: window.location.href = `../HTML/edit-visit.html?id=${visit.id}`;
-        });
-
-        // Action buttons
-        el.soaBtn?.addEventListener('click', () => {
-            console.log('Navigate to S.O.A');
-            // TODO: window.location.href = `../HTML/soa.html?patient=${MOCK_PATIENT.id}`;
-        });
-
-        el.newProcedureBtn?.addEventListener('click', () => {
-            console.log('Navigate to New Procedure');
-            // TODO: window.location.href = `../HTML/new-procedure.html?patient=${MOCK_PATIENT.id}`;
-        });
-
+        el.soaBtn?.addEventListener('click', () => window.location.href = `/soa?patientId=${this.state.patientId}`);
+        el.newProcedureBtn?.addEventListener('click', () => window.location.href = `/new-procedure?patientId=${this.state.patientId}`);
         
+        el.prevBtn?.addEventListener('click', () => {
+            if (this.state.currentIndex > 0) {
+                this.state.currentIndex--;
+                this.renderVisit();
+            }
+        });
+
+        el.nextBtn?.addEventListener('click', () => {
+            if (this.state.currentIndex < this.state.visits.length - 1) {
+                this.state.currentIndex++;
+                this.renderVisit();
+            }
+        });
+
+        el.editVisitBtn?.addEventListener('click', () => {
+            const currentVisit = this.state.visits[this.state.currentIndex];
+            if (currentVisit) {
+                window.location.href = `/edit-procedure?patientId=${this.state.patientId}&visitId=${currentVisit.visit_id}`;
+            }
+        });
     },
 
-    /* -----------------------------------------------
-       UI HELPERS
-    ----------------------------------------------- */
-    ui: {
-        setLoading(el, isLoading) {
-            if (!el) return;
-            if (isLoading) { el.classList.add('is-loading'); el.disabled = true; }
-            else           { el.classList.remove('is-loading'); el.disabled = false; }
-        },
-        checkOrientation() {
-            if (window.innerHeight > window.innerWidth) console.warn('System optimized for Landscape view.');
+    async loadPatientAndVisits() {
+        try {
+            const pRes = await fetch(`${API_CONFIG.BASE_URL}/patients/profile/${this.state.patientId}`, { headers: API_CONFIG.HEADERS });
+            if (pRes.ok) {
+                this.state.patientData = await pRes.json();
+                const fullName = `${this.state.patientData.first_name} ${this.state.patientData.last_name}`;
+                this.elements.topBarPatientName.textContent = fullName;
+                this.elements.sidebarPatientName.textContent = fullName;
+            }
+
+            // POINTING TO NEW CONTROLLER ROUTE
+            const vRes = await fetch(`${API_CONFIG.BASE_URL}/dental-visits/patient/${this.state.patientId}`, { headers: API_CONFIG.HEADERS });
+            if (!vRes.ok) throw new Error('Visits fetch failed');
+            this.state.visits = await vRes.json();
+            
+            this.renderVisit();
+        } catch (e) {
+            console.error(e);
+            this.elements.visitNotes.textContent = "Error loading visits.";
         }
     },
 
-    /* -----------------------------------------------
-       API LAYER — wire to Spring Boot later
-    ----------------------------------------------- */
-    api: {
-        async request(endpoint, options = {}) {
-            const url      = `${API_CONFIG.BASE_URL}${endpoint}`;
-            const settings = { ...options, headers: { ...API_CONFIG.HEADERS, ...options.headers } };
-            try {
-                const res = await fetch(url, settings);
-                if (!res.ok) {
-                    const err = await res.json().catch(() => ({}));
-                    throw new Error(err.message || `Status: ${res.status}`);
-                }
-                return res.status === 204 ? null : res.json();
-            } catch (e) {
-                console.error('Fetch Error:', e.message);
-                throw e;
-            }
-        },
-        get(endpoint)        { return this.request(endpoint, { method: 'GET' }); },
-        post(endpoint, data) { return this.request(endpoint, { method: 'POST',   body: JSON.stringify(data) }); },
-        put(endpoint, data)  { return this.request(endpoint, { method: 'PUT',    body: JSON.stringify(data) }); },
-        delete(endpoint)     { return this.request(endpoint, { method: 'DELETE' }); },
+    renderVisit() {
+        const el = this.elements;
+        
+        const labels = el.operationsContainer.querySelector('.OperationLabels');
+        el.operationsContainer.innerHTML = '';
+        el.operationsContainer.appendChild(labels);
+
+        if (this.state.visits.length === 0) {
+            el.currentPage.textContent = '0';
+            el.totalVisit.textContent = '0';
+            el.visitNotes.textContent = 'No past visits found.';
+            return;
+        }
+
+        const visit = this.state.visits[this.state.currentIndex];
+        
+        el.currentPage.textContent = (this.state.currentIndex + 1).toString();
+        el.totalVisit.textContent = this.state.visits.length.toString();
+        el.visitNumber.textContent = (this.state.visits.length - this.state.currentIndex).toString();
+        
+        el.visitCity.textContent = visit.branch_name || 'Unknown';
+        el.visitDate.textContent = visit.visit_date || '';
+        el.visitNotes.textContent = visit.visit_notes || 'No notes provided.';
+        
+        el.sidebarDentistName.textContent = visit.dentist_name || '-';
+        el.sidebarBranchName.textContent = visit.branch_name || '-';
+
+        let total = 0;
+
+        (visit.procedures || []).forEach(p => {
+            const cost = parseFloat(p.procedure_cost || 0);
+            total += cost;
+            
+            const detailDiv = document.createElement('div');
+            detailDiv.className = 'OperationDetails';
+            detailDiv.innerHTML = `
+                <div class="OperationColData">
+                    <h1 class="OperationColDataText">${p.procedure_name}</h1>
+                </div>
+                <div class="OperationColData">
+                    <h1 class="OperationColDataTextBill">₱ ${cost.toFixed(2)}</h1>
+                </div>
+            `;
+            el.operationsContainer.appendChild(detailDiv);
+        });
+
+        const totalDiv = document.createElement('div');
+        totalDiv.className = 'OperationDetails';
+        totalDiv.style.borderTop = '1px solid var(--Text-Gray)';
+        totalDiv.style.paddingTop = '1rem';
+        totalDiv.innerHTML = `
+            <div class="OperationColData">
+                <h1 class="OperationColDataText" style="font-weight: 700;">Total</h1>
+            </div>
+            <div class="OperationColData">
+                <h1 class="OperationColDataTextBill" style="font-weight: 700;">₱ ${total.toFixed(2)}</h1>
+            </div>
+        `;
+        el.operationsContainer.appendChild(totalDiv);
     }
 };
