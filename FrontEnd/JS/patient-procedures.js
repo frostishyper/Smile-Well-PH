@@ -1,142 +1,158 @@
+document.addEventListener('DOMContentLoaded', () => App.init());
 
-// This Is Only  Boilerplate Script, Copy & Paste This To A New JS File And Go From There.
-
-document.addEventListener('DOMContentLoaded', () => {
-    App.init();
-});
-
-/**
- * 1. BACKEND CONFIGURATION
- * Set your Spring Boot API base URL and default headers here.
- */
 const API_CONFIG = {
-    BASE_URL: 'http://localhost:8080/api/v1',
-    HEADERS: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    }
+    BASE_URL: '/api/v1',
+    HEADERS: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
 };
 
 const App = {
-    /**
-     * 2. ELEMENT CACHE
-     * Store your querySelectors here so you don't hunt the DOM twice.
-     */
-    elements: {
-        body: document.querySelector('body'),
-        soaBtn: document.querySelector('#Soa-BTN'),
-        newProcedureBtn: document.querySelector('#NewProcedure-BTN')
-        
-        // Example: submitBtn: document.querySelector('#submit-btn')
+    elements: {},
+    state: {
+        patientId: null,
+        patientData: null,
+        visits: [],
+        currentIndex: 0
     },
 
-    /**
-     * 3. INITIALIZATION
-     * This runs immediately when the page loads.
-     */
     init() {
-        console.log('Page Logic Initialized');
+        this.cacheElements();
+        this.state.patientId = new URLSearchParams(window.location.search).get('patientId');
+        if (!this.state.patientId) return window.location.href = '/records';
+        
         this.setupEventListeners();
-        this.ui.checkOrientation();
+        this.loadPatientAndVisits();
     },
 
-    /**
-     * 4. EVENT LISTENERS
-     * Define all clicks, submits, and input changes for this specific page here.
-     */
+    cacheElements() {
+        this.elements = {
+            soaBtn: document.querySelector('#Soa-BTN'),
+            newProcedureBtn: document.querySelector('#NewProcedure-BTN'),
+            editVisitBtn: document.querySelector('#Edit-Visit-BTN'),
+            prevBtn: document.querySelector('#PrevBTN'),
+            nextBtn: document.querySelector('#NextBTN'),
+            
+            topBarPatientName: document.querySelector('#TopBar-Patient-Name'),
+            sidebarPatientName: document.querySelector('#Sidebar-Patient-Name'),
+            sidebarDentistName: document.querySelector('#Sidebar-Dentist-Name'),
+            sidebarBranchName: document.querySelector('#Sidebar-Branch-Name'),
+
+            currentPage: document.querySelector('#CurrentPage'),
+            totalVisit: document.querySelector('#TotalVisit'),
+            visitNumber: document.querySelector('#VisitNumber'),
+            visitCity: document.querySelector('#VisitInfoCity'),
+            visitDate: document.querySelector('#VisitInfoDate'),
+            operationsContainer: document.querySelector('#VisitOperations-Container'),
+            visitNotes: document.querySelector('#VisitNotesText')
+        };
+    },
+
     setupEventListeners() {
-        // Example: this.elements.submitBtn.addEventListener('click', () => this.handleAction());
-        if (this.elements.soaBtn) {
-        this.elements.soaBtn.addEventListener('click', () => {
-            // This hops to your SOA page
-            window.location.href = '/soa'; 
+        const el = this.elements;
+        el.soaBtn?.addEventListener('click', () => window.location.href = `/soa?patientId=${this.state.patientId}`);
+        el.newProcedureBtn?.addEventListener('click', () => window.location.href = `/new-procedure?patientId=${this.state.patientId}`);
+        
+        el.prevBtn?.addEventListener('click', () => {
+            if (this.state.currentIndex > 0) {
+                this.state.currentIndex--;
+                this.renderVisit();
+            }
         });
-        }
 
-        if (this.elements.newProcedureBtn) {
-        this.elements.newProcedureBtn.addEventListener('click', () => {
-            // This hops to your SOA page
-            window.location.href = '/new-procedure'; 
+        el.nextBtn?.addEventListener('click', () => {
+            if (this.state.currentIndex < this.state.visits.length - 1) {
+                this.state.currentIndex++;
+                this.renderVisit();
+            }
         });
+
+        el.editVisitBtn?.addEventListener('click', () => {
+            const currentVisit = this.state.visits[this.state.currentIndex];
+            if (currentVisit) {
+                window.location.href = `/edit-procedure?patientId=${this.state.patientId}&visitId=${currentVisit.visit_id}`;
+            }
+        });
+    },
+
+    async loadPatientAndVisits() {
+        try {
+            const pRes = await fetch(`${API_CONFIG.BASE_URL}/patients/profile/${this.state.patientId}`, { headers: API_CONFIG.HEADERS });
+            if (pRes.ok) {
+                this.state.patientData = await pRes.json();
+                const fullName = `${this.state.patientData.first_name} ${this.state.patientData.last_name}`;
+                this.elements.topBarPatientName.textContent = fullName;
+                this.elements.sidebarPatientName.textContent = fullName;
+            }
+
+            // POINTING TO NEW CONTROLLER ROUTE
+            const vRes = await fetch(`${API_CONFIG.BASE_URL}/dental-visits/patient/${this.state.patientId}`, { headers: API_CONFIG.HEADERS });
+            if (!vRes.ok) throw new Error('Visits fetch failed');
+            this.state.visits = await vRes.json();
+            
+            this.renderVisit();
+        } catch (e) {
+            console.error(e);
+            this.elements.visitNotes.textContent = "Error loading visits.";
         }
     },
 
-    /**
-     * 5. UI HELPERS
-     * Reusable functions for interface states (loading spinners, orientation, etc.)
-     */
-    ui: {
-        // Use this to disable buttons during API calls
-        setLoading(element, isLoading) {
-            if (isLoading) {
-                element.classList.add('is-loading');
-                element.disabled = true;
-            } else {
-                element.classList.remove('is-loading');
-                element.disabled = false;
-            }
-        },
+    renderVisit() {
+        const el = this.elements;
+        
+        const labels = el.operationsContainer.querySelector('.OperationLabels');
+        el.operationsContainer.innerHTML = '';
+        el.operationsContainer.appendChild(labels);
 
-        // Keeps tablet users in Landscape mode
-        checkOrientation() {
-            if (window.innerHeight > window.innerWidth) {
-                console.warn('System optimized for Landscape view.');
-            }
+        if (this.state.visits.length === 0) {
+            el.currentPage.textContent = '0';
+            el.totalVisit.textContent = '0';
+            el.visitNotes.textContent = 'No past visits found.';
+            return;
         }
-    },
 
-    /**
-     * 6. API LAYER (REST)
-     * Centralized methods for communicating with the Spring Boot controllers.
-     */
-    api: {
-        async request(endpoint, options = {}) {
-            const url = `${API_CONFIG.BASE_URL}${endpoint}`;
-            const settings = {
-                ...options,
-                headers: { ...API_CONFIG.HEADERS, ...options.headers }
-            };
+        const visit = this.state.visits[this.state.currentIndex];
+        
+        el.currentPage.textContent = (this.state.currentIndex + 1).toString();
+        el.totalVisit.textContent = this.state.visits.length.toString();
+        el.visitNumber.textContent = (this.state.visits.length - this.state.currentIndex).toString();
+        
+        el.visitCity.textContent = visit.branch_name || 'Unknown';
+        el.visitDate.textContent = visit.visit_date || '';
+        el.visitNotes.textContent = visit.visit_notes || 'No notes provided.';
+        
+        el.sidebarDentistName.textContent = visit.dentist_name || '-';
+        el.sidebarBranchName.textContent = visit.branch_name || '-';
 
-            try {
-                const response = await fetch(url, settings);
-                
-                // Handle Spring Boot error responses (4xx, 5xx)
-                if (!response.ok) {
-                    const errorData = await response.json().catch(() => ({}));
-                    throw new Error(errorData.message || `Status: ${response.status}`);
-                }
+        let total = 0;
 
-                return response.status === 204 ? null : response.json();
-            } catch (error) {
-                console.error('Fetch Error:', error.message);
-                throw error;
-            }
-        },
+        (visit.procedures || []).forEach(p => {
+            const cost = parseFloat(p.procedure_cost || 0);
+            total += cost;
+            
+            const detailDiv = document.createElement('div');
+            detailDiv.className = 'OperationDetails';
+            detailDiv.innerHTML = `
+                <div class="OperationColData">
+                    <h1 class="OperationColDataText">${p.procedure_name}</h1>
+                </div>
+                <div class="OperationColData">
+                    <h1 class="OperationColDataTextBill">₱ ${cost.toFixed(2)}</h1>
+                </div>
+            `;
+            el.operationsContainer.appendChild(detailDiv);
+        });
 
-        // Usage: App.api.get('/patients/123')
-        get(endpoint) {
-            return this.request(endpoint, { method: 'GET' });
-        },
-
-        // Usage: App.api.post('/auth/login', { user, pass })
-        post(endpoint, data) {
-            return this.request(endpoint, {
-                method: 'POST',
-                body: JSON.stringify(data)
-            });
-        },
-
-        // Usage: App.api.put('/billing/update', updatedData)
-        put(endpoint, data) {
-            return this.request(endpoint, {
-                method: 'PUT',
-                body: JSON.stringify(data)
-            });
-        },
-
-        // Usage: App.api.delete('/records/99')
-        delete(endpoint) {
-            return this.request(endpoint, { method: 'DELETE' });
-        }
+        const totalDiv = document.createElement('div');
+        totalDiv.className = 'OperationDetails';
+        totalDiv.style.borderTop = '1px solid var(--Text-Gray)';
+        totalDiv.style.paddingTop = '1rem';
+        totalDiv.innerHTML = `
+            <div class="OperationColData">
+                <h1 class="OperationColDataText" style="font-weight: 700;">Total</h1>
+            </div>
+            <div class="OperationColData">
+                <h1 class="OperationColDataTextBill" style="font-weight: 700;">₱ ${total.toFixed(2)}</h1>
+            </div>
+        `;
+        el.operationsContainer.appendChild(totalDiv);
     }
 };

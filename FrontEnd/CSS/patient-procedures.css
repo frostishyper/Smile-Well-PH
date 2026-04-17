@@ -705,8 +705,15 @@ aspect-ratio: 1/1;
     justify-content: center;
     align-items: center;
     gap: 0.625rem;
-
     border-radius: 0.9375rem;
+}
+
+.DentistPFP {
+    background: url(../Media/Dentist.jpg) lightgray 50% / cover no-repeat;
+}
+
+.PatientPFP {
+    background: url(../Media/Patient.jpg) lightgray 50% / cover no-repeat;
 }
 
 .UsernameContainer{

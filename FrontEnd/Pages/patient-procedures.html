@@ -8,7 +8,6 @@
     </head>
     <body>
 
-        <!-- ===== SIDEBAR ===== -->
         <div class="SideBar">
             <div class="TopCorner">
                 <div class="LogoContainer">
@@ -20,7 +19,6 @@
                 </div>
             </div>
             <div class="Side-Nav-Container">
-                <!-- A Side Nav Button -->
                 <div class="Side-Nav-BTN" id="DashboardPage-BTN">
                     <div class="SNB-Icon-Container">
                         <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
@@ -34,7 +32,6 @@
                         <h1 class="SNB-Label">Dashboard</h1>
                     </div>
                 </div>
-                <!-- A Side Nav Button -->
                 <div class="Side-Nav-BTN Side-Nav-Active" id="RecordsPage-BTN">
                     <div class="SNB-Icon-Container">
                         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
@@ -47,7 +44,6 @@
                         <h1 class="SNB-Label-Active">Records</h1>
                     </div>
                 </div>
-                <!-- A Side Nav Button -->
                 <div class="Side-Nav-BTN" id="AppointmentsPage-BTN">
                     <div class="SNB-Icon-Container">
                         <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
@@ -61,21 +57,19 @@
                         <h1 class="SNB-Label">Appointments</h1>
                     </div>
                 </div>
-                <!-- A Side Nav Button -->
                 <div class="Side-Nav-BTN" id="NewPatientPage-BTN">
                     <div class="SNB-Icon-Container">
-                        <svg class="Nav-Icon Nav-Icon-Active" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                            <path d="M33.3335 43.75V39.5833C33.3335 37.3732 32.4555 35.2536 30.8927 33.6908C29.3299 32.128 27.2103 31.25 25.0002 31.25H10.4168C8.20669 31.25 6.08708 32.128 4.52427 33.6908C2.96147 35.2536 2.0835 37.3732 2.0835 39.5833V43.75" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M17.7083 22.9167C22.3107 22.9167 26.0417 19.1857 26.0417 14.5833C26.0417 9.98096 22.3107 6.25 17.7083 6.25C13.106 6.25 9.375 9.98096 9.375 14.5833C9.375 19.1857 13.106 22.9167 17.7083 22.9167Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M41.6665 16.6667V29.1667" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M47.9165 22.9167H35.4165" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
+                            <path d="M33.3335 43.75V39.5833C33.3335 37.3732 32.4555 35.2536 30.8927 33.6908C29.3299 32.128 27.2103 31.25 25.0002 31.25H10.4168C8.20669 31.25 6.08708 32.128 4.52427 33.6908C2.96147 35.2536 2.0835 37.3732 2.0835 39.5833V43.75" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M17.7083 22.9167C22.3107 22.9167 26.0417 19.1857 26.0417 14.5833C26.0417 9.98096 22.3107 6.25 17.7083 6.25C13.106 6.25 9.375 9.98096 9.375 14.5833C9.375 19.1857 13.106 22.9167 17.7083 22.9167Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M41.6665 16.6667V29.1667" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M47.9165 22.9167H35.4165" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
                     <div class="SNB-Label-Container">
                         <h1 class="SNB-Label">New Patient</h1>
                     </div>
                 </div>
-                <!-- A Side Nav Button -->
                 <div class="Side-Nav-BTN" id="StaffPage-BTN">
                     <div class="SNB-Icon-Container">
                         <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
@@ -96,24 +90,22 @@
                         </svg>
                     </div>
                     <div class="SNB-Label-Container">
-                        <h1 class="Logout-Label">Logout</h1> 
+                        <h1 class="Logout-Label">Logout</h1>
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
 
-        <!-- ===== MAIN VIEW ===== -->
         <div class="MainView">
             <div class="TopBar">
                 <div class="TopBar-Nav">
                     <h1 class="TopBar-Nav-Text">
-                        <span>Procedures</span>
+                        Records > <strong id="TopBar-Patient-Name">Loading...</strong> > <span>Procedures</span>
                     </h1>
                 </div>
                 <div class="UserContainer">
                     <div class="Username-Container">
-                        <!-- Staff Details -->
-                        <h1 class="Staff-Name" id="Staff-Name">Mezmerizer Miku</h1>
+                        <h1 class="Staff-Name" id="Staff-Name">Loading...</h1>
                         <h2 class="Staff-Role" id="Staff-Role">Dentist</h2>
                     </div>
                     <div class="PFP-Container">
@@ -123,9 +115,8 @@
             </div>
             <div class="MainActivity">
                 <div class="VisitsContainer">
-                    <!-- PAGINATION -->
                     <div class="ProcedurePagination">
-                        <div class="Prev" id="PrevBTN">
+                        <div class="Prev" id="PrevBTN" style="cursor: pointer;">
                             <svg class="Prevy" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
                                 <path d="M36.6667 56.6663L20 39.9997L36.6667 23.333" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M60.0002 56.6663L43.3335 39.9997L60.0002 23.333" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -133,13 +124,14 @@
                         </div>
                         <div class="Pages">
                             <div class="PageCell">
-                                <h1 class="PageCount" id="CurrentPage" >
-                                    <span id="CurrentPage">1</span>
+                                <h1 class="PageCount">
+                                    <span id="CurrentPage">0</span>
                                     /
-                                    <span id="TotalVisit">1</span></h1>
+                                    <span id="TotalVisit">0</span>
+                                </h1>
                             </div>
                         </div>
-                        <div class="Next" id="NextBTN">
+                        <div class="Next" id="NextBTN" style="cursor: pointer;">
                             <svg class="Nexty" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
                                 <path d="M43.3333 56.6663L59.9999 39.9997L43.3333 23.333" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M20 56.6663L36.6667 39.9997L20 23.333" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -147,36 +139,22 @@
                         </div>
                     </div>
 
-                    <!-- VISITS CONTAINER -->
                     <div class="VisitContainer">
 
-                        <!-- VISIT HEADER -->
                         <div class="VisitHeader">
                             <div class="VisitTitleRow">
                                 <div class="VisitTitleContainer">
                                     <h1 class="VisitTitleRowNumber">
-                                        Visit <span id="VisitNumber">1</span>
+                                        Visit <span id="VisitNumber">0</span>
                                     </h1>
                                 </div>
                                 <div class="VisitInfoContainer">
-                                    <h1 class="VisitInfoText" id="VisitInfoCity">
-                                        Manila
-                                    </h1>
-                                    <div class="VisitInfoDivider">
-
-                                    </div>
-                                    <h1 class="VisitInfoText" id="VisitInfoDate">
-                                        3/28/2026
-                                    </h1>
-                                    <div class="VisitInfoDivider">
-                                        
-                                    </div>
-                                    <h1 class="VisitInfoText" id="VisitInfoTime">
-                                        11:00 AM - 12:00 AM
-                                    </h1>
+                                    <h1 class="VisitInfoText" id="VisitInfoCity">-</h1>
+                                    <div class="VisitInfoDivider"></div>
+                                    <h1 class="VisitInfoText" id="VisitInfoDate">-</h1>
                                 </div>
                             </div>
-                            <div class="EditVisit-BTN">
+                            <div class="EditVisit-BTN" id="Edit-Visit-BTN" style="cursor: pointer;">
                                 <div class="EditVisit-BTNContainer">
                                     <svg class="EditVisit-BTNDesign" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
                                         <path d="M13.75 5H5C4.33696 5 3.70107 5.26339 3.23223 5.73223C2.76339 6.20107 2.5 6.83696 2.5 7.5V25C2.5 25.663 2.76339 26.2989 3.23223 26.7678C3.70107 27.2366 4.33696 27.5 5 27.5H22.5C23.163 27.5 23.7989 27.2366 24.2678 26.7678C24.7366 26.2989 25 25.663 25 25V16.25" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -186,76 +164,46 @@
                             </div>
                         </div>
 
-                        <!-- VISIT OPERATIONS -->
-                        <div class="VisitOperations">
+                        <div class="VisitOperations" id="VisitOperations-Container">
                             <div class="OperationLabels">
                                 <div class="OperationColLabel">
-                                    <h1 class="OperationTitleText">
-                                        Operation(s)
-                                    </h1>
+                                    <h1 class="OperationTitleText">Operation(s)</h1>
                                 </div>
                                 <div class="OperationColLabel">
-                                    <h1 class="OperationTitleText">
-                                        Bill
-                                    </h1>                                    
+                                    <h1 class="OperationTitleText">Bill</h1>                                  
                                 </div>
                             </div>
-                            <div class="OperationDetails">
-                                <div class="OperationColData">
-                                    <h1 class="OperationColDataText" id="OperationTitle">
-                                        Dental Cleaning
-                                    </h1>
-                                </div>
-                                <div class="OperationColData">
-                                    <h1 class="OperationColDataTextBill" id="OperationBill">
-                                        ₱ 800.00
-                                    </h1>
-                                </div>
                             </div>
-                        </div>
 
-                        <!-- VISIT NOTES -->
                         <div class="VisitNotes">
                             <div class="DentistNotes">
-                                <h1 class="DentistNotesTitle">
-                                    Dentist Note(s)
-                                </h1>
+                                <h1 class="DentistNotesTitle">Dentist Note(s)</h1>
                             </div>
                             <div class="VisitNotesContainer">
-                                <h1 class="VisitNotesText" id="VisitNotesText">
-                                    Come back every three months for Check-up & Cleaning
-                                </h1>
+                                <h1 class="VisitNotesText" id="VisitNotesText">No notes provided.</h1>
                             </div>
                         </div>
                     </div>
                 </div>
 
-
-                <!-- RIGHT SIDE THINGS-->
                 <div class="ProcedureOverviewContainer">
                     <div class="AttendingCard">
                         <div class="ProfileContainer">
-                            <div class="UserProfile">
-
-                            </div>
+                            <div class="UserProfile PatientPFP"></div>
                             <div class="UsernameContainer">
-                                <h1 class="UsernameContainerText">Kasane Teto</h1>
+                                <h1 class="UsernameContainerText" id="Sidebar-Patient-Name">Loading...</h1>
                                 <h1 class="UsernameContainerSubtext">Patient</h1>
                             </div>
                         </div>
                     </div>
                     <div class="AttendingCard">
                         <div class="AttendingHeader">
-                            <h1 class="AttendingDentist">
-                                Attending Dentist
-                            </h1>
+                            <h1 class="AttendingDentist">Attending Dentist</h1>
                         </div>
                         <div class="ProfileContainer">
-                            <div class="UserProfile">
-
-                            </div>
+                            <div class="UserProfile DentistPFP"></div>
                             <div class="UsernameContainer">
-                                <h1 class="UsernameContainerText">Makoto</h1>
+                                <h1 class="UsernameContainerText" id="Sidebar-Dentist-Name">-</h1>
                                 <h1 class="UsernameContainerSubtext">Dentist</h1>
                             </div>
                         </div>
@@ -264,14 +212,13 @@
                     <div class="AttendingCard">
                         <div class="BranchContainer">
                             <div class="UsernameContainerBranch">
-                                <h1 class="UsernameContainerText">Manila</h1>
+                                <h1 class="UsernameContainerText" id="Sidebar-Branch-Name">-</h1>
                                 <h1 class="UsernameContainerSubtext">Branch</h1>                                
                             </div>
                         </div>
                     </div>
 
-                    <!-- BUTTONS BOTTOM RIGHT -->
-                    <div class="NavigationButtonContainer" id="Soa-BTN">
+                    <div class="NavigationButtonContainer" id="Soa-BTN" style="cursor: pointer;">
                         <div class="NavigationButtonIcon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
                                 <path d="M40 3.3335V76.6668" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -283,7 +230,7 @@
                         </div>
                     </div>
 
-                    <div class="NavigationButtonContainer" id="NewProcedure-BTN">
+                    <div class="NavigationButtonContainer" id="NewProcedure-BTN" style="cursor: pointer;">
                         <div class="NavigationButtonIcon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
                                 <path d="M73.3334 40H60L50 70L30 10L20 40H6.66669" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -302,6 +249,7 @@
     </body>
     
     <div class="portrait-warning">
+        <i class="fa-solid fa-tablet-screen-button"></i>
         <h2>Please rotate your device</h2>
         <p>SmileWell Dental System requires landscape mode.</p>
     </div>

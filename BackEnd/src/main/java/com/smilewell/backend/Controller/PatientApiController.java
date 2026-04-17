@@ -31,7 +31,6 @@ public class PatientApiController {
         return jdbcTemplate.queryForList(sql);
     }
 
-    // FIXED: Changed from "/{id}" to "/profile/{id}" to avoid collision
     @GetMapping("/profile/{id}")
     public ResponseEntity<?> getPatientProfile(@PathVariable("id") int patientId) {
         try {

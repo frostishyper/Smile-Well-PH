@@ -51,7 +51,6 @@ const App = {
             return;
         }
         try {
-            // FIXED: Point to the new, collision-free endpoint
             const patient = await this.api.get(`/patients/profile/${patientId}`);
             this.populatePatient(patient);
         } catch (error) {
