@@ -38,7 +38,7 @@ const App = {
     },
 
     setupEventListeners() {
-        this.elements.fullProfileBtn?.addEventListener('click', () => this.handleNavigation('full-profile'));
+        this.elements.fullProfileBtn?.addEventListener('click', () => this.handleNavigation('full-profile-main-menu'));
         this.elements.soaBtn?.addEventListener('click', () => this.handleNavigation('soa'));
         this.elements.proceduresBtn?.addEventListener('click', () => this.handleNavigation('patient-procedures'));
         this.elements.newProcedureBtn?.addEventListener('click', () => this.handleNavigation('new-procedure'));

@@ -1,290 +1,257 @@
-/**
- * Edit Staff Page Logic
- * Handles form population, custom dropdowns, and date displays.
- * Convention: Pascal-Kebab for IDs, camelCase for variables.
- */
-
-document.addEventListener('DOMContentLoaded', () => {
-    App.init();
-});
+document.addEventListener('DOMContentLoaded', () => App.init());
 
 const API_CONFIG = {
-    BASE_URL: 'http://localhost:8080/api/v1',
-    HEADERS: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    }
+    BASE_URL: '/api/v1',
+    HEADERS: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
 };
-
-const MOCK_STAFF_MEMBER = {
-    firstName: 'Lee',
-    middleName: 'Ramos',
-    lastName: 'Yu',
-    phoneNumber: '09123456789',
-    emailAddress: 'lee.yu@smilewell.com',
-    birthdate: '2006-03-06',
-    sex: 'female',
-    role: 'dentist',
-    displayName: 'Frostishyper',
-    homeAddress: '69 Vocaloid St, Shibuya Tokyo JP'
-};
-
-const state = {
-    originalStaff: null
-};
-
-// --- Helpers ---
-
-function formatDateDisplay(value) {
-    if (!value) return 'MM / DD / YYYY';
-    const [year, month, day] = value.split('-');
-    return `${month} / ${day} / ${year}`;
-}
-
-function toTitleCase(value) {
-    if (!value) return '';
-    return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
-}
-
-// --- Core Application ---
 
 const App = {
-    elements: {
-        body: document.querySelector('body'),
-        form: document.getElementById('EditStaff-Form'),
-        
-        // Input Fields (Pascal-Kebab matching HTML)
-        firstName: document.getElementById('FirstName-Input'),
-        middleName: document.getElementById('MiddleName-Input'),
-        lastName: document.getElementById('LastName-Input'),
-        phoneNumber: document.getElementById('PhoneNumber-Input'),
-        emailAddress: document.getElementById('EmailAddress-Input'),
-        displayName: document.getElementById('DisplayName-Input'),
-        homeAddress: document.getElementById('HomeAddress-Input'),
-
-        // Birthdate Components
-        birthdate: document.getElementById('Birthdate-Input'),
-        birthdateField: document.getElementById('Birthdate-Field'),
-        birthdateDisplay: document.getElementById('Birthdate-Display'),
-
-        // Custom Dropdown UI Components
-        dropdowns: document.querySelectorAll('.edit-staff-dropdown'),
-        dropdownOptions: document.querySelectorAll('.edit-staff-dropdown-option'),
-        
-        sex: document.getElementById('Sex-Input'),
-        sexDropdown: document.querySelector('[data-dropdown="sex"]'),
-        sexToggle: document.getElementById('Sex-Toggle'),
-        sexDisplay: document.getElementById('Sex-Display'),
-        
-        role: document.getElementById('Role-Input'),
-        roleDropdown: document.querySelector('[data-dropdown="role"]'),
-        roleToggle: document.getElementById('Role-Toggle'),
-        roleDisplay: document.getElementById('Role-Display'),
-
-        // Action Buttons
-        resetBtn: document.getElementById('EditStaff-Reset-BTN'),
-        deleteBtn: document.getElementById('EditStaff-Delete-BTN'),
-        saveBtn: document.getElementById('EditStaff-Save-BTN'),
+    elements: {},
+    state: {
+        staffId: null,
+        originalStaff: null
     },
 
     init() {
-        console.log('Edit Staff Page Initialized');
-        state.originalStaff = { ...MOCK_STAFF_MEMBER };
+        this.cacheElements();
+        const urlParams = new URLSearchParams(window.location.search);
+        this.state.staffId = urlParams.get('id');
 
-        this.populateForm(state.originalStaff);
+        if (!this.state.staffId) {
+            window.location.href = '/staff-list';
+            return;
+        }
+
+        this.initDropdowns();
+        this.loadDynamicDropdowns();
+        this.fetchStaffDetails();
         this.setupEventListeners();
         this.ui.checkOrientation();
+    },
+
+    cacheElements() {
+        this.elements = {
+            form: document.getElementById('EditStaff-Form'),
+            firstName: document.getElementById('FirstName-Input'),
+            middleName: document.getElementById('MiddleName-Input'),
+            lastName: document.getElementById('LastName-Input'),
+            phoneNumber: document.getElementById('PhoneNumber-Input'),
+            emailAddress: document.getElementById('EmailAddress-Input'),
+            displayName: document.getElementById('DisplayName-Input'),
+            homeAddress: document.getElementById('HomeAddress-Input'),
+            birthdate: document.getElementById('Birthdate-Input'),
+            sexDropdown: document.getElementById('Sex-Dropdown'),
+            roleDropdown: document.getElementById('Role-Dropdown'),
+            resetBtn: document.getElementById('EditStaff-Reset-BTN'),
+            deleteBtn: document.getElementById('EditStaff-Delete-BTN'),
+            saveBtn: document.getElementById('EditStaff-Save-BTN'),
+            backBtn: document.getElementById('Back-BTN')
+        };
+    },
+
+    async loadDynamicDropdowns() {
+        const sexMenu = this.elements.sexDropdown?.querySelector('.Dropdown-Menu');
+        if (!sexMenu) return;
+
+        try {
+            const data = await this.api.get('/reference/sex');
+            if (data && data.length > 0) {
+                sexMenu.innerHTML = data.map(s => {
+                    const cleanVal = s.sex_name.charAt(0).toUpperCase();
+                    if (cleanVal === 'M' || cleanVal === 'F') {
+                        return `<li class="Dropdown-Item" data-value="${cleanVal}">${s.sex_name}</li>`;
+                    }
+                    return '';
+                }).join('');
+            } else {
+                this.injectFallbackSexOptions(sexMenu);
+            }
+        } catch (e) {
+            this.injectFallbackSexOptions(sexMenu);
+        }
+    },
+
+    injectFallbackSexOptions(menuElement) {
+        menuElement.innerHTML = `
+            <li class="Dropdown-Item" data-value="M">Male</li>
+            <li class="Dropdown-Item" data-value="F">Female</li>
+        `;
+    },
+
+    initDropdowns() {
+        document.addEventListener('click', (e) => {
+            const option = e.target.closest('.Dropdown-Item');
+            if (option) {
+                e.stopPropagation();
+                const dropdown = option.closest('.Custom-Dropdown');
+                const display = dropdown.querySelector('.Dropdown-Label');
+                
+                display.textContent = option.textContent;
+                display.style.color = '#000000';
+                display.classList.remove('is-placeholder');
+                dropdown.dataset.selectedValue = option.dataset.value;
+                
+                dropdown.classList.remove('is-open');
+                return;
+            }
+
+            const trigger = e.target.closest('.Dropdown-Trigger');
+            if (trigger) {
+                e.stopPropagation();
+                const dropdown = trigger.closest('.Custom-Dropdown');
+                
+                document.querySelectorAll('.Custom-Dropdown').forEach(d => {
+                    if (d !== dropdown) d.classList.remove('is-open');
+                });
+
+                dropdown.classList.toggle('is-open');
+                return;
+            }
+
+            document.querySelectorAll('.Custom-Dropdown').forEach(d => {
+                d.classList.remove('is-open');
+            });
+        });
     },
 
     setupEventListeners() {
         const el = this.elements;
 
-        el.form?.addEventListener('submit', (event) => {
-            event.preventDefault();
-            this.handleSave();
+        el.backBtn?.addEventListener('click', () => {
+            window.location.href = '/staff-list';
         });
 
-        el.resetBtn?.addEventListener('click', () => this.handleReset());
-        el.deleteBtn?.addEventListener('click', () => this.handleDelete());
+        el.resetBtn?.addEventListener('click', () => {
+            if (this.state.originalStaff) this.populateForm(this.state.originalStaff);
+        });
 
-        // Sync hidden select changes to custom UI
-        el.sex?.addEventListener('change', () => this.syncSelectDisplay(el.sex, el.sexDisplay, el.sexDropdown));
-        el.role?.addEventListener('change', () => this.syncSelectDisplay(el.role, el.roleDisplay, el.roleDropdown));
-
-        // Birthdate Logic
-        el.birthdate?.addEventListener('change', () => this.syncBirthdateDisplay());
-        el.birthdateField?.addEventListener('click', () => this.openBirthdatePicker());
-        el.birthdateField?.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                this.openBirthdatePicker();
+        el.saveBtn?.addEventListener('click', () => {
+            if (el.form.reportValidity() && this.validateForm()) {
+                this.handleSave();
             }
         });
 
-        // Numerical Phone Restriction
-        el.phoneNumber?.addEventListener('input', (event) => {
-            event.target.value = event.target.value.replace(/\D/g, '').slice(0, 11);
+        el.deleteBtn?.addEventListener('click', () => {
+            this.handleDelete();
         });
 
-        // Dropdown Toggle Clicks
-        el.sexToggle?.addEventListener('click', () => this.toggleDropdown(el.sexDropdown));
-        el.roleToggle?.addEventListener('click', () => this.toggleDropdown(el.roleDropdown));
-
-        // Custom Menu Option Clicks
-        el.dropdownOptions.forEach((option) => {
-            option.addEventListener('click', () => {
-                this.selectDropdownOption(option.dataset.target, option.dataset.value, option.textContent.trim());
-            });
-        });
-
-        // Close dropdowns on outside click
-        document.addEventListener('click', (event) => {
-            const isInside = Array.from(el.dropdowns).some((d) => d.contains(event.target));
-            if (!isInside) this.closeAllDropdowns();
-        });
-
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape') this.closeAllDropdowns();
+        el.phoneNumber?.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/\D/g, '').slice(0, 11);
         });
     },
 
-    populateForm(staffMember) {
+    validateForm() {
         const el = this.elements;
-        if (!staffMember) return;
-
-        el.firstName.value = staffMember.firstName;
-        el.middleName.value = staffMember.middleName;
-        el.lastName.value = staffMember.lastName;
-        el.phoneNumber.value = staffMember.phoneNumber;
-        el.emailAddress.value = staffMember.emailAddress;
-        el.birthdate.value = staffMember.birthdate;
-        el.sex.value = staffMember.sex;
-        el.role.value = staffMember.role;
-        el.displayName.value = staffMember.displayName;
-        el.homeAddress.value = staffMember.homeAddress;
-
-        this.syncSelectDisplay(el.sex, el.sexDisplay, el.sexDropdown);
-        this.syncSelectDisplay(el.role, el.roleDisplay, el.roleDropdown);
-        this.syncBirthdateDisplay();
+        if (!el.sexDropdown.dataset.selectedValue || !el.roleDropdown.dataset.selectedValue) {
+            alert("Please select both Sex and Role from the dropdowns.");
+            return false;
+        }
+        return true;
     },
 
-    syncSelectDisplay(selectElement, displayElement, dropdownElement) {
-        if (!selectElement || !displayElement || !dropdownElement) return;
-
-        const hasValue = selectElement.value !== "";
-        const selectedText = selectElement.options[selectElement.selectedIndex]?.text || 'Select';
-        
-        displayElement.textContent = hasValue ? toTitleCase(selectedText) : 'Select';
-        displayElement.classList.toggle('is-placeholder', !hasValue);
-
-        dropdownElement.querySelectorAll('.edit-staff-dropdown-option').forEach((option) => {
-            option.classList.toggle('is-selected', option.dataset.value === selectElement.value);
-        });
-    },
-
-    toggleDropdown(dropdownElement) {
-        if (!dropdownElement) return;
-        const isOpen = dropdownElement.classList.contains('open');
-        this.closeAllDropdowns();
-        if (!isOpen) this.openDropdown(dropdownElement);
-    },
-
-    openDropdown(dropdownElement) {
-        const toggle = dropdownElement.querySelector('.edit-staff-dropdown-toggle');
-        const menu = dropdownElement.querySelector('.edit-staff-dropdown-menu');
-        if (!toggle || !menu) return;
-
-        dropdownElement.classList.add('open');
-        toggle.setAttribute('aria-expanded', 'true');
-        menu.hidden = false;
-    },
-
-    closeDropdown(dropdownElement) {
-        const toggle = dropdownElement?.querySelector('.edit-staff-dropdown-toggle');
-        const menu = dropdownElement?.querySelector('.edit-staff-dropdown-menu');
-        if (!dropdownElement || !toggle || !menu) return;
-
-        dropdownElement.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-        menu.hidden = true;
-    },
-
-    closeAllDropdowns() {
-        this.elements.dropdowns.forEach((dropdown) => this.closeDropdown(dropdown));
-    },
-
-    selectDropdownOption(target, value, label) {
-        const selectElement = this.elements[target]; 
-        const displayElement = this.elements[`${target}Display`];
-        const dropdownElement = this.elements[`${target}Dropdown`];
-
-        if (!selectElement || !value) return;
-
-        selectElement.value = value;
-        this.syncSelectDisplay(selectElement, displayElement, dropdownElement);
-        this.closeDropdown(dropdownElement);
-    },
-
-    syncBirthdateDisplay() {
-        const el = this.elements;
-        if (!el.birthdateDisplay || !el.birthdate) return;
-
-        const val = el.birthdate.value;
-        el.birthdateDisplay.textContent = formatDateDisplay(val);
-        el.birthdateDisplay.classList.toggle('is-placeholder', !val);
-    },
-
-    openBirthdatePicker() {
-        const birthdateInput = this.elements.birthdate;
-        if (!birthdateInput) return;
-
-        if (birthdateInput.showPicker) {
-            birthdateInput.showPicker();
-        } else {
-            birthdateInput.focus();
-            birthdateInput.click();
+    async fetchStaffDetails() {
+        try {
+            const data = await this.api.get(`/staff/${this.state.staffId}`);
+            this.state.originalStaff = data;
+            this.populateForm(data);
+        } catch (e) {
+            alert("Failed to load staff details.");
+            window.location.href = '/staff-list';
         }
     },
 
-    getFormPayload() {
+    populateForm(data) {
         const el = this.elements;
-        return {
+        el.firstName.value = data.first_name || '';
+        el.middleName.value = data.middle_name || '';
+        el.lastName.value = data.last_name || '';
+        el.phoneNumber.value = data.contact_number || '';
+        el.emailAddress.value = data.email || '';
+        el.birthdate.value = data.birthday || '';
+        el.displayName.value = data.display_name || '';
+        el.homeAddress.value = data.home_address || '';
+
+        this.ui.updateDropdownUI(el.sexDropdown, data.sex);
+        this.ui.updateDropdownUI(el.roleDropdown, data.role);
+    },
+
+    async handleSave() {
+        const el = this.elements;
+        const payload = {
             firstName: el.firstName.value.trim(),
             middleName: el.middleName.value.trim(),
             lastName: el.lastName.value.trim(),
             phoneNumber: el.phoneNumber.value.trim(),
             emailAddress: el.emailAddress.value.trim(),
             birthdate: el.birthdate.value,
-            sex: el.sex.value,
-            role: el.role.value,
+            sex: el.sexDropdown.dataset.selectedValue,
+            role: el.roleDropdown.dataset.selectedValue,
             displayName: el.displayName.value.trim(),
             homeAddress: el.homeAddress.value.trim()
         };
+
+        try {
+            this.ui.setLoading(el.saveBtn, true);
+            await this.api.put(`/staff/${this.state.staffId}`, payload);
+            alert("Staff details updated successfully.");
+            window.location.href = '/staff-list';
+        } catch (e) {
+            alert("Failed to update staff.");
+        } finally {
+            this.ui.setLoading(el.saveBtn, false);
+        }
     },
 
-    handleReset() {
-        this.populateForm(state.originalStaff);
-        this.closeAllDropdowns();
-    },
+    async handleDelete() {
+        if (!window.confirm("Are you sure you want to deactivate this staff member?")) return;
 
-    handleSave() {
-        if (!this.elements.form?.reportValidity()) return;
-        const payload = this.getFormPayload();
-        console.log('Payload for API:', payload);
-        window.alert('Details validated. Ready for backend integration.');
-    },
-
-    handleDelete() {
-        if (window.confirm('Delete this staff record?')) {
-            console.log('Action: Delete', state.originalStaff);
+        try {
+            this.ui.setLoading(this.elements.deleteBtn, true);
+            await this.api.delete(`/staff/${this.state.staffId}`);
+            window.location.href = '/staff-list';
+        } catch (e) {
+            alert("Failed to deactivate staff.");
+        } finally {
+            this.ui.setLoading(this.elements.deleteBtn, false);
         }
     },
 
     ui: {
+        updateDropdownUI(dropdownEl, value) {
+            if (!dropdownEl || !value) return;
+            const menu = dropdownEl.querySelector('.Dropdown-Menu');
+            const display = dropdownEl.querySelector('.Dropdown-Label');
+            
+            setTimeout(() => {
+                const item = menu.querySelector(`[data-value="${value}"]`);
+                if (item) {
+                    dropdownEl.dataset.selectedValue = value;
+                    display.textContent = item.textContent;
+                    display.style.color = '#000000';
+                    display.classList.remove('is-placeholder');
+                }
+            }, 100); // Small delay to wait for dynamic menu items
+        },
+        setLoading(element, isLoading) {
+            if (!element) return;
+            element.disabled = isLoading;
+            element.style.opacity = isLoading ? '0.5' : '1';
+        },
         checkOrientation() {
-            if (window.innerHeight > window.innerWidth) {
-                console.warn('System optimized for Landscape view.');
-            }
+            if (window.innerHeight > window.innerWidth) console.warn('Landscape optimized');
         }
+    },
+
+    api: {
+        async request(endpoint, options = {}) {
+            const url = `${API_CONFIG.BASE_URL}${endpoint}`;
+            const settings = { ...options, headers: { ...API_CONFIG.HEADERS, ...options.headers } };
+            const response = await fetch(url, settings);
+            if (!response.ok) throw new Error(`Status: ${response.status}`);
+            return response.status === 204 ? null : response.json();
+        },
+        get(endpoint) { return this.request(endpoint, { method: 'GET' }); },
+        put(endpoint, data) { return this.request(endpoint, { method: 'PUT', body: JSON.stringify(data) }); },
+        delete(endpoint) { return this.request(endpoint, { method: 'DELETE' }); }
     }
 };

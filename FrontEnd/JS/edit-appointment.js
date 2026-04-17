@@ -1,46 +1,13 @@
-// This Is Only Boilerplate Script, Copy & Paste This To A New JS File And Go From There.
-
-// ─── PAGE FLOW OVERVIEW ─────────────────────────────────────────────────────
-/*
-    Edit Appointment page flow:
-
-    1. Read the appointment id from the page URL.
-       Example:
-       edit-appointment.html?id=67
-
-    2. Cache all edit-page elements used by this file.
-
-    3. Initialize the custom time dropdown UI and bind all page-specific events.
-
-    4. Fetch the appointment from the backend using:
-       GET /appointments/{id}
-
-    5. Normalize the returned data so this page can still work even if the
-       backend field names differ slightly from the front-end field names.
-
-    6. Populate the form fields and summary header using the fetched data.
-
-    7. As the user edits the form, keep the summary header in sync in real time.
-
-    8. On Save:
-       send PUT /appointments/{id}
-       then redirect back to Appointments.html if successful.
-
-    9. On Delete:
-       send DELETE /appointments/{id}
-       then redirect back to Appointments.html if successful.
-*/
-
 document.addEventListener('DOMContentLoaded', () => {
     App.init();
 });
 
 /**
  * 1. BACKEND CONFIGURATION
- * Set your Spring Boot API base URL and default headers here.
+ * Use same-origin API routes so this page works under the current Spring setup.
  */
 const API_CONFIG = {
-    BASE_URL: 'http://localhost:8080/api/v1',
+    BASE_URL: '/api/v1',
     HEADERS: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
@@ -80,10 +47,44 @@ function selectMatchingTimeOption(selectElement, timeValue) {
         return;
     }
 
-    const match = Array.from(selectElement.options).find((option) => option.text.trim() === timeValue.trim());
+    const normalizedTarget = normalizeTimeLabel(timeValue);
+
+    const match = Array.from(selectElement.options).find((option) => {
+        return normalizeTimeLabel(option.text) === normalizedTarget
+            || normalizeTimeLabel(option.value) === normalizedTarget;
+    });
 
     if (match) {
         selectElement.value = match.value;
+    }
+}
+
+/**
+ * Matches a select option by value first, then by visible text.
+ * This is used for branch because the backend may return either branchId or branch name.
+ */
+function selectMatchingOption(selectElement, expectedValue) {
+    if (!selectElement || expectedValue === null || expectedValue === undefined || expectedValue === '') {
+        return;
+    }
+
+    const normalizedExpectedValue = String(expectedValue).trim();
+
+    const valueMatch = Array.from(selectElement.options).find((option) => {
+        return String(option.value).trim() === normalizedExpectedValue;
+    });
+
+    if (valueMatch) {
+        selectElement.value = valueMatch.value;
+        return;
+    }
+
+    const textMatch = Array.from(selectElement.options).find((option) => {
+        return option.text.trim() === normalizedExpectedValue;
+    });
+
+    if (textMatch) {
+        selectElement.value = textMatch.value;
     }
 }
 
@@ -93,11 +94,104 @@ function normalizeAppointmentData(appointmentData) {
         procedure: appointmentData.procedure ?? appointmentData.reason ?? '',
         patientName: appointmentData.patientName ?? appointmentData.patient ?? '',
         contactNumber: appointmentData.contactNumber ?? appointmentData.contact ?? '',
-        appointmentDate: appointmentData.appointmentDate ?? appointmentData.date ?? '',
-        startTime: appointmentData.startTime ?? appointmentData.start ?? '',
-        endTime: appointmentData.endTime ?? appointmentData.end ?? '',
+
+        // Normalize date for <input type="date">
+        appointmentDate: normalizeDateInputValue(
+            appointmentData.appointmentDate ?? appointmentData.date ?? ''
+        ),
+
+        // Normalize time so it can match the dropdown options
+        startTime: normalizeTimeLabel(
+            appointmentData.startTime ?? appointmentData.start ?? ''
+        ),
+        endTime: normalizeTimeLabel(
+            appointmentData.endTime ?? appointmentData.end ?? ''
+        ),
+
+        // Branch support for dropdown + summary
+        branchId: appointmentData.branchId ?? appointmentData.branch_id ?? '',
+        branchName: appointmentData.branchName ?? appointmentData.branch ?? '',
+        status: appointmentData.status ?? 1,
         color: appointmentData.color ?? '#097BAC'
     };
+}
+
+function normalizeDateInputValue(value) {
+    if (!value) {
+        return '';
+    }
+
+    const rawValue = String(value).trim();
+
+    // Already correct for <input type="date">
+    if (/^\d{4}-\d{2}-\d{2}$/.test(rawValue)) {
+        return rawValue;
+    }
+
+    // Handle ISO / timestamp-like values from backend
+    const parsedDate = new Date(rawValue);
+    if (!Number.isNaN(parsedDate.getTime())) {
+        const year = parsedDate.getFullYear();
+        const month = String(parsedDate.getMonth() + 1).padStart(2, '0');
+        const day = String(parsedDate.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
+    return '';
+}
+
+function normalizeTimeLabel(value) {
+    if (!value) {
+        return '';
+    }
+
+    const rawValue = String(value).trim().toUpperCase();
+
+    // Convert 24-hour values like 09:00 or 09:00:00
+    const time24Match = rawValue.match(/^(\d{1,2}):(\d{2})(?::\d{2})?$/);
+    if (time24Match) {
+        const hours24 = Number(time24Match[1]);
+        const minutes = time24Match[2];
+        const meridiem = hours24 >= 12 ? 'PM' : 'AM';
+        const hours12 = hours24 % 12 || 12;
+        return `${hours12}:${minutes} ${meridiem}`;
+    }
+
+    // Normalize 12-hour values like 09:00 AM -> 9:00 AM
+    const time12Match = rawValue.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/);
+    if (time12Match) {
+        const hours = Number(time12Match[1]);
+        const minutes = time12Match[2];
+        const meridiem = time12Match[3];
+        return `${hours}:${minutes} ${meridiem}`;
+    }
+
+    return rawValue;
+}
+
+function selectMatchingOption(selectElement, expectedValue) {
+    if (!selectElement || expectedValue === null || expectedValue === undefined || expectedValue === '') {
+        return;
+    }
+
+    const normalizedExpectedValue = String(expectedValue).trim();
+
+    const valueMatch = Array.from(selectElement.options).find((option) => {
+        return String(option.value).trim() === normalizedExpectedValue;
+    });
+
+    if (valueMatch) {
+        selectElement.value = valueMatch.value;
+        return;
+    }
+
+    const textMatch = Array.from(selectElement.options).find((option) => {
+        return option.text.trim() === normalizedExpectedValue;
+    });
+
+    if (textMatch) {
+        selectElement.value = textMatch.value;
+    }
 }
 
 const App = {
@@ -122,7 +216,7 @@ const App = {
             appointmentColorStub: document.getElementById('appointment-color-stub'),
             summaryProcedure: document.getElementById('summary-procedure'),
             summaryPatient: document.getElementById('summary-patient'),
-            summaryTime: document.getElementById('summary-time'),
+            summaryDetails: document.getElementById('summary-details'),
             patientNameInput: document.getElementById('patient-name'),
             contactNumberInput: document.getElementById('contact-number'),
             procedureInput: document.getElementById('appointment-procedure'),
@@ -131,7 +225,14 @@ const App = {
             appointmentDatePickerTrigger: document.getElementById('appointment-date-picker-trigger'),
             startTimeSelect: document.getElementById('start-time'),
             endTimeSelect: document.getElementById('end-time'),
+            appointmentBranchSelect: document.getElementById('appointment-branch'),
+
+            // Branch dropdown source select
+            appointmentBranchSelect: document.getElementById('appointment-branch'),
+
+            // Keep existing structure; branch dropdown is included because it uses .appointment-dropdown
             timeDropdowns: document.querySelectorAll('.appointment-dropdown'),
+
             backButton: document.getElementById('back-btn'),
             deleteButton: document.getElementById('delete-btn'),
             saveButton: document.getElementById('save-btn')
@@ -164,7 +265,14 @@ const App = {
             this.syncAppointmentSummary();
         });
 
+        
         el.endTimeSelect?.addEventListener('change', () => {
+            this.syncAllTimeDropdownDisplays();
+            this.syncAppointmentSummary();
+        });
+
+        // Branch dropdown reuses the same dropdown component structure as start/end
+        el.appointmentBranchSelect?.addEventListener('change', () => {
             this.syncAllTimeDropdownDisplays();
             this.syncAppointmentSummary();
         });
@@ -179,6 +287,8 @@ const App = {
                 this.openAppointmentDatePicker();
             }
         });
+
+   
 
         el.backButton?.addEventListener('click', () => this.goBackToAppointments());
         el.deleteButton?.addEventListener('click', () => this.deleteAppointment());
@@ -248,6 +358,10 @@ const App = {
             el.endTimeSelect.value = '';
         }
 
+        if (el.appointmentBranchSelect) {
+            el.appointmentBranchSelect.value = '';
+        }
+
         this.syncAllTimeDropdownDisplays();
         this.syncAppointmentDateDisplay();
         this.syncAppointmentSummary();
@@ -280,8 +394,12 @@ const App = {
             el.appointmentDateInput.value = appointment.appointmentDate || '';
         }
 
+        
+
         selectMatchingTimeOption(el.startTimeSelect, appointment.startTime);
         selectMatchingTimeOption(el.endTimeSelect, appointment.endTime);
+
+        selectMatchingOption(el.appointmentBranchSelect, appointment.branchId || appointment.branchName);
 
         this.syncAllTimeDropdownDisplays();
         this.syncAppointmentDateDisplay();
@@ -468,11 +586,22 @@ const App = {
         const procedure = el.procedureInput?.value.trim() || '—';
         const patient = el.patientNameInput?.value.trim() || '—';
 
+        const branch = el.appointmentBranchSelect?.value
+            ? getSelectedOptionText(el.appointmentBranchSelect, '')
+            : '';
+
+        const date = el.appointmentDateInput?.value
+            ? formatAppointmentDateDisplay(el.appointmentDateInput.value)
+            : '';
+
         const hasStartTime = !!el.startTimeSelect?.value;
         const hasEndTime = !!el.endTimeSelect?.value;
 
         const startTime = hasStartTime ? getSelectedOptionText(el.startTimeSelect, '') : '';
         const endTime = hasEndTime ? getSelectedOptionText(el.endTimeSelect, '') : '';
+        const timeRange = startTime && endTime ? `${startTime} - ${endTime}` : '';
+
+        const detailParts = [branch, date, timeRange].filter(Boolean);
 
         if (el.summaryProcedure) {
             el.summaryProcedure.textContent = procedure;
@@ -482,8 +611,8 @@ const App = {
             el.summaryPatient.textContent = patient;
         }
 
-        if (el.summaryTime) {
-            el.summaryTime.textContent = startTime && endTime ? `${startTime} - ${endTime}` : '—';
+        if (el.summaryDetails) {
+            el.summaryDetails.textContent = detailParts.length ? detailParts.join(' - ') : '—';
         }
     },
 
@@ -496,10 +625,19 @@ const App = {
             procedure: el.procedureInput?.value.trim(),
             appointmentDate: el.appointmentDateInput?.value,
             startTime: el.startTimeSelect?.value || '',
-            endTime: el.endTimeSelect?.value || ''
+            endTime: el.endTimeSelect?.value || '',
+            branchId: el.appointmentBranchSelect?.value || ''
         };
 
-        if (!payload.patientName || !payload.contactNumber || !payload.procedure || !payload.appointmentDate || !payload.startTime || !payload.endTime) {
+        if (
+            !payload.patientName ||
+            !payload.contactNumber ||
+            !payload.procedure ||
+            !payload.appointmentDate ||
+            !payload.startTime ||
+            !payload.endTime ||
+            !payload.branchId
+        ) {
             console.warn('Validation failed - missing required fields:', payload);
             return;
         }
@@ -507,7 +645,7 @@ const App = {
         try {
             this.ui.setLoading(el.saveButton, true);
             await this.api.put(`/appointments/${state.currentAppointmentId}`, payload);
-            window.location.href = '../HTML/Appointments.html';
+            window.location.href = '/appointments';
         } catch (error) {
             console.error('Failed to update appointment:', error.message);
         } finally {
@@ -521,7 +659,7 @@ const App = {
         try {
             this.ui.setLoading(el.deleteButton, true);
             await this.api.delete(`/appointments/${state.currentAppointmentId}`);
-            window.location.href = '../HTML/Appointments.html';
+            window.location.href = '/appointments';
         } catch (error) {
             console.error('Failed to delete appointment:', error.message);
         } finally {
@@ -530,7 +668,7 @@ const App = {
     },
 
     goBackToAppointments() {
-        window.location.href = '../HTML/Appointments.html';
+        window.location.href = '/appointments';
     },
 
     /**

@@ -982,3 +982,26 @@ body {
 .Side-Nav-BTN:hover svg path {
     stroke: var(--White);
 }
+
+.Appt-Time-Row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.Appt-Status {
+    font: inherit;
+    line-height: inherit;
+}
+
+.Appt-Status-Cancelled {
+    color: #BE3A3A;
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.Appt-Control-BTN:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}

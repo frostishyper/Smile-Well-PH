@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const API_CONFIG = {
-    BASE_URL: 'http://localhost:8080/api/v1',
+    BASE_URL: '/api/v1',
     HEADERS: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
@@ -37,7 +37,7 @@ const App = {
             body: document.querySelector('body'),
             summaryProcedure: document.getElementById('summary-procedure'),
             summaryPatient: document.getElementById('summary-patient'),
-            summaryTime: document.getElementById('summary-time'),
+            summaryDetails: document.getElementById('summary-details'),
             appointmentColorStub: document.getElementById('appointment-color-stub'),
             patientNameInput: document.getElementById('patient-name'),
             contactNumberInput: document.getElementById('contact-number'),
@@ -45,6 +45,7 @@ const App = {
             appointmentDateInput: document.getElementById('appointment-date'),
             startTimeSelect: document.getElementById('start-time'),
             endTimeSelect: document.getElementById('end-time'),
+            appointmentBranchSelect: document.getElementById('appointment-branch'),
             appointmentDateDisplay: document.getElementById('appointment-date-display'),
             appointmentDatePickerTrigger: document.getElementById('appointment-date-picker-trigger'),
             timeDropdowns: document.querySelectorAll('.appointment-dropdown'),
@@ -89,6 +90,11 @@ const App = {
                 event.preventDefault();
                 this.openAppointmentDatePicker();
             }
+        });
+
+        el.appointmentBranchSelect?.addEventListener('change', () => {
+            this.syncAllTimeDropdownDisplays();
+            this.syncAppointmentSummary();
         });
 
         el.saveButton?.addEventListener('click', () => this.createAppointment());
@@ -270,8 +276,24 @@ const App = {
 
         const procedure = el.procedureInput?.value.trim() || 'New Appointment';
         const patient = el.patientNameInput?.value.trim() || '-';
-        const startTime = getSelectedOptionText(el.startTimeSelect, '--:--');
-        const endTime = getSelectedOptionText(el.endTimeSelect, '--:--');
+
+        const branch = el.appointmentBranchSelect?.value
+            ? getSelectedOptionText(el.appointmentBranchSelect, '')
+            : '';
+
+        const date = el.appointmentDateInput?.value
+            ? formatAppointmentDateDisplay(el.appointmentDateInput.value)
+            : '';
+
+        const startTime = el.startTimeSelect?.value
+            ? getSelectedOptionText(el.startTimeSelect, '')
+            : '';
+
+        const endTime = el.endTimeSelect?.value
+            ? getSelectedOptionText(el.endTimeSelect, '')
+            : '';
+
+        const detailParts = [branch, date, startTime, endTime].filter(Boolean);
 
         if (el.summaryProcedure) {
             el.summaryProcedure.textContent = procedure;
@@ -281,12 +303,12 @@ const App = {
             el.summaryPatient.textContent = patient;
         }
 
-        if (el.summaryTime) {
-            el.summaryTime.textContent = `${startTime} - ${endTime}`;
+        if (el.summaryDetails) {
+            el.summaryDetails.textContent = detailParts.length ? detailParts.join(' - ') : '—';
         }
     },
-
-    createAppointment() {
+    
+    async createAppointment() {
         const el = this.elements;
 
         const payload = {
@@ -295,20 +317,36 @@ const App = {
             procedure: el.procedureInput?.value.trim(),
             appointmentDate: el.appointmentDateInput?.value,
             startTime: getSelectedOptionText(el.startTimeSelect, ''),
-            endTime: getSelectedOptionText(el.endTimeSelect, '')
+            endTime: getSelectedOptionText(el.endTimeSelect, ''),
+            branchId: el.appointmentBranchSelect?.value || ''
         };
 
-        if (!payload.patientName || !payload.contactNumber || !payload.procedure) {
+        if (
+            !payload.patientName ||
+            !payload.contactNumber ||
+            !payload.procedure ||
+            !payload.appointmentDate ||
+            !payload.startTime ||
+            !payload.endTime ||
+            !payload.branchId
+        ) {
             console.warn('Validation failed - missing required fields:', payload);
             return;
         }
 
-        console.log('Saving appointment:', payload);
-        window.location.href = '../HTML/appointments.html';
+        try {
+            this.ui.setLoading(el.saveButton, true);
+            await this.api.post('/appointments', payload);
+            window.location.href = '/appointments';
+        } catch (error) {
+            console.error('Failed to create appointment:', error.message);
+        } finally {
+            this.ui.setLoading(el.saveButton, false);
+        }
     },
 
     cancelAppointmentCreation() {
-        window.location.href = '../HTML/appointments.html';
+        window.location.href = '/appointments';
     },
 
     ui: {

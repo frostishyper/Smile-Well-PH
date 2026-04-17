@@ -1,189 +1,170 @@
-document.addEventListener('DOMContentLoaded', () => {
-    App.init();
-});
+document.addEventListener('DOMContentLoaded', () => App.init());
 
-/**
- * 1. BACKEND CONFIGURATION
- * Set your Spring Boot API base URL and default headers here.
- */
 const API_CONFIG = {
-    BASE_URL: 'http://localhost:8080/api/v1',
-    HEADERS: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    }
+    BASE_URL: '/api/v1',
+    HEADERS: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
 };
 
 const App = {
-    /**
-     * 2. ELEMENT CACHE
-     * Store your querySelectors here so you don't hunt the DOM twice.
-     */
     elements: {},
-
     state: {
-        staffRows: []
+        allStaff: [],       // Raw data from DB
+        filteredStaff: [],  // Filtered/Sorted data
+        currentFilter: 'all',
+        currentSearch: ''
     },
 
-    /**
-     * 3. INITIALIZATION
-     * This runs immediately when the page loads.
-     */
     init() {
-        console.log('Page Logic Initialized');
-
-        // Populate element cache after DOM is ready
-        this.elements = {
-            body:           document.querySelector('body'),
-            staffName:      document.querySelector('#Staff-Name'),
-            staffRole:      document.querySelector('#Staff-Role'),
-            staffPFP:       document.querySelector('#Staff-PFP'),
-            searchInput:    document.querySelector('#Staff-Search-Input'),
-            newStaffBtn:    document.querySelector('#New-Staff-BTN'),
-            staffTableBody: document.querySelector('#Staff-List-Table-Body'),
-        };
-
+        this.cacheElements();
         this.setupEventListeners();
-        this.ui.checkOrientation();
         this.fetchStaffData();
+        this.ui.checkOrientation();
     },
 
-    /**
-     * 4. EVENT LISTENERS
-     * Define all clicks, submits, and input changes for this specific page here.
-     */
+    cacheElements() {
+        this.elements.tableBody = document.querySelector('#Staff-List-Table-Body');
+        this.elements.searchInput = document.querySelector('#Staff-Search-Input');
+        this.elements.newStaffBtn = document.querySelector('#New-Staff-BTN');
+        
+        this.elements.sortDropdown = document.querySelector('#Sort-Dropdown');
+        this.elements.filterDropdown = document.querySelector('#Filter-Dropdown');
+    },
+
     setupEventListeners() {
         this.elements.newStaffBtn?.addEventListener('click', () => {
             window.location.href = '/register-staff';
         });
 
-        this.elements.staffTableBody?.addEventListener('click', (e) => {
-            if (e.target.classList.contains('edit-action-btn')) {
-                window.location.href = `/edit-staff?id=${e.target.dataset.id}`;
+        // Row Click Hook (Takes over the Edit Button's job)
+        this.elements.tableBody?.addEventListener('click', (e) => {
+            const row = e.target.closest('.staff-row');
+            if (row) {
+                const staffId = row.dataset.staffId;
+                window.location.href = `/edit-staff?id=${staffId}`;
             }
         });
 
+        // Search Input
         this.elements.searchInput?.addEventListener('input', (e) => {
-            this.filterTable(e.target.value);
+            this.state.currentSearch = e.target.value.toLowerCase();
+            this.applyFiltersAndRender();
+        });
+
+        // Setup Dropdowns
+        this.setupDropdownLogic(this.elements.sortDropdown, this.handleSortSelect.bind(this));
+        this.setupDropdownLogic(this.elements.filterDropdown, this.handleFilterSelect.bind(this));
+    },
+
+    setupDropdownLogic(dropdownEl, callback) {
+        if (!dropdownEl) return;
+        
+        const trigger = dropdownEl.querySelector('.Dropdown-Trigger');
+        const items = dropdownEl.querySelectorAll('.Dropdown-Item');
+
+        trigger?.addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            document.querySelectorAll('.Custom-Dropdown').forEach(d => {
+                if(d !== dropdownEl) d.classList.remove('is-open');
+            });
+            dropdownEl.classList.toggle('is-open');
+        });
+
+        items?.forEach(item => {
+            item.addEventListener('click', () => callback(item, dropdownEl));
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!dropdownEl.contains(e.target)) dropdownEl.classList.remove('is-open');
         });
     },
 
-    /**
-     * 5. UI HELPERS
-     * Reusable functions for interface states (loading spinners, orientation, etc.)
-     */
-    ui: {
-        setLoading(element, isLoading) {
-            if (isLoading) {
-                element.classList.add('is-loading');
-                element.disabled = true;
-            } else {
-                element.classList.remove('is-loading');
-                element.disabled = false;
-            }
-        },
-
-        checkOrientation() {
-            if (window.innerHeight > window.innerWidth) {
-                console.warn('System optimized for Landscape view.');
-            }
+    handleSortSelect(selectedItem, dropdownEl) {
+        dropdownEl.querySelector('.Dropdown-Label').textContent = selectedItem.textContent;
+        dropdownEl.classList.remove('is-open');
+        
+        const sortType = selectedItem.dataset.value;
+        if (sortType === 'name-asc') {
+            this.state.filteredStaff.sort((a, b) => a.displayName.localeCompare(b.displayName));
+        } else if (sortType === 'recent') {
+            this.state.filteredStaff.sort((a, b) => b.dentistId - a.dentistId);
         }
+        
+        this.renderTable();
     },
 
-    /**
-     * 6. API LAYER (REST)
-     * Centralized methods for communicating with the Spring Boot controllers.
-     */
-    api: {
-        async request(endpoint, options = {}) {
-            const url = `${API_CONFIG.BASE_URL}${endpoint}`;
-            const settings = {
-                ...options,
-                headers: { ...API_CONFIG.HEADERS, ...options.headers }
-            };
-
-            try {
-                const response = await fetch(url, settings);
-
-                if (!response.ok) {
-                    const errorData = await response.json().catch(() => ({}));
-                    throw new Error(errorData.message || `Status: ${response.status}`);
-                }
-
-                return response.status === 204 ? null : response.json();
-            } catch (error) {
-                console.error('Fetch Error:', error.message);
-                throw error;
-            }
-        },
-
-        get(endpoint) {
-            return this.request(endpoint, { method: 'GET' });
-        },
-
-        post(endpoint, data) {
-            return this.request(endpoint, {
-                method: 'POST',
-                body: JSON.stringify(data)
-            });
-        },
-
-        put(endpoint, data) {
-            return this.request(endpoint, {
-                method: 'PUT',
-                body: JSON.stringify(data)
-            });
-        },
-
-        delete(endpoint) {
-            return this.request(endpoint, { method: 'DELETE' });
-        }
+    handleFilterSelect(selectedItem, dropdownEl) {
+        dropdownEl.querySelector('.Dropdown-Label').textContent = selectedItem.textContent;
+        dropdownEl.classList.remove('is-open');
+        
+        this.state.currentFilter = selectedItem.dataset.value;
+        this.applyFiltersAndRender();
     },
 
-    // PAGE LOGIC
+    applyFiltersAndRender() {
+        // 1. Filter by Role
+        let results = this.state.allStaff;
+        if (this.state.currentFilter !== 'all') {
+            results = results.filter(staff => staff.role === this.state.currentFilter);
+        }
+
+        // 2. Filter by Search
+        if (this.state.currentSearch) {
+            results = results.filter(staff => 
+                staff.displayName.toLowerCase().includes(this.state.currentSearch) ||
+                staff.dentistId.toString().includes(this.state.currentSearch)
+            );
+        }
+
+        this.state.filteredStaff = results;
+        this.renderTable();
+    },
 
     async fetchStaffData() {
-
-        // === MOCK DATA START ===
-        this.state.staffRows = [
-            { dentistId: 1, displayName: "Mezmerizer Miku", role: "Dentist" },
-            { dentistId: 2, displayName: "John Santos",     role: "Receptionist" },
-            { dentistId: 3, displayName: "Maria Cruz",      role: "Dental Assistant" },
-        ];
-        this.render();
-        return;
-        // === MOCK DATA END ===
-
         try {
             const data = await this.api.get('/staff/list');
-            this.state.staffRows = data;
+            this.state.allStaff = data;
+            this.applyFiltersAndRender();
         } catch (e) {
             console.error("Database Error:", e);
-            this.state.staffRows = [{ dentistId: 1, displayName: "Database Connection Error", role: "N/A" }];
+            if (this.elements.tableBody) {
+                this.elements.tableBody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:red;">Database Error</td></tr>`;
+            }
         }
-        this.render();
     },
 
-    render(rows = this.state.staffRows) {
-        const tbody = this.elements.staffTableBody;
-        if (!tbody) return;
+    renderTable() {
+        if (!this.elements.tableBody) return;
+        this.elements.tableBody.innerHTML = '';
 
-        tbody.innerHTML = rows.map(staff => `
-            <tr>
+        if (this.state.filteredStaff.length === 0) {
+            this.elements.tableBody.innerHTML = `<tr><td colspan="3" style="text-align:center;">No staff found.</td></tr>`;
+            return;
+        }
+
+        // Generate Rows
+        const rowsHtml = this.state.filteredStaff.map(staff => `
+            <tr class="staff-row" data-staff-id="${staff.dentistId}">
                 <td>${staff.dentistId}</td>
                 <td>${staff.displayName}</td>
                 <td>${staff.role}</td>
-                <td style="text-align: center;">
-                    <button class="edit-action-btn" data-id="${staff.dentistId}">Edit</button>
-                </td>
             </tr>
         `).join('');
+
+        this.elements.tableBody.innerHTML = rowsHtml;
     },
 
-    filterTable(query) {
-        const filtered = this.state.staffRows.filter(staff =>
-            staff.displayName.toLowerCase().includes(query.toLowerCase())
-        );
-        this.render(filtered);
+    ui: {
+        checkOrientation() { if (window.innerHeight > window.innerWidth) console.warn('Landscape optimized.'); }
+    },
+
+    api: {
+        async request(endpoint, options = {}) {
+            const url = `${API_CONFIG.BASE_URL}${endpoint}`;
+            const settings = { ...options, headers: { ...API_CONFIG.HEADERS, ...options.headers } };
+            const response = await fetch(url, settings);
+            if (!response.ok) throw new Error(`Status: ${response.status}`);
+            return response.status === 204 ? null : response.json();
+        },
+        get(endpoint) { return this.request(endpoint, { method: 'GET' }); }
     }
 };

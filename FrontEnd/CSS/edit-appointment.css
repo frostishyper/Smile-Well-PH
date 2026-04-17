@@ -610,6 +610,7 @@ body {
     flex-shrink: 0;
 }
 
+
 /* Profile Field Col  [node 220:686]  gap:10px  flex:1 */
 .Profile-Field-Col {
     display: flex;
@@ -669,7 +670,7 @@ body {
    TIME ROW  [node 220:702]
    gap:20px  pb:20px  pt:10px  px:10px
    ===================================================== */
-.Time-Row {
+.Time-Row, .Branch-Field-Row {
     display: flex;
     align-items: center;
     gap: 1.25rem;
@@ -680,7 +681,7 @@ body {
 }
 
 /* Time Label Container  [node 220:703] */
-.Time-Label-Container {
+.Time-Label-Container, .Branch-Label-Container {
     display: flex;
     align-items: center;
     height: 4.375rem;           /* 70px */
@@ -688,7 +689,7 @@ body {
 }
 
 /* Time Label  font-size:32px  bold  black */
-.Time-Label {
+.Time-Label, .Branch-Label {
     color: var(--Black);
     font-size: 2rem;
     font-weight: 700;

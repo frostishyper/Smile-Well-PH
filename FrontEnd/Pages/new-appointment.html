@@ -137,7 +137,7 @@
                         <div class="Appt-Details">
                             <span class="Appt-Procedure" id="summary-procedure">Tooth Removal</span>
                             <span class="Appt-Patient" id="summary-patient">Jared Ocampo</span>
-                            <span class="Appt-Time" id="summary-time">1:00 PM - 1:30 PM</span>
+                            <span class="Appt-Time" id="summary-details">-</span>
                         </div>
 
                         <!-- Appointment Control  [node 220:459] -->
@@ -314,6 +314,56 @@
 
                         </div><!-- /Time-Row -->
 
+
+                        <!-- Branch/Location Row  [node 220:708] -->
+                        <div class="Branch-Field-Row">
+
+                            <div class="Branch-Label-Container">
+                                <label class="Branch-Label" id="appointment-branch-label" for="appointment-branch">Branch</label>
+                            </div>
+
+                            <div class="appointment-dropdown" id="appointment-branch-dropdown" data-dropdown="branch">
+                                <button
+                                    class="appointment-dropdown-toggle"
+                                    id="appointment-branch-toggle"
+                                    type="button"
+                                    aria-haspopup="listbox"
+                                    aria-expanded="false"
+                                    aria-labelledby="appointment-branch-label appointment-branch-value"
+                                >
+                                    <span class="appointment-dropdown-value" id="appointment-branch-value">Select Branch</span>
+                                    <div class="appointment-dropdown-arrow" aria-hidden="true">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
+                                            <path d="M12 18L25 31L38 18" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                </button>
+
+                                <div
+                                    class="appointment-dropdown-menu"
+                                    id="appointment-branch-menu"
+                                    role="listbox"
+                                    aria-label="Branch options"
+                                    hidden
+                                ></div>
+
+                                <!-- Branch dropdown source values should be branch ids, text stays user-friendly -->
+                                <select
+                                    class="appointment-select-input"
+                                    id="appointment-branch"
+                                    name="branchId"
+                                    tabindex="-1"
+                                    aria-hidden="true"
+                                >
+                                    <option value="" selected disabled>Select Branch</option>
+                                    <option value="1">Manila</option>
+                                    <option value="2">Buendia</option>
+                                </select>
+                            </div>
+                        </div>
+
+                
+                        
                     </div><!-- /Profile-Fields-Container -->
 
                 </div><!-- /NewAppointment-Card -->

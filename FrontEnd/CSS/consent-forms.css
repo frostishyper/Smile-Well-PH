@@ -194,7 +194,6 @@ body {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    
 }
 
 .Staff-Role {
@@ -203,7 +202,6 @@ body {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    align-items: flex-start;
 }
 
 .PFP-Container {
@@ -254,17 +252,17 @@ body {
 }
 
 .Nav-Icon {
-width: 3.125rem;
+    width: 3.125rem;
     height: 3.125rem;
     flex-shrink: 0;
     aspect-ratio: 1/1;
 }
 
 .svg-icons{
-width: 5rem;
-height: 5rem;
-flex-shrink: 0;
-aspect-ratio: 1/1;
+        width: 3.125rem;
+    height: 3.125rem;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
 }
 
 .SNB-Label-Container {
@@ -336,144 +334,139 @@ aspect-ratio: 1/1;
     box-sizing: border-box;
 }
 
-.profile-edit-container {
+.consent-forms {
     display: flex;
-    justify-content: flex-end;
+    padding: 0.625rem; 
+    flex-direction: column;
     align-items: flex-start;
+    gap: 1.25rem; 
     flex: 1 0 0;
     align-self: stretch;
+    box-sizing: border-box;
+    background: transparent;
 }
 
-.edit-visit-btn {
+.medical-condition {
     display: flex;
-    height: 5.714rem;
-    align-items: center;
-    border-radius: 1.07rem;
-    border: 1px solid var(--Text-Gray);
-    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.30);
+    height: 7.14rem; 
+    padding: 0.714rem; 
+    align-items: flex-start;
+    gap: 0.714rem; 
+    align-self: stretch;
+    border-radius: 1.07rem; 
+    border: 1px solid var(--Black);
     box-sizing: border-box;
 }
 
-.side-nav-button-container {
+.radio-container {
     display: flex;
-    padding: 0.714rem 2.14rem;
+    width: 5.714rem;
+    padding: 0.714rem;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 0.714rem;
     align-self: stretch;
-    border-radius: 1.07rem;
+    aspect-ratio: 1/1;
     box-sizing: border-box;
 }
 
-#editIcon {
-    width: 2.14rem;
-    height: 2.14rem;
+#medicalConditionIcon1 {
+    width: 100%;
+    height: 100%;
+    color: var(--Black);
+}
+
+.medical-condition-label {
+    display: flex;
+    padding: 0.714rem;
+    align-items: center;
+    gap: 0.714rem;
+    flex: 1 0 0;
+    align-self: stretch;
+    box-sizing: border-box;
+}
+
+.record-filename {
+    color: var(--Black);
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+.ProcedurePagination{
+    display: flex;
+    height: 6.25rem;
+    padding: 0.625rem 1.25rem;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.Prev{
+    display: flex;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.Prevy{
+    width: 5rem;
+    height: 5rem;
     aspect-ratio: 1/1;
 }
 
-/* Profile Navs Main Container */
-.profile-navs {
+.Pages{
     display: flex;
-    align-items: center;
-    gap: 1.42rem; /* 20px */
-    flex: 1 0 0;
-    align-self: stretch;
-    box-sizing: border-box;
-}
-
-/* Column Base (Ready for next step) */
-.profile-nav-col {
-    display: flex;
-flex-direction: column;
-align-items: flex-start;
-gap: 30px;
-flex: 1 0 0;
-align-self: stretch;
-}
-
-.profile-nav-row {
-    display: flex;
-    padding: 0.714rem; /* 10px */
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.714rem; /* 10px */
-    flex: 1 0 0;
-    align-self: stretch;
-    box-sizing: border-box;
-}
-
-/* Main Button Card */
-.profile-nav-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.714rem; /* 10px */
-    flex: 1 0 0;
-    align-self: stretch;
-    border-radius: 1.07rem; /* 15px */
-    border: 1px solid var(--Text-Gray);
-    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.30);
-    background: var(--White);
-    cursor: pointer;
-    overflow: hidden;
-    transition: background 0.15s, border-color 0.15s;
-    transition: all 0.2s ease;
-}
-
-.profile-nav-btn:hover {
-    background: #F5F5F5;
-}
-
-.profile-nav-btn:hover {
-    background: var(--Black);
-    border-radius: 0.9375rem;
-    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.30);
-    border-color: var(--Black);
-}
-
-.profile-nav-btn:hover .card-label {
-    color: var(--White);
-}
-
-.profile-nav-btn:hover svg path,
-.profile-nav-btn:hover svg circle,
-.profile-nav-btn:hover svg rect {
-    stroke: var(--White);
-}
-
-#Patient-Textix {
-    align-items: flex-start;
-}
-
-/* Icon Container (Left Side) */
-.side-nav-button-container {
-    display: flex;
-    width: 10.71rem; /* 150px */
-    padding: 0.714rem; /* 10px */
     justify-content: center;
     align-items: center;
-    gap: 0.714rem;
-    align-self: stretch;
-    border-radius: 1.07rem 0 0 1.07rem;
-    box-sizing: border-box;
-}
-
-/* Label Container (Right Side) */
-.side-nav-button-label-container {
-    display: flex;
-    padding: 0.714rem; /* 10px */
-    justify-content: center;
-    align-items: center;
-    gap: 0.714rem;
+    gap: 1.25rem;
     flex: 1 0 0;
     align-self: stretch;
-    box-sizing: border-box;
+
 }
 
-.card-label {
-    color: var(--Black);
-    font-size: 1.5rem; /* Adjust based on your visual preference */
-    font-weight: 500;
+.PageCell{
+    border-radius: 1.25rem;
+    background: #ffffff;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+    
+    display: flex;
+    width: 5.0625rem;
+    padding: 0.9375rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
 }
+
+.PageCount{
+    color: #000;
+    font-family: "Plus Jakarta Sans";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    flex: 1 0 0;
+    align-self: center;
+}
+
+.Next{
+    display: flex;
+    padding: 0.625rem;
+    justify-content: right;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.Nexty{
+    width: 5rem;
+    height: 5rem;
+    aspect-ratio: 1/1;
+}
+
 .Side-Nav-BTN {
     cursor: pointer;
     transition: background 0.15s, color 0.15s;
