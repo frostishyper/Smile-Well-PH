@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>New Procedure - SmileWell</title>
+        <link rel="stylesheet" href="../CSS/new-procedure.css">
+    </head>
+    <body>
+        <div class="MainView" style="width: 100%; max-width: 100%;">
+            <div class="TopBar">
+                <div class="TopBar-Nav">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <button id="Back-BTN" type="button" title="Back to Procedures" style="background: none; border: none; cursor: pointer; color: var(--Black);">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 12H5M12 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <h1 class="TopBar-Nav-Text">Records &gt; <strong id="TopBar-Patient-Name">Loading...</strong> &gt; <span>New Procedure</span></h1>
+                    </div>
+                </div>
+            </div>
+            <div class="MainActivity">
+                <div class="ProcedureMainContainer">
+                    <section class="ProcedureMainContent">
+                        <article class="Dentist-Notes-Card">
+                            <h2 class="SectionTitle">Dentist Note(s)</h2>
+                            <div class="Profile-Field NotesField">
+                                <textarea class="dentist-notes-input" id="Visit-Notes-Input" placeholder="Type here..."></textarea>
+                            </div>
+                        </article>
+
+                        <article class="ProcedureDetailsCard">
+                            <div class="ProcedureDetailsHeader">
+                                <h2 class="SectionTitle">Procedure(s)</h2>
+                            </div>
+                            <div class="AppointmentEntryContainer">
+                                <div class="Profile-Field ProcedureNameField">
+                                    <input type="text" class="AppointmentTitleEntryInput" id="Proc-Name-Input" placeholder="Procedure Name">
+                                </div>
+                                <div class="Profile-Field AmountField">
+                                    <div class="PesoFrame"><span class="Peso">&#8369;</span></div>
+                                    <input type="number" min="0" step="0.01" class="AppointmentEntryInput" id="Proc-Cost-Input" placeholder="0.00">
+                                </div>
+                                <button class="SaveEditBTN" id="Add-Proc-BTN" type="button">
+                                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M15 27.5C21.9036 27.5 27.5 21.9036 27.5 15C27.5 8.09644 21.9036 2.5 15 2.5C8.09644 2.5 2.5 8.09644 2.5 15C2.5 21.9036 8.09644 27.5 15 27.5Z"/>
+                                        <path d="M15 10V20"/><path d="M10 15H20"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="AppointmentsListEntryContainer" id="Procedure-List"></div>
+                        </article>
+                    </section>
+
+                    <aside class="ProcedureSidebarContainer">
+                        <article class="PatientCard">
+                            <div class="PatientCardInner">
+                                <div class="PatientInfo">
+                                    <h2 class="PatientName" id="Patient-Name-Display">Loading...</h2>
+                                    <p class="PatientRole">Patient</p>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="ProcedureMetaCard">
+                            <div class="MetaFieldGroup">
+                                <label class="MetaLabel">Attending Dentist</label>
+                                <div class="Custom-Dropdown" id="Dentist-Dropdown" data-dropdown="dentist" style="width: 100%;">
+                                    <div class="Dropdown-Trigger" style="height: 4.5rem; background: var(--White); border: 1px solid var(--Text-Gray); box-shadow: none;">
+                                        <div class="Dropdown-Label is-placeholder" id="Dentist-Display">Select</div>
+                                        <div class="Dropdown-Icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9L12 15L18 9"/></svg>
+                                        </div>
+                                    </div>
+                                    <ul class="Dropdown-Menu" id="Dentist-Menu"></ul>
+                                </div>
+                            </div>
+
+                            <div class="MetaFieldGroup">
+                                <label class="MetaLabel">Branch</label>
+                                <div class="Custom-Dropdown" id="Branch-Dropdown" data-dropdown="branch" style="width: 100%;">
+                                    <div class="Dropdown-Trigger" style="height: 4.5rem; background: var(--White); border: 1px solid var(--Text-Gray); box-shadow: none;">
+                                        <div class="Dropdown-Label is-placeholder" id="Branch-Display">Select</div>
+                                        <div class="Dropdown-Icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9L12 15L18 9"/></svg>
+                                        </div>
+                                    </div>
+                                    <ul class="Dropdown-Menu" id="Branch-Menu"></ul>
+                                </div>
+                            </div>
+
+                            <div class="MetaFieldGroup">
+                                <label class="MetaLabel">Date</label>
+                                <div class="DateFieldShell">
+                                    <input class="DateInput" id="visit-date" type="date">
+                                </div>
+                            </div>
+
+                            <div class="MetaFieldGroup">
+                                <label class="MetaLabel">Start Time</label>
+                                <div class="Custom-Dropdown" id="Start-Time-Dropdown" data-dropdown="startTime" style="width: 100%;">
+                                    <div class="Dropdown-Trigger" style="height: 4.5rem; background: var(--White); border: 1px solid var(--Text-Gray); box-shadow: none;">
+                                        <div class="Dropdown-Label is-placeholder" id="Start-Time-Display">Select</div>
+                                        <div class="Dropdown-Icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9L12 15L18 9"/></svg>
+                                        </div>
+                                    </div>
+                                    <ul class="Dropdown-Menu" id="Start-Time-Menu"></ul>
+                                </div>
+                            </div>
+
+                            <div class="MetaFieldGroup">
+                                <label class="MetaLabel">End Time</label>
+                                <div class="Custom-Dropdown" id="End-Time-Dropdown" data-dropdown="endTime" style="width: 100%;">
+                                    <div class="Dropdown-Trigger" style="height: 4.5rem; background: var(--White); border: 1px solid var(--Text-Gray); box-shadow: none;">
+                                        <div class="Dropdown-Label is-placeholder" id="End-Time-Display">Select</div>
+                                        <div class="Dropdown-Icon">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9L12 15L18 9"/></svg>
+                                        </div>
+                                    </div>
+                                    <ul class="Dropdown-Menu" id="End-Time-Menu"></ul>
+                                </div>
+                            </div>
+                        </article>
+
+                        <button class="CreateVisitBTN" id="Create-Visit-BTN" type="button">
+                            <span class="CreateVisitLabel">Create Visit</span>
+                        </button>
+                    </aside>
+                </div>
+            </div>
+        </div>
+        <script src="../JS/new-procedure.js"></script>
+    </body>
+</html>

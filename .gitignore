@@ -17,6 +17,8 @@ build/
 # IDEs & Editor Configuration
 # ==========================================
 # VS Code (Ignores personal workspace settings)
+.vscode
+vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -49,5 +51,24 @@ Thumbs.db
 # ==========================================
 # Frontend Tools (Optional future-proofing)
 # ==========================================
-# If you ever decide to use npm for CSS libraries later
+# If ever decide to use npm for CSS libraries later
 node_modules/
+
+# ==========================================
+# Springboot
+# ==========================================
+ELP.md
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+

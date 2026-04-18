@@ -1,0 +1,586 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+body, button, input, textarea, select {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+@media (max-width: 1920px) {
+    html {
+    font-size: 14px; /* Shrinks all 'rem' values globally by about 12% */
+    }
+}
+
+/* 3. Scale down for smaller laptops */
+@media (max-width: 1366px) {
+    html {
+    font-size: 12px; 
+    }
+}
+
+/* Portrait Barrier */
+.portrait-warning {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--Logo-Dark);
+    color: var(--White);
+    z-index: 9999;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    text-align: center;
+}
+
+.portrait-warning i {
+    font-size: 4rem;
+}
+
+@media (orientation: portrait) {
+    body {
+        overflow: hidden;
+    }
+    
+    .portrait-warning {
+        display: flex;
+    }
+}
+
+:root {
+    --Logo-Light: #7BB3D2;
+    --Logo-Dark: #2E5C76;
+    --White: #FFFFFF;
+    --Black: #000000;
+    --Control-Gray: #E5E7EB;
+    --Text-Gray: #959595;
+    --Table-Gray: #F0F0F0;
+    --Subtle-Green: #E8F7E0;
+    --Highlight-Green: #67B07D;
+    --Subtle-Red: #F6B9B9;
+    --Highlight-Red: #BE3A3A;
+    --Arc-Blue: #097BAC;
+    --Arc-Green: #19D646;
+    --Arc-Orange: #F5B119;
+    --Arc-Red: #D3030D;
+}
+
+body {
+    display: flex;
+    width: 100%;
+    max-width: 2000px; 
+    min-height: 100vh; 
+    margin: 0 auto; 
+    align-items: stretch;
+    background: #FAFAFA;
+}
+
+.SideBar {
+    display: flex;
+    flex-direction: column;
+    width: 26rem; 
+    align-self: stretch;
+    background: var(--White);
+    border-right: 3px solid var(--Control-Gray);
+    flex-shrink: 0;
+}
+
+.MainView {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.TopBar {
+    display: flex;
+    height: 10rem;
+    align-items: flex-start;
+    align-self: stretch;
+    border-bottom: 3px solid var(--Control-Gray);
+    background: var(--White);
+}
+
+.MainActivity {
+    display: flex;
+    padding: 1.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+    background: var(--Table-Gray);
+}
+
+.TopCorner {
+    display: flex;
+    width: 100%;
+    height: 10rem;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.LogoContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.SmileWellLogo {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.logo-light {
+    color: var(--Logo-Light);
+}
+
+.logo-dark {
+    color: var(--Logo-Dark);
+}
+
+.TopBar-Nav {
+    display: flex;
+    padding: 0 1.25rem;
+    align-items: center;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.TopBar-Nav-Text {
+    color: var(--Black);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.10);
+    font-size: 2.8125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.UserContainer {
+    display: flex;
+    padding: 0 1.25rem;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.875rem;
+    align-self: stretch;
+}
+
+.Username-Container {
+    display: flex;
+    padding: 0.625rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    align-self: stretch;
+}
+
+.Staff-Name {
+    color: var(--Black);
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.Staff-Role {
+    color: var(--Text-Gray);
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.PFP-Container {
+    display: flex;
+    width: 6.875rem;
+    height: 6.875rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.PFP {
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+    background: url(../Media/Dentist.jpg) lightgray 50% / cover no-repeat;
+    border-radius: 1rem;
+}
+
+.Side-Nav-Container {
+    display: flex;
+    padding: 5rem 1.875rem 1.25rem 1.875rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.Side-Nav-BTN {
+    display: flex;
+    height: 5.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    border-radius: 1rem;
+}
+
+.SNB-Icon-Container {
+    display: flex;
+    width: 6.25rem;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.Nav-Icon {
+    width: 3.125rem;
+    height: 3.125rem;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+}
+
+.SNB-Label-Container {
+    display: flex;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.SNB-Label {
+    color: var(--Black);
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.Logout-Container {
+    display: flex;
+    width: 100%;
+    padding: 3.125rem 1.875rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.Logout-BTN {
+    display: flex;
+    height: 5.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    flex: 1 0 0;
+    border-radius: 0.9375rem;
+    background: var(--Control-Gray);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
+
+.Logout-Label {
+    color: var(--Black);
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* This Is Just A Template CSS, Copy Paste The Contents Of This Page To A New CSS File And Go From There */
+/* Start Styling Bellow Here: */
+
+.Records-Header {
+    display: flex;
+    padding: 0 0 1rem 0; 
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.8rem;
+    align-self: stretch;
+    flex-shrink: 0; 
+}
+
+.Custom-Dropdown {
+    position: relative;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.Dropdown-Trigger {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 0.9375rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s ease;
+}
+
+.Dropdown-Icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Dropdown-Icon svg {
+    transition: transform 0.3s ease;
+}
+
+.Dropdown-Label {
+    flex: 1 0 0;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.Dropdown-Menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0; 
+    width: 100%;
+    min-width: max-content;
+    background: var(--White);
+    border: 1px solid var(--Text-Gray);
+    border-radius: 0.9375rem;
+    list-style: none;
+    padding: 0.5rem 0;
+    z-index: 100; 
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.Custom-Dropdown.is-open .Dropdown-Menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.Custom-Dropdown.is-open .Dropdown-Icon svg {
+    transform: rotate(180deg);
+}
+
+.Dropdown-Item {
+    padding: 0.75rem 1.25rem;
+    color: var(--Black);
+    font-size: 1.8rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.Dropdown-Item:hover {
+    background: var(--Table-Gray);
+}
+
+.Search-Bar {
+    display: flex;
+    padding: 0.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    flex: 1 0 0;
+    border-radius: 0.9375rem;
+    border: 1px solid var(--Text-Gray);
+    background: var(--White);
+}
+
+.Search-Icon-Container {
+    display: flex;
+    width: 3.75rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.Search-Icon-Container svg {
+    width: 2rem;
+    height: 2rem;
+    color: var(--Text-Gray);
+}
+
+.Search-Input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--Black);
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.Search-Input::placeholder {
+    color: var(--Text-Gray);
+}
+
+.Sort-Dropdown {
+    flex: none;
+    width: 12rem;
+}
+
+.Sort-Dropdown .Dropdown-Trigger {
+    background: var(--Control-Gray);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+    justify-content: space-between; 
+    padding: 0.625rem 1.25rem;
+}
+.Sort-Dropdown .Dropdown-Icon svg {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+}
+
+.Record-List-Container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+    background: var(--White);
+    border-radius: 0.9375rem;
+    border: 1px solid var(--Text-Gray);
+    overflow: hidden;
+    min-height: 0; 
+}
+
+.Table-Scroll-Wrapper {
+    flex: 1;
+    width: 100%;
+    overflow-y: auto; 
+}
+
+.Records-Table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+
+.Records-Table th {
+    position: sticky;
+    top: 0;
+    color: var(--Black);
+    font-size: 2rem;
+    font-weight: 700;
+    padding: 1.25rem 1rem;
+    background: var(--Table-Gray);
+    border-bottom: 2px solid var(--Text-Gray);
+    z-index: 10;
+}
+
+.Records-Table th:not(:last-child) {
+    border-right: 1px solid var(--Text-Gray);
+}
+
+.Records-Table td {
+    color: var(--Black);
+    font-size: 2rem;
+    font-weight: 400;
+    padding: 1.25rem 1rem;
+    border-bottom: 1px solid var(--Text-Gray);
+}
+
+.Records-Table tbody tr td {
+    transition: background-color 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+}
+
+.Records-Table tbody tr:hover td {
+    background-color: var(--Black);
+    color: var(--White);
+}
+
+.Pagination-Container {
+    display: flex;
+    padding: 0.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    background: var(--Table-Gray);
+    border-top: 2px solid var(--Text-Gray);
+    flex-shrink: 0; /* Prevents pagination from being squished */
+}
+
+.Page-Nav-Btn {
+    display: flex;
+    width: 11.25rem;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    cursor: pointer;
+    color: var(--Black);
+    transition: color 0.2s;
+}
+
+.Page-Nav-Btn:hover {
+    color: var(--Text-Gray);
+}
+
+.Page-Nav-Btn svg {
+    width: 4rem;
+    height: 4rem;
+}
+
+.Page-Numbers-Wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    flex: 1 0 0;
+}
+
+.Page-Num {
+    display: flex;
+    width: 3.875rem;
+    height: 3.875rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1.25rem;
+    background: var(--White);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+    color: var(--Black);
+    font-size: 2rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.Page-Num.active {
+    background: var(--Black);
+    color: var(--White);
+}
+
+.Side-Nav-BTN {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.Side-Nav-BTN:hover {
+    border-radius: 0.9375rem;
+    background: var(--Black);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
+
+.Side-Nav-BTN:hover .SNB-Label {
+    color: var(--White);
+}
+
+.Side-Nav-BTN:hover svg path {
+    stroke: var(--White);
+}

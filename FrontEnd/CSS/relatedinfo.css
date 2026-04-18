@@ -1,0 +1,598 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+body, button, input, textarea, select {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+@media (max-width: 1920px) {
+    html {
+    font-size: 14px; /* Shrinks all 'rem' values globally by about 12% */
+    }
+}
+
+/* 3. Scale down for smaller laptops */
+@media (max-width: 1366px) {
+    html {
+    font-size: 12px; 
+    }
+}
+
+/* Portrait Barrier */
+.portrait-warning {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--Logo-Dark);
+    color: var(--White);
+    z-index: 9999;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    text-align: center;
+}
+
+.portrait-warning i {
+    font-size: 4rem;
+}
+
+@media (orientation: portrait) {
+    body {
+        overflow: hidden;
+    }
+    
+    .portrait-warning {
+        display: flex;
+    }
+}
+
+:root {
+    --Logo-Light: #7BB3D2;
+    --Logo-Dark: #2E5C76;
+    --White: #FFFFFF;
+    --Black: #000000;
+    --Control-Gray: #E5E7EB;
+    --Text-Gray: #959595;
+    --Table-Gray: #F0F0F0;
+    --Subtle-Green: #E8F7E0;
+    --Highlight-Green: #67B07D;
+    --Subtle-Red: #F6B9B9;
+    --Highlight-Red: #BE3A3A;
+    --Arc-Blue: #097BAC;
+    --Arc-Green: #19D646;
+    --Arc-Orange: #F5B119;
+    --Arc-Red: #D3030D;
+}
+
+body {
+    display: flex;
+    width: 100%;
+    max-width: 2000px; 
+    min-height: 100vh; 
+    margin: 0 auto; 
+    align-items: stretch;
+    background: #FAFAFA;
+}
+
+.SideBar {
+    display: flex;
+    flex-direction: column;
+    width: 26rem; 
+    align-self: stretch;
+    background: var(--White);
+    border-right: 3px solid var(--Control-Gray);
+    flex-shrink: 0;
+}
+
+.MainView {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.TopBar {
+    display: flex;
+    height: 10rem;
+    align-items: flex-start;
+    align-self: stretch;
+    border-bottom: 3px solid var(--Control-Gray);
+    background: var(--White);
+}
+
+.MainActivity {
+    display: flex;
+    padding: 1.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+    background: var(--Table-Gray);
+}
+
+.TopCorner {
+    display: flex;
+    width: 100%;
+    height: 10rem;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.LogoContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.SmileWellLogo {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.logo-light {
+    color: var(--Logo-Light);
+}
+
+.logo-dark {
+    color: var(--Logo-Dark);
+}
+
+.TopBar-Nav {
+    display: flex;
+    padding: 0 1.25rem;
+    align-items: center;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.TopBar-Nav-Text {
+    color: var(--Black);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.10);
+    font-size: 2.8125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.UserContainer {
+    display: flex;
+    padding: 0 1.25rem;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.875rem;
+    align-self: stretch;
+}
+
+.Username-Container {
+    display: flex;
+    padding: 0.625rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    align-self: stretch;
+}
+
+.Staff-Name {
+    color: var(--Black);
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.Staff-Role {
+    color: var(--Text-Gray);
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.PFP-Container {
+    display: flex;
+    width: 6.875rem;
+    height: 6.875rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.PFP {
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+    background: url(../Media/Dentist.jpg) lightgray 50% / cover no-repeat;
+    border-radius: 1rem;
+}
+
+.Side-Nav-Container {
+    display: flex;
+    padding: 5rem 1.875rem 1.25rem 1.875rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.Side-Nav-BTN {
+    display: flex;
+    height: 5.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    border-radius: 1rem;
+}
+
+.SNB-Icon-Container {
+    display: flex;
+    width: 6.25rem;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.Nav-Icon {
+width: 3.125rem;
+    height: 3.125rem;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+}
+
+.svg-icons{
+width: 1.875rem;
+height: 1.875rem;
+flex-shrink: 0;
+aspect-ratio: 1/1;  
+}
+
+.SNB-Label-Container {
+    display: flex;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.SNB-Label {
+    color: var(--Black);
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.Logout-Container {
+    display: flex;
+    width: 100%;
+    padding: 3.125rem 1.875rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.Logout-BTN {
+    display: flex;
+    height: 5.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    flex: 1 0 0;
+    border-radius: 0.9375rem;
+    background: var(--Control-Gray);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
+
+.Logout-Label {
+    color: var(--Black);
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* New Patient Form Container */
+.new-patient-form {
+    display: flex;
+    padding: 1.25rem; /* Exactly 20px */
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+    background: var(--White); /* #FFF from Figma */
+    border-radius: 1.07rem; /* Matching your general UI radius */
+    box-sizing: border-box;
+}
+
+.check-box-header-container {
+    display: flex;
+    padding: 1.25rem; /* 20px */
+    align-items: center;
+    gap: 0.625rem; /* 10px */
+    align-self: stretch;
+    box-sizing: border-box;
+}
+
+.form-title {
+    color: var(--Black);
+    font-size: 1.5rem; /* Adjust based on your Staff-Name/Role scaling */
+    font-weight: 700;
+    margin: 0;
+}
+
+.appointment-control {
+    display: flex;
+    padding: 0 0.625rem; /* Exactly as shown in Figma */
+    justify-content: flex-end; /* Pins buttons to the right */
+    align-items: center;
+    gap: 1.25rem; /* 20px gap between buttons */
+    flex: 1 0 0; /* Grows to fill the space in the header */
+    align-self: stretch;
+}
+
+/* Base style for the small square buttons in this header */
+.edit-btn {
+    display: flex;
+    height: 5rem;
+    align-items: center;
+    border-radius: 0.9375rem;
+    border: 1px solid #959595;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
+
+.save-btn{
+    display: flex;
+height: 5rem;
+align-items: center;
+border-radius: 0.9375rem;
+border: 1px solid #67B07D;
+background: #E8F7E0;
+box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
+
+#saveEditBtnControl {
+    border: 1px solid var(--Highlight-Green);
+    background: var(--Subtle-Green);
+}
+
+.side-nav-button-container {
+    display: flex;
+    width: 5.25rem; /* Exactly from Figma */
+    padding: 0.625rem 1.875rem; /* 10px top/bottom, 30px left/right */
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    border-radius: 0.9375rem; /* 15px */
+    box-sizing: border-box;
+}
+
+/* Ensure the SVG inside scales correctly */
+.side-nav-button-container svg {
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+}
+
+.patient-details-form {
+    display: flex;
+    padding: 0.625rem; /* Exactly 10px */
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem; /* 10px spacing between rows/inputs */
+    flex: 1 0 0;
+    align-self: stretch;
+    box-sizing: border-box;
+}
+
+.profile-field-row {
+    display: flex;
+    padding: 0.625rem; /* 10px */
+    align-items: flex-start;
+    gap: 1.25rem; /* 20px gap between input groups */
+    align-self: stretch;
+    box-sizing: border-box;
+}
+
+/* Vertical container for Label + Input */
+.profile-field-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem; /* 10px from Figma */
+    flex: 1 0 0; /* Ensures the three names share the row width equally */
+}
+
+/* Label Styling */
+.field-label {
+    color: var(--Text-Gray);
+    font-size: 1.125rem; /* Adjusted for readability */
+    font-weight: 500;
+}
+
+/* The Input Wrapper */
+.profile-field {
+    display: flex;
+    padding: 0.625rem; /* 10px */
+    align-items: center;
+    align-self: stretch;
+    border-radius: 0.9375rem; /* 15px */
+    border: 1px solid var(--Text-Gray); /* #959595 */
+    background: var(--White);
+    box-sizing: border-box;
+}
+
+/* The actual text input inside */
+.field-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1.25rem;
+    color: var(--Black);
+}
+
+.Custom-Dropdown {
+    position: relative;
+    align-self: stretch;
+    flex: 1;
+}
+
+.Dropdown-Trigger {
+    display: flex;
+    height: 4.375rem; /* Matches your Figma height */
+    padding: 0.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 0.9375rem;
+    background: #E5E7EB; /* Control-Gray */
+    color: #858788;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.Dropdown-Label {
+    flex: 1;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.Dropdown-Menu {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 0.9375rem;
+    list-style: none;
+    padding: 0.5rem 0;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.Custom-Dropdown.is-open .Dropdown-Menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.Dropdown-Item {
+    padding: 0.75rem 1.25rem;
+    color: #000000;
+    font-size: 1.15rem;
+    cursor: pointer;
+}
+
+.Dropdown-Item:hover {
+    background: #F3F4F6;
+}
+/* No new CSS needed if you already have these from the previous steps: */
+.profile-field-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+    flex: 1 0 0;
+}
+
+.profile-field {
+    display: flex;
+    padding: 0.625rem;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 0.9375rem;
+    border: 1px solid var(--Text-Gray);
+    box-sizing: border-box;
+}
+
+.Side-Nav-BTN {
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+/* Active (current page) + Hover share the same black style */
+.Side-Nav-BTN:hover,
+.Side-Nav-BTN.active {
+    background: var(--Black);
+}
+
+/* Label turns white */
+.Side-Nav-BTN:hover .SNB-Label,
+.Side-Nav-BTN.active .SNB-Label {
+    color: var(--White);
+}
+
+/* SVG strokes turn white */
+.Side-Nav-BTN:hover svg path,
+.Side-Nav-BTN:hover svg circle,
+.Side-Nav-BTN:hover svg rect,
+.Side-Nav-BTN.active svg path,
+.Side-Nav-BTN.active svg circle,
+.Side-Nav-BTN.active svg rect {
+    stroke: var(--White);
+}
+
+/* Special case: Logout icon uses fill not stroke */
+.Logout-BTN:hover svg path,
+.Logout-BTN.active svg path {
+    fill: var(--White);
+    stroke: none;
+}
+
+/* Date input styling */
+.date-input {
+    color: var(--Black);
+    cursor: pointer;
+}
+
+.date-input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.date-input::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+
+.Side-Nav-BTN {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.Side-Nav-BTN:hover {
+    border-radius: 0.9375rem;
+    background: var(--Black);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
+
+.Side-Nav-BTN:hover .SNB-Label {
+    color: var(--White);
+}
+
+.Side-Nav-BTN:hover svg path {
+    stroke: var(--White);
+}
+

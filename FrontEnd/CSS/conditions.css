@@ -1,0 +1,613 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+body, button, input, textarea, select {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+@media (max-width: 1920px) {
+    html {
+    font-size: 14px; /* Shrinks all 'rem' values globally by about 12% */
+    }
+}
+
+/* 3. Scale down for smaller laptops */
+@media (max-width: 1366px) {
+    html {
+    font-size: 12px; 
+    }
+}
+
+/* Portrait Barrier */
+.portrait-warning {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--Logo-Dark);
+    color: var(--White);
+    z-index: 9999;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    text-align: center;
+}
+
+.portrait-warning i {
+    font-size: 4rem;
+}
+
+@media (orientation: portrait) {
+    body {
+        overflow: hidden;
+    }
+    
+    .portrait-warning {
+        display: flex;
+    }
+}
+
+:root {
+    --Logo-Light: #7BB3D2;
+    --Logo-Dark: #2E5C76;
+    --White: #FFFFFF;
+    --Black: #000000;
+    --Control-Gray: #E5E7EB;
+    --Text-Gray: #959595;
+    --Table-Gray: #F0F0F0;
+    --Subtle-Green: #E8F7E0;
+    --Highlight-Green: #67B07D;
+    --Subtle-Red: #F6B9B9;
+    --Highlight-Red: #BE3A3A;
+    --Arc-Blue: #097BAC;
+    --Arc-Green: #19D646;
+    --Arc-Orange: #F5B119;
+    --Arc-Red: #D3030D;
+}
+
+body {
+    display: flex;
+    width: 100%;
+    max-width: 2000px; 
+    min-height: 100vh; 
+    margin: 0 auto; 
+    align-items: stretch;
+    background: #FAFAFA;
+}
+
+.SideBar {
+    display: flex;
+    flex-direction: column;
+    width: 26rem; 
+    align-self: stretch;
+    background: var(--White);
+    border-right: 3px solid var(--Control-Gray);
+    flex-shrink: 0;
+}
+
+.MainView {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.TopBar {
+    display: flex;
+    height: 10rem;
+    align-items: flex-start;
+    align-self: stretch;
+    border-bottom: 3px solid var(--Control-Gray);
+    background: var(--White);
+}
+
+.MainActivity {
+    display: flex;
+    padding: 1.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+    background: var(--Table-Gray);
+}
+
+.TopCorner {
+    display: flex;
+    width: 100%;
+    height: 10rem;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.LogoContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.SmileWellLogo {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.logo-light {
+    color: var(--Logo-Light);
+}
+
+.logo-dark {
+    color: var(--Logo-Dark);
+}
+
+.TopBar-Nav {
+    display: flex;
+    padding: 0 1.25rem;
+    align-items: center;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.TopBar-Nav-Text {
+    color: var(--Black);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.10);
+    font-size: 2.8125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.UserContainer {
+    display: flex;
+    padding: 0 1.25rem;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.875rem;
+    align-self: stretch;
+}
+
+.Username-Container {
+    display: flex;
+    padding: 0.625rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    align-self: stretch;
+}
+
+.Staff-Name {
+    color: var(--Black);
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.Staff-Role {
+    color: var(--Text-Gray);
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.PFP-Container {
+    display: flex;
+    width: 6.875rem;
+    height: 6.875rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.PFP {
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+    background: url(../Media/Dentist.jpg) lightgray 50% / cover no-repeat;
+    border-radius: 1rem;
+}
+
+.Side-Nav-Container {
+    display: flex;
+    padding: 5rem 1.875rem 1.25rem 1.875rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.Side-Nav-BTN {
+    display: flex;
+    height: 5.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    border-radius: 1rem;
+}
+
+.SNB-Icon-Container {
+    display: flex;
+    width: 6.25rem;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.Nav-Icon {
+    width: 3.125rem;
+    height: 3.125rem;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+}
+
+.SNB-Label-Container {
+    display: flex;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.SNB-Label {
+    color: var(--Black);
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.Logout-Container {
+    display: flex;
+    width: 100%;
+    padding: 3.125rem 1.875rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.Logout-BTN {
+    display: flex;
+    height: 5.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    flex: 1 0 0;
+    border-radius: 0.9375rem;
+    background: var(--Control-Gray);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
+
+.Logout-Label {
+    color: var(--Black);
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.new-patient-form {
+    display: flex;
+    padding: 1.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+    background: var(--White);
+    border-radius: 1.07rem;
+    box-sizing: border-box;
+    overflow: auto;
+}
+
+.check-box-header-container {
+    display: flex;
+    padding: 1.25rem;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.form-title {
+    color: var(--Black);
+    font-size: 2.2rem;
+    font-weight: 700;
+    flex: 1;
+}
+
+.appointment-control {
+    display: flex;
+    gap: 1.25rem;
+}
+
+.edit-btn, .save-btn {
+    display: flex;
+    height: 5rem;
+    align-items: center;
+    border-radius: 0.9375rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.30);
+    cursor: pointer;
+}
+
+.edit-btn { border: 1px solid var(--Text-Gray); }
+.save-btn { border: 1px solid var(--Highlight-Green); background: var(--Subtle-Green); }
+
+.side-nav-button-container {
+    display: flex;
+    width: 5.25rem;
+    padding: 0.625rem 1.875rem;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+}
+
+.patient-details-form {
+    display: flex;
+    padding: 0.625rem;
+    flex-direction: column;
+    gap: 0.625rem;
+    align-self: stretch;
+}
+
+.medical-conditions-container {
+    display: flex;
+    padding: 0.625rem; /* Exactly from Figma padding property */
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem; /* Exactly from Figma gap property */
+    flex: 1 0 0;
+    align-self: stretch;
+    box-sizing: border-box;
+}
+
+.medical-condition-row {
+    display: flex;
+    padding: 0.625rem; /* Exactly from Figma padding property */
+    align-items: center;
+    gap: 0.625rem; /* Exactly from Figma gap property */
+    flex: 1 0 0;
+    align-self: stretch;
+    box-sizing: border-box;
+}
+
+.medical-condition-info {
+    display: flex;
+    padding: 0.625rem; /* Exactly from Frame 75 properties */
+    align-items: center;
+    gap: 0.625rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.radio-container {
+    display: flex;
+    width: 5rem; /* Exactly from Figma property panel */
+    padding: 1.25rem; /* Exactly from Figma padding property */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    cursor: pointer;
+    aspect-ratio: 1/1;
+}
+
+.condition-checkbox {
+    display: none; /* Hide standard check */
+}
+
+.custom-sq-box {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--Black);
+    background: var(--White);
+    transition: all 0.2s ease;
+}
+
+/* Green Glow/Fill when clicked */
+.condition-checkbox:checked + .custom-sq-box {
+    background-color: var(--Highlight-Green);
+    border-color: var(--Highlight-Green);
+    box-shadow: 0 0 8px rgba(103, 176, 125, 0.4);
+}
+
+.medical-condition-label {
+    display: flex;
+    width: 27.6rem; /* Exactly from Figma dimensions */
+    padding: 0.625rem;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    color: var(--Black);
+    font-size: 1.15rem;
+}
+
+/* Specific styling for the text input box in this row */
+.medical-condition-row .profile-field {
+    flex: 1 0 0;
+    /* Keeps existing profile-field padding/border from previous step */
+}
+
+/* Start Styling Bellow Here: */
+
+.conditions-list-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem 0;
+    gap: 0.625rem; /* Precise Figma spacing */
+}
+
+.condition-item-row {
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    gap: 2rem; /* Space between checkbox/label and the input */
+    padding: 0.5rem 0;
+}
+
+.check-box-wrapper {
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.condition-toggle {
+    display: none;
+}
+
+.custom-sq-box {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 2px solid var(--Black);
+    background: var(--White);
+    transition: all 0.2s ease;
+}
+
+.condition-toggle:checked + .custom-sq-box {
+    background-color: var(--Highlight-Green);
+    border-color: var(--Highlight-Green);
+}
+
+.condition-text-label {
+    flex: 1; /* Pushes the input field to the right */
+    color: var(--Black);
+    font-size: 1.15rem;
+    font-weight: 500;
+}
+
+.cond-input-field {
+    width: 100%;
+    max-width: 450px; /* Limits width to match the Figma visual */
+    display: flex;
+    padding: 0.625rem;
+    align-items: center;
+    border-radius: 0.9375rem;
+    border: 1px solid var(--Control-Gray);
+}
+
+.cond-input-field input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1.25rem;
+}
+
+.Side-Nav-BTN {
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+/* Active (current page) + Hover share the same black style */
+.Side-Nav-BTN:hover,
+.Side-Nav-BTN.active {
+    background: var(--Black);
+}
+
+/* Label turns white */
+.Side-Nav-BTN:hover .SNB-Label,
+.Side-Nav-BTN.active .SNB-Label {
+    color: var(--White);
+}
+
+/* SVG strokes turn white */
+.Side-Nav-BTN:hover svg path,
+.Side-Nav-BTN:hover svg circle,
+.Side-Nav-BTN:hover svg rect,
+.Side-Nav-BTN.active svg path,
+.Side-Nav-BTN.active svg circle,
+.Side-Nav-BTN.active svg rect {
+    stroke: var(--White);
+}
+
+/* Special case: Logout icon uses fill not stroke */
+.Logout-BTN:hover svg path,
+.Logout-BTN.active svg path {
+    fill: var(--White);
+    stroke: none;
+}
+
+.Side-Nav-BTN {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.Side-Nav-BTN:hover {
+    border-radius: 0.9375rem;
+    background: var(--Black);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+}
+
+.Side-Nav-BTN:hover .SNB-Label {
+    color: var(--White);
+}
+
+.Side-Nav-BTN:hover svg path {
+    stroke: var(--White);
+}
+
+.ChoiceContainer{
+    display: flex;
+    width: 6rem;
+    height: 3.5rem;
+    padding: 0.2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    aspect-ratio: 1/1;
+}
+
+.hidden-input {
+    display: none;
+}
+
+.box-visual {
+    width: 3.125rem;
+    height: 3.125rem;
+    border: 2px solid var(--Logo-Dark);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.hidden-input:checked + .box-visual {
+    background-color: #d1fae5;
+    border-color: #065f46;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23065f46"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>');
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.box-visual:active {
+    transform: scale(0.9);
+}
+
+.choice-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
