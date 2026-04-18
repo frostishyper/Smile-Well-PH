@@ -20,13 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
  *     procedure: 'Dental Cleaning',
  *     patient: 'Juan Dela Cruz',
  *     start: '09:00',
- *     end: '10:00',
- *     color: '#19D646'
+ *     end: '10:00'
  *   }
  * ]
  */
 const API_CONFIG = {
-    BASE_URL: 'http://localhost:8080/api/v1',
+    BASE_URL: '/api/v1',
     HEADERS: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
@@ -37,14 +36,22 @@ const API_CONFIG = {
 const ITEMS_PER_PAGE = 5;
 const TODAY = new Date();
 
+const STUB_COLORS = [
+    '#097BAC',
+    '#19D646',
+    '#F5B119',
+    '#D3030D',
+    '#097BAC'
+];
+
 // ─── PAGE STATE ─────────────────────────────────────────────────────────────
 const state = {
-    selectedDate:   new Date(TODAY),
-    viewMonth:      TODAY.getMonth(),
-    viewYear:       TODAY.getFullYear(),
+    selectedDate: new Date(TODAY),
+    viewMonth: TODAY.getMonth(),
+    viewYear: TODAY.getFullYear(),
     selectedBranch: 'Manila',
-    currentPage:    1,
-    appointments:   {}
+    currentPage: 1,
+    appointments: {}
 };
 
 // ─── UTILITY FUNCTIONS ──────────────────────────────────────────────────────
@@ -68,11 +75,25 @@ function getSelectedOptionText(selectElement, fallback = 'Select') {
     return selectElement.options[selectElement.selectedIndex]?.text || fallback;
 }
 
+function getStubColor(slotIndex) {
+    return STUB_COLORS[slotIndex % STUB_COLORS.length];
+}
+
+// Optional safety helper for text rendered through innerHTML
+function escapeHtml(value) {
+    return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
 // ─── ICON LIBRARY ───────────────────────────────────────────────────────────
 const Icons = {
-    edit:   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>`,
+    edit: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>`,
     cancel: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>`,
-    go:     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>`
+    go: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>`
 };
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -95,30 +116,35 @@ const App = {
         console.log('Page Logic Initialized');
 
         this.elements = {
-            body:              document.querySelector('body'),
+            body: document.querySelector('body'),
+
             // ─── Appointment List ───
-            apptList:          document.getElementById('appt-list'),
-            apptDateLabel:     document.getElementById('appt-date-label'),
+            apptList: document.getElementById('appt-list'),
+            apptDateLabel: document.getElementById('appt-date-label'),
+
             // ─── Pagination ─────────
-            pagPrev:           document.getElementById('pag-prev'),
-            pagNext:           document.getElementById('pag-next'),
-            pagInfo:           document.getElementById('pag-info'),
+            pagPrev: document.getElementById('pag-prev'),
+            pagNext: document.getElementById('pag-next'),
+            pagInfo: document.getElementById('pag-info'),
+
             // ─── Booking ────────────
-            newBookingBtn:     document.getElementById('new-booking-btn'),
+            newBookingBtn: document.getElementById('new-booking-btn'),
+
             // ─── Calendar Grid ──────
-            calDayLabels:      document.getElementById('cal-day-labels'),
-            calDates:          document.getElementById('cal-dates'),
-            calDayPill:        document.getElementById('cal-day-pill'),
-            calPrevDay:        document.getElementById('cal-prev-day'),
-            calNextDay:        document.getElementById('cal-next-day'),
+            calDayLabels: document.getElementById('cal-day-labels'),
+            calDates: document.getElementById('cal-dates'),
+            calDayPill: document.getElementById('cal-day-pill'),
+            calPrevDay: document.getElementById('cal-prev-day'),
+            calNextDay: document.getElementById('cal-next-day'),
+
             // ─── Calendar Dropdowns ─
-            calMonthDropdown:  document.getElementById('cal-month-dropdown'),
-            calMonthSelect:    document.getElementById('cal-month-select'),
-            calYearDropdown:   document.getElementById('cal-year-dropdown'),
-            calYearSelect:     document.getElementById('cal-year-select'),
+            calMonthDropdown: document.getElementById('cal-month-dropdown'),
+            calMonthSelect: document.getElementById('cal-month-select'),
+            calYearDropdown: document.getElementById('cal-year-dropdown'),
+            calYearSelect: document.getElementById('cal-year-select'),
             calBranchDropdown: document.getElementById('cal-branch-dropdown'),
-            calBranchSelect:   document.getElementById('cal-branch-select'),
-            dropdowns:         document.querySelectorAll('.Cal-Dropdown')
+            calBranchSelect: document.getElementById('cal-branch-select'),
+            dropdowns: document.querySelectorAll('.Cal-Dropdown')
         };
 
         this.buildYearSelect();
@@ -378,14 +404,19 @@ const App = {
 
         apptDateLabel.textContent = isSameDay(state.selectedDate, TODAY)
             ? 'Today'
-            : state.selectedDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+            : state.selectedDate.toLocaleDateString('en-US', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric'
+            });
 
         const startIndex = (state.currentPage - 1) * ITEMS_PER_PAGE;
         const pageAppointments = appointmentsForDay.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
-        pagInfo.textContent = `${state.currentPage} / ${totalPages}`;
-        pagPrev.disabled = state.currentPage <= 1;
-        pagNext.disabled = state.currentPage >= totalPages;
+        if (pagInfo) pagInfo.textContent = `${state.currentPage} / ${totalPages}`;
+        if (pagPrev) pagPrev.disabled = state.currentPage <= 1;
+        if (pagNext) pagNext.disabled = state.currentPage >= totalPages;
+
         apptList.innerHTML = '';
 
         if (pageAppointments.length === 0) {
@@ -393,20 +424,32 @@ const App = {
             return;
         }
 
-        pageAppointments.forEach((appointment) => {
+        pageAppointments.forEach((appointment, index) => {
+            const stubColor = getStubColor(index);
+            const isCancelled = Number(appointment.status) === 0;
+
             const entry = document.createElement('div');
             entry.className = 'Appointment-Entry';
             entry.innerHTML = `
-                <div class="Appt-Color-Stub" style="background:${appointment.color}"></div>
+                <div class="Appt-Color-Stub" style="background:${stubColor}"></div>
                 <div class="Appt-Details">
-                    <span class="Appt-Procedure">${appointment.procedure}</span>
-                    <span class="Appt-Patient">${appointment.patient}</span>
-                    <span class="Appt-Time">${fmt12(appointment.start)} - ${fmt12(appointment.end)}</span>
+                    <span class="Appt-Procedure">${escapeHtml(appointment.procedure)}</span>
+                    <span class="Appt-Patient">${escapeHtml(appointment.patient)}</span>
+                    <div class="Appt-Time-Row">
+                        <span class="Appt-Time">${fmt12(appointment.start)} - ${fmt12(appointment.end)}</span>
+                        ${isCancelled ? '<span class="Appt-Status Appt-Status-Cancelled">Cancelled</span>' : ''}
+                    </div>
                 </div>
                 <div class="Appointment-Control">
                     <button class="Appt-Control-BTN Appt-BTN-Edit edit-btn" data-id="${appointment.id}" title="Edit">${Icons.edit}</button>
-                    <button class="Appt-Control-BTN Appt-BTN-Cancel cancel-btn" data-id="${appointment.id}" title="Cancel">${Icons.cancel}</button>
-                    <button class="Appt-Control-BTN Appt-BTN-Go go-btn" data-id="${appointment.id}" data-patient="${appointment.patient}" title="View Patient">${Icons.go}</button>
+                    <button
+                        class="Appt-Control-BTN Appt-BTN-Cancel cancel-btn"
+                        data-id="${appointment.id}"
+                        data-status="${appointment.status ?? 1}"
+                        title="${isCancelled ? 'Already Cancelled' : 'Cancel'}"
+                        ${isCancelled ? 'disabled aria-disabled="true"' : ''}
+                    >${Icons.cancel}</button>
+                    <button class="Appt-Control-BTN Appt-BTN-Go go-btn" data-id="${appointment.id}" data-patient="${escapeHtml(appointment.patient)}" title="View Patient">${Icons.go}</button>
                 </div>
             `;
             apptList.appendChild(entry);
@@ -414,25 +457,66 @@ const App = {
 
         apptList.querySelectorAll('.edit-btn').forEach((button) => {
             button.addEventListener('click', () => {
-                // Edit route should use the appointment id from this button.
-                // Example flow:
-                // GET /appointments/{id}
-                // then open the edit appointment page or modal with that record.
-                console.log('Edit appointment id:', button.dataset.id);
+                const appointmentId = button.dataset.id;
+
+                // Route to the edit appointment page and pass the appointment id in the query string.
+                if (!appointmentId) {
+                    console.warn('Missing appointment id on edit button.');
+                    return;
+                }
+
+                window.location.href = `/edit-appointment?id=${encodeURIComponent(appointmentId)}`;
             });
         });
 
+
         apptList.querySelectorAll('.cancel-btn').forEach((button) => {
-            button.addEventListener('click', () => {
-                // Delete route should use the appointment id from this button.
-                // DELETE /appointments/{id}
-                console.log('Cancel appt id:', button.dataset.id);
+            button.addEventListener('click', async () => {
+                const appointmentId = button.dataset.id;
+                const currentStatus = button.dataset.status;
+
+                if (!appointmentId) {
+                    console.warn('Missing appointment id on cancel button.');
+                    return;
+                }
+
+                // Already cancelled, so do nothing.
+                if (String(currentStatus) === '0') {
+                    return;
+                }
+
+                const confirmed = window.confirm('Cancel this appointment?');
+                if (!confirmed) {
+                    return;
+                }
+
+                try {
+                    await this.api.put(`/appointments/${appointmentId}/cancel`, {});
+
+                    const selectedDateKey = dateKey(state.selectedDate);
+                    const currentAppointments = state.appointments[selectedDateKey] || [];
+
+                    // Keep the row, only flip its status to cancelled.
+                    state.appointments[selectedDateKey] = currentAppointments.map((appointment) => {
+                        if (String(appointment.id) !== String(appointmentId)) {
+                            return appointment;
+                        }
+
+                        return {
+                            ...appointment,
+                            status: 0
+                        };
+                    });
+
+                    this.renderAppointments();
+                } catch (error) {
+                    console.error(`Failed to cancel appointment #${appointmentId}:`, error.message);
+                }
             });
         });
 
         apptList.querySelectorAll('.go-btn').forEach((button) => {
             button.addEventListener('click', () => {
-                // This button currently only logs the selected patient label.
                 console.log('Go to patient:', button.dataset.patient);
             });
         });
@@ -456,7 +540,7 @@ const App = {
         } = this.elements;
 
         newBookingBtn?.addEventListener('click', () => {
-            window.location.href = '../HTML/new-appointment.html';
+            window.location.href = '../Pages/new-appointment.html';
         });
 
         pagPrev?.addEventListener('click', () => {
@@ -587,6 +671,7 @@ const App = {
         post(endpoint, data) {
             return this.request(endpoint, {
                 method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
         },
@@ -594,6 +679,7 @@ const App = {
         put(endpoint, data) {
             return this.request(endpoint, {
                 method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
         },

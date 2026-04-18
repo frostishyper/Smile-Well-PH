@@ -26,7 +26,6 @@ public class PatientApiController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    // 1. Fetches the summary list for the Records page
     @GetMapping("/list")
     public List<Map<String, Object>> getAllPatients() {
         String sql = "SELECT p.patient_id, p.first_name, p.last_name, " +
@@ -185,7 +184,6 @@ public class PatientApiController {
             String pSex = sanitizeSex((String) personal.get("sex"));
             String rSex = (related != null) ? sanitizeSex((String) related.get("sex")) : null;
 
-            // Insert Core Patient
             KeyHolder keyHolder = new GeneratedKeyHolder();
             String patientSql = "INSERT INTO patients (first_name, middle_name, last_name, contact_number, email, birthday, sex, blood_type, valid_id_number, home_address, occupation, religion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
@@ -210,7 +208,6 @@ public class PatientApiController {
             if (key == null) throw new RuntimeException("Generated ID not found");
             int patientId = key.intValue();
 
-            // Insert Related Info
             if (related != null && related.get("firstName") != null && !((String)related.get("firstName")).isEmpty()) {
                 String relSql = "INSERT INTO patient_relations (patient_id, relationship_type, first_name, middle_name, last_name, contact_number, email, birthday, sex, home_address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 jdbcTemplate.update(relSql, 
@@ -227,7 +224,6 @@ public class PatientApiController {
                 );
             }
 
-            // Insert Health Habits
             if (habits != null) {
                 String habitsSql = "INSERT INTO patient_health_habits (patient_id, in_good_health, smoker, alcohol, illicit_drugs, pregnant, birth_control, nursing) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 jdbcTemplate.update(habitsSql, patientId, 
@@ -241,7 +237,6 @@ public class PatientApiController {
                 );
             }
 
-            // Insert Allergies
             if (allergies != null) {
                 String allergySql = "INSERT INTO patient_allergies (patient_id, penicillin_antibiotics, local_anesthetics, aspirin, latex, sulfa_drugs, others_notes) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 jdbcTemplate.update(allergySql, patientId,
@@ -254,7 +249,6 @@ public class PatientApiController {
                 );
             }
 
-            // Insert Conditions
             if (conditions != null) {
                 String condSql = "INSERT INTO patient_conditions (patient_id, condition_category, has_condition, condition_notes) VALUES (?, ?, ?, ?)";
                 String[] categories = {

@@ -52,10 +52,6 @@ const App = {
             // 1. Fetch Summary Data (Metrics & Branches)
             const summary = await this.api.get('/dashboard/summary');
             
-            // Update Headers
-            document.querySelector('#Staff-Name').textContent = summary.staffName;
-            document.querySelector('#Staff-Role').textContent = summary.staffRole;
-            
             // Update Quick Metrics
             document.querySelector('#Total-Patients').textContent = summary.totalPatients;
             document.querySelector('#Total-Appointments').textContent = summary.totalAppointments;

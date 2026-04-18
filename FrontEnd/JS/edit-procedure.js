@@ -8,6 +8,7 @@ const API_CONFIG = {
 const App = {
     elements: {},
     state: {
+        visitId: null,
         patientId: null,
         procedures: []
     },
@@ -15,11 +16,13 @@ const App = {
     init() {
         this.cacheElements();
         const urlParams = new URLSearchParams(window.location.search);
+        this.state.visitId = urlParams.get('visitId');
         this.state.patientId = urlParams.get('patientId');
         
-        if (!this.state.patientId) return window.location.href = '/records';
-        
-        this.elements.visitDate.valueAsDate = new Date();
+        if (!this.state.visitId || !this.state.patientId) {
+            return window.location.href = '/records';
+        }
+
         this.initDropdowns();
         this.setupEventListeners();
         this.loadPageData();
@@ -27,33 +30,29 @@ const App = {
 
     cacheElements() {
         this.elements = {
-            patientName: document.getElementById('Patient-Name-Display'),
             topBarPatientName: document.getElementById('TopBar-Patient-Name'),
+            sidebarPatientName: document.getElementById('Sidebar-Patient-Name'),
+            
             visitNotes: document.getElementById('Visit-Notes-Input'),
             visitDate: document.getElementById('visit-date'),
+            
             dentistDropdown: document.getElementById('Dentist-Dropdown'),
             branchDropdown: document.getElementById('Branch-Dropdown'),
             startTimeDropdown: document.getElementById('Start-Time-Dropdown'),
             endTimeDropdown: document.getElementById('End-Time-Dropdown'),
-            procNameInput: document.getElementById('Proc-Name-Input'),
-            procCostInput: document.getElementById('Proc-Cost-Input'),
-            addProcBtn: document.getElementById('Add-Proc-BTN'),
-            procList: document.getElementById('Procedure-List'),
-            createBtn: document.getElementById('Create-Visit-BTN'),
+            
+            procNameInput: document.getElementById('AppointmentTitleEntryInput'),
+            procCostInput: document.getElementById('AppointmentEntryInput'),
+            addProcBtn: document.getElementById('SaveEditBTN'),
+            procList: document.getElementById('procedure-list'),
+            
+            saveBtn: document.getElementById('Save-Visit-BTN'),
             backBtn: document.getElementById('Back-BTN')
         };
     },
 
     async loadPageData() {
         try {
-            const pRes = await fetch(`${API_CONFIG.BASE_URL}/patients/profile/${this.state.patientId}`);
-            if (pRes.ok) {
-                const patientData = await pRes.json();
-                const fullName = `${patientData.first_name} ${patientData.last_name}`;
-                this.elements.patientName.textContent = fullName;
-                this.elements.topBarPatientName.textContent = fullName;
-            }
-
             const [branches, dentists, timeslots] = await Promise.all([
                 this.api.get('/reference/branches'),
                 this.api.get('/reference/dentists'),
@@ -65,10 +64,32 @@ const App = {
             this.populateDropdownMenu(this.elements.startTimeDropdown, timeslots, 'slot_time', 'slot_time');
             this.populateDropdownMenu(this.elements.endTimeDropdown, timeslots, 'slot_time', 'slot_time');
 
+            // POINTING TO NEW CONTROLLER ROUTE
+            const visitData = await this.api.get(`/dental-visits/${this.state.visitId}`);
+            
+            const fullName = `${visitData.first_name} ${visitData.last_name}`;
+            this.elements.topBarPatientName.textContent = fullName;
+            this.elements.sidebarPatientName.textContent = fullName;
+            
+            this.elements.visitNotes.value = visitData.visit_notes || '';
+            this.elements.visitDate.value = visitData.visit_date || '';
+
+            this.setDropdownValue(this.elements.branchDropdown, visitData.branch_id);
+            this.setDropdownValue(this.elements.dentistDropdown, visitData.staff_id);
+
+            if (visitData.start_time) this.setDropdownValue(this.elements.startTimeDropdown, visitData.start_time);
+            if (visitData.end_time) this.setDropdownValue(this.elements.endTimeDropdown, visitData.end_time);
+
+            this.state.procedures = (visitData.procedures || []).map(p => ({
+                id: p.procedure_id,
+                name: p.procedure_name,
+                amount: p.procedure_cost
+            }));
+            
             this.renderProcedures();
         } catch (e) {
             console.error(e);
-            alert("Failed to load reference data.");
+            alert("Failed to load visit data.");
         }
     },
 
@@ -78,6 +99,18 @@ const App = {
         menu.innerHTML = dataArray.map(item => `
             <li class="Dropdown-Item" data-value="${item[valueKey]}">${item[labelKey]}</li>
         `).join('');
+    },
+
+    setDropdownValue(dropdownEl, value) {
+        if (!dropdownEl || !value) return;
+        const item = dropdownEl.querySelector(`[data-value="${value}"]`);
+        if (item) {
+            const display = dropdownEl.querySelector('.Dropdown-Label');
+            display.textContent = item.textContent;
+            display.style.color = '#000000';
+            display.classList.remove('is-placeholder');
+            dropdownEl.dataset.selectedValue = value;
+        }
     },
 
     initDropdowns() {
@@ -138,7 +171,7 @@ const App = {
             }
         });
 
-        el.createBtn?.addEventListener('click', () => this.createVisit());
+        el.saveBtn?.addEventListener('click', () => this.saveVisit());
     },
 
     renderProcedures() {
@@ -168,7 +201,7 @@ const App = {
         `).join('');
     },
 
-    async createVisit() {
+    async saveVisit() {
         const el = this.elements;
         
         if (!el.branchDropdown.dataset.selectedValue || !el.dentistDropdown.dataset.selectedValue) {
@@ -188,16 +221,16 @@ const App = {
         };
 
         try {
-            el.createBtn.disabled = true;
-            el.createBtn.style.opacity = '0.5';
+            el.saveBtn.disabled = true;
+            el.saveBtn.style.opacity = '0.5';
             
             // POINTING TO NEW CONTROLLER ROUTE
-            await this.api.post('/dental-visits', payload);
+            await this.api.put(`/dental-visits/${this.state.visitId}`, payload);
             window.location.href = `/patient-procedures?patientId=${this.state.patientId}`;
         } catch (e) {
-            alert('Failed to create visit.');
-            el.createBtn.disabled = false;
-            el.createBtn.style.opacity = '1';
+            alert('Failed to save visit changes.');
+            el.saveBtn.disabled = false;
+            el.saveBtn.style.opacity = '1';
         }
     },
 
@@ -210,6 +243,6 @@ const App = {
             return response.status === 204 ? null : response.json();
         },
         get(endpoint) { return this.request(endpoint, { method: 'GET' }); },
-        post(endpoint, data) { return this.request(endpoint, { method: 'POST', body: JSON.stringify(data) }); }
+        put(endpoint, data) { return this.request(endpoint, { method: 'PUT', body: JSON.stringify(data) }); }
     }
 };

@@ -654,3 +654,5 @@ body {
 .Side-Nav-BTN:hover svg path {
     stroke: var(--White);
 }
+
+background: url(../Media/Dentist.jpg) lightgray 50% / cover no-repeat;

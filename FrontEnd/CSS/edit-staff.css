@@ -660,3 +660,111 @@ body {
 .Side-Nav-BTN:hover svg path {
     stroke: var(--White);
 }
+
+.Custom-Dropdown { 
+    position: relative; 
+    flex: none; 
+    width: 13rem; 
+}
+
+.Custom-Dropdown .Dropdown-Trigger {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    gap: 0.625rem; 
+    border-radius: 0.9375rem; 
+    cursor: pointer; 
+    user-select: none; 
+    transition: background 0.2s ease;
+    background: var(--Control-Gray); 
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30); 
+    padding: 0.625rem 1.25rem;
+}
+
+.Dropdown-Label { 
+    flex: 1 0 0; 
+    font-size: 1.8rem; 
+    font-weight: 400; 
+}
+
+.Dropdown-Icon { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.Dropdown-Icon svg { 
+    width: 1.5rem; 
+    height: 1.5rem; 
+    transition: transform 0.3s ease; 
+}
+
+.Dropdown-Menu {
+    position: absolute; 
+    top: calc(100% + 0.5rem); 
+    right: 0; 
+    width: 100%; 
+    min-width: max-content;
+    background: var(--White); 
+    border: 1px solid var(--Text-Gray); 
+    border-radius: 0.9375rem;
+    list-style: none; 
+    padding: 0.5rem 0; 
+    z-index: 100; 
+    opacity: 0; 
+    visibility: hidden;
+    transform: translateY(-10px); 
+    transition: all 0.2s ease; 
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.Custom-Dropdown.is-open .Dropdown-Menu { 
+    opacity: 1; 
+    visibility: visible; 
+    transform: translateY(0); 
+}
+
+.Custom-Dropdown.is-open .Dropdown-Icon svg { 
+    transform: rotate(180deg); 
+}
+
+.Dropdown-Item { 
+    padding: 0.75rem 1.25rem; 
+    color: var(--Black); 
+    font-size: 1.6rem; 
+    font-weight: 400; 
+    cursor: pointer; 
+    transition: background 0.2s ease; 
+}
+
+.Dropdown-Item:hover { 
+    background: var(--Table-Gray); 
+}
+
+.New-Staff-BTN {
+    display: flex; 
+    padding: 0 2rem; 
+    height: 4.5rem; 
+    justify-content: center; 
+    align-items: center;
+    border-radius: 0.9375rem; 
+    background: var(--Black); 
+    color: var(--White); 
+    font-size: 1.8rem; 
+    font-weight: 600; 
+    border: none; 
+    cursor: pointer;
+}
+
+.Record-List-Container {
+    display: flex; 
+    flex-direction: column; 
+    align-items: flex-start; 
+    flex: 1 0 0; 
+    align-self: stretch;
+    background: var(--White); 
+    border-radius: 0.9375rem; 
+    border: 1px solid var(--Text-Gray); 
+    overflow: hidden; 
+    min-height: 0; 
+}
