@@ -130,6 +130,7 @@ public class PatientMedicalInfoApiController {
         }
     }
 
+    // Helper method to convert various input types to boolean
     private boolean toBoolean(Object raw) {
         if (raw == null) return false;
         if (raw instanceof Boolean) return (Boolean) raw;
@@ -137,5 +138,201 @@ public class PatientMedicalInfoApiController {
 
         String value = raw.toString().trim().toLowerCase();
         return value.equals("1") || value.equals("true") || value.equals("yes");
+    }
+
+    // 3. Fetches Allergies for a specific patient
+    @GetMapping("/{patientId}/allergies")
+    public ResponseEntity<?> getPatientAllergies(@PathVariable("patientId") int patientId) {
+        try {
+            String sql =
+                "SELECT " +
+                "    p.patient_id, " +
+                "    p.first_name AS patient_first_name, " +
+                "    p.last_name AS patient_last_name, " +
+                "    pa.penicillin_antibiotics, " +
+                "    pa.local_anesthetics, " +
+                "    pa.aspirin, " +
+                "    pa.latex, " +
+                "    pa.sulfa_drugs, " +
+                "    pa.others_notes " +
+                "FROM patients p " +
+                "LEFT JOIN patient_allergies pa ON p.patient_id = pa.patient_id " +
+                "WHERE p.patient_id = ? " +
+                "LIMIT 1";
+
+            List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql, patientId);
+
+            if (rows.isEmpty()) {
+                return ResponseEntity.status(404).body(Map.of("error", "Patient not found"));
+            }
+
+            return ResponseEntity.ok(rows.get(0));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(Map.of("error", "Database error"));
+        }
+    }
+
+    // 4. Updates or creates Allergies for a specific patient
+    @PutMapping("/{patientId}/allergies")
+    public ResponseEntity<?> updatePatientAllergies(
+            @PathVariable("patientId") int patientId,
+            @RequestBody Map<String, Object> payload) {
+        try {
+            Integer count = jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) FROM patient_allergies WHERE patient_id = ?",
+                Integer.class,
+                patientId
+            );
+
+            boolean penicillinAntibiotics = toBoolean(payload.get("penicillin_antibiotics"));
+            boolean localAnesthetics = toBoolean(payload.get("local_anesthetics"));
+            boolean aspirin = toBoolean(payload.get("aspirin"));
+            boolean latex = toBoolean(payload.get("latex"));
+            boolean sulfaDrugs = toBoolean(payload.get("sulfa_drugs"));
+            String othersNotes = payload.get("others_notes") != null ? payload.get("others_notes").toString() : "";
+
+            if (count != null && count > 0) {
+                String updateSql =
+                    "UPDATE patient_allergies SET " +
+                    "penicillin_antibiotics = ?, " +
+                    "local_anesthetics = ?, " +
+                    "aspirin = ?, " +
+                    "latex = ?, " +
+                    "sulfa_drugs = ?, " +
+                    "others_notes = ?, " +
+                    "updated_at = CURRENT_TIMESTAMP " +
+                    "WHERE patient_id = ?";
+
+                jdbcTemplate.update(
+                    updateSql,
+                    penicillinAntibiotics,
+                    localAnesthetics,
+                    aspirin,
+                    latex,
+                    sulfaDrugs,
+                    othersNotes,
+                    patientId
+                );
+            } else {
+                String insertSql =
+                    "INSERT INTO patient_allergies (" +
+                    "patient_id, penicillin_antibiotics, local_anesthetics, aspirin, latex, sulfa_drugs, others_notes, created_at, updated_at" +
+                    ") VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+
+                jdbcTemplate.update(
+                    insertSql,
+                    patientId,
+                    penicillinAntibiotics,
+                    localAnesthetics,
+                    aspirin,
+                    latex,
+                    sulfaDrugs,
+                    othersNotes
+                );
+            }
+
+            return ResponseEntity.ok(Map.of(
+                "status", "success",
+                "message", "Patient allergies updated successfully",
+                "patientId", patientId
+            ));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(Map.of("error", e.getMessage()));
+        }
+    }
+
+    // 5. Fetches Conditions for a specific patient
+    @GetMapping("/{patientId}/conditions")
+    public ResponseEntity<?> getPatientConditions(@PathVariable("patientId") int patientId) {
+        try {
+            String patientSql =
+                "SELECT patient_id, first_name AS patient_first_name, last_name AS patient_last_name " +
+                "FROM patients WHERE patient_id = ? LIMIT 1";
+
+            List<Map<String, Object>> patientRows = jdbcTemplate.queryForList(patientSql, patientId);
+
+            if (patientRows.isEmpty()) {
+                return ResponseEntity.status(404).body(Map.of("error", "Patient not found"));
+            }
+
+            String conditionsSql =
+                "SELECT " +
+                "    condition_id, " +
+                "    patient_id, " +
+                "    condition_category, " +
+                "    has_condition, " +
+                "    condition_notes " +
+                "FROM patient_conditions " +
+                "WHERE patient_id = ? " +
+                "ORDER BY condition_id ASC";
+
+            List<Map<String, Object>> conditions = jdbcTemplate.queryForList(conditionsSql, patientId);
+
+            Map<String, Object> response = patientRows.get(0);
+            response.put("conditions", conditions);
+
+            return ResponseEntity.ok(response);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(Map.of("error", "Database error"));
+        }
+    }
+
+    // 6. Updates Conditions for a specific patient
+    @PutMapping("/{patientId}/conditions")
+    public ResponseEntity<?> updatePatientConditions(
+            @PathVariable("patientId") int patientId,
+            @RequestBody Map<String, Object> payload) {
+        try {
+            Object conditionsObj = payload.get("conditions");
+
+            if (!(conditionsObj instanceof List<?> conditionsList)) {
+                return ResponseEntity.badRequest().body(Map.of("error", "Invalid conditions payload"));
+            }
+
+            jdbcTemplate.update("DELETE FROM patient_conditions WHERE patient_id = ?", patientId);
+
+            String insertSql =
+                "INSERT INTO patient_conditions (" +
+                "patient_id, condition_category, has_condition, condition_notes, created_at, updated_at" +
+                ") VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)";
+
+            for (Object item : conditionsList) {
+                if (!(item instanceof Map<?, ?> rawMap)) continue;
+
+                String category = rawMap.get("condition_category") != null
+                    ? rawMap.get("condition_category").toString()
+                    : "";
+
+                boolean hasCondition = toBoolean(rawMap.get("has_condition"));
+
+                String notes = rawMap.get("condition_notes") != null
+                    ? rawMap.get("condition_notes").toString()
+                    : "";
+
+                jdbcTemplate.update(
+                    insertSql,
+                    patientId,
+                    category,
+                    hasCondition,
+                    notes
+                );
+            }
+
+            return ResponseEntity.ok(Map.of(
+                "status", "success",
+                "message", "Patient conditions updated successfully",
+                "patientId", patientId
+            ));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(Map.of("error", e.getMessage()));
+        }
     }
 }

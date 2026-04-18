@@ -313,7 +313,7 @@ body {
     background: var(--White);
     border-radius: 1.07rem;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow: auto;
 }
 
 .check-box-header-container {
