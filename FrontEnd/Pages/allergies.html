@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Title Here</title>
         <link rel="stylesheet" href="../CSS/allergies.css"> <!-- Replace Path To Proper CSS -->
-        <script src="../JS/template.js"></script> <!-- Replace Path To Proper JS -->
+        <script src="../JS/allergies.js"></script> <!-- Replace Path To Proper JS -->
         <script src="../JS/logout.js"></script>
     </head>
 
@@ -23,6 +23,7 @@
                     </h1>
                 </div>
             </div>
+
             <div class="Side-Nav-Container">
                 <!-- A Side Nav Button -->
                 <div class="Side-Nav-BTN" id="DashboardPage-BTN">
@@ -38,6 +39,7 @@
                         <h1 class="SNB-Label">Dash Board</h1>
                     </div>
                 </div>
+
                 <!-- A Side Nav Button -->
                 <div class="Side-Nav-BTN" id="RecordsPage-BTN">
                     <div class="SNB-Icon-Container">
@@ -51,6 +53,7 @@
                         <h1 class="SNB-Label">Records</h1>
                     </div>
                 </div>
+
                 <!-- A Side Nav Button -->
                 <div class="Side-Nav-BTN" id="AppointmentsPage-BTN">
                     <div class="SNB-Icon-Container">
@@ -65,6 +68,7 @@
                         <h1 class="SNB-Label">Appointments</h1>
                     </div>
                 </div>
+
                 <!-- A Side Nav Button -->
                 <div class="Side-Nav-BTN active" id="NewPatientPage-BTN">
                     <div class="SNB-Icon-Container">
@@ -79,6 +83,7 @@
                         <h1 class="SNB-Label">New Patient</h1>
                     </div>
                 </div>
+
                 <!-- A Side Nav Button -->
                 <div class="Side-Nav-BTN" id="StaffPage-BTN">
                     <div class="SNB-Icon-Container">
@@ -92,6 +97,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="Logout-Container">
                 <div class="Logout-BTN" id="Logout-BTN">
                     <div class="SNB-Icon-Container">
@@ -104,7 +110,8 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
+
         <div class="MainView">
             <div class="TopBar">
                 <div class="TopBar-Nav">
@@ -112,6 +119,7 @@
                         <span>Records  > Kasane Teto > Full Profile > Allergies</span>
                     </h1>
                 </div>
+
                 <div class="UserContainer">
                     <div class="Username-Container">
                         <!-- Staff Details -->
@@ -123,81 +131,141 @@
                     </div>
                 </div>
             </div>
+
             <div class="MainActivity">
                 <div class="new-patient-form" id="allergensForm">
-    <div class="check-box-header-container">
-        <h2 class="form-title">Allergens</h2>
-        <div class="appointment-control">
-            <div class="edit-btn" id="editAllergensBtn">
-                <div class="side-nav-button-container">
-                    <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
-                        <path d="M11.25 12.5L5 18.75L11.25 25" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M25 5V13.75C25 15.0761 24.4732 16.3479 23.5355 17.2855C22.5979 18.2232 21.3261 18.75 20 18.75H5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-            </div>
-            <div class="save-btn" id="saveAllergensBtn">
-                <div class="side-nav-button-container">
-                    <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
-                        <path d="M23.75 26.25H6.25C5.58696 26.25 4.95107 25.9866 4.48223 25.5178C4.01339 25.0489 3.75 24.413 3.75 23.75V6.25C3.75 5.58696 4.01339 4.95107 4.48223 4.48223C4.95107 4.01339 5.58696 3.75 6.25 3.75H20L26.25 10V23.75C26.25 24.413 25.9866 25.0489 25.5178 25.5178C25.0489 25.9866 24.413 26.25 23.75 26.25Z" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M21.25 26.25V16.25H8.75V26.25" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M8.75 3.75V10H18.75" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </div>
+                    <div class="check-box-header-container">
+                        <h2 class="form-title">Allergens</h2>
+                        <div class="appointment-control">
+                            <div class="edit-btn" id="editAllergensBtn">
+                                <div class="side-nav-button-container">
+                                    <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                                        <path d="M11.25 12.5L5 18.75L11.25 25" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M25 5V13.75C25 15.0761 24.4732 16.3479 23.5355 17.2855C22.5979 18.2232 21.3261 18.75 20 18.75H5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </div>
 
-    <div class="patient-details-form">
-        <div class="question-container full-width-questions">
-            <div class="questionnaire-labels">
-                <div class="label-col-question">Allergen</div>
-                <div class="label-col-yes">Yes</div>
-                <div class="label-col-no">No</div>
-            </div>
-            <div class="patient-form-container">
-                <div class="patient-form-row">
-                    <div class="question-label">Local Anesthetic?</div>
-                    <div class="yes-box"><label class="square-toggle yes-toggle"><input type="radio" name="localAnesthetic" value="yes" class="toggle-radio"><div class="box-visual"></div></label></div>
-                    <div class="no-box"><label class="square-toggle no-toggle"><input type="radio" name="localAnesthetic" value="no" class="toggle-radio"><div class="box-visual"></div></label></div>
+                            <div class="save-btn" id="saveAllergensBtn">
+                                <div class="side-nav-button-container">
+                                    <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                                        <path d="M23.75 26.25H6.25C5.58696 26.25 4.95107 25.9866 4.48223 25.5178C4.01339 25.0489 3.75 24.413 3.75 23.75V6.25C3.75 5.58696 4.01339 4.95107 4.48223 4.48223C4.95107 4.01339 5.58696 3.75 6.25 3.75H20L26.25 10V23.75C26.25 24.413 25.9866 25.0489 25.5178 25.5178C25.0489 25.9866 24.413 26.25 23.75 26.25Z" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M21.25 26.25V16.25H8.75V26.25" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M8.75 3.75V10H18.75" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="patient-details-form">
+                        <div class="question-container full-width-questions">
+                            <div class="questionnaire-labels">
+                                <div class="label-col-question">Allergen</div>
+                                <div class="label-col-yes">Yes</div>
+                                <div class="label-col-no">No</div>
+                            </div>
+
+                            <div class="patient-form-container">
+                                <div class="patient-form-row">
+                                    <div class="question-label">Local Anesthetic?</div>
+                                    <div class="yes-box">
+                                        <label class="square-toggle yes-toggle" for="localAnestheticYes">
+                                            <input type="radio" id="localAnestheticYes" name="localAnesthetic" value="yes" class="toggle-radio">
+                                            <div class="box-visual"></div>
+                                        </label>
+                                    </div>
+                                    <div class="no-box">
+                                        <label class="square-toggle no-toggle" for="localAnestheticNo">
+                                            <input type="radio" id="localAnestheticNo" name="localAnesthetic" value="no" class="toggle-radio">
+                                            <div class="box-visual"></div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="patient-form-row">
+                                    <div class="question-label">Penicillin / Antibiotics?</div>
+                                    <div class="yes-box">
+                                        <label class="square-toggle yes-toggle" for="antibioticsYes">
+                                            <input type="radio" id="antibioticsYes" name="antibiotics" value="yes" class="toggle-radio">
+                                            <div class="box-visual"></div>
+                                        </label>
+                                    </div>
+                                    <div class="no-box">
+                                        <label class="square-toggle no-toggle" for="antibioticsNo">
+                                            <input type="radio" id="antibioticsNo" name="antibiotics" value="no" class="toggle-radio">
+                                            <div class="box-visual"></div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="patient-form-row">
+                                    <div class="question-label">Latex / Rubber?</div>
+                                    <div class="yes-box">
+                                        <label class="square-toggle yes-toggle" for="latexYes">
+                                            <input type="radio" id="latexYes" name="latex" value="yes" class="toggle-radio">
+                                            <div class="box-visual"></div>
+                                        </label>
+                                    </div>
+                                    <div class="no-box">
+                                        <label class="square-toggle no-toggle" for="latexNo">
+                                            <input type="radio" id="latexNo" name="latex" value="no" class="toggle-radio">
+                                            <div class="box-visual"></div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="patient-form-row">
+                                    <div class="question-label">Aspirin?</div>
+                                    <div class="yes-box">
+                                        <label class="square-toggle yes-toggle" for="aspirinYes">
+                                            <input type="radio" id="aspirinYes" name="aspirin" value="yes" class="toggle-radio">
+                                            <div class="box-visual"></div>
+                                        </label>
+                                    </div>
+                                    <div class="no-box">
+                                        <label class="square-toggle no-toggle" for="aspirinNo">
+                                            <input type="radio" id="aspirinNo" name="aspirin" value="no" class="toggle-radio">
+                                            <div class="box-visual"></div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="patient-form-row">
+                                    <div class="question-label">Food Allergies?</div>
+                                    <div class="yes-box">
+                                        <label class="square-toggle yes-toggle" for="foodAllergyYes">
+                                            <input type="radio" id="foodAllergyYes" name="foodAllergy" value="yes" class="toggle-radio">
+                                            <div class="box-visual"></div>
+                                        </label>
+                                    </div>
+                                    <div class="no-box">
+                                        <label class="square-toggle no-toggle" for="foodAllergyNo">
+                                            <input type="radio" id="foodAllergyNo" name="foodAllergy" value="no" class="toggle-radio">
+                                            <div class="box-visual"></div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="patient-form-row">
+                                    <div class="profile-field-col others-col">
+                                        <h3 class="field-label-text">Others</h3>
+                                        <div class="profile-field">
+                                            <input type="text" id="otherAllergensInput" class="field-input">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="patient-form-row">
-                    <div class="question-label">Penicillin / Antibiotics?</div>
-                    <div class="yes-box"><label class="square-toggle yes-toggle"><input type="radio" name="antibiotics" value="yes" class="toggle-radio"><div class="box-visual"></div></label></div>
-                    <div class="no-box"><label class="square-toggle no-toggle"><input type="radio" name="antibiotics" value="no" class="toggle-radio"><div class="box-visual"></div></label></div>
-                </div>
-                <div class="patient-form-row">
-                    <div class="question-label">Latex / Rubber?</div>
-                    <div class="yes-box"><label class="square-toggle yes-toggle"><input type="radio" name="latex" value="yes" class="toggle-radio"><div class="box-visual"></div></label></div>
-                    <div class="no-box"><label class="square-toggle no-toggle"><input type="radio" name="latex" value="no" class="toggle-radio"><div class="box-visual"></div></label></div>
-                </div>
-                <div class="patient-form-row">
-                    <div class="question-label">Aspirin?</div>
-                    <div class="yes-box"><label class="square-toggle yes-toggle"><input type="radio" name="aspirin" value="yes" class="toggle-radio"><div class="box-visual"></div></label></div>
-                    <div class="no-box"><label class="square-toggle no-toggle"><input type="radio" name="aspirin" value="no" class="toggle-radio"><div class="box-visual"></div></label></div>
-                </div>
-                <div class="patient-form-row">
-                    <div class="question-label">Food Allergies?</div>
-                    <div class="yes-box"><label class="square-toggle yes-toggle"><input type="radio" name="foodAllergy" value="yes" class="toggle-radio"><div class="box-visual"></div></label></div>
-                    <div class="no-box"><label class="square-toggle no-toggle"><input type="radio" name="foodAllergy" value="no" class="toggle-radio"><div class="box-visual"></div></label></div>
-                </div>
-                <div class="patient-form-row">
-                    <div class="profile-field-col others-col">
-                <h3 class="field-label-text">Others</h3>
-                <div class="profile-field">
-                    <input type="text" id="otherAllergensInput" class="field-input">
-                </div>
-            </div>
-            </div>
-        </div>
-    </div>
-</div>
             </div>
         </div>
     </body>
+
     <div class="portrait-warning">
-    <i class="fa-solid fa-tablet-screen-button"></i>
-    <h2>Please rotate your device</h2>
-    <p>SmileWell Dental System requires landscape mode.</p>
+        <i class="fa-solid fa-tablet-screen-button"></i>
+        <h2>Please rotate your device</h2>
+        <p>SmileWell Dental System requires landscape mode.</p>
     </div>
 </html>

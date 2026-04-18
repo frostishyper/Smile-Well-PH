@@ -1,54 +1,51 @@
-document.addEventListener('DOMContentLoaded', () => {
-    App.init();
-});
+document.addEventListener('DOMContentLoaded', () => App.init());
 
 const API_CONFIG = {
-    BASE_URL: 'http://localhost:8080/api/v1',
-    HEADERS: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    }
+    BASE_URL: '/api/v1',
+    HEADERS: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
 };
 
 const App = {
     elements: {},
+    state: {
+        allPatients: [],    // The raw data from DB
+        filteredPatients: [], // The data after search/sort
+        currentPage: 1,
+        itemsPerPage: 8
+    },
 
     init() {
         this.cacheElements();
         this.setupEventListeners();
+        this.fetchPatients(); 
         this.ui.checkOrientation();
     },
 
     cacheElements() {
-        this.elements.body = document.querySelector('body');
-        
+        this.elements.tableBody = document.querySelector('.Records-Table tbody');
+        this.elements.searchInput = document.querySelector('.Search-Input');
         this.elements.sortDropdown = document.querySelector('#Sort-Dropdown');
+        this.elements.pageNumbersWrapper = document.querySelector('.Page-Numbers-Wrapper');
+        this.elements.prevPageBtn = document.querySelector('#Prev-Page');
+        this.elements.nextPageBtn = document.querySelector('#Next-Page');
         
         if (this.elements.sortDropdown) {
             this.elements.sortTrigger = this.elements.sortDropdown.querySelector('.Dropdown-Trigger');
             this.elements.sortLabel = this.elements.sortDropdown.querySelector('.Dropdown-Label');
             this.elements.sortItems = this.elements.sortDropdown.querySelectorAll('.Dropdown-Item');
         }
-
-        this.elements.logoutTrigger = document.querySelector('#Logout-BTN');
-        this.elements.logoutModal = document.querySelector('#Logout-Modal');
-        this.elements.cancelLogoutBtn = document.querySelector('#Cancel-Logout');
-        this.elements.confirmLogoutBtn = document.querySelector('#Confirm-Logout');
     },
 
     setupEventListeners() {
+        // Dropdown Logic
         if (this.elements.sortDropdown) {
-            this.elements.sortTrigger.addEventListener('click', (e) => {
+            this.elements.sortTrigger?.addEventListener('click', (e) => {
                 e.stopPropagation(); 
                 this.elements.sortDropdown.classList.toggle('is-open');
             });
-
-            this.elements.sortItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    this.handleSortSelect(item);
-                });
+            this.elements.sortItems?.forEach(item => {
+                item.addEventListener('click', () => this.handleSortSelect(item));
             });
-
             document.addEventListener('click', (e) => {
                 if (!this.elements.sortDropdown.contains(e.target)) {
                     this.elements.sortDropdown.classList.remove('is-open');
@@ -56,94 +53,141 @@ const App = {
             });
         }
 
-        if (this.elements.logoutTrigger && this.elements.logoutModal) {
-            this.elements.logoutTrigger.addEventListener('click', () => {
-                this.elements.logoutModal.classList.add('is-open');
-            });
+        // Live Search Filter
+        this.elements.searchInput?.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            this.state.filteredPatients = this.state.allPatients.filter(p => 
+                p.first_name.toLowerCase().includes(query) || 
+                p.last_name.toLowerCase().includes(query) ||
+                p.patient_id.toString().includes(query)
+            );
+            this.state.currentPage = 1; // Reset to page 1 on new search
+            this.renderTable();
+            this.renderPagination();
+        });
+
+        // Pagination Buttons
+        this.elements.prevPageBtn?.addEventListener('click', () => {
+            if (this.state.currentPage > 1) {
+                this.state.currentPage--;
+                this.renderTable();
+                this.renderPagination();
+            }
+        });
+
+        this.elements.nextPageBtn?.addEventListener('click', () => {
+            const totalPages = Math.ceil(this.state.filteredPatients.length / this.state.itemsPerPage);
+            if (this.state.currentPage < totalPages) {
+                this.state.currentPage++;
+                this.renderTable();
+                this.renderPagination();
+            }
+        });
+
+        // Row Click Routing
+        this.elements.tableBody?.addEventListener('click', (e) => {
+            const row = e.target.closest('.patient-row');
+            if (row) {
+                const patientId = row.dataset.patientId;
+                // Ensures URL matches your FrontendController route
+                window.location.href = `/patient-profile?patientId=${patientId}`;
+            }
+        });
+    },
+
+    async fetchPatients() {
+        try {
+            const data = await this.api.get('/patients/list');
+            this.state.allPatients = data;
+            this.state.filteredPatients = data; // Initially, no filter
+            this.renderTable();
+            this.renderPagination();
+        } catch (error) {
+            console.error("Failed to load patients:", error);
+            if (this.elements.tableBody) {
+                this.elements.tableBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:red;">Database Error</td></tr>`;
+            }
+        }
+    },
+
+    renderTable() {
+        if (!this.elements.tableBody) return;
+        this.elements.tableBody.innerHTML = '';
+
+        if (this.state.filteredPatients.length === 0) {
+            this.elements.tableBody.innerHTML = `<tr><td colspan="4" style="text-align:center;">No patient records found.</td></tr>`;
+            return;
         }
 
-        if (this.elements.cancelLogoutBtn && this.elements.logoutModal) {
-            this.elements.cancelLogoutBtn.addEventListener('click', () => {
-                this.elements.logoutModal.classList.remove('is-open');
-            });
+        // Pagination Slicing
+        const start = (this.state.currentPage - 1) * this.state.itemsPerPage;
+        const end = start + this.state.itemsPerPage;
+        const paginatedData = this.state.filteredPatients.slice(start, end);
+
+        const rowsHtml = paginatedData.map(patient => `
+            <tr class="patient-row" data-patient-id="${patient.patient_id}" style="cursor: pointer;">
+                <td>${patient.patient_id}</td>
+                <td>${patient.last_name}</td>
+                <td>${patient.first_name}</td>
+                <td>${patient.last_visit || 'N/A'}</td>
+            </tr>
+        `).join('');
+
+        this.elements.tableBody.innerHTML = rowsHtml;
+    },
+
+    renderPagination() {
+        if (!this.elements.pageNumbersWrapper) return;
+        
+        const totalPages = Math.ceil(this.state.filteredPatients.length / this.state.itemsPerPage) || 1;
+        let pagesHtml = '';
+
+        for (let i = 1; i <= totalPages; i++) {
+            const activeClass = i === this.state.currentPage ? 'active' : '';
+            pagesHtml += `<div class="Page-Num ${activeClass}" data-page="${i}">${i}</div>`;
         }
 
-        if (this.elements.confirmLogoutBtn) {
-            this.elements.confirmLogoutBtn.addEventListener('click', () => {
-                
+        this.elements.pageNumbersWrapper.innerHTML = pagesHtml;
+
+        // Attach clicks to specific page numbers
+        this.elements.pageNumbersWrapper.querySelectorAll('.Page-Num').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                this.state.currentPage = parseInt(e.target.dataset.page);
+                this.renderTable();
+                this.renderPagination();
             });
-        }
+        });
     },
 
     handleSortSelect(selectedItem) {
         this.elements.sortLabel.textContent = selectedItem.textContent;
         this.elements.sortDropdown.classList.remove('is-open');
         
-        const sortMethod = selectedItem.getAttribute('data-value');
-        console.log(`Sorting table by: ${sortMethod}`);
+        const sortType = selectedItem.dataset.value;
+        if (sortType === 'name-asc') {
+            this.state.filteredPatients.sort((a, b) => a.last_name.localeCompare(b.last_name));
+        } else if (sortType === 'recent') {
+            // Sort by patient_id descending as a proxy for newest (assuming auto-increment)
+            this.state.filteredPatients.sort((a, b) => b.patient_id - a.patient_id);
+        }
+        
+        this.state.currentPage = 1;
+        this.renderTable();
+        this.renderPagination();
     },
 
     ui: {
-        setLoading(element, isLoading) {
-            if (isLoading) {
-                element.classList.add('is-loading');
-                element.disabled = true;
-            } else {
-                element.classList.remove('is-loading');
-                element.disabled = false;
-            }
-        },
-
-        checkOrientation() {
-            if (window.innerHeight > window.innerWidth) {
-                console.warn('System optimized for Landscape view.');
-            }
-        }
+        checkOrientation() { if (window.innerHeight > window.innerWidth) console.warn('Landscape optimized'); }
     },
 
     api: {
         async request(endpoint, options = {}) {
             const url = `${API_CONFIG.BASE_URL}${endpoint}`;
-            const settings = {
-                ...options,
-                headers: { ...API_CONFIG.HEADERS, ...options.headers }
-            };
-
-            try {
-                const response = await fetch(url, settings);
-                
-                if (!response.ok) {
-                    const errorData = await response.json().catch(() => ({}));
-                    throw new Error(errorData.message || `Status: ${response.status}`);
-                }
-
-                return response.status === 204 ? null : response.json();
-            } catch (error) {
-                console.error('Fetch Error:', error.message);
-                throw error;
-            }
+            const settings = { ...options, headers: { ...API_CONFIG.HEADERS, ...options.headers } };
+            const response = await fetch(url, settings);
+            if (!response.ok) throw new Error(`Status: ${response.status}`);
+            return response.status === 204 ? null : response.json();
         },
-
-        get(endpoint) {
-            return this.request(endpoint, { method: 'GET' });
-        },
-
-        post(endpoint, data) {
-            return this.request(endpoint, {
-                method: 'POST',
-                body: JSON.stringify(data)
-            });
-        },
-
-        put(endpoint, data) {
-            return this.request(endpoint, {
-                method: 'PUT',
-                body: JSON.stringify(data)
-            });
-        },
-
-        delete(endpoint) {
-            return this.request(endpoint, { method: 'DELETE' });
-        }
+        get(endpoint) { return this.request(endpoint, { method: 'GET' }); }
     }
 };

@@ -438,7 +438,7 @@ body {
    EDIT APPOINTMENT CARD  [node 220:657]
    bg:white  p:20px  border-radius:15px  gap:20px
    ===================================================== */
-.NewAppointment-Card {
+.EditAppointment-Card {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -564,7 +564,7 @@ body {
 
 /* Cancel/Delete  [node 220:670]
    w:90px  bg:#f6b9b9  border:#be3a3a */
-.Appt-BTN-Cancel {
+.Appt-BTN-Delete {
     width: 5.625rem;            /* 90px */
     background: var(--Subtle-Red);
     border-color: var(--Highlight-Red);
@@ -609,6 +609,7 @@ body {
     align-self: stretch;
     flex-shrink: 0;
 }
+
 
 /* Profile Field Col  [node 220:686]  gap:10px  flex:1 */
 .Profile-Field-Col {
@@ -669,7 +670,7 @@ body {
    TIME ROW  [node 220:702]
    gap:20px  pb:20px  pt:10px  px:10px
    ===================================================== */
-.Time-Row {
+.Time-Row, .Branch-Field-Row {
     display: flex;
     align-items: center;
     gap: 1.25rem;
@@ -680,7 +681,7 @@ body {
 }
 
 /* Time Label Container  [node 220:703] */
-.Time-Label-Container {
+.Time-Label-Container, .Branch-Label-Container {
     display: flex;
     align-items: center;
     height: 4.375rem;           /* 70px */
@@ -688,7 +689,7 @@ body {
 }
 
 /* Time Label  font-size:32px  bold  black */
-.Time-Label {
+.Time-Label, .Branch-Label {
     color: var(--Black);
     font-size: 2rem;
     font-weight: 700;
@@ -702,6 +703,7 @@ body {
     position: relative;
     display: flex;
     height: 4.375rem;           /* 70px */
+    width: 18.5rem;
     align-items: center;
     padding: 0.625rem;
     border-radius: 0.9375rem;
@@ -714,7 +716,7 @@ body {
    w:160px  font-size:32px  color:#858788 */
 .Time-Display-Text {
     display: flex;
-    width: 10rem;               /* 160px */
+    width: 14rem;               /* 160px */
     height: 100%;
     align-items: center;
     justify-content: center;

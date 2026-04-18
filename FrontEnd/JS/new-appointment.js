@@ -3,14 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const API_CONFIG = {
-    BASE_URL: 'http://localhost:8080/api/v1',
+    BASE_URL: '/api/v1',
     HEADERS: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
     }
 };
 
-function formatDateDisplay(value) {
+function formatAppointmentDateDisplay(value) {
     if (!value) {
         return 'MM/DD/YYYY';
     }
@@ -28,30 +28,34 @@ function getSelectedOptionText(selectElement, fallback = 'Select') {
 }
 
 const App = {
-    elements: {
-        body: document.querySelector('body'),
-        summaryProcedure: document.getElementById('summary-procedure'),
-        summaryPatient: document.getElementById('summary-patient'),
-        summaryTime: document.getElementById('summary-time'),
-        colorStub: document.getElementById('appt-color-stub'),
-        patientName: document.getElementById('patient-name'),
-        contactNumber: document.getElementById('contact-number'),
-        appointmentReason: document.getElementById('appointment-reason'),
-        appointmentDate: document.getElementById('appointment-date'),
-        startTime: document.getElementById('start-time'),
-        endTime: document.getElementById('end-time'),
-        dateDisplay: document.getElementById('date-display'),
-        dateDropdownWrapper: document.getElementById('date-dropdown-wrapper'),
-        dropdowns: document.querySelectorAll('.appointment-dropdown'),
-        cancelBtn: document.getElementById('cancel-btn'),
-        saveBtn: document.getElementById('save-btn')
-    },
+    elements: {},
 
     init() {
         console.log('New Appointment Page Initialized');
-        this.setupCustomDropdowns();
-        this.syncDateDisplay();
-        this.updateSummary();
+
+        this.elements = {
+            body: document.querySelector('body'),
+            summaryProcedure: document.getElementById('summary-procedure'),
+            summaryPatient: document.getElementById('summary-patient'),
+            summaryDetails: document.getElementById('summary-details'),
+            appointmentColorStub: document.getElementById('appointment-color-stub'),
+            patientNameInput: document.getElementById('patient-name'),
+            contactNumberInput: document.getElementById('contact-number'),
+            procedureInput: document.getElementById('appointment-procedure'),
+            appointmentDateInput: document.getElementById('appointment-date'),
+            startTimeSelect: document.getElementById('start-time'),
+            endTimeSelect: document.getElementById('end-time'),
+            appointmentBranchSelect: document.getElementById('appointment-branch'),
+            appointmentDateDisplay: document.getElementById('appointment-date-display'),
+            appointmentDatePickerTrigger: document.getElementById('appointment-date-picker-trigger'),
+            timeDropdowns: document.querySelectorAll('.appointment-dropdown'),
+            cancelButton: document.getElementById('cancel-btn'),
+            saveButton: document.getElementById('save-btn')
+        };
+
+        this.setupTimeDropdowns();
+        this.syncAppointmentDateDisplay();
+        this.syncAppointmentSummary();
         this.setupEventListeners();
         this.ui.checkOrientation();
     },
@@ -59,64 +63,71 @@ const App = {
     setupEventListeners() {
         const el = this.elements;
 
-        el.patientName?.addEventListener('input', () => this.updateSummary());
-        el.appointmentReason?.addEventListener('input', () => this.updateSummary());
-        el.appointmentDate?.addEventListener('change', () => {
-            this.syncDateDisplay();
-            this.updateSummary();
-        });
-        el.startTime?.addEventListener('change', () => {
-            this.syncAllDropdownDisplays();
-            this.updateSummary();
-        });
-        el.endTime?.addEventListener('change', () => {
-            this.syncAllDropdownDisplays();
-            this.updateSummary();
+        el.patientNameInput?.addEventListener('input', () => this.syncAppointmentSummary());
+        el.procedureInput?.addEventListener('input', () => this.syncAppointmentSummary());
+
+        el.appointmentDateInput?.addEventListener('change', () => {
+            this.syncAppointmentDateDisplay();
+            this.syncAppointmentSummary();
         });
 
-        el.dateDropdownWrapper?.addEventListener('click', () => {
-            this.openDatePicker();
+        el.startTimeSelect?.addEventListener('change', () => {
+            this.syncAllTimeDropdownDisplays();
+            this.syncAppointmentSummary();
         });
 
-        el.dateDropdownWrapper?.addEventListener('keydown', (event) => {
+        el.endTimeSelect?.addEventListener('change', () => {
+            this.syncAllTimeDropdownDisplays();
+            this.syncAppointmentSummary();
+        });
+
+        el.appointmentDatePickerTrigger?.addEventListener('click', () => {
+            this.openAppointmentDatePicker();
+        });
+
+        el.appointmentDatePickerTrigger?.addEventListener('keydown', (event) => {
             if (event.key === 'Enter' || event.key === ' ') {
                 event.preventDefault();
-                this.openDatePicker();
+                this.openAppointmentDatePicker();
             }
         });
 
-        el.saveBtn?.addEventListener('click', () => this.handleSave());
-        el.cancelBtn?.addEventListener('click', () => this.handleCancel());
+        el.appointmentBranchSelect?.addEventListener('change', () => {
+            this.syncAllTimeDropdownDisplays();
+            this.syncAppointmentSummary();
+        });
 
-        
+        el.saveButton?.addEventListener('click', () => this.createAppointment());
+        el.cancelButton?.addEventListener('click', () => this.cancelAppointmentCreation());
     },
 
-    setupCustomDropdowns() {
-        this.elements.dropdowns.forEach((dropdown) => {
-            this.buildDropdownOptions(dropdown);
-            this.syncDropdownDisplay(dropdown);
+    setupTimeDropdowns() {
+        this.elements.timeDropdowns.forEach((dropdown) => {
+            this.buildTimeDropdownOptions(dropdown);
+            this.syncTimeDropdownDisplay(dropdown);
 
             dropdown.querySelector('.appointment-dropdown-toggle')?.addEventListener('click', () => {
-                this.toggleDropdown(dropdown);
+                this.toggleTimeDropdown(dropdown);
             });
         });
 
         document.addEventListener('click', (event) => {
-            const clickedInsideDropdown = Array.from(this.elements.dropdowns).some((dropdown) => dropdown.contains(event.target));
+            const clickedInsideDropdown = Array.from(this.elements.timeDropdowns)
+                .some((dropdown) => dropdown.contains(event.target));
 
             if (!clickedInsideDropdown) {
-                this.closeAllDropdowns();
+                this.closeAllTimeDropdowns();
             }
         });
 
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape') {
-                this.closeAllDropdowns();
+                this.closeAllTimeDropdowns();
             }
         });
     },
 
-    buildDropdownOptions(dropdownElement) {
+    buildTimeDropdownOptions(dropdownElement) {
         const selectElement = dropdownElement?.querySelector('.appointment-select-input');
         const menuElement = dropdownElement?.querySelector('.appointment-dropdown-menu');
 
@@ -139,14 +150,14 @@ const App = {
             optionButton.textContent = option.text;
 
             optionButton.addEventListener('click', () => {
-                this.selectDropdownOption(dropdownElement, option.value);
+                this.selectTimeDropdownOption(dropdownElement, option.value);
             });
 
             menuElement.appendChild(optionButton);
         });
     },
 
-    syncDropdownDisplay(dropdownElement) {
+    syncTimeDropdownDisplay(dropdownElement) {
         const selectElement = dropdownElement?.querySelector('.appointment-select-input');
         const displayElement = dropdownElement?.querySelector('.appointment-dropdown-value');
 
@@ -167,26 +178,26 @@ const App = {
         });
     },
 
-    syncAllDropdownDisplays() {
-        this.elements.dropdowns.forEach((dropdown) => {
-            this.syncDropdownDisplay(dropdown);
+    syncAllTimeDropdownDisplays() {
+        this.elements.timeDropdowns.forEach((dropdown) => {
+            this.syncTimeDropdownDisplay(dropdown);
         });
     },
 
-    toggleDropdown(dropdownElement) {
+    toggleTimeDropdown(dropdownElement) {
         if (!dropdownElement) {
             return;
         }
 
         const isOpen = dropdownElement.classList.contains('open');
-        this.closeAllDropdowns();
+        this.closeAllTimeDropdowns();
 
         if (!isOpen) {
-            this.openDropdown(dropdownElement);
+            this.openTimeDropdown(dropdownElement);
         }
     },
 
-    openDropdown(dropdownElement) {
+    openTimeDropdown(dropdownElement) {
         const toggle = dropdownElement?.querySelector('.appointment-dropdown-toggle');
         const menu = dropdownElement?.querySelector('.appointment-dropdown-menu');
 
@@ -199,7 +210,7 @@ const App = {
         menu.hidden = false;
     },
 
-    closeDropdown(dropdownElement) {
+    closeTimeDropdown(dropdownElement) {
         const toggle = dropdownElement?.querySelector('.appointment-dropdown-toggle');
         const menu = dropdownElement?.querySelector('.appointment-dropdown-menu');
 
@@ -212,13 +223,13 @@ const App = {
         menu.hidden = true;
     },
 
-    closeAllDropdowns() {
-        this.elements.dropdowns.forEach((dropdown) => {
-            this.closeDropdown(dropdown);
+    closeAllTimeDropdowns() {
+        this.elements.timeDropdowns.forEach((dropdown) => {
+            this.closeTimeDropdown(dropdown);
         });
     },
 
-    selectDropdownOption(dropdownElement, value) {
+    selectTimeDropdownOption(dropdownElement, value) {
         const selectElement = dropdownElement?.querySelector('.appointment-select-input');
 
         if (!selectElement || !value) {
@@ -229,44 +240,60 @@ const App = {
             selectElement.value = value;
             selectElement.dispatchEvent(new Event('change', { bubbles: true }));
         } else {
-            this.syncDropdownDisplay(dropdownElement);
+            this.syncTimeDropdownDisplay(dropdownElement);
         }
 
-        this.closeDropdown(dropdownElement);
+        this.closeTimeDropdown(dropdownElement);
     },
 
-    syncDateDisplay() {
+    syncAppointmentDateDisplay() {
         const el = this.elements;
 
-        if (!el.dateDisplay || !el.appointmentDate) {
+        if (!el.appointmentDateDisplay || !el.appointmentDateInput) {
             return;
         }
 
-        el.dateDisplay.textContent = formatDateDisplay(el.appointmentDate.value);
+        el.appointmentDateDisplay.textContent = formatAppointmentDateDisplay(el.appointmentDateInput.value);
     },
 
-    openDatePicker() {
-        const appointmentDate = this.elements.appointmentDate;
+    openAppointmentDatePicker() {
+        const appointmentDateInput = this.elements.appointmentDateInput;
 
-        if (!appointmentDate) {
+        if (!appointmentDateInput) {
             return;
         }
 
-        if (appointmentDate.showPicker) {
-            appointmentDate.showPicker();
+        if (appointmentDateInput.showPicker) {
+            appointmentDateInput.showPicker();
         } else {
-            appointmentDate.focus();
-            appointmentDate.click();
+            appointmentDateInput.focus();
+            appointmentDateInput.click();
         }
     },
 
-    updateSummary() {
+    syncAppointmentSummary() {
         const el = this.elements;
 
-        const procedure = el.appointmentReason?.value.trim() || 'New Appointment';
-        const patient = el.patientName?.value.trim() || '-';
-        const start = getSelectedOptionText(el.startTime, '--:--');
-        const end = getSelectedOptionText(el.endTime, '--:--');
+        const procedure = el.procedureInput?.value.trim() || 'New Appointment';
+        const patient = el.patientNameInput?.value.trim() || '-';
+
+        const branch = el.appointmentBranchSelect?.value
+            ? getSelectedOptionText(el.appointmentBranchSelect, '')
+            : '';
+
+        const date = el.appointmentDateInput?.value
+            ? formatAppointmentDateDisplay(el.appointmentDateInput.value)
+            : '';
+
+        const startTime = el.startTimeSelect?.value
+            ? getSelectedOptionText(el.startTimeSelect, '')
+            : '';
+
+        const endTime = el.endTimeSelect?.value
+            ? getSelectedOptionText(el.endTimeSelect, '')
+            : '';
+
+        const detailParts = [branch, date, startTime, endTime].filter(Boolean);
 
         if (el.summaryProcedure) {
             el.summaryProcedure.textContent = procedure;
@@ -276,34 +303,50 @@ const App = {
             el.summaryPatient.textContent = patient;
         }
 
-        if (el.summaryTime) {
-            el.summaryTime.textContent = `${start} - ${end}`;
+        if (el.summaryDetails) {
+            el.summaryDetails.textContent = detailParts.length ? detailParts.join(' - ') : '—';
         }
     },
-
-    handleSave() {
+    
+    async createAppointment() {
         const el = this.elements;
 
         const payload = {
-            patientName: el.patientName?.value.trim(),
-            contactNumber: el.contactNumber?.value.trim(),
-            reason: el.appointmentReason?.value.trim(),
-            appointmentDate: el.appointmentDate?.value,
-            startTime: getSelectedOptionText(el.startTime, ''),
-            endTime: getSelectedOptionText(el.endTime, '')
+            patientName: el.patientNameInput?.value.trim(),
+            contactNumber: el.contactNumberInput?.value.trim(),
+            procedure: el.procedureInput?.value.trim(),
+            appointmentDate: el.appointmentDateInput?.value,
+            startTime: getSelectedOptionText(el.startTimeSelect, ''),
+            endTime: getSelectedOptionText(el.endTimeSelect, ''),
+            branchId: el.appointmentBranchSelect?.value || ''
         };
 
-        if (!payload.patientName || !payload.contactNumber || !payload.reason) {
+        if (
+            !payload.patientName ||
+            !payload.contactNumber ||
+            !payload.procedure ||
+            !payload.appointmentDate ||
+            !payload.startTime ||
+            !payload.endTime ||
+            !payload.branchId
+        ) {
             console.warn('Validation failed - missing required fields:', payload);
             return;
         }
 
-        console.log('Saving appointment:', payload);
-        window.location.href = '../HTML/appointments.html';
+        try {
+            this.ui.setLoading(el.saveButton, true);
+            await this.api.post('/appointments', payload);
+            window.location.href = '/appointments';
+        } catch (error) {
+            console.error('Failed to create appointment:', error.message);
+        } finally {
+            this.ui.setLoading(el.saveButton, false);
+        }
     },
 
-    handleCancel() {
-        window.location.href = '../HTML/appointments.html';
+    cancelAppointmentCreation() {
+        window.location.href = '/appointments';
     },
 
     ui: {

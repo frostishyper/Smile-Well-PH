@@ -640,3 +640,47 @@ aspect-ratio: 1/1;
     stroke: var(--White);
 }
 
+/* ── Status badges ── */
+.status {
+  width: 15%;
+}
+
+.status-badge {
+  display: inline-flex;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.status-paid {
+  background: var(--Subtle-Green);
+  color: var(--Highlight-Green);
+}
+
+.status-unpaid {
+  background: var(--Subtle-Red);
+  color: var(--Highlight-Red);
+}
+
+/* ── Payment rows ── */
+.payment-row {
+  background: #F7FBF9; /* very subtle green tint to distinguish payment rows */
+}
+
+.payment-amount {
+  color: var(--Highlight-Green) !important; /* green for incoming payments */
+}
+
+.payment-tag {
+  display: inline-flex;
+  padding: 0.15rem 0.5rem;
+  margin-right: 0.4rem;
+  border-radius: 0.3rem;
+  background: var(--Subtle-Green);
+  color: var(--Highlight-Green);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  vertical-align: middle;
+}

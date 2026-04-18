@@ -1,7 +1,7 @@
 // ==========================================
-// 1. STANDALONE LOGOUT COMPONENT
+// 1. STANDALONE SESSION & LOGOUT MANAGER
 // ==========================================
-class LogoutManager {
+class SessionManager {
     constructor() {
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => this.init());
@@ -10,18 +10,44 @@ class LogoutManager {
         }
     }
 
-    init() {
-        this.triggerBtn = document.querySelector('#Logout-BTN');
+    async init() {
+        this.cacheElements();
+        
         if (!this.triggerBtn) return;
 
         this.injectCSS();
         this.injectHTML();
-        this.cacheElements();
+        this.cacheModalElements();
         this.bindEvents();
+        
+        
+        await this.updateUserProfile();
+    }
+
+    cacheElements() {
+        this.triggerBtn = document.querySelector('#Logout-BTN');
+        this.staffNameEl = document.querySelector('#Staff-Name');
+        this.staffRoleEl = document.querySelector('#Staff-Role');
+    }
+
+    async updateUserProfile() {
+        try {
+            const response = await fetch('/api/v1/dashboard/summary');
+            if (response.ok) {
+                const data = await response.json();
+                
+                // Update elements if they exist in the current DOM
+                if (this.staffNameEl) this.staffNameEl.textContent = data.staffName;
+                if (this.staffRoleEl) this.staffRoleEl.textContent = data.staffRole;
+            } else {
+                console.warn("SessionManager: Failed to fetch profile data.");
+            }
+        } catch (error) {
+            console.error("SessionManager: Network error updating profile:", error);
+        }
     }
 
     injectCSS() {
-        // ... (Keep all your existing CSS string here) ...
         const style = document.createElement('style');
         style.textContent = `
             .Logout-Modal-Overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.4); display: flex; justify-content: center; align-items: center; z-index: 9999; opacity: 0; visibility: hidden; transition: all 0.2s ease; }
@@ -39,7 +65,6 @@ class LogoutManager {
     }
 
     injectHTML() {
-        // ... (Keep your existing HTML injection here) ...
         this.modalWrapper = document.createElement('div');
         this.modalWrapper.className = 'Logout-Modal-Overlay';
         this.modalWrapper.id = 'Logout-Modal';
@@ -57,21 +82,32 @@ class LogoutManager {
         document.body.appendChild(this.modalWrapper);
     }
 
-    cacheElements() {
+    cacheModalElements() {
         this.cancelBtn = this.modalWrapper.querySelector('#Cancel-Logout');
         this.confirmBtn = this.modalWrapper.querySelector('#Confirm-Logout');
     }
 
     bindEvents() {
+        // Modal controls
         this.triggerBtn.addEventListener('click', () => { this.modalWrapper.classList.add('is-open'); });
         this.cancelBtn.addEventListener('click', () => { this.modalWrapper.classList.remove('is-open'); });
+        
+        // Confirm logout logic
         this.confirmBtn.addEventListener('click', async () => {
             this.confirmBtn.textContent = "Logging out...";
             this.confirmBtn.disabled = true;
             try {
-                const response = await fetch('/api/v1/logout', { method: 'POST', headers: { 'Content-Type': 'application/json' } });
-                if (response.ok) { window.location.href = '/'; } 
-                else { console.error("Server refused to log out."); this.resetButton(); }
+                const response = await fetch('/api/v1/logout', { 
+                    method: 'POST', 
+                    headers: { 'Content-Type': 'application/json' } 
+                });
+                
+                if (response.ok) { 
+                    window.location.href = '/'; 
+                } else { 
+                    console.error("Server refused to log out."); 
+                    this.resetButton(); 
+                }
             } catch (error) {
                 console.error("Network error during logout:", error);
                 this.resetButton();
@@ -110,13 +146,10 @@ class SidebarNavigation {
     }
 
     bindNavigationEvents() {
-        // Loop through the route map and attach click listeners to the buttons
         for (const [buttonId, targetUrl] of Object.entries(this.routes)) {
             const btn = document.getElementById(buttonId);
-            
             if (btn) {
                 btn.addEventListener('click', () => {
-                    // Navigate to the target HTML page
                     window.location.href = targetUrl;
                 });
             }
@@ -124,6 +157,5 @@ class SidebarNavigation {
     }
 }
 
-// Instantiate both components globally
-new LogoutManager();
+new SessionManager();
 new SidebarNavigation();

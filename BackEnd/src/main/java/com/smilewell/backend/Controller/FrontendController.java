@@ -98,6 +98,9 @@ public class FrontendController {
     @GetMapping("/transactionhistory")
     public String serveTransactionHistory() { return "forward:/Pages/transactionhistory.html"; }
 
+    @GetMapping("/edit-procedure")
+    public String serveEditProcedure() { return "forward:/Pages/edit-procedure.html"; }
+
     // Frontend Ai Slop Compensator
     @GetMapping("/{page}.html")
     public String interceptBadHtmlRequests(@PathVariable String page) {

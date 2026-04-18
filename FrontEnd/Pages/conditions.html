@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Title Here</title>
         <link rel="stylesheet" href="../CSS/conditions.css"> <!-- Replace Path To Proper CSS -->
-        <script src="../JS/template.js"></script> <!-- Replace Path To Proper JS -->
+        <script src="../JS/conditions.js"></script> <!-- Replace Path To Proper JS -->
         <script src="../JS/logout.js"></script>
     </head>
 
@@ -125,114 +125,150 @@
             </div>
             <div class="MainActivity">
                 <div class="new-patient-form" id="allergensForm">
-    <div class="check-box-header-container">
-        <h2 class="form-title">Conditions</h2>
-        <div class="appointment-control">
-            <div class="edit-btn" id="editConditionsBtn">
-                <div class="side-nav-button-container">
-                    <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
-                        <path d="M11.25 12.5L5 18.75L11.25 25" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M25 5V13.75C25 15.0761 24.4732 16.3479 23.5355 17.2855C22.5979 18.2232 21.3261 18.75 20 18.75H5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-            </div>
-            <div class="save-btn" id="saveAllergensBtn">
-                <div class="side-nav-button-container">
-                    <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
-                        <path d="M23.75 26.25H6.25C5.58696 26.25 4.95107 25.9866 4.48223 25.5178C4.01339 25.0489 3.75 24.413 3.75 23.75V6.25C3.75 5.58696 4.01339 4.95107 4.48223 4.48223C4.95107 4.01339 5.58696 3.75 6.25 3.75H20L26.25 10V23.75C26.25 24.413 25.9866 25.0489 25.5178 25.5178C25.0489 25.9866 24.413 26.25 23.75 26.25Z" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M21.25 26.25V16.25H8.75V26.25" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M8.75 3.75V10H18.75" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </div>
-
-        <div class="patient-details-form">
-        <div class="conditions-list-container">
-            <div class="condition-item-row">
-                <label class="check-box-wrapper">
-                    <input type="checkbox" class="condition-toggle">
-                    <div class="custom-sq-box"></div>
-                </label>
-                <span class="condition-text-label">Heart Conditions (EX. Pacemakers, Etc)</span>
-                <div class="profile-field cond-input-field">
-                    <input type="text">
-                </div>
-            </div>
-            
-            <div class="condition-item-row">
-                <label class="check-box-wrapper">
-                    <input type="checkbox" class="condition-toggle">
-                    <div class="custom-sq-box"></div>
-                </label>
-                <span class="condition-text-label">Diabetes (Type)</span>
-                <div class="profile-field cond-input-field">
-                    <input type="text">
-                </div>
-            </div>
-
-            <div class="condition-item-row">
-                <label class="check-box-wrapper">
-                    <input type="checkbox" class="condition-toggle">
-                    <div class="custom-sq-box"></div>
-                </label>
-                <span class="condition-text-label">Blood Conditions (Bleeding Conditions, Blood Pressure)</span>
-                <div class="profile-field cond-input-field">
-                    <input type="text">
-                </div>
-            </div>
-
-            <div class="condition-item-row">
-                <label class="check-box-wrapper">
-                    <input type="checkbox" class="condition-toggle">
-                    <div class="custom-sq-box"></div>
-                </label>
-                <span class="condition-text-label">Respiratory Conditions (Asthma, Emphysema)</span>
-                <div class="profile-field cond-input-field">
-                    <input type="text">
-                </div>
-            </div>
-
-            <div class="condition-item-row">
-                <label class="check-box-wrapper">
-                    <input type="checkbox" class="condition-toggle">
-                    <div class="custom-sq-box"></div>
-                </label>
-                <span class="condition-text-label">Kidney Or Liver Conditions</span>
-                <div class="profile-field cond-input-field">
-                    <input type="text">
-                </div>
-            </div>
-
-            <div class="condition-item-row">
-                <label class="check-box-wrapper">
-                    <input type="checkbox" class="condition-toggle">
-                    <div class="custom-sq-box"></div>
-                </label>
-                <span class="condition-text-label">Epilepsy or Seizures</span>
-                <div class="profile-field cond-input-field">
-                    <input type="text">
-                </div>
-            </div>
-
-            <div class="condition-item-row">
-                <label class="check-box-wrapper">
-                    <input type="checkbox" class="condition-toggle">
-                    <div class="custom-sq-box"></div>
-                </label>
-                <span class="condition-text-label">Others</span>
-                <div class="profile-field cond-input-field">
-                    <input type="text">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-                </div>
+                    <div class="check-box-header-container">
+                        <h2 class="form-title">Conditions</h2>
+                        <div class="appointment-control">
+                            <div class="edit-btn" id="editConditionsBtn">
+                                <div class="side-nav-button-container">
+                                    <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                                        <path d="M11.25 12.5L5 18.75L11.25 25" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M25 5V13.75C25 15.0761 24.4732 16.3479 23.5355 17.2855C22.5979 18.2232 21.3261 18.75 20 18.75H5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="save-btn" id="saveAllergensBtn">
+                                <div class="side-nav-button-container">
+                                    <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                                        <path d="M23.75 26.25H6.25C5.58696 26.25 4.95107 25.9866 4.48223 25.5178C4.01339 25.0489 3.75 24.413 3.75 23.75V6.25C3.75 5.58696 4.01339 4.95107 4.48223 4.48223C4.95107 4.01339 5.58696 3.75 6.25 3.75H20L26.25 10V23.75C26.25 24.413 25.9866 25.0489 25.5178 25.5178C25.0489 25.9866 24.413 26.25 23.75 26.25Z" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M21.25 26.25V16.25H8.75V26.25" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M8.75 3.75V10H18.75" stroke="#67B07D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="patient-details-form">
+                        <div class="conditions-list-container">
+                            <div class="condition-item-row">
+                                <div class="ChoiceContainer">
+                                    <label class="choice-label" for="conditionCardiovascularCheckbox">
+                                        <input type="checkbox" id="conditionCardiovascularCheckbox" class="hidden-input">
+                                        <div class="box-visual"></div>
+                                    </label>
+                                </div>
+                                <span class="condition-text-label">Cardiovascular & Blood Conditions</span>
+                                <div class="profile-field cond-input-field">
+                                    <input type="text" id="conditionCardiovascularNotes" class="field-input" placeholder="(High Blood Pressure, Stroke, Heart Disease, Anemia, etc.)">
+                                </div>
+                            </div>
+
+                            <div class="condition-item-row">
+                                <div class="ChoiceContainer">
+                                    <label class="choice-label" for="conditionRespiratoryCheckbox">
+                                        <input type="checkbox" id="conditionRespiratoryCheckbox" class="hidden-input">
+                                        <div class="box-visual"></div>
+                                    </label>
+                                </div>
+                                <span class="condition-text-label">Respiratory & Lung Health</span>
+                                <div class="profile-field cond-input-field">
+                                    <input type="text" id="conditionRespiratoryNotes" class="field-input" placeholder="(Asthma, Emphysema, Allergies)">
+                                </div>
+                            </div>
+
+                            <div class="condition-item-row">
+                                <div class="ChoiceContainer">
+                                    <label class="choice-label" for="conditionNeurologicalCheckbox">
+                                        <input type="checkbox" id="conditionNeurologicalCheckbox" class="hidden-input">
+                                        <div class="box-visual"></div>
+                                    </label>
+                                </div>
+                                <span class="condition-text-label">Neurological & Mental Health</span>
+                                <div class="profile-field cond-input-field">
+                                    <input type="text" id="conditionNeurologicalNotes" class="field-input" placeholder="(Epilepsy, Seizure, Head Injuries)">
+                                </div>
+                            </div>
+
+                            <div class="condition-item-row">
+                                <div class="ChoiceContainer">
+                                    <label class="choice-label" for="conditionMetabolicCheckbox">
+                                        <input type="checkbox" id="conditionMetabolicCheckbox" class="hidden-input">
+                                        <div class="box-visual"></div>
+                                    </label>
+                                </div>
+                                <span class="condition-text-label">Metabolic & Endocrine Systems</span>
+                                <div class="profile-field cond-input-field">
+                                    <input type="text" id="conditionMetabolicNotes" class="field-input" placeholder="(Diabetes, Thyroid Problem, Rapid Weight Loss)">
+                                </div>
+                            </div>
+
+                            <div class="condition-item-row">
+                                <div class="ChoiceContainer">
+                                    <label class="choice-label" for="conditionGastroCheckbox">
+                                        <input type="checkbox" id="conditionGastroCheckbox" class="hidden-input">
+                                        <div class="box-visual"></div>
+                                    </label>
+                                </div>
+                                <span class="condition-text-label">Gastrointestinal & Hepatic (Liver) Health</span>
+                                <div class="profile-field cond-input-field">
+                                    <input type="text" id="conditionGastroNotes" class="field-input" placeholder="(Ulcer, Hepatitis, Kidney Disease)">
+                                </div>
+                            </div>
+
+                            <div class="condition-item-row">
+                                <div class="ChoiceContainer">
+                                    <label class="choice-label" for="conditionInfectiousCheckbox">
+                                        <input type="checkbox" id="conditionInfectiousCheckbox" class="hidden-input">
+                                        <div class="box-visual"></div>
+                                    </label>
+                                </div>
+                                <span class="condition-text-label">Infectious Diseases & Immune System</span>
+                                <div class="profile-field cond-input-field">
+                                    <input type="text" id="conditionInfectiousNotes" class="field-input" placeholder="(AIDS, HIV, Sexually Transmitted Disease)">
+                                </div>
+                            </div>
+
+                            <div class="condition-item-row">
+                                <div class="ChoiceContainer">
+                                    <label class="choice-label" for="conditionMusculoskeletalCheckbox">
+                                        <input type="checkbox" id="conditionMusculoskeletalCheckbox" class="hidden-input">
+                                        <div class="box-visual"></div>
+                                    </label>
+                                </div>
+                                <span class="condition-text-label">Musculoskeletal & Surgical</span>
+                                <div class="profile-field cond-input-field">
+                                    <input type="text" id="conditionMusculoskeletalNotes" class="field-input" placeholder="(Arthritis, Joint Replacement, Rheumatism)">
+                                </div>
+                            </div>
+
+                            <div class="condition-item-row">
+                                <div class="ChoiceContainer">
+                                    <label class="choice-label" for="conditionOncologyCheckbox">
+                                        <input type="checkbox" id="conditionOncologyCheckbox" class="hidden-input">
+                                        <div class="box-visual"></div>
+                                    </label>
+                                </div>
+                                <span class="condition-text-label">Oncology & Specialized Treatments</span>
+                                <div class="profile-field cond-input-field">
+                                    <input type="text" id="conditionOncologyNotes" class="field-input" placeholder="(Cancer, Tumors, Radiation Therapy)">
+                                </div>
+                            </div>
+
+                            <div class="condition-item-row">
+                                <div class="ChoiceContainer">
+                                    <label class="choice-label" for="conditionMiscellaneousCheckbox">
+                                        <input type="checkbox" id="conditionMiscellaneousCheckbox" class="hidden-input">
+                                        <div class="box-visual"></div>
+                                    </label>
+                                </div>
+                                <span class="condition-text-label">Miscellaneous</span>
+                                <div class="profile-field cond-input-field">
+                                    <input type="text" id="conditionMiscellaneousNotes" class="field-input" placeholder="(Other)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
     </body>
     <div class="portrait-warning">
     <i class="fa-solid fa-tablet-screen-button"></i>

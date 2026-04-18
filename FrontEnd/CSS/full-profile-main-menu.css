@@ -416,13 +416,31 @@ align-self: stretch;
     cursor: pointer;
     overflow: hidden;
     transition: background 0.15s, border-color 0.15s;
+    transition: all 0.2s ease;
 }
 
 .profile-nav-btn:hover {
     background: #F5F5F5;
 }
 
-#patientTextFix {
+.profile-nav-btn:hover {
+    background: var(--Black);
+    border-radius: 0.9375rem;
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.30);
+    border-color: var(--Black);
+}
+
+.profile-nav-btn:hover .card-label {
+    color: var(--White);
+}
+
+.profile-nav-btn:hover svg path,
+.profile-nav-btn:hover svg circle,
+.profile-nav-btn:hover svg rect {
+    stroke: var(--White);
+}
+
+#Patient-Textix {
     align-items: flex-start;
 }
 

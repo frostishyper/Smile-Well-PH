@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Staff Management - SmileWell</title>
         <link rel="stylesheet" href="../CSS/staff-list.css">
+        <script src="../JS/staff-list.js"></script>
         <script src="../JS/logout.js"></script>
-        <script src="../JS/staff-list.js" defer></script>
     </head>
 
     <body>
@@ -80,28 +80,66 @@
                     <div class="PFP-Container"><div class="PFP" id="Staff-PFP"></div></div>
                 </div>
             </div>
+            
             <div class="MainActivity">
-                <div class="Staff-Toolbar">
-                    <div class="Search-Box">
-                        <svg class="svg-icons" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20L16.5 16.5"/></svg>
-                        <input type="text" id="Staff-Search-Input" placeholder="Search display name...">
+                <div class="Records-Header">
+                    <div class="Search-Bar">
+                        <div class="Search-Icon-Container">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <input type="text" class="Search-Input" id="Staff-Search-Input" placeholder="Search staff...">
                     </div>
+                    
+                    <div class="Custom-Dropdown Sort-Dropdown" id="Filter-Dropdown">
+                        <div class="Dropdown-Trigger">
+                            <div class="Dropdown-Label">All Roles</div>
+                            <div class="Dropdown-Icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                                    <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <ul class="Dropdown-Menu">
+                            <li class="Dropdown-Item" data-value="all">All Roles</li>
+                            <li class="Dropdown-Item" data-value="Dentist">Dentist</li>
+                            <li class="Dropdown-Item" data-value="Staff">Staff</li>
+                        </ul>
+                    </div>
+
+                    <div class="Custom-Dropdown Sort-Dropdown" id="Sort-Dropdown">
+                        <div class="Dropdown-Trigger">
+                            <div class="Dropdown-Label">Sort</div>
+                            <div class="Dropdown-Icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                                    <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <ul class="Dropdown-Menu">
+                            <li class="Dropdown-Item" data-value="recent">Most Recent</li>
+                            <li class="Dropdown-Item" data-value="name-asc">Name (A-Z)</li>
+                        </ul>
+                    </div>
+
                     <button class="New-Staff-BTN" id="New-Staff-BTN">Add New Staff</button>
                 </div>
 
-                <div class="Staff-Table-Card">
-                    <table class="Staff-Table">
-                        <thead>
-                            <tr>
-                                <th>Staff ID</th>
-                                <th>Display Name</th>
-                                <th>Role</th>
-                                <th style="text-align: center;">Controls</th>
-                            </tr>
-                        </thead>
-                        <tbody id="Staff-List-Table-Body">
-                            </tbody>
-                    </table>
+                <div class="Record-List-Container">
+                    <div class="Table-Scroll-Wrapper">
+                        <table class="Records-Table">
+                            <thead>
+                                <tr>
+                                    <th>Staff ID</th>
+                                    <th>Display Name</th>
+                                    <th>Role</th>
+                                </tr>
+                            </thead>
+                            <tbody id="Staff-List-Table-Body">
+                                </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

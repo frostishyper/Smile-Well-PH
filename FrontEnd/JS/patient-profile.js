@@ -1,200 +1,106 @@
-document.addEventListener('DOMContentLoaded', () => {
-    App.init();
-});
+document.addEventListener('DOMContentLoaded', () => App.init());
 
-/**
- * 1. BACKEND CONFIGURATION
- */
 const API_CONFIG = {
-    BASE_URL: 'http://localhost:8080/api/v1',
-    HEADERS: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    }
+    BASE_URL: '/api/v1',
+    HEADERS: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
 };
 
 const App = {
-    /**
-     * 2. ELEMENT CACHE
-     */
-    elements: {
-        body: document.querySelector('body'),
+    elements: {}, 
 
-        // Patient Identity
-        patientPhoto:       document.querySelector('#PO-Patient-Photo'),
-        patientName:        document.querySelector('#PO-Patient-Name'),
-        phone:              document.querySelector('#PO-Phone'),
-        address:            document.querySelector('#PO-Address'),
-
-        // Patient Detail Fields
-        sex:                document.querySelector('#PO-Sex'),
-        birthday:           document.querySelector('#PO-Birthday'),
-        age:                document.querySelector('#PO-Age'),
-        blood:              document.querySelector('#PO-Blood'),
-        fieldData:          document.querySelector('#PO-Field-Data'),
-        insurance:          document.querySelector('#PO-Insurance'),
-        firstVisit:         document.querySelector('#PO-First-Visit'),
-        lastVisitDate:      document.querySelector('#PO-Last-Visit-Date'),
-        lastVisitBranch:    document.querySelector('#PO-Last-Visit-Branch'),
-
-        // Nav Buttons
-        fullProfileBtn:     document.querySelector('#PO-Full-Profile-BTN'),
-        soaBtn:             document.querySelector('#PO-SOA-BTN'),
-        proceduresBtn:      document.querySelector('#PO-Procedures-BTN'),
-        newProcedureBtn:    document.querySelector('#PO-New-Procedure-BTN'),
-
-        // Top Bar
-        topBarPatientName:  document.querySelector('#TopBar-Patient-Name'),
-        staffName:          document.querySelector('#Staff-Name'),
-        staffRole:          document.querySelector('#Staff-Role'),
-    },
-
-    /**
-     * 3. INITIALIZATION
-     */
     init() {
-        console.log('Patient Overview Initialized');
+        this.cacheElements(); 
         this.setupEventListeners();
         this.ui.checkOrientation();
         this.loadPatientData();
     },
 
-    /**
-     * 4. EVENT LISTENERS
-     */
-    setupEventListeners() {
-        this.elements.fullProfileBtn?.addEventListener('click',  () => this.handleNavigation('full-profile'));
-        this.elements.soaBtn?.addEventListener('click',          () => this.handleNavigation('soa'));
-        this.elements.proceduresBtn?.addEventListener('click',   () => this.handleNavigation('procedures'));
-        this.elements.newProcedureBtn?.addEventListener('click', () => this.handleNavigation('new-procedure'));
-
-        window.addEventListener('resize', () => this.ui.checkOrientation());
+    cacheElements() {
+        this.elements = {
+            body: document.querySelector('body'),
+            topBarPatientName: document.querySelector('.TopBar-Nav-Text strong'),
+            patientName: document.querySelector('#PO-Patient-Name'),
+            phone: document.querySelector('#PO-Phone'),
+            address: document.querySelector('#PO-Address'),
+            sex: document.querySelector('#PO-Sex'),
+            birthday: document.querySelector('#PO-Birthday'),
+            age: document.querySelector('#PO-Age'),
+            blood: document.querySelector('#PO-Blood'),
+            insurance: document.querySelector('#PO-Insurance'),
+            firstVisit: document.querySelector('#PO-First-Visit'),
+            lastVisitDate: document.querySelector('#PO-Last-Visit-Date'),
+            lastVisitBranch: document.querySelector('#PO-Last-Visit-Branch'),
+            fullProfileBtn: document.querySelector('#PO-Full-Profile-BTN'),
+            soaBtn: document.querySelector('#PO-SOA-BTN'),
+            proceduresBtn: document.querySelector('#PO-Procedures-BTN'),
+            newProcedureBtn: document.querySelector('#PO-New-Procedure-BTN')
+        };
     },
 
-    /**
-     * 5. PAGE LOGIC
-     */
+    setupEventListeners() {
+        this.elements.fullProfileBtn?.addEventListener('click', () => this.handleNavigation('full-profile-main-menu'));
+        this.elements.soaBtn?.addEventListener('click', () => this.handleNavigation('soa'));
+        this.elements.proceduresBtn?.addEventListener('click', () => this.handleNavigation('patient-procedures'));
+        this.elements.newProcedureBtn?.addEventListener('click', () => this.handleNavigation('new-procedure'));
+    },
 
-    /**
-     * Loads patient data from the backend and populates the UI.
-     * Reads the patient ID from the URL query param: ?patientId=123
-     */
     async loadPatientData() {
         const patientId = new URLSearchParams(window.location.search).get('patientId');
-
         if (!patientId) {
-            console.warn('No patientId found in URL. Displaying placeholder data.');
+            console.warn('No patientId in URL.');
             return;
         }
-
         try {
-            const patient = await App.api.get(`/patients/${patientId}`);
+            const patient = await this.api.get(`/patients/profile/${patientId}`);
             this.populatePatient(patient);
         } catch (error) {
-            console.error('Failed to load patient data:', error.message);
+            console.error('Failed to load profile:', error.message);
+            if (this.elements.patientName) this.elements.patientName.textContent = "Error Loading Data";
         }
     },
 
-    /**
-     * Fills the page with the patient object returned by the API.
-     * @param {Object} patient - The patient data object from the backend.
-     */
     populatePatient(patient) {
         const e = this.elements;
+        const fullName = `${patient.first_name} ${patient.last_name}`;
 
-        // Top bar
-        if (e.topBarPatientName) e.topBarPatientName.textContent = patient.fullName        ?? '-';
-
-        // Identity
-        if (e.patientName)  e.patientName.textContent  = patient.fullName    ?? '-';
-        if (e.patientPhoto) e.patientPhoto.src          = patient.photoUrl    ?? e.patientPhoto.src;
-        if (e.phone)        e.phone.textContent         = patient.phone       ?? '-';
-        if (e.address)      e.address.textContent       = patient.address     ?? '-';
-
-        // Detail fields
-        if (e.sex)             e.sex.textContent              = patient.sex              ?? '-';
-        if (e.birthday)        e.birthday.textContent         = patient.birthday         ?? '-';
-        if (e.age)             e.age.textContent              = patient.age              ?? '-';
-        if (e.blood)           e.blood.textContent            = patient.bloodType        ?? '-';
-        if (e.fieldData)       e.fieldData.textContent        = patient.fieldData        ?? '-';
-        if (e.insurance)       e.insurance.textContent        = patient.insurance        ?? '-';
-        if (e.firstVisit)      e.firstVisit.textContent       = patient.firstVisit       ?? '-';
-        if (e.lastVisitDate)   e.lastVisitDate.textContent    = patient.lastVisitDate    ?? '-';
-        if (e.lastVisitBranch) e.lastVisitBranch.textContent  = patient.lastVisitBranch  ?? '-';
+        if (e.topBarPatientName) e.topBarPatientName.textContent = fullName;
+        if (e.patientName) e.patientName.textContent = fullName;
+        if (e.phone) e.phone.textContent = patient.contact_number || '-';
+        if (e.address) e.address.textContent = patient.home_address || '-';
+        if (e.sex) {
+            if (patient.sex === 'M') e.sex.textContent = 'Male';
+            else if (patient.sex === 'F') e.sex.textContent = 'Female';
+            else e.sex.textContent = 'Other';
+        }
+        if (e.birthday) e.birthday.textContent = patient.birthday || '-';
+        if (e.age) e.age.textContent = patient.age || '-';
+        if (e.blood) e.blood.textContent = patient.blood_type || '-';
+        if (e.insurance) e.insurance.textContent = patient.insurance_provider || 'None';
+        if (e.firstVisit) e.firstVisit.textContent = patient.first_visit || 'N/A';
+        if (e.lastVisitDate) e.lastVisitDate.textContent = patient.last_visit || 'N/A';
+        if (e.lastVisitBranch) e.lastVisitBranch.textContent = patient.last_branch || '-';
     },
 
-    /**
-     * Routes the user to the correct page when a nav card is clicked.
-     * @param {string} destination - Which page to navigate to.
-     */
     handleNavigation(destination) {
         const patientId = new URLSearchParams(window.location.search).get('patientId');
+        if (!patientId) return;
 
-        const routes = {
-            'full-profile':  `full-profile.html?patientId=${patientId}`,
-            'soa':           `statement-of-account.html?patientId=${patientId}`,
-            'procedures':    `procedures.html?patientId=${patientId}`,
-            'new-procedure': `new-procedure.html?patientId=${patientId}`,
-        };
-
-        const route = routes[destination];
-        if (route) {
-            window.location.href = route;
-        } else {
-            console.warn(`No route defined for: ${destination}`);
-        }
+        const route = `/${destination}?patientId=${patientId}`;
+        window.location.href = route;
     },
 
-    /**
-     * 6. UI HELPERS
-     */
     ui: {
-        setLoading(element, isLoading) {
-            if (isLoading) {
-                element.classList.add('is-loading');
-                element.disabled = true;
-            } else {
-                element.classList.remove('is-loading');
-                element.disabled = false;
-            }
-        },
-
-        checkOrientation() {
-            if (window.innerHeight > window.innerWidth) {
-                console.warn('System optimized for Landscape view.');
-            }
-        }
+        checkOrientation() { if (window.innerHeight > window.innerWidth) console.warn('Landscape optimized.'); }
     },
 
-    /**
-     * 7. API LAYER (REST)
-     */
     api: {
         async request(endpoint, options = {}) {
             const url = `${API_CONFIG.BASE_URL}${endpoint}`;
-            const settings = {
-                ...options,
-                headers: { ...API_CONFIG.HEADERS, ...options.headers }
-            };
-
-            try {
-                const response = await fetch(url, settings);
-
-                if (!response.ok) {
-                    const errorData = await response.json().catch(() => ({}));
-                    throw new Error(errorData.message || `Status: ${response.status}`);
-                }
-
-                return response.status === 204 ? null : response.json();
-            } catch (error) {
-                console.error('Fetch Error:', error.message);
-                throw error;
-            }
+            const settings = { ...options, headers: { ...API_CONFIG.HEADERS, ...options.headers } };
+            const response = await fetch(url, settings);
+            if (!response.ok) throw new Error(`Status: ${response.status}`);
+            return response.status === 204 ? null : response.json();
         },
-
-        get(endpoint)        { return this.request(endpoint, { method: 'GET' }); },
-        post(endpoint, data) { return this.request(endpoint, { method: 'POST',   body: JSON.stringify(data) }); },
-        put(endpoint, data)  { return this.request(endpoint, { method: 'PUT',    body: JSON.stringify(data) }); },
-        delete(endpoint)     { return this.request(endpoint, { method: 'DELETE' }); }
+        get(endpoint) { return this.request(endpoint, { method: 'GET' }); }
     }
 };
