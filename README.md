@@ -73,24 +73,31 @@ this platform handles daily schedule management, comprehensive digital patient r
 - **Modern Web Browser** — For testing the client and admin portals (Chrome, Edge, Safari, Firefox)
 
 ```
+cd BackEnd
 .\mvnw spring-boot:run
 ```
 
 ## 🧭 Roadmap
 
 ✅ Initial commit
-- [ ] Login & Registration
-- [ ] Homepage 
-- [ ] Information Page
-- [ ] Appointment Booking & Confirmation
-- [ ] Messaging
-- [ ] Patient Dental Records & Management
-- [ ] Polish
+✅ Login & Registration
+✅ Homepage 
+✅ Dashboard
+✅ Patient Records Management
+✅ Patient Register
+✅ Appointment Scheduling
+✅ Staff Management
 
 
 ## 🖼️ Screenshots
 
-*(Coming soon)*
+
+<img width="1920" height="913" alt="image" src="https://github.com/user-attachments/assets/40a1acef-f632-4a3c-9a4a-ac64cb348f74" />
+
+
+<img width="1918" height="909" alt="image" src="https://github.com/user-attachments/assets/41a0bbff-0764-4ee2-b46e-b0e2e860e052" />
+
+
 
 ## 🎨 Figma Design
 
