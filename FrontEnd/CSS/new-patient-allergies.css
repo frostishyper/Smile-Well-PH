@@ -320,8 +320,9 @@ aspect-ratio: 1/1;
     align-items: flex-start;
     flex: 1 0 0;
     align-self: stretch;
-
+    overflow: auto;
     background: #FFF;
+    border-radius: 1.07rem;
 }
 
 .check-box-header-container {

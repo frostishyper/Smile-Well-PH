@@ -313,6 +313,7 @@ body {
     background: var(--White);
     border-radius: 1.07rem;
     box-sizing: border-box;
+    overflow: auto;
 }
 
 .check-box-header-container {
@@ -561,3 +562,52 @@ body {
     stroke: var(--White);
 }
 
+.ChoiceContainer{
+    display: flex;
+    width: 6rem;
+    height: 3.5rem;
+    padding: 0.2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    align-self: stretch;
+    aspect-ratio: 1/1;
+}
+
+.hidden-input {
+    display: none;
+}
+
+.box-visual {
+    width: 3.125rem;
+    height: 3.125rem;
+    border: 2px solid var(--Logo-Dark);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.hidden-input:checked + .box-visual {
+    background-color: #d1fae5;
+    border-color: #065f46;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23065f46"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>');
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.box-visual:active {
+    transform: scale(0.9);
+}
+
+.choice-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}

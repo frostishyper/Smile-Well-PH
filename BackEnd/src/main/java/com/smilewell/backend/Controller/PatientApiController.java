@@ -1,17 +1,23 @@
 package com.smilewell.backend.Controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
-
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/patients")
@@ -31,7 +37,14 @@ public class PatientApiController {
         return jdbcTemplate.queryForList(sql);
     }
 
+    // Alias for the main profile endpoint for failback and old links
     @GetMapping("/profile/{id}")
+    public ResponseEntity<?> getPatientProfileAlias(@PathVariable("id") int patientId) {
+        return getPatientProfile(patientId);
+    }
+
+    // 2. Fetches specific details for a SINGLE patient profile
+    @GetMapping("/{id}")
     public ResponseEntity<?> getPatientProfile(@PathVariable("id") int patientId) {
         try {
             String sql = "SELECT p.patient_id, p.first_name, p.last_name, p.contact_number, p.home_address, " +
@@ -59,6 +72,101 @@ public class PatientApiController {
         }
     }
 
+
+    // 3. Fetches complete Personal Details for the edit/view form
+    @GetMapping("/{id}/personal-details")
+    public ResponseEntity<?> getPatientPersonalDetails(@PathVariable("id") int patientId) {
+        try {
+            String sql =
+                "SELECT " +
+                "    p.patient_id, " +
+                "    p.first_name, " +
+                "    p.middle_name, " +
+                "    p.last_name, " +
+                "    p.contact_number, " +
+                "    p.email, " +
+                "    DATE_FORMAT(p.birthday, '%Y-%m-%d') AS birthday, " +
+                "    p.sex, " +
+                "    p.blood_type, " +
+                "    p.valid_id_number, " +
+                "    p.home_address, " +
+                "    p.occupation, " +
+                "    p.religion, " +
+                "    TIMESTAMPDIFF(YEAR, p.birthday, CURDATE()) AS age " +
+                "FROM patients p " +
+                "WHERE p.patient_id = ? " +
+                "LIMIT 1";
+
+            Map<String, Object> patient = jdbcTemplate.queryForMap(sql, patientId);
+            return ResponseEntity.ok(patient);
+
+        } catch (org.springframework.dao.EmptyResultDataAccessException e) {
+            return ResponseEntity.status(404).body(Map.of("error", "Patient not found"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(Map.of("error", "Database error"));
+        }
+    }
+
+    // 4. Updates Personal Details for a specific patient
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updatePatientPersonalDetails(
+            @PathVariable("id") int patientId,
+            @RequestBody Map<String, Object> payload) {
+        try {
+            String sex = sanitizeSex((String) payload.get("sex"));
+
+            String sql =
+                "UPDATE patients SET " +
+                "first_name = ?, " +
+                "middle_name = ?, " +
+                "last_name = ?, " +
+                "contact_number = ?, " +
+                "email = ?, " +
+                "birthday = ?, " +
+                "sex = ?, " +
+                "blood_type = ?, " +
+                "valid_id_number = ?, " +
+                "home_address = ?, " +
+                "occupation = ?, " +
+                "religion = ? " +
+                "WHERE patient_id = ?";
+
+            int updated = jdbcTemplate.update(
+                sql,
+                (String) payload.get("first_name"),
+                (String) payload.get("middle_name"),
+                (String) payload.get("last_name"),
+                (String) payload.get("contact_number"),
+                (String) payload.get("email"),
+                (String) payload.get("birthday"),
+                sex,
+                (String) payload.get("blood_type"),
+                (String) payload.get("valid_id_number"),
+                (String) payload.get("home_address"),
+                (String) payload.get("occupation"),
+                (String) payload.get("religion"),
+                patientId
+            );
+
+            if (updated == 0) {
+                return ResponseEntity.status(404).body(Map.of("error", "Patient not found"));
+            }
+
+            return ResponseEntity.ok(Map.of(
+                "status", "success",
+                "message", "Patient personal details updated successfully",
+                "patientId", patientId
+            ));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(Map.of("error", e.getMessage()));
+        }
+    }
+
+
+    // 3. Handles the full 6-page registration payload
     @PostMapping("/register")
     @Transactional
     public ResponseEntity<?> registerNewPatient(@RequestBody Map<String, Object> payload) {
@@ -172,6 +280,8 @@ public class PatientApiController {
             return ResponseEntity.status(500).body(Map.of("error", e.getMessage()));
         }
     }
+
+    
 
     private String sanitizeSex(String raw) {
         if (raw == null || raw.trim().isEmpty()) return "Other";

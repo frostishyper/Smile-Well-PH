@@ -1,5 +1,5 @@
 package com.smilewell.backend.Controller;
 
-public class TransActionHistoryController {
+public class PatientFilesApiController {
     
 }

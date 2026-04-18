@@ -1,18 +1,15 @@
 <!DOCTYPE html>
-
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Title Here</title>
-        <link rel="stylesheet" href="../CSS/transactionhistory.css"> <!-- Replace Path To Proper CSS -->
-        <script src="../JS/template.js" defer></script> <!-- Replace Path To Proper JS -->
+        <title>Transaction History</title>
+        <link rel="stylesheet" href="../CSS/transactionhistory.css">
+        <script src="../JS/transactionhistory.js" defer></script>
         <script src="../JS/logout.js"></script>
     </head>
-    
+
     <body>
-        <!-- A -->
-        <!-- This Is Just A Template Page, Copy Paste The Contents Of This Page To A New HTML File And Go From There -->
         <div class="SideBar">
             <div class="TopCorner">
                 <div class="LogoContainer">
@@ -24,7 +21,6 @@
                 </div>
             </div>
             <div class="Side-Nav-Container">
-                <!-- A Side Nav Button -->
                 <div class="Side-Nav-BTN" id="DashboardPage-BTN">
                     <div class="SNB-Icon-Container">
                         <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none">
@@ -38,7 +34,6 @@
                         <h1 class="SNB-Label">Dash Board</h1>
                     </div>
                 </div>
-                <!-- A Side Nav Button -->
                 <div class="Side-Nav-BTN active" id="RecordsPage-BTN">
                     <div class="SNB-Icon-Container">
                         <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
@@ -51,7 +46,6 @@
                         <h1 class="SNB-Label">Records</h1>
                     </div>
                 </div>
-                <!-- A Side Nav Button -->
                 <div class="Side-Nav-BTN" id="AppointmentsPage-BTN">
                     <div class="SNB-Icon-Container">
                         <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
@@ -65,7 +59,6 @@
                         <h1 class="SNB-Label">Appointments</h1>
                     </div>
                 </div>
-                <!-- A Side Nav Button -->
                 <div class="Side-Nav-BTN" id="NewPatientPage-BTN">
                     <div class="SNB-Icon-Container">
                         <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
@@ -79,11 +72,10 @@
                         <h1 class="SNB-Label">New Patient</h1>
                     </div>
                 </div>
-                <!-- A Side Nav Button -->
                 <div class="Side-Nav-BTN" id="StaffPage-BTN">
                     <div class="SNB-Icon-Container">
                         <svg class="Nav-Icon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                            <path d="M33.3335 8.33331H37.5002C38.6052 8.33331 39.665 8.7723 40.4464 9.5537C41.2278 10.3351 41.6668 11.3949 41.6668 12.5V41.6666C41.6668 42.7717 41.2278 43.8315 40.4464 44.6129C39.665 45.3943 38.6052 45.8333 37.5002 45.8333H12.5002C11.3951 45.8333 10.3353 45.3943 9.55388 44.6129C8.77248 43.8315 8.3335 42.7717 8.3335 41.6666V12.5C8.3335 11.3949 8.77248 10.3351 9.55388 9.5537C10.3353 8.7723 11.3951 8.33331 12.5002 8.33331H16.6668" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M33.3335 8.33331H37.5002C38.6052 8.33331 39.665 8.7723 40.4464 9.5537C41.2278 10.3351 41.6668 11.3949 41.6668 12.5V41.6666C41.6668 42.7717 41.2278 43.8315 40.4464 44.6129C39.665 45.3943 38.6052 45.8333 37.5002 45.8333H12.5002C11.3951 45.8333 10.3353 45.3943 9.55388 44.6129C8.77248 43.8315 8.3335 42.7717 8.3335 41.6666V12.5C8.3335 11.3949 8.77248 10.3351 9.55388 9.5537C10.3353 8.7723 11.3951 8.33331 12.5002 8.33331Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M31.2498 4.16669H18.7498C17.5992 4.16669 16.6665 5.09943 16.6665 6.25002V10.4167C16.6665 11.5673 17.5992 12.5 18.7498 12.5H31.2498C32.4004 12.5 33.3332 11.5673 33.3332 10.4167V6.25002C33.3332 5.09943 32.4004 4.16669 31.2498 4.16669Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
@@ -100,92 +92,94 @@
                         </svg>
                     </div>
                     <div class="SNB-Label-Container">
-                        <h1 class="Logout-Label">Logout</h1> 
+                        <h1 class="Logout-Label">Logout</h1>
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
+
         <div class="MainView">
             <div class="TopBar">
                 <div class="TopBar-Nav">
                     <h1 class="TopBar-Nav-Text">
-                        <span>Records  > Kasane Teto > <b>SOA</b> </span>
+                        <span id="TopBar-Nav-Text">Records > <b>Transaction History</b></span>
                     </h1>
                 </div>
                 <div class="UserContainer">
                     <div class="Username-Container">
-                        <!-- Staff Details -->
-                        <h1 class="Staff-Name" id="Staff-Name">Mezmerizer Miku</h1>
-                        <h2 class="Staff-Role" id="Staff-Role">Dentist</h2>
+                        <h1 class="Staff-Name" id="Staff-Name">Staff Name</h1>
+                        <h2 class="Staff-Role" id="Staff-Role">Role</h2>
                     </div>
                     <div class="PFP-Container">
                         <div class="PFP" id="Staff-PFP"></div>
                     </div>
                 </div>
             </div>
+
             <div class="MainActivity">
 
-    <div class="transaction-details-container">
-        <div class="col-label-container header">
-            <div class="record-col trans-id">Trans ID</div>
-            <div class="record-col item-name">Item Name</div>
-            <div class="record-col amount">Amount</div>
-            <div class="record-col date">Date</div>
-        </div>
+                <div class="transaction-details-container">
+                    <!-- Table Header -->
+                    <div class="col-label-container header">
+                        <div class="record-col trans-id">Trans ID</div>
+                        <div class="record-col item-name">Item Name</div>
+                        <div class="record-col amount">Amount</div>
+                        <div class="record-col status">Status</div>
+                        <div class="record-col date">Date</div>
+                    </div>
 
-        <div class="col-label-container record-row">
-            <div class="record-col trans-id">1</div>
-            <div class="record-col item-name">Dental Cleaning</div>
-            <div class="record-col amount">₱ 800.00</div>
-            <div class="record-col date">3/28/2026</div>
-        </div>
+                    <!-- Rows injected here by JS -->
+                    <div class="transaction-list-container" id="transaction-list-container"></div>
 
-                        <!-- PAGE STUFF ROW -->
-                        <div class="ProcedurePagination">
-                            <div class="Prev" id="PrevBTN">
-                                <svg class="Prevy" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
-                                    <path d="M36.6667 56.6663L20 39.9997L36.6667 23.333" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M60.0002 56.6663L43.3335 39.9997L60.0002 23.333" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <div class="Pages">
-                                <div class="PageCell">
-                                    <h1 class="PageCount" id="CurrentPage" >1/6</h1>
-                                </div>
-                            </div>
-                            <div class="Next" id="NextBTN">
-                                <svg class="Nexty" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
-                                    <path d="M43.3333 56.6663L59.9999 39.9997L43.3333 23.333" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M20 56.6663L36.6667 39.9997L20 23.333" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
+                    <!-- Empty State -->
+                    <div id="SOA-Empty-State" style="display:none;">No transaction history found.</div>
+
+                    <!-- Pagination -->
+                    <div class="ProcedurePagination">
+                        <div class="Prev" id="PrevBTN">
+                            <svg class="Prevy" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                <path d="M36.6667 56.6663L20 39.9997L36.6667 23.333" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M60.0002 56.6663L43.3335 39.9997L60.0002 23.333" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="Pages">
+                            <div class="PageCell">
+                                <h1 class="PageCount" id="CurrentPage">1/1</h1>
                             </div>
                         </div>
-    </div>
+                        <div class="Next" id="NextBTN">
+                            <svg class="Nexty" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                <path d="M43.3333 56.6663L59.9999 39.9997L43.3333 23.333" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M20 56.6663L36.6667 39.9997L20 23.333" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
 
-    <div class="action-sidebar-container">
-        <div class="sidebar-card patient-card">
-            <div class="User-Profile">
-                <img src="../Media/Patient.jpg" class="PFP" alt="Patient">
-            </div>
-            <div class="card-info">
-                <div class="patient-name">Kasane Teto</div>
-                <div class="patient-label">Patient</div>
-            </div>
-        </div>
+                <div class="action-sidebar-container">
+                    <!-- Patient Card -->
+                    <div class="sidebar-card patient-card">
+                        <div class="User-Profile">
+                            <img src="../Media/Patient.jpg" class="PFP" alt="Patient">
+                        </div>
+                        <div class="card-info">
+                            <div class="patient-name" id="patient-name">—</div>
+                            <div class="patient-label">Patient</div>
+                        </div>
+                    </div>
 
-        <div class="sidebar-card action-button" id="soaBtn">
-            <div class="sidebar-icon">
-                <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
-                    <path d="M40 3.3335V76.6668" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M56.6667 16.6665H31.6667C28.5725 16.6665 25.605 17.8957 23.4171 20.0836C21.2292 22.2715 20 25.239 20 28.3332C20 31.4274 21.2292 34.3948 23.4171 36.5827C25.605 38.7707 28.5725 39.9998 31.6667 39.9998H48.3333C51.4275 39.9998 54.395 41.229 56.5829 43.4169C58.7708 45.6049 60 48.5723 60 51.6665C60 54.7607 58.7708 57.7282 56.5829 59.9161C54.395 62.104 51.4275 63.3332 48.3333 63.3332H20" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-            <div class="action-text">S.O.A</div>
-        </div>
-    </div>
+                    <!-- Back to SOA button -->
+                    <div class="sidebar-card action-button" id="soaBtn">
+                        <div class="sidebar-icon">
+                            <svg class="svg-icons" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
+                                <path d="M40 3.3335V76.6668" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M56.6667 16.6665H31.6667C28.5725 16.6665 25.605 17.8957 23.4171 20.0836C21.2292 22.2715 20 25.239 20 28.3332C20 31.4274 21.2292 34.3948 23.4171 36.5827C25.605 38.7707 28.5725 39.9998 31.6667 39.9998H48.3333C51.4275 39.9998 54.395 41.229 56.5829 43.4169C58.7708 45.6049 60 48.5723 60 51.6665C60 54.7607 58.7708 57.7282 56.5829 59.9161C54.395 62.104 51.4275 63.3332 48.3333 63.3332H20" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="action-text">S.O.A</div>
+                    </div>
+                </div>
 
-</div>
-                
             </div>
         </div>
 
