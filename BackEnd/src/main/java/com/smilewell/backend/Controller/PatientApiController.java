@@ -38,6 +38,12 @@ public class PatientApiController {
         return jdbcTemplate.queryForList(sql);
     }
 
+    // Alias for the main profile endpoint for failback and old links
+    @GetMapping("/profile/{id}")
+    public ResponseEntity<?> getPatientProfileAlias(@PathVariable("id") int patientId) {
+        return getPatientProfile(patientId);
+    }
+
     // 2. Fetches specific details for a SINGLE patient profile
     @GetMapping("/{id}")
     public ResponseEntity<?> getPatientProfile(@PathVariable("id") int patientId) {
